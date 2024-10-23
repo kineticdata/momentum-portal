@@ -38,6 +38,12 @@
   }
 }
 
+@layer components {
+  .btn {
+    @apply py-1.5 px-4 border border-gray-600 rounded-full;
+  }
+}
+
 @layer utilities {
   /* Display and Header classes, combining font size with font weight */
   .d1 {
