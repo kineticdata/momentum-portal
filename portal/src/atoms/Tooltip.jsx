@@ -13,6 +13,8 @@ import { calcPlacement, getChildSlots } from '../helpers/index.js';
  * @param {('start'|'middle'|'end')} [props.alignment=start] The alignment of
  * the menu relative to the trigger.
  * @param {boolean} [props.open] Is the tooltip open.
+ * @param {number} [props.openDelay=80] Delay before the tooltip opens.
+ * @param {number} [props.closeDelay=0] Delay before the tooltip closes.
  * @param {JSX.Element|JSX.Element[]} [props.children] Elements to inject into
  *  available slots in the menu. Available slots are:
  * - trigger: Component that toggles the tooltip open state when interacted with.
@@ -26,33 +28,32 @@ export const Tooltip = ({
   alignment,
   open,
   onOpenChange,
+  openDelay = 80,
+  closeDelay = 0,
   children,
 }) => {
   const slots = getChildSlots(children, {
     componentName: 'Tooltip',
     requiredSlots: ['trigger'],
     optionalSlots: ['content'],
-  })
+  });
 
   const placement = calcPlacement(position, alignment);
 
   return (
     <ArkTooltip.Root
-      openDelay={1}
+      openDelay={openDelay}
+      closeDelay={closeDelay}
       interactive={interactive}
       open={open}
       onOpenChange={onOpenChange}
       positioning={{ placement }}
     >
       {slots.trigger && (
-        <ArkTooltip.Trigger asChild>
-          {slots.trigger}
-        </ArkTooltip.Trigger>
+        <ArkTooltip.Trigger asChild>{slots.trigger}</ArkTooltip.Trigger>
       )}
       <ArkTooltip.Positioner>
-      <ArkTooltip.Content>
-        {slots.content || content}
-      </ArkTooltip.Content>
+        <ArkTooltip.Content>{slots.content || content}</ArkTooltip.Content>
       </ArkTooltip.Positioner>
     </ArkTooltip.Root>
   );
@@ -65,5 +66,7 @@ Tooltip.propTypes = {
   alignment: t.oneOf(['start', 'middle', 'end']),
   open: t.bool,
   onOpenChange: t.func,
+  openDelay: t.number,
+  closeDelay: t.number,
   children: t.node,
 };
