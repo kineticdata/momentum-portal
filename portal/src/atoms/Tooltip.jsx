@@ -5,20 +5,20 @@ import { calcPlacement, getChildSlots } from '../helpers/index.js';
 /**
  * A label that provides information on hover or focus.
  *
- * @param {Object} props Props object
+ * @param {Object} props Props object.
  * @param {string} [props.content] The content to display inside the tooltip.
- * @param {boolean} [props.interactive] Is the tooltip open.
+ * @param {boolean} [props.interactive] Can the content of the tooltip be interacted with.
  * @param {('bottom'|'top'|'left'|'right')} [props.position=bottom] The position
- * of the menu relative to the trigger.
+ * of the tooltip relative to the trigger.
  * @param {('start'|'middle'|'end')} [props.alignment=start] The alignment of
- * the menu relative to the trigger.
+ * the tooltip relative to the trigger.
  * @param {boolean} [props.open] Is the tooltip open.
  * @param {number} [props.openDelay=80] Delay before the tooltip opens.
  * @param {number} [props.closeDelay=0] Delay before the tooltip closes.
  * @param {JSX.Element|JSX.Element[]} [props.children] Elements to inject into
  *  available slots in the menu. Available slots are:
  * - trigger: Component that toggles the tooltip open state when interacted with.
- * - content: Optional slot to override the default content rendered via the `items` prop.
+ * - content: Optional slot to render JSX content instead of a string inside the tooltip.
  */
 
 export const Tooltip = ({
