@@ -25,7 +25,7 @@ const getMetaData = submission => {
       case 'Draft':
         return {
           status: 'Draft',
-          dateString: `Drafted ${timeAgo(submission.createdAt)}`,
+          dateString: `Created ${timeAgo(submission.createdAt)}`,
         };
       case 'Closed':
         return {

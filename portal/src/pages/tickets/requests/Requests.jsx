@@ -18,9 +18,9 @@ const buildMyRequestsSearch = (profile, filters) => {
   }
   // Add assignment query, making sure at least one part is always included
   search.or();
-    search.equals('createdBy', 'username');
-    search.equals('submittedBy', 'username');
-    search.equals('values[Requested For]', 'username');
+  search.equals('createdBy', 'username');
+  search.equals('submittedBy', 'username');
+  search.equals('values[Requested For]', 'username');
   // End or block
   search.end();
   // End query builder
@@ -36,7 +36,7 @@ const buildMyRequestsSearch = (profile, filters) => {
       ].filter(Boolean),
       username: profile.username,
     }),
-    include: ['details', 'values', 'form', 'form.attributesMap',],
+    include: ['details', 'values', 'form', 'form.attributesMap'],
     limit: 10,
   };
 };
