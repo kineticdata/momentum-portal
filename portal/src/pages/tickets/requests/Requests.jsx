@@ -16,15 +16,11 @@ const buildMyRequestsSearch = (profile, filters) => {
   if (filters.status.open || filters.status.closed || filters.status.draft) {
     search.in('coreState', 'statuses');
   }
-
   // Add assignment query, making sure at least one part is always included
   search.or();
-  if (filters.assignment.mine) {
     search.equals('createdBy', 'username');
     search.equals('submittedBy', 'username');
     search.equals('values[Requested For]', 'username');
-  }
-
   // End or block
   search.end();
   // End query builder
@@ -40,14 +36,7 @@ const buildMyRequestsSearch = (profile, filters) => {
       ].filter(Boolean),
       username: profile.username,
     }),
-    include: [
-      'details',
-      'values',
-      'form',
-      'form.attributesMap',
-      'createdBy',
-      'submittedBy',
-    ],
+    include: ['details', 'values', 'form', 'form.attributesMap',],
     limit: 10,
   };
 };
@@ -58,7 +47,6 @@ export const Requests = () => {
   // State for filters
   const [filters, setFilters] = useState({
     status: { draft: false, open: false, closed: false },
-    assignment: { mine: true },
   });
 
   // Search object based on the current filters

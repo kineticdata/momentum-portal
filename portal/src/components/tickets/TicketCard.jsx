@@ -22,11 +22,6 @@ const getMetaData = submission => {
     }
   } else if (['Service'].includes(submission.type)) {
     switch (submission.coreState) {
-      case 'Submitted':
-        return {
-          status: 'Open',
-          dateString: `Submitted ${timeAgo(submission.submittedAt)}`,
-        };
       case 'Draft':
         return {
           status: 'Draft',
