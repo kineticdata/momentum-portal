@@ -73,7 +73,7 @@ export const Button = ({
       // Background
       'bg-secondary-400 hover:bg-secondary-100 focus-visible:bg-primary-900 data-[state=open]:bg-primary-900 disabled:bg-gray-200',
       // Border
-      'border-primary-500 diasabled:border-primary-300',
+      'border-primary-500 disabled:border-primary-300',
     ],
 
     // Secondary
