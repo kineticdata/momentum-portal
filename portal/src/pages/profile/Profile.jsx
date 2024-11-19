@@ -6,8 +6,7 @@ import clsx from 'clsx';
 import { produce } from 'immer';
 import { updateProfile } from '@kineticdata/react';
 import { validateEmail } from '../../helpers/index.js';
-import eyeIcon from '../../assets/styles/icons/eyeIcon.svg';
-import logoutIcon from '../../assets/styles/icons/logoutIcon.svg';
+import { Icon } from '../../atoms/Icon.jsx';
 
 export const Profile = () => {
   const mobile = useSelector(state => state.view.mobile);
@@ -99,7 +98,10 @@ export const Profile = () => {
   return (
     <>
       <div
-        className={`flex items-center ${mobile ? 'relative justify-start' : 'justify-center'} mt-8`}
+        className={clsx('flex items-center mt-8', {
+          'relative justify-start': mobile,
+          'justify-center': !mobile,
+        })}
       >
         <Button
           link
@@ -164,44 +166,62 @@ export const Profile = () => {
                 required={true}
                 value={newPassword}
                 onChange={e => setNewPassword(e.target.value)}
+                className="w-full px-4 pr-10 py-2"
               />
-              <img
-                src={eyeIcon}
-                className="absolute w-5 h-5 top-2.5 right-2.5"
-                onClick={() => setShowPassword(prev => !prev)}
-              />
+
+              {showPassword ? (
+                <Button
+                  type="button"
+                  variant="tertiary"
+                  icon="eye-off"
+                  aria-label="Show password"
+                  className="absolute w-5 h-5 top-3 right-2.5 mr-3 flex items-center justify-center"
+                  onClick={() => setShowPassword(prev => !prev)}
+                />
+              ) : (
+                <Button
+                  type="button"
+                  variant="tertiary"
+                  icon="eye"
+                  className="absolute w-5 h-5 top-3 right-2.5 mr-3 flex items-center justify-center"
+                  aria-label="Hide password"
+                  onClick={() => setShowPassword(prev => !prev)}
+                />
+              )}
+
               {validationErrors.newPassword && (
                 <span className="text-warning-500 mr-4">
                   {validationErrors.newPassword}
                 </span>
               )}
-              <a
-                className="font-semibold text-sm cursor-pointer"
+              <Button
+                type="button"
+                variant="tertiary"
+                className="font-semibold text-sm pl-0 py-0 !justify-start"
                 onClick={() => setShowChangedPassword(false)}
               >
                 Cancel
-              </a>
+              </Button>
             </div>
           </div>
         )}
         {showChangedPassword === false && (
-          <a
-            className="font-semibold text-sm cursor-pointer"
+          <Button
+            type="button"
+            variant="tertiary"
+            className="font-semibold text-sm text-left mt-4 pl-0 !justify-start"
             onClick={() => setShowChangedPassword(true)}
           >
             Change password
-          </a>
+          </Button>
         )}
 
-        <Button type="submit" onClick={saveProfile}>
+        <Button type="submit" onClick={saveProfile} className="mt-7">
           Save
         </Button>
         <div className="flex items-center justify-center">
           <a className="btn-tertiary" href="/app/logout">
-            <img
-              src={logoutIcon}
-              alt="Logout Icon"
-            />
+            <Icon name="logout" aria-label="Logout"></Icon>
             <span>Logout</span>
           </a>
         </div>
