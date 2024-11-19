@@ -168,27 +168,14 @@ export const Profile = () => {
                 onChange={e => setNewPassword(e.target.value)}
                 className="w-full px-4 pr-10 py-2"
               />
-
-              {showPassword ? (
-                <Button
-                  type="button"
-                  variant="tertiary"
-                  icon="eye-off"
-                  aria-label="Show password"
-                  className="absolute w-5 h-5 top-3 right-2.5 mr-3 flex items-center justify-center"
-                  onClick={() => setShowPassword(prev => !prev)}
-                />
-              ) : (
-                <Button
-                  type="button"
-                  variant="tertiary"
-                  icon="eye"
-                  className="absolute w-5 h-5 top-3 right-2.5 mr-3 flex items-center justify-center"
-                  aria-label="Hide password"
-                  onClick={() => setShowPassword(prev => !prev)}
-                />
-              )}
-
+              <Button
+                type="button"
+                variant="tertiary"
+                icon={`${showPassword ? 'eye-off' : 'eye'}`}
+                aria-label={`${showPassword ? 'Hide Password' : 'Show Password'}`}
+                className="absolute w-5 h-5 top-3 right-2.5 mr-3 flex items-center justify-center"
+                onClick={() => setShowPassword(prev => !prev)}
+              />
               {validationErrors.newPassword && (
                 <span className="text-warning-500 mr-4">
                   {validationErrors.newPassword}
