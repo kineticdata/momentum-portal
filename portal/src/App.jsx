@@ -13,7 +13,7 @@ import useRouteChange from './helpers/useRouteChange.js';
 import { PrivateRoutes } from './pages/PrivateRoutes.jsx';
 import { PublicRoutes } from './pages/PublicRoutes.jsx';
 import { Login } from './pages/login/Login.jsx';
-import { ConfirmationModal } from './components/confirm/ConfirmationModal.js';
+import { ConfirmationModal } from './components/confirm/ConfirmationModal.jsx';
 
 export const App = ({
   initialized,

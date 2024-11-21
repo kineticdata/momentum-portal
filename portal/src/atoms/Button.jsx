@@ -448,6 +448,7 @@ CategoryButton.propTypes = {
  *  of several styles for the button.
  * @param {string} [icon] The name of an icon to render in the button.
  * @param {string} [category] The name of the category the service is in.
+ * @param {boolean} [small] Should the button use the small design.
  * @param {JSX.Element|JSX.Element[]} [children] The content of the button.
  * @param {Object} [passThroughProps] Any additional props will we passed
  *  through to the component.
@@ -457,11 +458,11 @@ export const PopularServiceButton = ({
   index = 0,
   icon = 'forms',
   category,
+  small = false,
   children,
   ...passThroughProps
 }) => {
-  const mobile = useSelector(state => state.view.mobile);
-  return mobile ? (
+  return small ? (
     <ButtonOrLink
       className={clsx(
         className,
@@ -577,5 +578,6 @@ PopularServiceButton.propTypes = {
   index: t.number,
   icon: t.string,
   category: t.string,
+  small: t.bool,
   children: t.node,
 };

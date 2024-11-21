@@ -81,17 +81,17 @@ window.addEventListener('resize', throttle(viewActions.handleResize, 200));
 function calcViewState(state = {}) {
   state.width = window.innerWidth;
   if (window.innerWidth < 640) {
-    state.size = 'xs';
+    state.size = 'xs'; // 0 <-> 639
   } else if (window.innerWidth < 768) {
-    state.size = 'sm';
+    state.size = 'sm'; // 640 <-> 767
   } else if (window.innerWidth < 1024) {
-    state.size = 'md';
+    state.size = 'md'; // 768 <-> 1023
   } else if (window.innerWidth < 1280) {
-    state.size = 'lg';
+    state.size = 'lg'; // 1024 <-> 1279
   } else if (window.innerWidth < 1536) {
-    state.size = 'xl';
+    state.size = 'xl'; // 1280 <-> 1535
   } else {
-    state.size = '2xl';
+    state.size = '2xl'; // 1536 <-> ...
   }
   state.mobile = ['xs', 'sm'].includes(state.size);
   state.tablet = ['md', 'lg'].includes(state.size);

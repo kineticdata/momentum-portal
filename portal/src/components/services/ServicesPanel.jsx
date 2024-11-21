@@ -179,6 +179,7 @@ export const ServicesPanel = ({ children }) => {
                               c => c.category.slug !== 'popular-services',
                             )?.category?.name
                           }
+                          small={true}
                           className="flex-none w-[calc(100%/3-0.75rem/2)]"
                           to={`/forms/${popularForm.slug}`}
                           onClick={() => setOpen(false)}
