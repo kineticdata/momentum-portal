@@ -9,7 +9,7 @@ import {
   CategoryButton,
   CloseButton,
   PopularServiceButton,
-} from '../../atoms/Button.js';
+} from '../../atoms/Button.jsx';
 import useDataItem from '../../helpers/useDataItem.js';
 import { getAttributeValue } from '../../helpers/records.js';
 import { Loading } from '../states/Loading.jsx';

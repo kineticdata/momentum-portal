@@ -3,7 +3,7 @@ import useDataItem from '../../helpers/useDataItem.js';
 import { fetchCategory } from '@kineticdata/react';
 import { Loading } from '../states/Loading.jsx';
 import clsx from 'clsx';
-import { PopularServiceButton } from '../../atoms/Button.js';
+import { PopularServiceButton } from '../../atoms/Button.jsx';
 import { getAttributeValue } from '../../helpers/records.js';
 
 export const PopularServicesSection = () => {
