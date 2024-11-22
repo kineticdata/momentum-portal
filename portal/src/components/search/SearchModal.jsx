@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 import { ServiceCard } from '../services/ServiceCard.jsx';
 import { Loading } from '../states/Loading.jsx';
 import { Error } from '../states/Error.jsx';
-import { Button } from '../../atoms/Button.js';
+import { Button } from '../../atoms/Button.jsx';
 
 export const SearchModal = ({ children }) => {
   // State for opening the modal
@@ -34,7 +34,7 @@ export const SearchModal = ({ children }) => {
 
   const [searchResults, searchActions] = useDataList(
     fetchForms,
-    query && query.length >= 1
+    query
       ? [
           {
             kappSlug,
@@ -56,7 +56,7 @@ export const SearchModal = ({ children }) => {
       title="Search"
       open={open}
       onOpenChange={({ open }) => setOpen(open)}
-      onExitComplete={() => onModalExit()}
+      onExitComplete={() => onModalExit}
       size="sm"
     >
       <ark.div asChild slot="trigger">
@@ -68,7 +68,7 @@ export const SearchModal = ({ children }) => {
           name="Search"
           placeholder="How can we help you?"
           value={inputValue}
-          onChange={e => handleInputChange(e)}
+          onChange={handleInputChange}
         />
       </div>
       <div
