@@ -56,7 +56,7 @@ export const SearchModal = ({ children }) => {
       title="Search"
       open={open}
       onOpenChange={({ open }) => setOpen(open)}
-      onExitComplete={() => onModalExit}
+      onExitComplete={onModalExit}
       size="sm"
     >
       <ark.div asChild slot="trigger">
