@@ -97,7 +97,7 @@ jobs:
           script: |
             core.setFailed('The S3_AWS_ACCESS_KEY_SECRET secret was not set in the Repository Settings.')
 
-      # # Setup Node
+      # Setup Node
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
