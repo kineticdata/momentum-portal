@@ -33,7 +33,7 @@ jobs:
         uses: actions/checkout@v4
 
       # Determine Version Directory
-      - name: Set Bundle Version Directory
+      - name: Set Portal Version Directory
         id: version
         uses: kineticdata/kinetic-github-actions/dockertag@v1
 
@@ -127,5 +127,5 @@ jobs:
         run: |
           aws s3 sync \
           ./build \
-          s3://${{ vars.S3_BUCKET }}/portals/${{ steps.repo_name.outputs.REPO_NAME }}/branches/latest/ \
+          s3://${{ vars.S3_BUCKET }}/portals/${{ steps.repo_name.outputs.REPO_NAME }}/branches/${{ steps.version.outputs.tag }}/ \
           --acl public-read --cache-control=\"must-revalidate,max-age:0\" --delete --dryrun
