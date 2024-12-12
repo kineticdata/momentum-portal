@@ -98,43 +98,34 @@ jobs:
             core.setFailed('The S3_AWS_ACCESS_KEY_SECRET secret was not set in the Repository Settings.')
 
       # # Setup Node
-      # - name: Setup Node
-      #   uses: actions/setup-node@v4
-      #   with:
-      #     node-version: 18
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
 
       # # Install dependencies
-      # - name: Run Yarn Install
-      #   working-directory: ${{ vars.SOURCE_DIRECTORY }}
-      #   run: yarn install
+      - name: Run Yarn Install
+        working-directory: ${{ vars.SOURCE_DIRECTORY }}
+        run: yarn install
 
       # # Build the bundle
-      # - name: Run Yarn Build
-      #   working-directory: ${{ vars.SOURCE_DIRECTORY }}
-      #   run: yarn build
+      - name: Run Yarn Build
+        working-directory: ${{ vars.SOURCE_DIRECTORY }}
+        run: yarn build
 
       # Setup our access to AWS
-      # - name: Configure AWS Credentials
-      #   uses: aws-actions/configure-aws-credentials@v4
-      #   with:
-      #     aws-access-key-id: ${{ vars.S3_AWS_ACCESS_KEY_ID }}
-      #     aws-secret-access-key: ${{ secrets.S3_AWS_ACCESS_KEY_SECRET }}
-      #     aws-region: ${{ vars.S3_BUCKET_REGION }}
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ vars.S3_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.S3_AWS_ACCESS_KEY_SECRET }}
+          aws-region: ${{ vars.S3_BUCKET_REGION }}
 
-      - name: Echo
+      # Copy our built bundle to the S3 bucket
+      - name: Deploy to S3
         working-directory: ${{ vars.SOURCE_DIRECTORY }}
         run: |
-          echo \
           aws s3 sync \
           ./build \
           s3://${{ vars.S3_BUCKET }}/portals/${{ steps.repo_name.outputs.REPO_NAME }}/branches/latest/ \
           --acl public-read --cache-control=\"must-revalidate,max-age:0\" --delete --dryrun
-
-      # Copy our built bundle to the S3 bucket
-      # - name: Deploy to S3
-      #   working-directory: ${{ vars.SOURCE_DIRECTORY }}
-      #   run: |
-      #     aws s3 sync \
-      #     ./build \ 
-      #     s3://${{ vars.S3_BUCKET }}/portals/${{ steps.repo_name.outputs.REPO_NAME }}/branches/latest/ \
-      #     --acl public-read --cache-control="must-revalidate,max-age:0" --delete --dryrun
