@@ -103,12 +103,12 @@ jobs:
         with:
           node-version: 18
 
-      # # Install dependencies
+      # Install dependencies
       - name: Run Yarn Install
         working-directory: ${{ vars.SOURCE_DIRECTORY }}
         run: yarn install
 
-      # # Build the portal
+      # Build the portal
       - name: Run Yarn Build
         working-directory: ${{ vars.SOURCE_DIRECTORY }}
         run: yarn build
