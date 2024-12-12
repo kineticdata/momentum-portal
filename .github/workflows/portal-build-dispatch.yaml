@@ -128,4 +128,4 @@ jobs:
           aws s3 sync \
           ./build \
           s3://${{ vars.S3_BUCKET }}/portals/${{ steps.repo_name.outputs.REPO_NAME }}/versions/${{ steps.version.outputs.tag }}/ \
-          --acl public-read --cache-control=\"must-revalidate,max-age:0\" --delete
+          --cache-control=\"must-revalidate,max-age:0\" --delete
