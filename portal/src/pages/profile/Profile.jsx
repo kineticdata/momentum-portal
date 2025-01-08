@@ -9,6 +9,7 @@ import { Icon } from '../../atoms/Icon.jsx';
 import { validateEmail } from '../../helpers/index.js';
 import { appActions, themeActions } from '../../helpers/state.js';
 import { toastError, toastSuccess } from '../../helpers/toasts.js';
+import Signature from '../../components/kinetic-form/widgets/signature.js';
 
 export const Profile = () => {
   const mobile = useSelector(state => state.view.mobile);
@@ -24,6 +25,11 @@ export const Profile = () => {
     newDisplayName: '',
     newPassword: '',
   });
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const toggleModal = () => {
+    setIsModalOpen((prev) => !prev);
+  };
 
   const validateForm = () => {
     // Validate the fields
@@ -223,6 +229,9 @@ export const Profile = () => {
           </a>
         </div>
       </form>
+      <div>
+        <Signature/>
+      </div>
     </>
   );
 };
