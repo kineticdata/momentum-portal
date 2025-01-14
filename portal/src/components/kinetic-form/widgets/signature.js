@@ -59,7 +59,7 @@ const SignatureComponent = forwardRef(
       return fetch(dataUrl)
         .then(response => response.blob())
         .catch(error =>
-          console.error('Error converting data URL to Blob:', error),
+          console.error('Error converting image to blob', error),
         );
     };
 
