@@ -28,6 +28,7 @@ import { CloseButton } from './Button.jsx';
  *  escape key is pressed.
  * @param {boolean} [props.closeOnInteractOutside=true] Should the modal close
  *  when the user interacts with the area outside the modal.
+ * @param {string} className
  * @param {JSX.Element|JSX.Element[]} [props.children] Elements to inject into
  *  available slots in the modal. Available slots are:
  *  - trigger: Component that toggles the modal open state when interacted with.
@@ -45,6 +46,7 @@ export const Modal = ({
   size = 'sm',
   closeOnEscape,
   closeOnInteractOutside,
+  className,
   children,
 }) => {
   const slots = getChildSlots(children, {
@@ -83,6 +85,7 @@ export const Modal = ({
                 'md:w-screen-lg md:max-h-[80vh]': size === 'lg',
                 'md:w-screen': size === 'xl',
               },
+              className,
             )}
           >
             <div className="flex justify-between items-center gap-2 py-3 px-6">
@@ -136,4 +139,5 @@ Modal.propTypes = {
   title: t.string.isRequired,
   size: t.string,
   children: t.node,
+  className: t.string,
 };

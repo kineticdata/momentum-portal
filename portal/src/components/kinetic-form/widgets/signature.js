@@ -1,50 +1,121 @@
-import { useState } from 'react';
+import { useState, forwardRef } from 'react';
+import clsx from 'clsx';
+import t from 'prop-types';
 import { Modal } from '../../../atoms/Modal.jsx';
 import { SignaturePad } from '@ark-ui/react/signature-pad';
-import clsx from 'clsx';
-import { Button } from '../../../atoms/Button.jsx';
 import { Icon } from '../../../atoms/Icon.jsx';
+import {
+  WidgetAPI,
+  registerWidget,
+  validateContainer,
+  validateField,
+} from './index.js';
+import { getCsrfToken } from '@kineticdata/react';
+import { toastError } from '../../../helpers/toasts.js';
 
-const Signature = () => {
+/**
+ * SignatureComponent is a forward-ref component that handles signature input,
+ * allowing users to draw and save their signature.
+ */
+const SignatureComponent = forwardRef(({ className, field }, ref) => {
   const [open, setOpen] = useState(false);
-  const [signature, setSignature] = useState(null);
   const [imageUrl, setImageUrl] = useState('');
   const [savedSignature, setSavedSignature] = useState(null);
 
-  const handleClear = () => {
-    setSignature(null); // Clear the signature
+  // Function to get the value
+  const getValue = () => {
+    return field.value();
   };
 
-  const onSave = () => {
-    setSavedSignature(imageUrl)
-    setOpen(false);
+  // Function to update the value
+  const setValue = value => {
+    setSavedSignature(value);
+  };
+
+  // Clears the signature pad by resetting the imageUrl
+  const handleClear = () => {
+    setImageUrl('');
+  };
+
+  const verifyFilename = filename => {
+    let fn = filename || `${field.form().slug()}_signature`;
+    if (!/\.pdf$/i.test(fn)) {
+      fn += '.png';
+    }
+    return fn;
+  };
+
+  const dataUrlToBlob = dataUrl => {
+    return fetch(dataUrl)
+      .then(response => response.blob())
+      .catch(error =>
+        console.error('Error converting data URL to Blob:', error),
+      );
+  };
+
+  const onSave = async () => {
+    let data = new FormData();
+    data.append(
+      'files',
+      await dataUrlToBlob(imageUrl),
+      verifyFilename('widgets_signature'),
+    );
+
+    fetch(field.form().fileUploadPath(), {
+      method: 'POST',
+      headers: { 'X-XSRF-TOKEN': getCsrfToken() },
+      body: data,
+    })
+      .then(async response => {
+        if (!response.ok) {
+          throw new Error('Failed to save signature.');
+        }
+
+        const responseData = await response.json();
+        field.value(responseData);
+        setSavedSignature(imageUrl);
+        setOpen(false);
+      })
+      .catch(() => {
+        toastError({
+          title: 'Failed to save signature.',
+        });
+      });
   };
 
   const onExitComplete = () => {
-    setSignature(null);
     setImageUrl('');
   };
 
   return (
-    <>
-      <div className="flex flex-col">
-        <span>Signature</span>
-        <Button
-          variant="secondary"
+    <WidgetAPI
+      ref={ref}
+      api={{
+        getValue,
+        setValue,
+      }}
+    >
+      <div className={clsx(className, 'flex flex-col')}>
+        <label className="block text-sm font-semibold text-gray-900 leading-4 pb-2">
+          Signature
+        </label>
+        <button
+          type="button"
           onClick={() => setOpen(true)}
-          className={clsx(
-            'w-[271px] h-[59px] bg-white border border-primary-400 rounded-[20px]',
-            'hover:border-primary-400 border bg-primary-100 !important',
-          )}
+          className="w-[271px] h-[59px] bg-white border border-primary-400 rounded-[20px] hover:bg-primary-100 flex items-center justify-center"
         >
           {savedSignature ? (
-            <img src={savedSignature} alt="signature" />
+            <img
+              src={savedSignature}
+              alt="signature"
+              className="max-h-full max-w-full object-contain rounded-[20px]" // Ensure it fits within the container
+            />
           ) : (
-            <span>
+            <span className="flex items-center gap-2">
               Signature <Icon name="writing" aria-label="signature" />
             </span>
           )}
-        </Button>
+        </button>
       </div>
       <Modal
         title="Sign your form"
@@ -52,6 +123,7 @@ const Signature = () => {
         onOpenChange={({ open }) => setOpen(open)}
         onExitComplete={onExitComplete}
         size="sm"
+        className="!rounded-[40px]"
       >
         <div slot="body">
           <SignaturePad.Root
@@ -64,12 +136,15 @@ const Signature = () => {
             </div>
             <SignaturePad.Control
               className={clsx(
-                'border-primary-400 border bg-gray-100 relative rounded-[20px]',
-                'hover:border-primary-400 border hover:bg-primary-100',
-                'focus-within:border-secondary-400 focus-within:bg-gray-100',
+                'border border-primary-400 bg-gray-100 relative rounded-[20px] transition-all',
+                'hover:bg-primary-100',
+                {
+                  'focus-within:border-secondary-400':!imageUrl,
+                  'border-secondary-400': imageUrl,
+                },
               )}
             >
-              <SignaturePad.Segment value={signature} onChange={setSignature} />
+              <SignaturePad.Segment />
               <SignaturePad.Guide
                 className={clsx(
                   'h-[200px] relative rounded-[20px] border border-solid',
@@ -91,11 +166,42 @@ const Signature = () => {
           <p className="text-center text-small text-gray-900">
             I understand this is a legal representation of my signature.
           </p>
-          <Button onClick={() => onSave()} className="w-full rounded-[20px]">Save</Button>
+          <button
+            type="button"
+            onClick={onSave}
+            className="w-full rounded-[20px] bg-secondary-400 button-text py-2 font-semibold border border-primary-500"
+          >
+            Save
+          </button>
         </div>
       </Modal>
-    </>
+    </WidgetAPI>
   );
+});
+
+SignatureComponent.propTypes = {
+  className: t.string,
+  field: t.object.isRequired,
 };
 
-export default Signature;
+/**
+ * The Signature widget registers the SignatureComponent and validates the container and field.
+ */
+export const Signature = ({ container, field, config, id } = {}) => {
+  if (
+    validateContainer(container, 'Signature Widget') &&
+    validateField(field, 'attachment', 'Signature')
+  ) {
+    return registerWidget(Signature, {
+      container,
+      Component: SignatureComponent,
+      props: { ...config, field },
+      id,
+    });
+  }
+};
+
+/**
+ * @typedef {Object} SignatureWidgetConfig
+ * @property {string} [className] Classes to add to the widget wrapper.
+ */
