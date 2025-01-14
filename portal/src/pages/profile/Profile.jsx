@@ -24,11 +24,6 @@ export const Profile = () => {
     newDisplayName: '',
     newPassword: '',
   });
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const toggleModal = () => {
-    setIsModalOpen((prev) => !prev);
-  };
 
   const validateForm = () => {
     // Validate the fields
@@ -228,8 +223,6 @@ export const Profile = () => {
           </a>
         </div>
       </form>
-      <div>
-      </div>
     </>
   );
 };
