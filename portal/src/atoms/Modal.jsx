@@ -46,7 +46,6 @@ export const Modal = ({
   size = 'sm',
   closeOnEscape,
   closeOnInteractOutside,
-  className,
   children,
 }) => {
   const slots = getChildSlots(children, {
@@ -78,14 +77,13 @@ export const Modal = ({
               // Mobile first styles
               'max-md:w-screen max-md:h-screen',
               // Non mobile styles
-              'md:max-w-[calc(100vw-3rem)] md:max-h-[calc(100vh-3rem)] md:rounded md:shadow-lg',
+              'md:max-w-[calc(100vw-3rem)] md:max-h-[calc(100vh-3rem)] md:rounded-[40px] md:shadow-lg',
               {
                 'md:w-screen-sm md:max-h-[60vh]': size === 'sm',
                 'md:w-screen-md md:max-h-[70vh]': size === 'md',
                 'md:w-screen-lg md:max-h-[80vh]': size === 'lg',
                 'md:w-screen': size === 'xl',
               },
-              className,
             )}
           >
             <div className="flex justify-between items-center gap-2 py-3 px-6">
@@ -139,5 +137,4 @@ Modal.propTypes = {
   title: t.string.isRequired,
   size: t.string,
   children: t.node,
-  className: t.string,
 };
