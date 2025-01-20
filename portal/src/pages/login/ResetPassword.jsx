@@ -2,9 +2,9 @@ import { useCallback, useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { createSubmission, getCsrfToken } from '@kineticdata/react';
 import { useSelector } from 'react-redux';
-import { LoginHeader } from './Login.jsx';
 import { Button } from '../../atoms/Button.jsx';
 import { toastSuccess } from '../../helpers/toasts.js';
+import logo from '../../assets/images/logo-full.svg';
 
 export const ResetPassword = () => {
   let { token } = useParams();
@@ -12,15 +12,6 @@ export const ResetPassword = () => {
 
   return (
     <>
-      <LoginHeader>
-        <Button
-          variant="tertiary"
-          inverse
-          icon="arrow-left"
-          to="/login"
-          aria-label="Return to Login"
-        />
-      </LoginHeader>
       {token ? (
         <ResetPasswordChangeForm
           token={token}
@@ -66,35 +57,44 @@ const ResetPasswordRequestForm = () => {
   );
 
   return (
-    <form className="self-center flex flex-col gap-5 items-stretch w-full max-w-96">
-      <div className="field">
-        <label htmlFor="username">Username</label>
-        <input
-          id="email"
-          type="text"
-          name="username"
-          required={true}
-          autoFocus
-          value={username}
-          onChange={onChangeUsername}
-          disabled={submitted}
-        />
+    <div className="flex justify-center items-center min-h-screen">
+      <div className="flex flex-col items-center gap-6 w-[556px] p-[24px_100px] bg-white rounded-xl shadow-lg">
+        <form className="self-center flex flex-col gap-5 items-stretch w-full max-w-96 mb-12">
+          <img
+            src={logo}
+            alt="Logo"
+            className="h-12 object-contain mt-5 mb-5"
+          />
+          <div className="field">
+            <label htmlFor="username">Username</label>
+            <input
+              id="email"
+              type="text"
+              name="username"
+              required={true}
+              autoFocus
+              value={username}
+              onChange={onChangeUsername}
+              disabled={submitted}
+            />
+          </div>
+          {submitted && (
+            <p>
+              Your request has been submitted. You should receive an email with
+              a password reset link shortly.
+            </p>
+          )}
+          {error && <p className="text-warning-500">{error}</p>}
+          <Button
+            type="submit"
+            onClick={submitRequest}
+            disabled={!username || submitted}
+          >
+            Reset Password
+          </Button>
+        </form>
       </div>
-      {submitted && (
-        <p>
-          Your request has been submitted. You should receive an email with a
-          password reset link shortly.
-        </p>
-      )}
-      {error && <p className="text-warning-500">{error}</p>}
-      <Button
-        type="submit"
-        onClick={submitRequest}
-        disabled={!username || submitted}
-      >
-        Reset Password
-      </Button>
-    </form>
+    </div>
   );
 };
 
