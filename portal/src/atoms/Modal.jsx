@@ -28,7 +28,6 @@ import { CloseButton } from './Button.jsx';
  *  escape key is pressed.
  * @param {boolean} [props.closeOnInteractOutside=true] Should the modal close
  *  when the user interacts with the area outside the modal.
- * @param {string} className
  * @param {JSX.Element|JSX.Element[]} [props.children] Elements to inject into
  *  available slots in the modal. Available slots are:
  *  - trigger: Component that toggles the modal open state when interacted with.

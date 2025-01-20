@@ -27,12 +27,17 @@ const SignatureComponent = forwardRef(
       savedButtonLabel = 'Save',
       savedFileName = 'signature_widget',
       buttonLabel = 'Signature',
+      clearButtonLabel = 'Clear',
     },
     ref,
   ) => {
     const [open, setOpen] = useState(false);
     const [imageUrl, setImageUrl] = useState('');
-    const [savedSignature, setSavedSignature] = useState(null);
+    const [savedSignature, setSavedSignature] = useState(() =>
+      field.value()?.[0]
+        ? `${field.form().fileDownloadPath(field.name())}/0/${encodeURIComponent(field.value()[0].name)}`
+        : null,
+    );
 
     // Function to get the value
     const getValue = () => {
@@ -43,7 +48,7 @@ const SignatureComponent = forwardRef(
     const reset = () => {
       setImageUrl('');
       setSavedSignature('');
-      field.value(null);
+      field.value([]);
     };
 
     const dataUrlToBlob = dataUrl => {
@@ -95,9 +100,6 @@ const SignatureComponent = forwardRef(
         }}
       >
         <div className={clsx('flex flex-col')}>
-          <label className="block text-sm font-semibold text-gray-900 leading-4 pb-2">
-            Signature
-          </label>
           <div className="flex items-center justify-between w-full">
             <button
               type="button"
@@ -117,11 +119,8 @@ const SignatureComponent = forwardRef(
               )}
             </button>
             {savedSignature && (
-              <button
-                className="flex ml-6 font-semibold"
-                onClick={reset}
-              >
-                Clear
+              <button className="flex ml-6 font-semibold" onClick={reset}>
+                {clearButtonLabel}
               </button>
             )}
           </div>
@@ -146,10 +145,7 @@ const SignatureComponent = forwardRef(
                 className={clsx(
                   'border border-primary-400 bg-gray-100 relative rounded-2.5xl transition-all',
                   'hover:bg-primary-100',
-                  {
-                    'ring:ring-secondary-400': !imageUrl,
-                    'border-secondary-400': imageUrl,
-                  },
+                  'focus-within:ring focus-within:ring-secondary-400',
                 )}
               >
                 <SignaturePad.Segment />
@@ -202,6 +198,7 @@ SignatureComponent.propTypes = {
   savedButtonLabel: t.string,
   savedFileName: t.string,
   buttonLabel: t.string,
+  clearButtonLabel: t.string,
 };
 
 /**
@@ -236,5 +233,6 @@ export const Signature = ({ container, field, config, id } = {}) => {
  * @property {string} [agreementText] The text displayed to indicate the agreement for the signature.
  * @property {string} [savedButtonLabel] The label for the "Save" button in the modal.
  * @property {string} [savedFileName] The name of the file saved after the signature is completed.
- @property {string} [buttonLabel] The label for the signature field.
+ * @property {string} [buttonLabel] The label for the signature field.
+ * @property {string} [clearButtonLabel] The label for the "Clear" button next to the signature field.
  */
