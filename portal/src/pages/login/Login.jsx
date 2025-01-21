@@ -1,7 +1,9 @@
-import logo from '../../assets/images/logo-full.svg';
+
 import { Button } from '../../atoms/Button.jsx';
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
+import { useSelector } from 'react-redux';
+import logo from '../../assets/images/logo-full.svg';
 
 export const Login = loginProps => (
   <div className="flex justify-center items-center min-h-screen">
@@ -23,9 +25,11 @@ export const LoginForm = loginProps => {
     username,
   } = loginProps;
 
+  const themeLogo = useSelector(state => state.theme.inverseLogo);
+
   return (
     <form className="flex flex-col gap-5 items-stretch w-full p-5 max-w-96">
-      <img src={logo} alt="Logo" className="h-12 object-contain mb-5 mt-5" />
+      <img src={themeLogo || logo} alt="Logo" className="h-12 object-contain mb-5 mt-5" />
       <div className="field">
         <label htmlFor="username">Username</label>
         <input

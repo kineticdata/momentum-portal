@@ -12,7 +12,8 @@ export const ResetPassword = () => {
   let [searchParams] = useSearchParams();
 
   return (
-    <>
+    <div className="flex justify-center items-center min-h-screen">
+      <div className="flex flex-col items-center w-[36rem] bg-white rounded-xl shadow-lg">
       {token ? (
         <ResetPasswordChangeForm
           token={token}
@@ -21,13 +22,14 @@ export const ResetPassword = () => {
       ) : (
         <ResetPasswordRequestForm />
       )}
-    </>
+    </div>
+    </div>
   );
 };
 
 const ResetPasswordRequestForm = () => {
   const kappSlug = useSelector(state => state.app.kappSlug);
-
+  const themeLogo = useSelector(state => state.theme.inverseLogo);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(null);
 
@@ -58,9 +60,8 @@ const ResetPasswordRequestForm = () => {
   );
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      <div className="flex flex-col items-center w-[36rem] bg-white rounded-xl shadow-lg">
-        <div className="flex justify-start w-full pl-8 pt-4">
+    <>
+        <div className="flex justify-start w-full md:pl-8 pt-4">
           <Button
             variant="tertiary"
             icon="arrow-left"
@@ -70,7 +71,7 @@ const ResetPasswordRequestForm = () => {
         </div>
         <form className="self-center flex flex-col gap-5 px-5 items-stretch w-full max-w-96 mb-12">
           <img
-            src={logo}
+            src={themeLogo || logo}
             alt="Logo"
             className="h-12 object-contain mt-4 mb-5"
           />
@@ -102,8 +103,7 @@ const ResetPasswordRequestForm = () => {
             Reset Password
           </Button>
         </form>
-      </div>
-    </div>
+      </>
   );
 };
 
@@ -111,6 +111,7 @@ const ResetPasswordChangeForm = ({ token, username }) => {
   const navigate = useNavigate();
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(null);
+  const themeLogo = useSelector(state => state.theme.inverseLogo);
 
   // State and change handlers for new password fields
   const [password, setPassword] = useState('');
@@ -173,7 +174,12 @@ const ResetPasswordChangeForm = ({ token, username }) => {
   );
 
   return (
-    <form className="self-center flex flex-col gap-5 items-stretch w-full max-w-96">
+    <form className="flex flex-col gap-5 items-stretch w-full p-5 max-w-96 mb-12">
+      <img
+        src={themeLogo || logo}
+        alt="Logo"
+        className="h-12 object-contain mt-4 mb-5"
+      />
       {!token || !username ? (
         <>The reset password link is invalid.</>
       ) : (
