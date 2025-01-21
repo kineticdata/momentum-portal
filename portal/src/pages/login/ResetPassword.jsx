@@ -6,6 +6,7 @@ import { Button } from '../../atoms/Button.jsx';
 import { toastSuccess } from '../../helpers/toasts.js';
 import logo from '../../assets/images/logo-full.svg';
 
+
 export const ResetPassword = () => {
   let { token } = useParams();
   let [searchParams] = useSearchParams();
@@ -58,12 +59,20 @@ const ResetPasswordRequestForm = () => {
 
   return (
     <div className="flex justify-center items-center min-h-screen">
-      <div className="flex flex-col items-center gap-6 w-[556px] p-[24px_100px] bg-white rounded-xl shadow-lg">
-        <form className="self-center flex flex-col gap-5 items-stretch w-full max-w-96 mb-12">
+      <div className="flex flex-col items-center w-[36rem] bg-white rounded-xl shadow-lg">
+        <div className="flex justify-start w-full pl-8 pt-4">
+          <Button
+            variant="tertiary"
+            icon="arrow-left"
+            to=".."
+            aria-label="Back to Login"
+          ></Button>
+        </div>
+        <form className="self-center flex flex-col gap-5 px-5 items-stretch w-full max-w-96 mb-12">
           <img
             src={logo}
             alt="Logo"
-            className="h-12 object-contain mt-5 mb-5"
+            className="h-12 object-contain mt-4 mb-5"
           />
           <div className="field">
             <label htmlFor="username">Username</label>
