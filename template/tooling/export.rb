@@ -23,7 +23,6 @@
 #   }
 # }
 
-require 'bundler'
 require 'logger'
 require 'json'
 
