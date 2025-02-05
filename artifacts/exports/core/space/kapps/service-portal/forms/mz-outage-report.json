@@ -1,0 +1,167 @@
+{
+  "anonymous": false,
+  "attributes": [
+
+  ],
+  "bridgedResources": [
+
+  ],
+  "categorizations": [
+    {
+      "category": {
+        "slug": "access-requests"
+      }
+    },
+    {
+      "category": {
+        "slug": "it--technical-services"
+      }
+    },
+    {
+      "category": {
+        "slug": "popular-services"
+      }
+    }
+  ],
+  "customHeadContent": null,
+  "description": "",
+  "indexDefinitions": [
+    {
+      "name": "closedBy",
+      "parts": [
+        "closedBy"
+      ],
+      "unique": false
+    },
+    {
+      "name": "createdBy",
+      "parts": [
+        "createdBy"
+      ],
+      "unique": false
+    },
+    {
+      "name": "handle",
+      "parts": [
+        "handle"
+      ],
+      "unique": false
+    },
+    {
+      "name": "submittedBy",
+      "parts": [
+        "submittedBy"
+      ],
+      "unique": false
+    },
+    {
+      "name": "updatedBy",
+      "parts": [
+        "updatedBy"
+      ],
+      "unique": false
+    },
+    {
+      "name": "values[Text]",
+      "parts": [
+        "values[Text]"
+      ],
+      "unique": false
+    }
+  ],
+  "integrations": [
+
+  ],
+  "name": "Report an Outage",
+  "notes": null,
+  "pages": [
+    {
+      "advanceCondition": null,
+      "displayCondition": null,
+      "displayPage": null,
+      "elements": [
+        {
+          "enabled": true,
+          "dataType": "string",
+          "defaultDataSource": "none",
+          "requiredMessage": null,
+          "name": "Text",
+          "omitWhenHidden": null,
+          "renderAttributes": {
+          },
+          "renderType": "text",
+          "pattern": null,
+          "defaultValue": null,
+          "visible": true,
+          "label": "Text",
+          "constraints": [
+
+          ],
+          "events": [
+
+          ],
+          "rows": 1,
+          "defaultResourceName": null,
+          "type": "field",
+          "key": "b4ac03a83a5f427d8633e3102b09bc72",
+          "required": false
+        },
+        {
+          "type": "button",
+          "renderType": "save",
+          "name": "Save",
+          "label": "Save",
+          "visible": true,
+          "enabled": true,
+          "renderAttributes": {
+          }
+        },
+        {
+          "visible": true,
+          "renderAttributes": {
+          },
+          "name": "Submit Button",
+          "label": "Submit",
+          "type": "button",
+          "renderType": "submit-page",
+          "enabled": true
+        }
+      ],
+      "events": [
+
+      ],
+      "name": "Page 1",
+      "renderType": "submittable",
+      "type": "page"
+    },
+    {
+      "advanceCondition": null,
+      "displayCondition": null,
+      "displayPage": null,
+      "elements": [
+        {
+          "type": "content",
+          "renderType": "html",
+          "name": "Thank you",
+          "text": "<h1>Thank you!</h1>",
+          "visible": true,
+          "renderAttributes": {
+          }
+        }
+      ],
+      "events": [
+
+      ],
+      "name": "Confirmation",
+      "renderType": "confirmation",
+      "type": "page"
+    }
+  ],
+  "securityPolicies": [
+
+  ],
+  "slug": "mz-outage-report",
+  "status": "Active",
+  "submissionLabelExpression": "",
+  "type": "Service"
+}
