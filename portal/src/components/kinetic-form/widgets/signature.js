@@ -52,9 +52,9 @@ const SignatureComponent = forwardRef(
 
     const signatureFonts = [
       { font: 'Waiting for the Sunrise' },
-      { font: 'mynerve' },
+      { font: 'Mynerve' },
       { font: 'Grechen Fuemen' },
-      { font: 'condiment' },
+      { font: 'Condiment' },
       { font: 'Nothing You Could Do' },
       { font: 'Comforter Brush' },
     ];
@@ -153,7 +153,7 @@ const SignatureComponent = forwardRef(
 
     const isSaveDisabled =
       (activeTab === 'draw' && !imageUrl) ||
-      (activeTab === 'type' && !selectedStyle);
+      (activeTab === 'type' && (!selectedStyle || !fullName));
 
     return (
       <WidgetAPI
@@ -194,9 +194,9 @@ const SignatureComponent = forwardRef(
           open={open}
           onOpenChange={({ open }) => setOpen(open)}
           onExitComplete={onExitComplete}
-          size="tall"
+          size="sm"
         >
-          <div slot="body" className="signature-widget-form">
+          <div slot="body">
             <Tabs.Root
               value={activeTab}
               onValueChange={tab => setActiveTab(tab.value)}
@@ -271,32 +271,50 @@ const SignatureComponent = forwardRef(
                   >
                     {fullNameLabel}
                   </label>
-                  <input
-                    type="text"
-                    value={fullName}
-                    onChange={e => setFullName(e.target.value)}
-                    className="font-semibold"
-                  />
+                  <div className="field w-full">
+                    <input
+                      type="text"
+                      value={fullName}
+                      onChange={e => setFullName(e.target.value)}
+                      className="block px-5 md:px-6 py-2.75 md:py-2.25 max-md:text-sm border rounded-2.5xl outline-0 w-full font-semibold
+               text-primary-900 bg-white border-primary-400
+               hover:bg-primary-100 focus-visible:bg-white focus-visible:ring focus-visible:ring-secondary-400
+               disabled:text-gray-900 disabled:bg-gray-100"
+                    />
+                  </div>
                 </div>
                 <hr className="mb-4 mt-6 border-primary-400" />
                 <div className="grid grid-cols-2 gap-4 radio-btn">
                   {signatureFonts.map(style => (
                     <label
                       key={style.font}
-                      className={`flex items-center justify-between border rounded-2.5xl p-4 w-[18rem] h-16 cursor-pointer transition-all`}
+                      className="flex items-center justify-between border rounded-2.5xl p-4 w-[18rem] h-16 cursor-pointer transition-all
+             text-primary-900 bg-white border-primary-400 hover:bg-primary-100
+             focus-within:bg-white focus-within:ring focus-within:ring-secondary-400
+             overflow-wrap-anywhere disabled:text-gray-900 disabled:bg-gray-100"
                       onClick={() => setSelectedStyle(style.font)}
                     >
                       <span
-                        className={`text-xl text-primary-900 uppercase`}
-                        style={{ fontFamily: style.font }}
+                        className="text-2xl text-primary-900 uppercase"
+                        style={{
+                          fontFamily: style.font,
+                          display: 'inline-block',
+                          maxWidth: '12.5rem',
+                          whiteSpace: 'nowrap',
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                        }}
                       >
                         {fullName}
                       </span>
+
                       <input
                         type="radio"
                         value={style.font}
                         checked={selectedStyle === style.font}
                         onChange={() => setSelectedStyle(style.font)}
+                        className="flex-none appearance-none w-5 h-5 border-2 border-primary-400 bg-secondary-400 outline-0 bg-center bg-no-repeat rounded-full
+               checked:bg-[url('./icons/radio-checked.svg')] disabled:checked:bg-[url('./icons/radio-checked_disabled.svg')] bg-[length:0.75rem]"
                       />
                     </label>
                   ))}

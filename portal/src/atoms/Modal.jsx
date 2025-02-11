@@ -24,7 +24,7 @@ import { Toaster } from './Toaster.jsx';
  * @param {Function} [props.onExitComplete] Function to call after the modal
  *  finishes closing.
  * @param {string} props.title The title text for the modal.
- * @param {('sm'|'md'|'lg'|'xl'|'tall')} [size=sm] The size of the modal
+ * @param {('sm'|'md'|'lg'|'xl')} [size=sm] The size of the modal
  * @param {boolean} [props.closeOnEscape=true] Should the modal close when the
  *  escape key is pressed.
  * @param {boolean} [props.closeOnInteractOutside=true] Should the modal close
@@ -84,11 +84,10 @@ export const Modal = ({
               // Non mobile styles
               'md:max-w-[calc(100vw-3rem)]',
               {
-                'md:w-screen-sm md:max-h-[60vh]': size === 'sm',
-                'md:w-screen-md md:max-h-[70vh]': size === 'md',
-                'md:w-screen-lg md:max-h-[80vh]': size === 'lg',
+                'md:w-screen-sm': size === 'sm',
+                'md:w-screen-md': size === 'md',
+                'md:w-screen-lg': size === 'lg',
                 'md:w-screen': size === 'xl',
-                'md:w-screen-sm md:max-h-[80vh]': size === 'tall',
               },
             )}
           >
