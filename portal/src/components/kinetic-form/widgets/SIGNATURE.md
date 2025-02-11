@@ -5,12 +5,71 @@
 The signature widget renders a signature element, which opens a modal where the user can draw their signature or type it using a preselected font. The signature is stored as an image attachment field on the form.
 
 ```js
-// Initialize the Markdown widget
+// Initialize the Signature widget
 bundle.widgets.Signature({ container, field, config, id });
 
 // Retrieve a reference to the widget's API
 bundle.widgets.Signature.get(id);
 ```
+
+### Parameters
+
+![name=container](https://img.shields.io/badge/container-gray)
+![type=HTMLElement](https://img.shields.io/badge/HTMLElement-e66e22)  
+The HTML element into which the widget should be rendered.
+
+![name=field](https://img.shields.io/badge/field-gray)
+![type=Object](https://img.shields.io/badge/Object-e66e22)  
+The Kinetic field object used to store the value of the signature.
+
+<details>
+<summary>
+  <img alt="name=config" src="https://img.shields.io/badge/config-gray">
+  <img alt="type=Object" src="https://img.shields.io/badge/Object-e66e22">
+  <br>
+  An object of configurations for the widget.
+</summary>
+<br>
+<blockquote>
+
+![name=modalTitle](https://img.shields.io/badge/modalTitle-gray)
+![type=string](https://img.shields.io/badge/string-e66e22)  
+The title displayed at the top of the signature modal.
+
+![name=signaturePadLabel](https://img.shields.io/badge/signaturePadLabel-gray)
+![type=string](https://img.shields.io/badge/string-e66e22)  
+The label displayed above the signature pad.
+
+![name=fullNameLabel](https://img.shields.io/badge/fullNameLabel-gray)
+![type=string](https://img.shields.io/badge/string-e66e22)  
+Label for the full name input field
+
+![name=agreementText](https://img.shields.io/badge/agreementText-gray)
+![type=string](https://img.shields.io/badge/string-e66e22)  
+Agreement text displayed below the signature field
+
+![name=savedButtonLabel](https://img.shields.io/badge/savedButtonLabel-gray)
+![type=string](https://img.shields.io/badge/string-e66e22)  
+Name of the saved signature file
+
+![name=savedFileName](https://img.shields.io/badge/savedFileName-gray)
+![type=string](https://img.shields.io/badge/string-e66e22)  
+Label for the button that opens the signature modal
+
+![name=buttonLabel](https://img.shields.io/badge/buttonLabel-gray)
+![type=string](https://img.shields.io/badge/string-e66e22)  
+Label for the button that clears the signature
+
+![name=clearButtonLabel](https://img.shields.io/badge/clearButtonLabel-gray)
+![type=string](https://img.shields.io/badge/string-e66e22)  
+Label for the button that clears the signature
+
+</blockquote>
+</details>
+
+![name=id](https://img.shields.io/badge/id-gray)
+![type=string](https://img.shields.io/badge/string-e66e22)  
+A unique id that can be used to retrieve the API of the widget.
 
 ### API
 
@@ -21,21 +80,6 @@ Retrieves the current value of the signature.
 ![name=reset](https://img.shields.io/badge/reset%28%29-gray)
 ![type=Function](https://img.shields.io/badge/Function-e66e22)  
 Resets the signature field, clearing the stored signature.
-
-### Props
-
-The SignatureComponent accepts the following props:
-
-| prop name           | type     | default value                                                  | description                                          |
-| ------------------- | -------- | -------------------------------------------------------------- | ---------------------------------------------------- |
-| `modalTitle`        | `string` | 'Sign your form'                                               | Title of the signature modal.                        |
-| `signaturePadLabel` | `string` | 'Signature'                                                    | Label displayed above the signature pad.             |
-| `fullNameLabel`     | `string` | 'Full Name\*'                                                  | Label for the full name input field.                 |
-| `agreementText`     | `string` | 'I understand this is a legal representation of my signature.' | Agreement text displayed below the signature field.  |
-| `savedButtonLabel`  | `string` | 'Save'                                                         | Label for the save button.                           |
-| `savedFileName`     | `string` | 'signature_widget'                                             | Name of the saved signature file.                    |
-| `buttonLabel`       | `string` | 'Signature'                                                    | Label for the button that opens the signature modal. |
-| `clearButtonLabel`  | `string` | 'Clear'                                                        | Label for the button that clears the signature.      |
 
 ### Example
 
