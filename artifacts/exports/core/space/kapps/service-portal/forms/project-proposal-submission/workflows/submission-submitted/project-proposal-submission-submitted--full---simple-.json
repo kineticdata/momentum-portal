@@ -1,0 +1,722 @@
+{
+  "builderVersion": "",
+  "schemaVersion": "1.0",
+  "version": "",
+  "processOwnerEmail": "",
+  "lastId": 20,
+  "name": "Project Proposal Submission Submitted (Full - Simple)",
+  "notes": "",
+  "connectors": [
+    {
+      "from": "start",
+      "to": "utilities_echo_v1_6",
+      "label": "",
+      "value": "",
+      "type": "Complete"
+    },
+    {
+      "from": "system_noop_v1_4",
+      "to": "utilities_echo_v1_14",
+      "label": "",
+      "value": "",
+      "type": "Create"
+    },
+    {
+      "from": "utilities_echo_v1_6",
+      "to": "utilities_echo_v1_7",
+      "label": "",
+      "value": "",
+      "type": "Complete"
+    },
+    {
+      "from": "utilities_echo_v1_6",
+      "to": "utilities_echo_v1_19",
+      "label": "",
+      "value": "",
+      "type": "Complete"
+    },
+    {
+      "from": "utilities_echo_v1_7",
+      "to": "utilities_echo_v1_8",
+      "label": "",
+      "value": "",
+      "type": "Create"
+    },
+    {
+      "from": "utilities_echo_v1_7",
+      "to": "utilities_echo_v1_9",
+      "label": "Approved",
+      "value": "",
+      "type": "Complete"
+    },
+    {
+      "from": "utilities_echo_v1_7",
+      "to": "system_junction_v1_13",
+      "label": "Denied",
+      "value": "",
+      "type": "Complete"
+    },
+    {
+      "from": "utilities_echo_v1_8",
+      "to": "utilities_echo_v1_16",
+      "label": "",
+      "value": "",
+      "type": "Complete"
+    },
+    {
+      "from": "utilities_echo_v1_9",
+      "to": "utilities_echo_v1_12",
+      "label": "",
+      "value": "",
+      "type": "Create"
+    },
+    {
+      "from": "utilities_echo_v1_9",
+      "to": "system_noop_v1_4",
+      "label": "Approved",
+      "value": "",
+      "type": "Complete"
+    },
+    {
+      "from": "utilities_echo_v1_9",
+      "to": "system_junction_v1_13",
+      "label": "Denied",
+      "value": "",
+      "type": "Complete"
+    },
+    {
+      "from": "utilities_echo_v1_10",
+      "to": "utilities_echo_v1_11",
+      "label": "",
+      "value": "",
+      "type": "Complete"
+    },
+    {
+      "from": "utilities_echo_v1_12",
+      "to": "utilities_echo_v1_17",
+      "label": "",
+      "value": "",
+      "type": "Complete"
+    },
+    {
+      "from": "system_junction_v1_13",
+      "to": "utilities_echo_v1_10",
+      "label": "",
+      "value": "",
+      "type": "Complete"
+    },
+    {
+      "from": "utilities_echo_v1_14",
+      "to": "utilities_echo_v1_18",
+      "label": "",
+      "value": "",
+      "type": "Complete"
+    }
+  ],
+  "nodes": [
+    {
+      "configured": true,
+      "defers": false,
+      "deferrable": false,
+      "visible": false,
+      "name": "Start",
+      "messages": [
+
+      ],
+      "dependents": {
+        "task": [
+          {
+            "label": "",
+            "type": "Complete",
+            "value": "",
+            "content": "utilities_echo_v1_6"
+          }
+        ]
+      },
+      "id": "start",
+      "position": {
+        "x": 10,
+        "y": 10
+      },
+      "version": 1,
+      "parameters": [
+
+      ],
+      "definitionId": "system_start_v1"
+    },
+    {
+      "configured": true,
+      "defers": false,
+      "deferrable": false,
+      "visible": false,
+      "name": "Wait for Task Completion",
+      "messages": [
+
+      ],
+      "dependents": {
+        "task": [
+          {
+            "label": "",
+            "type": "Create",
+            "value": "",
+            "content": "utilities_echo_v1_14"
+          }
+        ]
+      },
+      "id": "system_noop_v1_4",
+      "position": {
+        "x": 197.74237644584647,
+        "y": 591.0341745531003
+      },
+      "version": 1,
+      "parameters": [
+
+      ],
+      "definitionId": "system_noop_v1"
+    },
+    {
+      "configured": true,
+      "defers": false,
+      "deferrable": false,
+      "visible": true,
+      "name": "Lookup Department Head",
+      "messages": [
+
+      ],
+      "dependents": {
+        "task": [
+          {
+            "label": "",
+            "type": "Complete",
+            "value": "",
+            "content": "utilities_echo_v1_7"
+          },
+          {
+            "label": "",
+            "type": "Complete",
+            "value": "",
+            "content": "utilities_echo_v1_19"
+          }
+        ]
+      },
+      "id": "utilities_echo_v1_6",
+      "position": {
+        "x": 204,
+        "y": 46.5
+      },
+      "version": 1,
+      "parameters": [
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "input",
+          "label": "Input",
+          "menu": "",
+          "value": "",
+          "required": true
+        }
+      ],
+      "definitionId": "utilities_echo_v1"
+    },
+    {
+      "configured": true,
+      "defers": false,
+      "deferrable": false,
+      "visible": true,
+      "name": "Wait for Department Head Approval",
+      "messages": [
+
+      ],
+      "dependents": {
+        "task": [
+          {
+            "label": "",
+            "type": "Create",
+            "value": "",
+            "content": "utilities_echo_v1_8"
+          },
+          {
+            "label": "Approved",
+            "type": "Complete",
+            "value": "",
+            "content": "utilities_echo_v1_9"
+          },
+          {
+            "label": "Denied",
+            "type": "Complete",
+            "value": "",
+            "content": "system_junction_v1_13"
+          }
+        ]
+      },
+      "id": "utilities_echo_v1_7",
+      "position": {
+        "x": 203.8969505783386,
+        "y": 198.35488958990538
+      },
+      "version": 1,
+      "parameters": [
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "input",
+          "label": "Input",
+          "menu": "",
+          "value": "",
+          "required": true
+        }
+      ],
+      "definitionId": "utilities_echo_v1"
+    },
+    {
+      "configured": true,
+      "defers": false,
+      "deferrable": false,
+      "visible": true,
+      "name": "Create Department Head Approval",
+      "messages": [
+
+      ],
+      "dependents": {
+        "task": [
+          {
+            "label": "",
+            "type": "Complete",
+            "value": "",
+            "content": "utilities_echo_v1_16"
+          }
+        ]
+      },
+      "id": "utilities_echo_v1_8",
+      "position": {
+        "x": 533.6698212407988,
+        "y": 201.5094637223975
+      },
+      "version": 1,
+      "parameters": [
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "input",
+          "label": "Input",
+          "menu": "",
+          "value": "",
+          "required": true
+        }
+      ],
+      "definitionId": "utilities_echo_v1"
+    },
+    {
+      "configured": true,
+      "defers": false,
+      "deferrable": false,
+      "visible": true,
+      "name": "Wait for Executive Approval",
+      "messages": [
+
+      ],
+      "dependents": {
+        "task": [
+          {
+            "label": "",
+            "type": "Create",
+            "value": "",
+            "content": "utilities_echo_v1_12"
+          },
+          {
+            "label": "Approved",
+            "type": "Complete",
+            "value": "",
+            "content": "system_noop_v1_4"
+          },
+          {
+            "label": "Denied",
+            "type": "Complete",
+            "value": "",
+            "content": "system_junction_v1_13"
+          }
+        ]
+      },
+      "id": "utilities_echo_v1_9",
+      "position": {
+        "x": 198.53627760252365,
+        "y": 389.65457413249203
+      },
+      "version": 1,
+      "parameters": [
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "input",
+          "label": "Input",
+          "menu": "",
+          "value": "",
+          "required": true
+        }
+      ],
+      "definitionId": "utilities_echo_v1"
+    },
+    {
+      "configured": true,
+      "defers": false,
+      "deferrable": false,
+      "visible": true,
+      "name": "Denial Message to Submitter",
+      "messages": [
+
+      ],
+      "dependents": {
+        "task": [
+          {
+            "label": "",
+            "type": "Complete",
+            "value": "",
+            "content": "utilities_echo_v1_11"
+          }
+        ]
+      },
+      "id": "utilities_echo_v1_10",
+      "position": {
+        "x": -401.08412197686556,
+        "y": 286.0362776025247
+      },
+      "version": 1,
+      "parameters": [
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "input",
+          "label": "Input",
+          "menu": "",
+          "value": "",
+          "required": true
+        }
+      ],
+      "definitionId": "utilities_echo_v1"
+    },
+    {
+      "configured": true,
+      "defers": false,
+      "deferrable": false,
+      "visible": true,
+      "name": "Close Submission",
+      "messages": [
+
+      ],
+      "dependents": "",
+      "id": "utilities_echo_v1_11",
+      "position": {
+        "x": -409.4731861198743,
+        "y": 437.5073606729753
+      },
+      "version": 1,
+      "parameters": [
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "input",
+          "label": "Input",
+          "menu": "",
+          "value": "",
+          "required": true
+        }
+      ],
+      "definitionId": "utilities_echo_v1"
+    },
+    {
+      "configured": true,
+      "defers": false,
+      "deferrable": false,
+      "visible": true,
+      "name": "Create Executive Approval",
+      "messages": [
+
+      ],
+      "dependents": {
+        "task": [
+          {
+            "label": "",
+            "type": "Complete",
+            "value": "",
+            "content": "utilities_echo_v1_17"
+          }
+        ]
+      },
+      "id": "utilities_echo_v1_12",
+      "position": {
+        "x": 537,
+        "y": 387.5
+      },
+      "version": 1,
+      "parameters": [
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "input",
+          "label": "Input",
+          "menu": "",
+          "value": "",
+          "required": true
+        }
+      ],
+      "definitionId": "utilities_echo_v1"
+    },
+    {
+      "configured": true,
+      "defers": false,
+      "deferrable": false,
+      "visible": false,
+      "name": "Junction",
+      "messages": [
+
+      ],
+      "dependents": {
+        "task": [
+          {
+            "label": "",
+            "type": "Complete",
+            "value": "",
+            "content": "utilities_echo_v1_10"
+          }
+        ]
+      },
+      "id": "system_junction_v1_13",
+      "position": {
+        "x": -117.88643533122995,
+        "y": 289.7597266035756
+      },
+      "version": 1,
+      "parameters": [
+
+      ],
+      "definitionId": "system_junction_v1"
+    },
+    {
+      "configured": true,
+      "defers": false,
+      "deferrable": false,
+      "visible": true,
+      "name": "Create Task",
+      "messages": [
+
+      ],
+      "dependents": {
+        "task": [
+          {
+            "label": "",
+            "type": "Complete",
+            "value": "",
+            "content": "utilities_echo_v1_18"
+          }
+        ]
+      },
+      "id": "utilities_echo_v1_14",
+      "position": {
+        "x": 539.5741324921136,
+        "y": 591.0341745531003
+      },
+      "version": 1,
+      "parameters": [
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "input",
+          "label": "Input",
+          "menu": "",
+          "value": "",
+          "required": true
+        }
+      ],
+      "definitionId": "utilities_echo_v1"
+    },
+    {
+      "configured": true,
+      "defers": false,
+      "deferrable": false,
+      "visible": true,
+      "name": "Notes",
+      "messages": [
+
+      ],
+      "dependents": "",
+      "id": "utilities_echo_v1_15",
+      "position": {
+        "x": 255.0891728699382,
+        "y": -67.74674187205468
+      },
+      "version": 1,
+      "parameters": [
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "input",
+          "label": "Input",
+          "menu": "",
+          "value": "TODO:\nApprover Look ups\nSLA\nStatus Updates",
+          "required": true
+        }
+      ],
+      "definitionId": "utilities_echo_v1"
+    },
+    {
+      "configured": true,
+      "defers": false,
+      "deferrable": false,
+      "visible": true,
+      "name": "Activity Update",
+      "messages": [
+
+      ],
+      "dependents": "",
+      "id": "utilities_echo_v1_16",
+      "position": {
+        "x": 841.1060146394791,
+        "y": 198.17929929588388
+      },
+      "version": 1,
+      "parameters": [
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "input",
+          "label": "Input",
+          "menu": "",
+          "value": "",
+          "required": true
+        }
+      ],
+      "definitionId": "utilities_echo_v1"
+    },
+    {
+      "configured": true,
+      "defers": false,
+      "deferrable": false,
+      "visible": true,
+      "name": "Activity Update - Executive Team",
+      "messages": [
+
+      ],
+      "dependents": "",
+      "id": "utilities_echo_v1_17",
+      "position": {
+        "x": 853.3166318693836,
+        "y": 381.94972595581055
+      },
+      "version": 1,
+      "parameters": [
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "input",
+          "label": "Input",
+          "menu": "",
+          "value": "",
+          "required": true
+        }
+      ],
+      "definitionId": "utilities_echo_v1"
+    },
+    {
+      "configured": true,
+      "defers": false,
+      "deferrable": false,
+      "visible": true,
+      "name": "Activity Update Task",
+      "messages": [
+
+      ],
+      "dependents": "",
+      "id": "utilities_echo_v1_18",
+      "position": {
+        "x": 874.7616961117415,
+        "y": 584.3738457000732
+      },
+      "version": 1,
+      "parameters": [
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "input",
+          "label": "Input",
+          "menu": "",
+          "value": "",
+          "required": true
+        }
+      ],
+      "definitionId": "utilities_echo_v1"
+    },
+    {
+      "configured": true,
+      "defers": false,
+      "deferrable": false,
+      "visible": true,
+      "name": "Update Status",
+      "messages": [
+
+      ],
+      "dependents": "",
+      "id": "utilities_echo_v1_19",
+      "position": {
+        "x": 535.8573991931137,
+        "y": 47.61005480883789
+      },
+      "version": 1,
+      "parameters": [
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "input",
+          "label": "Input",
+          "menu": "",
+          "value": "",
+          "required": true
+        }
+      ],
+      "definitionId": "utilities_echo_v1"
+    },
+    {
+      "configured": true,
+      "defers": false,
+      "deferrable": false,
+      "visible": true,
+      "name": "EXAMPLE ONLY - NON WORKING",
+      "messages": [
+
+      ],
+      "dependents": "",
+      "id": "utilities_echo_v1_20",
+      "position": {
+        "x": 78.97837157644558,
+        "y": -12.159260336112133
+      },
+      "version": 1,
+      "parameters": [
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "input",
+          "label": "Input",
+          "menu": "",
+          "value": "",
+          "required": true
+        }
+      ],
+      "definitionId": "utilities_echo_v1"
+    }
+  ],
+  "attributes": null
+}
