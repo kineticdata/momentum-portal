@@ -19,7 +19,7 @@ export const RequestsList = ({
   const mobile = useSelector(state => state.view.mobile);
 
   const { initialized, error, loading, data, pageNumber } = listData;
-  const { nextPage, previousPage, reload } = listActions;
+  const { nextPage, previousPage, reloadPage } = listActions;
 
   return (
     <>
@@ -45,6 +45,7 @@ export const RequestsList = ({
             <Error error={error} />
           ) : (
             <div className="flex flex-col gap-4 mb-4 md:mb-6 md:grid md:grid-cols-[auto_2fr_1fr_auto]">
+              {/* Mobile previous page button */}
               {mobile && previousPage && (
                 <Button
                   variant="tertiary"
@@ -55,20 +56,31 @@ export const RequestsList = ({
                   previous
                 </Button>
               )}
-              {loading && (
+
+              {/* Loading indicator if we're loading and there is no data */}
+              {loading && !data && (
                 <Loading className={!mobile ? 'col-start-1 col-end-5' : null} />
               )}
-              {!loading &&
+
+              {/* List of data */}
+              {data?.length > 0 &&
                 data.map(submission => (
                   <TicketCard
                     key={submission.id}
                     submission={submission}
-                    reload={reload}
+                    reload={reloadPage}
                   />
                 ))}
-              {!loading && data.length === 0 && (
-                <EmptyCard>There are no requests to show.</EmptyCard>
+
+              {/* Empty message if we're not loading and there is no data*/}
+              {data?.length === 0 && (
+                <EmptyCard>
+                  There are no requests to show
+                  {previousPage ? ' on this page' : ''}.
+                </EmptyCard>
               )}
+
+              {/*Mobile next page button*/}
               {mobile && nextPage && (
                 <Button
                   variant="tertiary"
@@ -78,7 +90,9 @@ export const RequestsList = ({
                   more...
                 </Button>
               )}
-              {!mobile && data?.length > 0 && (
+
+              {/* Non mobile pagination UI */}
+              {!mobile && (data?.length > 0 || previousPage) && (
                 <div className="col-start-1 col-end-5 py-2.5 px-6 flex justify-center items-center gap-6 bg-white rounded-xl shadow-card min-h-16">
                   <Button
                     variant="secondary"
@@ -88,9 +102,13 @@ export const RequestsList = ({
                   >
                     Previous
                   </Button>
-                  <div className="flex justify-center items-center w-11 h-11 bg-secondary-400 rounded-full font-semibold">
-                    {pageNumber}
-                  </div>
+                  {loading ? (
+                    <Loading xsmall size={36} />
+                  ) : (
+                    <div className="flex justify-center items-center w-11 h-11 bg-secondary-400 rounded-full font-semibold">
+                      {pageNumber}
+                    </div>
+                  )}
                   <Button
                     variant="secondary"
                     onClick={nextPage}

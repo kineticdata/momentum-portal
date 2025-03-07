@@ -31,7 +31,7 @@ const generateViewParentButton = actionSubmission => () => {
   );
 };
 
-export const ActionForm = ({ listActions: { reload } }) => {
+export const ActionForm = ({ listActions: { reloadPage } }) => {
   const { submissionId } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
@@ -63,8 +63,8 @@ export const ActionForm = ({ listActions: { reload } }) => {
 
   const handleCompleted = useCallback(() => {
     navigate(backTo);
-    reload();
-  }, [navigate, backTo, reload]);
+    reloadPage();
+  }, [navigate, backTo, reloadPage]);
 
   return actionData.data ? (
     <KineticForm
