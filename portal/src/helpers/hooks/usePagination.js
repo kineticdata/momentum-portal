@@ -26,10 +26,13 @@ export function usePagination() {
 
   const prev = useCallback(() => {
     setPagination(
-      ({ previousPageTokens: [pageToken, ...previousPageTokens] }) => ({
+      ({
+        pageToken: nextPageToken,
+        previousPageTokens: [pageToken, ...previousPageTokens],
+      }) => ({
         pageToken,
         previousPageTokens,
-        nextPageToken: undefined,
+        nextPageToken,
       }),
     );
   }, []);

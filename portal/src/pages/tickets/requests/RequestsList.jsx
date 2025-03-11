@@ -46,7 +46,7 @@ export const RequestsList = ({
           ) : (
             <div className="flex flex-col gap-4 mb-4 md:mb-6 md:grid md:grid-cols-[auto_2fr_1fr_auto]">
               {/* Mobile previous page button */}
-              {mobile && previousPage && (
+              {mobile && !loading && previousPage && (
                 <Button
                   variant="tertiary"
                   onClick={previousPage}
@@ -58,9 +58,12 @@ export const RequestsList = ({
               )}
 
               {/* Loading indicator if we're loading and there is no data */}
-              {loading && !data && (
-                <Loading className={!mobile ? 'col-start-1 col-end-5' : null} />
-              )}
+              {loading &&
+                (mobile ? (
+                  <Loading xsmall size={36} />
+                ) : (
+                  !data && <Loading className="col-start-1 col-end-5" />
+                ))}
 
               {/* List of data */}
               {data?.length > 0 &&
@@ -81,7 +84,7 @@ export const RequestsList = ({
               )}
 
               {/*Mobile next page button*/}
-              {mobile && nextPage && (
+              {mobile && !loading && nextPage && (
                 <Button
                   variant="tertiary"
                   onClick={nextPage}

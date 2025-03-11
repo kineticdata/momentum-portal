@@ -48,6 +48,9 @@ export function usePaginatedData(fn, params) {
           else return [d, ts];
         });
       });
+    } else {
+      // Reset data when params are cleared
+      setData(([, ts]) => [null, ts]);
     }
   }, [fn, params, pageToken, setNextPageToken]);
 
