@@ -38,7 +38,7 @@ export const SearchModal = ({ children }) => {
       query
         ? {
             kappSlug,
-            q: `type = "Service" AND name *=* "${query}"`,
+            q: `type = "Service" AND name *=* "${query}" AND (status = "Active" OR status = "New")`,
             limit: 10,
           }
         : null,
@@ -84,24 +84,22 @@ export const SearchModal = ({ children }) => {
             <>
               {loading && !data && <Loading size={40} small />}
 
-              {data?.length > 0 ? (
-                data
-                  .filter(
-                    form => form.status === 'Active' || form.status === 'New',
-                  )
-                  .map(form => (
-                    <ServiceCard
-                      key={form.slug}
-                      form={form}
-                      className="!shadow-none !border-gray-200"
-                      onClick={() => setOpen(false)}
-                    />
+              {data?.length > 0
+                  ? data.map(form => (
+                      <ServiceCard
+                          key={form.slug}
+                          form={form}
+                          className="!shadow-none !border-gray-200"
+                          onClick={() => setOpen(false)}
+                      />
                   ))
-              ) : (
-                <p className="text-gray-900 text-center italic my-5">
-                  No results found.
-                </p>
+                  : null}
+              {data?.length === 0 && (
+                  <p className="text-gray-900 text-center italic my-5">
+                    No results found.
+                  </p>
               )}
+
 
               {(actions.previousPage || actions.nextPage) && (
                 <div className="col-start-1 col-end-5 py-2.5 px-6 flex justify-center items-center gap-6 bg-white rounded-xl min-h-16">
