@@ -84,8 +84,12 @@ export const SearchModal = ({ children }) => {
             <>
               {loading && !data && <Loading size={40} small />}
 
-              {data?.length > 0
-                ? data.map(form => (
+              {data?.length > 0 ? (
+                data
+                  .filter(
+                    form => form.status === 'Active' || form.status === 'New',
+                  )
+                  .map(form => (
                     <ServiceCard
                       key={form.slug}
                       form={form}
@@ -93,8 +97,7 @@ export const SearchModal = ({ children }) => {
                       onClick={() => setOpen(false)}
                     />
                   ))
-                : null}
-              {data?.length === 0 && (
+              ) : (
                 <p className="text-gray-900 text-center italic my-5">
                   No results found.
                 </p>
