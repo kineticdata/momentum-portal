@@ -94,21 +94,21 @@ Should the form be rendered with disabled fields.
 Function that's called when the subform is loaded.  
 It is passed an `api` object which contains the following properties:  
 `kForm`: A function that returns the kinetic form object. Only available if a Kinetic subform is loaded.
-`destory`: A function that closes the subform.  
+`destroy`: A function that closes the subform.  
 `toasterId`: A string id that can be provided to the Toast functions to render a toast inside the context of the subform modal.
 
 ![name=onSave](https://img.shields.io/badge/onSave%28data,%20api%29-gray)
 ![type=Function](https://img.shields.io/badge/Function-e66e22)  
 Function that's called when the save button of the widget is clicked. If omitted, the save button will not be rendered.  
 It is passed a `data` object representing the form data, and an `api` object which contains the following properties:  
-`destory`: A function that closes the subform.  
+`destroy`: A function that closes the subform.  
 `toasterId`: A string id that can be provided to the Toast functions to render a toast inside the context of the subform modal.
 
 ![name=onError](https://img.shields.io/badge/onError%28api%29-gray)
 ![type=Function](https://img.shields.io/badge/Function-e66e22)  
 Function that's called when the subform fails to load. Only called if attempting to load a Kinetic form.  
 It is passed an `api` object which contains the following properties:  
-`destory`: A function that closes the subform.  
+`destroy`: A function that closes the subform.  
 `toasterId`: A string id that can be provided to the Toast functions to render a toast inside the context of the subform modal.
 
 ![name=inline](https://img.shields.io/badge/inline-gray)
