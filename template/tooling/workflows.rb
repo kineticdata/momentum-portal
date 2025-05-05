@@ -71,23 +71,25 @@ def export_workflows(core_path, core_sdk, task_sdk)
     end
 
     forms_path = "#{kapps_path}/#{kapp_slug}/forms"
-    Dir.children(forms_path).keep_if{ |f| File.extname("#{forms_path}/#{f}") == ".json" }.each do |form_file|
-      form_content = JSON.parse(File.read("#{forms_path}/#{form_file}"))
-      form_slug = form_content["slug"]
-      res = core_sdk.find_form_workflows(kapp_slug, form_slug)
-      if res.status == 200
-        form_wf_path = "#{forms_path}/workflows/#{form_slug}"
-        res.content["workflows"].each do |workflow|
-          # retrieve the workflow tree json
-          res = core_sdk.find_form_workflow(kapp_slug, form_slug, workflow["id"])
-          if res.status == 200
-            write_workflow_file(form_wf_path, workflow, res.content["treeJson"])
-          else
-            raise "(#{res.code}) Error retrieving form workflow tree: #{res.message}"
+    if Dir.exist?(forms_path)
+      Dir.children(forms_path).keep_if{ |f| File.extname("#{forms_path}/#{f}") == ".json" }.each do |form_file|
+        form_content = JSON.parse(File.read("#{forms_path}/#{form_file}"))
+        form_slug = form_content["slug"]
+        res = core_sdk.find_form_workflows(kapp_slug, form_slug)
+        if res.status == 200
+          form_wf_path = "#{forms_path}/workflows/#{form_slug}"
+          res.content["workflows"].each do |workflow|
+            # retrieve the workflow tree json
+            res = core_sdk.find_form_workflow(kapp_slug, form_slug, workflow["id"])
+            if res.status == 200
+              write_workflow_file(form_wf_path, workflow, res.content["treeJson"])
+            else
+              raise "(#{res.code}) Error retrieving form workflow tree: #{res.message}"
+            end
           end
+        else
+          raise "(#{res.code}) Error retrieving form workflows: #{res.message}"
         end
-      else
-        raise "(#{res.code}) Error retrieving form workflows: #{res.message}"
       end
     end
   end

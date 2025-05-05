@@ -109,7 +109,8 @@ logger.info "Exporting the core components for the \"#{template_name}\" template
 logger.info "  exporting with api: #{space_sdk.api_url}"
 logger.info "   - exporting configuration data (Kapps,forms, etc)"
 space_sdk.export_space
-
+exit
+puts "here"
 # export workflows as these are not included in the export_space method
 export_workflows(core_path, space_sdk, task_sdk)
 
