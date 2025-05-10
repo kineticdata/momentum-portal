@@ -1,0 +1,7 @@
+[
+  {
+    "allowsMultiple": false,
+    "description": "The name of the icon to use for this form, from the Tabler Icons library.",
+    "name": "Icon"
+  }
+]

@@ -1,0 +1,318 @@
+{
+  "builderVersion": "",
+  "schemaVersion": "1.0",
+  "version": "",
+  "processOwnerEmail": "",
+  "lastId": 5,
+  "name": "Project Proposal Submission Submitted (Single)",
+  "notes": "",
+  "connectors": [
+    {
+      "from": "start",
+      "to": "system_submission_create_v1_5",
+      "label": "",
+      "value": "",
+      "type": "Complete"
+    },
+    {
+      "from": "system_submission_create_v1_5",
+      "to": "system_noop_v1_4",
+      "label": "",
+      "value": "",
+      "type": "Complete"
+    }
+  ],
+  "nodes": [
+    {
+      "configured": true,
+      "defers": false,
+      "deferrable": false,
+      "visible": false,
+      "name": "Start",
+      "messages": [
+
+      ],
+      "dependents": {
+        "task": [
+          {
+            "label": "",
+            "type": "Complete",
+            "value": "",
+            "content": "system_submission_create_v1_5"
+          }
+        ]
+      },
+      "id": "start",
+      "position": {
+        "x": 10,
+        "y": 10
+      },
+      "version": 1,
+      "parameters": [
+
+      ],
+      "definitionId": "system_start_v1"
+    },
+    {
+      "configured": true,
+      "defers": false,
+      "deferrable": false,
+      "visible": true,
+      "name": "Notes",
+      "messages": [
+
+      ],
+      "dependents": "",
+      "id": "utilities_echo_v1_2",
+      "position": {
+        "x": 366,
+        "y": 4.5
+      },
+      "version": 1,
+      "parameters": [
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "input",
+          "label": "Input",
+          "menu": "",
+          "value": "How much configuration to we user here?\n\nDo we pass in the approver here or look it up in the Approval Routine.\nIf we pass it here it is more transparent but another point in the process that could need future updating.\nIn the Routine it is more resilient to future changes but perhaps less tranparent.\nIt also take more logic in the Routine to handle multiple approvals (ie: Team1 then Team2)\n\nTeam and Individual\nI could add a routine to look up if it is a team or individual here or in an approval workflow.  There are tradeoffs.\nIf we want to use a team manager this also adds additional logic and checks.  Where is this logic added?",
+          "required": true
+        }
+      ],
+      "definitionId": "utilities_echo_v1"
+    },
+    {
+      "configured": true,
+      "defers": false,
+      "deferrable": false,
+      "visible": false,
+      "name": "Create Task",
+      "messages": [
+
+      ],
+      "dependents": "",
+      "id": "system_noop_v1_4",
+      "position": {
+        "x": 264,
+        "y": 294.5
+      },
+      "version": 1,
+      "parameters": [
+
+      ],
+      "definitionId": "system_noop_v1"
+    },
+    {
+      "configured": true,
+      "defers": false,
+      "deferrable": false,
+      "visible": true,
+      "name": "Create Approval (Single)",
+      "messages": [
+
+      ],
+      "dependents": {
+        "task": [
+          {
+            "label": "",
+            "type": "Complete",
+            "value": "",
+            "content": "system_noop_v1_4"
+          }
+        ]
+      },
+      "id": "system_submission_create_v1_5",
+      "position": {
+        "x": 132,
+        "y": 168.5
+      },
+      "version": 1,
+      "parameters": [
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "kappSlug",
+          "label": "Kapp Slug",
+          "menu": "",
+          "value": "service-portal",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "formSlug",
+          "label": "Form Slug",
+          "menu": "",
+          "value": "approval",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "coreState",
+          "label": "Core State",
+          "menu": "",
+          "value": "Draft",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "currentPage",
+          "label": "Current Page",
+          "menu": "",
+          "value": "",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "origin",
+          "label": "Origin",
+          "menu": "",
+          "value": "<%= @submission['Id'] %>",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parent",
+          "label": "Parent",
+          "menu": "",
+          "value": "<%= @submission['Id'] %>",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "values.Decision",
+          "label": "Decision",
+          "menu": "",
+          "value": "",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "values.Reason",
+          "label": "Reason",
+          "menu": "",
+          "value": "",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "values.Notes for Customer",
+          "label": "Notes for Customer",
+          "menu": "",
+          "value": "",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "values.Assigned Individual",
+          "label": "Assigned Individual",
+          "menu": "",
+          "value": "",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "values.Assigned Individual Display Name",
+          "label": "Assigned Individual Display Name",
+          "menu": "",
+          "value": "",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "values.Assigned Team",
+          "label": "Assigned Team",
+          "menu": "",
+          "value": "",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "values.Assigned Team Display Name",
+          "label": "Assigned Team Display Name",
+          "menu": "",
+          "value": "",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "values.Deferral Token",
+          "label": "Deferral Token",
+          "menu": "",
+          "value": "",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "values.Status",
+          "label": "Status",
+          "menu": "",
+          "value": "",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "values.Summary",
+          "label": "Summary",
+          "menu": "",
+          "value": "",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "values.Due Date",
+          "label": "Due Date",
+          "menu": "",
+          "value": "",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "values.Details",
+          "label": "Details",
+          "menu": "",
+          "value": "",
+          "required": false
+        }
+      ],
+      "definitionId": "system_submission_create_v1"
+    }
+  ],
+  "attributes": null
+}
