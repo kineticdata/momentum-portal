@@ -87,8 +87,8 @@ integrator_sdk = KineticSdk::Integrator.new({
   password: vars["core"]["service_user_password"],
   options: http_options.merge({
     export_directory: "#{integrator_path}",
-    oauth_client_id: vars["http_options"]["oauth_client_id"],
-    oauth_client_secret: vars["http_options"]["oauth_client_secret"]
+    oauth_client_id: vars["http_options"]["oauth_client_id"] || vars["core"]["service_user_username"],
+    oauth_client_secret: vars["http_options"]["oauth_client_secret"] || vars["core"]["service_user_password"]
   })
 })
 task_sdk = KineticSdk::Task.new({

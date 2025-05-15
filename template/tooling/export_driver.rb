@@ -14,6 +14,8 @@ domain = ENV["EXPORT_DOMAIN"]
 space_slug = ENV["EXPORT_SPACE_SLUG"]
 space_username = ENV["EXPORT_SPACE_ADMIN_USERNAME"]
 space_password = ENV["EXPORT_SPACE_ADMIN_PASSWORD"].gsub("$", "\$").gsub("`", "\`").gsub("\"", "\\\"").gsub("\\", "\\\\").gsub("!", "\!").gsub("~", "\~")
+oauth_client_id = ENV["EXPORT_OAUTH_CLIENT_ID"] || space_username
+oauth_client_secret = ENV["EXPORT_OAUTH_CLIENT_SECRET"] || space_password
 
 export_server = "https://#{space_slug}.#{domain}"
 
@@ -32,10 +34,11 @@ export_options = {
   },
   "http_options" => {
     "log_level" => "info",
-    "log_output" => "stdout"
+    "log_output" => "stdout",
+    "oauth_client_id" => oauth_client_id,
+    "oauth_client_secret" => oauth_client_secret
   }
 }
-
 
 export_file = File.join(File.dirname(__FILE__), "export.rb")
 system("ruby", export_file, export_options.to_json)
