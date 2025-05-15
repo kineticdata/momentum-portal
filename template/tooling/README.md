@@ -8,8 +8,20 @@ The export functionality is found in the `template/tooling` directory, and the e
 
 Exporting requires space admin privileges, therefore a space admin user must be used in the configuration when running this operation. The integrator service does not support basic authentication like the core service does, it requires the use of a bearer token for authentication. Therefore, an OAuth client must be created, or must already exist in the space. OAuth clients can be found in the space console under the `Space -> Configuration Settings -> OAuth` tab.
 
-- Ruby must be installed on the local workstation running the export script
-- The bundler gem is installed, and the project gems are installed (bundle install)
+- [Ruby](https://www.ruby-lang.org/en/) must be installed on the local workstation running the export script
+- The bundler gem is installed
+
+  ```
+  gem install bundler
+  ```
+
+- The gems listed in `template/tooling/Gemfile` are installed
+
+  ```
+  cd template/tooling
+  bundle install
+  ```
+
 - Space to export from has a User with space admin permissions with known credentials
 - Space to export from has an OAuth client with known credentials
 - [Direnv](https://direnv.net/) is installed on the local workstation running export - **NOT a requirement, just nice to have**
