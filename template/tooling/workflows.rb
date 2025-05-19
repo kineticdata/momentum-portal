@@ -44,10 +44,5 @@ def workflow_payload(filename, event)
 end
 
 def decode_event(evt)
-  evt.split(".").map{ |s| s.capitalize }.join(" ")
-end
-
-
-def encode_event(evt)
-  evt.split(" ").map{ |s| s.downcase }.join(".")
+  evt.split("-").map{ |s| s.capitalize }.join(" ")
 end
