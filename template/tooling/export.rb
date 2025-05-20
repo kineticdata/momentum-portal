@@ -61,7 +61,6 @@ Dir.chdir(tooling_path) { system("bundle", "install") }
 
 require 'kinetic_sdk'
 require File.join(tooling_path, "integrator.rb")
-require File.join(tooling_path, "workflows.rb")
 
 http_options = (vars["http_options"] || {}).each_with_object({}) do |(k,v),result|
   result[k.to_sym] = v
