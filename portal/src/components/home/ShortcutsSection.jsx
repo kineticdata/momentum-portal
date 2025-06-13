@@ -110,16 +110,15 @@ const shortcutsTransform = submissions =>
 
 export const ShortcutsSection = () => {
   const mobile = useSelector(state => state.view.mobile);
-  const { kappSlug } = useSelector(state => state.app);
 
   // Parameters for the shortcuts query
   const params = useMemo(
     () => ({
-      kapp: kappSlug,
+      kapp: 'admin-center',
       form: 'portal-shortcuts',
       search: shortcutsSearch,
     }),
-    [kappSlug],
+    [],
   );
 
   const { initialized, loading, response } = useData(searchSubmissions, params);
