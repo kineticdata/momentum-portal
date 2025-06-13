@@ -82,11 +82,12 @@ const newsTransform = submissions =>
 
 export const NewsSection = () => {
   const mobile = useSelector(state => state.view.mobile);
+  const { kappSlug } = useSelector(state => state.app);
 
   // Parameters for the news query
   const params = useMemo(
-    () => ({ kapp: 'admin-center', form: 'portal-news', search: newsSearch }),
-    [],
+    () => ({ kapp: kappSlug, form: 'portal-news', search: newsSearch }),
+    [kappSlug],
   );
 
   const { initialized, loading, response } = useData(searchSubmissions, params);
