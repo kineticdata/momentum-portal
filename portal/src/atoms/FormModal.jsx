@@ -9,14 +9,14 @@ import { KineticForm } from '../components/kinetic-form/KineticForm.jsx';
  * @param {Object} props
  * @param {boolean} [props.open] Whether the modal is open.
  * @param {Function} [props.onOpenChange] Callback for when open state changes.
- * @param {string} [props.title] Optional title text for the modal.
+ * @param {Function} [props.onSubmit] Callback for when the form is submitted.
  * @param {string} [props.size='sm'] Size of the modal.
  * @param {JSX.Element|JSX.Element[]} [props.children] Slot content for modal sections.
  */
 export const FormModal = ({
   open,
   onOpenChange,
-    onSubmit,
+  onSubmit,
   title = '',
   size = 'sm',
   closeOnEscape,
@@ -40,7 +40,11 @@ export const FormModal = ({
     >
       <div slot="description">{slots.description}</div>
       <div slot="body">
-        <KineticForm kappSlug="catalog" formSlug="tenant-decommission" completed={onSubmit}/>
+        <KineticForm
+          kappSlug="catalog"
+          formSlug="tenant-decommission"
+          completed={onSubmit}
+        />
       </div>
     </Modal>
   );
@@ -49,7 +53,7 @@ export const FormModal = ({
 FormModal.propTypes = {
   open: t.bool,
   onOpenChange: t.func,
-  onExitComplete: t.func,
+  onsubmit: t.func,
   title: t.string,
   closeOnEscape: t.bool,
   closeOnInteractOutside: t.bool,

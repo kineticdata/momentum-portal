@@ -10,9 +10,11 @@ export const StatusPill = ({ className, status }) => (
             'md:py-1.25 md:min-w-32',
             // Colors
             {
+                'bg-secondary-100 text-secondary-500 border-secondary-500':
+                    status === 'Draft',
                 'bg-success-200 text-success-500 border-success-400':
-                    status === 'Active',
-                'bg-gray-200 text-gray-900 border-gray-500': status === 'Decommissioned',
+                    status === 'Submitted' || status === 'Open' || status === 'Active',
+                'bg-gray-200 text-gray-900 border-gray-500': status === 'Closed' || status === 'Decommissioned',
             },
             className,
         )}
@@ -22,7 +24,7 @@ export const StatusPill = ({ className, status }) => (
 );
 
 StatusPill.propTypes = {
-    status: t.oneOf(['Active', 'Decommissioned']),
+    status: t.oneOf(['Open', 'Closed', 'Draft', 'Submitted','Active', 'Decommissioned']),
 };
 
 export const StatusDot = ({ status }) => (
@@ -34,14 +36,15 @@ export const StatusDot = ({ status }) => (
             'md:h-4 md:w-4',
             // Colors
             {
+                'bg-secondary-100 border-secondary-500': status === 'Draft',
                 'bg-success-200 border-success-400':
-                    status === 'Active',
-                'bg-gray-200 border-gray-500': status === 'Decommissioned',
+                    status === 'Submitted' || status === 'Open' || status === 'Active',
+                'bg-gray-200 border-gray-500': status === 'Closed' || status === 'Decommissioned',
             },
         )}
     />
 );
 
 StatusDot.propTypes = {
-    status: t.oneOf(['Active', 'Decommissioned']),
+    status: t.oneOf(['Open', 'Closed', 'Draft', 'Submitted','Active', 'Decommissioned']),
 };

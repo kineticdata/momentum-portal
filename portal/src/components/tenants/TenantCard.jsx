@@ -11,7 +11,7 @@ import { useState } from 'react';
 import {toastSuccess} from "../../helpers/toasts.js";
 
 const getMetaData = tenantSubmission => {
-  if (['Approval', 'Task', 'Datastore'].includes(tenantSubmission.type)) {
+  if (['Datastore'].includes(tenantSubmission.type)) {
     const submission = tenantSubmission.submission;
     if (submission?.values?.['Status'] === undefined) {
       const date =

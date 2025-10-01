@@ -7,7 +7,7 @@ import {
   fetchForm,
 } from '@kineticdata/react';
 import { TenantsList } from './TenantsList.jsx';
-import { TenantDetail } from './TenantDetail.jsx';
+import { RequestDetail } from '../../tickets/requests/RequestDetail.jsx';
 import { Form } from '../../forms/Form.jsx';
 import { usePaginatedData } from '../../../helpers/hooks/usePaginatedData.js';
 import { executeIntegration } from '../../../helpers/api.js';
@@ -168,7 +168,7 @@ export const Tenants = () => {
 
   return (
     <Routes>
-      <Route path=":submissionId" element={<TenantDetail />} />
+      <Route path=":submissionId" element={<RequestDetail />} />
       <Route
         path=":submissionId/review"
         element={<Form review={false} requestPath="tenants" />}
