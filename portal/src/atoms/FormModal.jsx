@@ -53,7 +53,7 @@ export const FormModal = ({
 FormModal.propTypes = {
   open: t.bool,
   onOpenChange: t.func,
-  onsubmit: t.func,
+  onSubmit: t.func,
   title: t.string,
   closeOnEscape: t.bool,
   closeOnInteractOutside: t.bool,
