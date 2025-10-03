@@ -112,8 +112,8 @@ export const NewsSection = () => {
         {loading && <Loading />}
         {!loading && news?.length > 0 && (
           <Carousel.Root
-            index={openIndex}
-            onIndexChange={({ index }) => setOpenIndex(index)}
+            page={openIndex}
+            onPageChange={({ page }) => setOpenIndex(page)}
             loop={true}
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
@@ -121,19 +121,23 @@ export const NewsSection = () => {
               'relative block h-28 md:h-44 overflow-hidden transition',
             )}
           >
-            <Carousel.Viewport
+            <div
               className={clsx(
                 'relative flex flex-col h-full w-full overflow-hidden rounded-2xl bg-neutral',
               )}
             >
               <Carousel.ItemGroup className="flex-auto max-h-full">
                 {news.map((news, index) => (
-                  <Carousel.Item key={index} index={index}>
+                  <Carousel.Item
+                    key={index}
+                    index={index}
+                    className="overflow-hidden"
+                  >
                     <NewsLink index={index} mobile={mobile} {...news} />
                   </Carousel.Item>
                 ))}
               </Carousel.ItemGroup>
-            </Carousel.Viewport>
+            </div>
             <Carousel.IndicatorGroup
               className={clsx(
                 'absolute bottom-0.75 left-1.5 md:bottom-5 md:left-[4.625rem]',

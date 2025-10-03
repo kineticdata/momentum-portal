@@ -672,7 +672,7 @@ const fetchTableData = ({ field, data, integration, rowTransform }) => {
     try {
       const value = field.value();
       return Promise.resolve({ rows: value ? JSON.parse(value) : [] });
-    } catch (e) {
+    } catch {
       return Promise.resolve({
         error: 'The data for this table is not valid JSON.',
       });

@@ -1,23 +1,16 @@
 import { useSelector } from 'react-redux';
 import { useState, useCallback } from 'react';
 import clsx from 'clsx';
-import { produce } from 'immer';
-import { Link, useLocation } from 'react-router-dom';
-import { updateProfile, updateSpace } from '@kineticdata/react';
+import { updateProfile } from '@kineticdata/react';
 import { Avatar } from '../../atoms/Avatar.jsx';
-import { Button } from '../../atoms/Button.jsx';
 import { Icon } from '../../atoms/Icon.jsx';
 import { validateEmail } from '../../helpers/index.js';
-import { appActions, themeActions } from '../../helpers/state.js';
+import { appActions } from '../../helpers/state.js';
 import { toastError, toastSuccess } from '../../helpers/toasts.js';
-import { getAttributeValue } from '../../helpers/records.js';
-import { Menu } from '../../atoms/Menu.jsx';
-import { openConfirm } from '../../helpers/confirm.js';
+import { PageHeading } from '../../components/PageHeading.jsx';
 
 export const Profile = () => {
-  const mobile = useSelector(state => state.view.mobile);
-  const theme = useSelector(state => state.theme);
-  const { profile, space } = useSelector(state => state.app);
+  const { profile } = useSelector(state => state.app);
   const [newPassword, setNewPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showChangedPassword, setShowChangedPassword] = useState(false);
@@ -29,56 +22,33 @@ export const Profile = () => {
     newPassword: '',
   });
 
-  const location = useLocation();
-  const backPath = location.state?.backPath;
-
-  const portalKappSlug = getAttributeValue(
-    space,
-    'Service Portal Kapp Slug',
-    'service-portal',
-  );
-  const portalKapp = space?.kapps?.find(k => k.slug === portalKappSlug) || {
-    name: 'Invalid Kapp',
-    slug: portalKappSlug,
-  };
-
-  const validateForm = () => {
-    // Validate the fields
-    const newValidationErrors = produce(validationErrors, o => {
-      o.newEmail =
-        newEmail.length <= 0
-          ? 'Email is required'
-          : !validateEmail(newEmail)
-            ? 'Invalid email format'
-            : '';
-      o.newDisplayName =
-        newDisplayName.length <= 0 ? 'Display Name is required.' : '';
-      o.newPassword =
-        showChangedPassword && newPassword.length <= 0
-          ? 'Password is required.'
-          : '';
-    });
-
-    // Update the validations state
-    setValidationErrors(newValidationErrors);
-
-    // Return true if none of the fields have errors
-    return Object.values(newValidationErrors).every(o => !o);
-  };
-
   const saveProfile = useCallback(
     async e => {
       e.preventDefault();
 
-      if (validateForm() === false) {
+      // Validate the fields
+      const newValidationErrors = {
+        newEmail:
+          newEmail.length <= 0
+            ? 'Email is required'
+            : !validateEmail(newEmail)
+              ? 'Invalid email format'
+              : '',
+        newDisplayName:
+          newDisplayName.length <= 0 ? 'Display Name is required.' : '',
+        newPassword:
+          showChangedPassword && newPassword.length <= 0
+            ? 'Password is required.'
+            : '',
+      };
+      // Update the validations state
+      setValidationErrors(newValidationErrors);
+
+      if (Object.values(newValidationErrors).some(o => o)) {
         return;
       }
 
-      let newProfileData = {
-        displayName: newDisplayName,
-        email: newEmail,
-      };
-
+      let newProfileData = { displayName: newDisplayName, email: newEmail };
       if (showChangedPassword && newPassword.length > 0) {
         newProfileData.password = newPassword;
       }
@@ -101,23 +71,13 @@ export const Profile = () => {
   );
 
   return (
-    <div className="px-44">
-      <div className="max-w-screen-lg">
-        <div className={clsx('relative l-h-start-center gap-3')}>
-          <Link
-            className="kbtn kbtn-ghost kbtn-lg kbtn-circle"
-            to={backPath || '..'}
-            aria-label="Back"
-          >
-            <Icon name="arrow-left" />
-          </Link>
-          <span className="text-xl font-semibold">My Profile</span>
+    <div className="gutter">
+      <div className="max-w-screen-lg pt-1 pb-6">
+        <PageHeading title="My Profile" backTo="/" />
+        <div className="flex-cc mb-4">
+          <Avatar username={profile.username} size="2xl" />
         </div>
-        <form className="flex flex-col gap-5 items-stretch w-full">
-          <div className="flex justify-center items-center mb-5 mt-8">
-            <Avatar username={profile.username} size="2xl" />
-          </div>
-
+        <form className="flex-c-st gap-6 w-full">
           <div
             className={clsx('field required', {
               'has-error': validationErrors.newEmail,
@@ -129,12 +89,11 @@ export const Profile = () => {
               type="text"
               name="email"
               required={true}
-              autoFocus
               value={newEmail}
               onChange={e => setNewEmail(e.target.value)}
             />
             {validationErrors.newEmail && (
-              <p className="flex items-center gap-2 text-base-content/80">
+              <p className="flex-sc gap-2 text-base-content/60">
                 <span className="kstatus kstatus-error"></span>
                 {validationErrors.newEmail}
               </p>
@@ -151,12 +110,11 @@ export const Profile = () => {
               type="text"
               name="displayName"
               required={true}
-              autoFocus
               value={newDisplayName}
               onChange={e => setNewDisplayName(e.target.value)}
             />
             {validationErrors.newDisplayName && (
-              <p className="flex items-center gap-2 text-base-content/80">
+              <p className="flex-sc gap-2 text-base-content/60">
                 <span className="kstatus kstatus-error"></span>
                 {validationErrors.newDisplayName}
               </p>
@@ -179,17 +137,17 @@ export const Profile = () => {
                   onChange={e => setNewPassword(e.target.value)}
                   className="pr-12"
                 />
-                <Button
+                <button
                   type="button"
-                  variant="custom"
-                  icon={`${showPassword ? 'eye-off' : 'eye'}`}
-                  aria-label={`${showPassword ? 'Hide Password' : 'Show Password'}`}
-                  className="absolute w-5 h-5 top-3 right-2.5 mr-3 flex items-center justify-center z-1 cursor-pointer"
+                  className="kbtn kbtn-ghost kbtn-xs kbtn-circle absolute right-3 top-2 z-1"
                   onClick={() => setShowPassword(prev => !prev)}
-                />
+                  aria-label={`${showPassword ? 'Hide Password' : 'Show Password'}`}
+                >
+                  <Icon name={showPassword ? 'eye-off' : 'eye'} />
+                </button>
               </div>
               {validationErrors.newPassword && (
-                <p className="flex items-center gap-2 text-base-content/80">
+                <p className="flex-sc gap-2 text-base-content/60">
                   <span className="kstatus kstatus-error"></span>
                   {validationErrors.newPassword}
                 </p>
@@ -201,13 +159,13 @@ export const Profile = () => {
             className="kbtn kbtn-ghost kbtn-xs self-end -mt-3"
             onClick={() => setShowChangedPassword(!showChangedPassword)}
           >
-            {showChangedPassword === false ? 'Change password' : 'Cancel'}
+            {showChangedPassword === false ? 'Change Password' : 'Cancel'}
           </button>
 
-          <Button
+          <button
             type="submit"
+            className="kbtn kbtn-primary kbtn-lg w-70 self-center mt-6"
             onClick={saveProfile}
-            className="mt-7"
             disabled={
               profile.email === newEmail &&
               profile.displayName === newDisplayName &&
@@ -215,78 +173,7 @@ export const Profile = () => {
             }
           >
             Save
-          </Button>
-
-          {profile.spaceAdmin && (
-            <>
-              <hr className="border-base-300" />
-              <div className="field">
-                <label htmlFor="">Current Portal Kapp</label>
-                <Menu
-                  items={(space?.kapps || []).map(k => ({
-                    label: `${k.name} <${k.slug}>`,
-                    onClick: () => {
-                      if (portalKappSlug !== k.slug) {
-                        openConfirm({
-                          title: 'Change Portal Kapp',
-                          description: `Are you sure you want to change the portal kapp to ${k.name}?`,
-                          acceptLabel: 'Yes',
-                          accept: () => {
-                            updateSpace({
-                              space: {
-                                attributesMap: {
-                                  'Service Portal Kapp Slug': [k.slug],
-                                },
-                              },
-                              include: 'attributesMap,kapps',
-                            }).then(({ error, space }) => {
-                              if (error) {
-                                toastError({
-                                  title: 'Failed to update portal kapp',
-                                  description: error.message,
-                                });
-                              } else {
-                                toastSuccess({
-                                  title: 'Successfully updated portal kapp',
-                                });
-                                appActions.setSpace({ space });
-                              }
-                            });
-                          },
-                        });
-                      }
-                    },
-                  }))}
-                >
-                  <Button
-                    slot="trigger"
-                    type="button"
-                    variant="secondary"
-                    className="w-full"
-                  >
-                    {portalKapp.name} &lt;{portalKapp.slug}&gt;
-                    <Icon name="chevron-down" className="ml-auto" />
-                  </Button>
-                </Menu>
-              </div>
-              {theme.ready && (
-                <div className="flex justify-center items-center">
-                  <Button
-                    variant="tertiary"
-                    onClick={() =>
-                      theme.editor
-                        ? themeActions.disableEditor()
-                        : themeActions.enableEditor()
-                    }
-                  >
-                    {theme.editor
-                      ? 'Disable Theme Editor'
-                      : 'Enable Theme Editor'}
-                  </Button>
-                </div>
-              )}
-            </>
-          )}
+          </button>
         </form>
       </div>
     </div>

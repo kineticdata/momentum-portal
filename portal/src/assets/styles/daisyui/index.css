@@ -48,7 +48,5 @@
 }
 
 @utility kmodal-box {
-  @apply flex flex-col gap-6 p-8 max-md:w-screen md:max-w-[calc(100vw-3rem)];
-  max-height: calc(100vh - 3rem);
+  @apply flex-c-st gap-6 p-8 max-w-[calc(100vw-2rem)] max-h-[calc(100vh-2rem)];
 }
-

@@ -74,10 +74,10 @@
   .embedded-core-form form {
     [data-element-type='button'] {
       &[data-button-type='submit-page'] {
-        @apply kbtn kbtn-primary;
+        @apply kbtn kbtn-primary kbtn-lg;
       }
       &:not([data-button-type='submit-page']) {
-        @apply kbtn kbtn-outline;
+        @apply kbtn kbtn-outline kbtn-lg;
       }
     }
   }
@@ -114,11 +114,15 @@
 /*  --kbtn-p: 1rem;*/
 /*}*/
 
-/*@utility kbtn-xl {*/
-/*  --ksize: calc(var(--size-field, 0.25rem) * 12);*/
-/*  --kfontsize: 1rem;*/
-/*  --kbtn-p: 1rem;*/
-/*}*/
+@utility kbtn {
+  @apply font-medium;
+}
+@utility kbtn-lg {
+  @apply max-md:text-base;
+}
+@utility kbtn-xl {
+  @apply text-lg max-md:text-base;
+}
 
 /*@utility kbtn-outline {*/
 /*  &:not(*/
