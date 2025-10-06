@@ -1,7 +1,6 @@
-import { Button } from '../../atoms/Button.jsx';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
-import { useSelector } from 'react-redux';
 import logo from '../../assets/images/logo-full.svg';
 
 export const LoginCardWrapper = ({ children }) => (
@@ -63,13 +62,14 @@ export const Login = loginProps => {
             {error}
           </p>
         )}
-        <Button
+        <button
           type="submit"
+          className="kbtn kbtn-primary kbtn-lg"
           onClick={onLogin}
           disabled={pending || !username || !password}
         >
           Sign In
-        </Button>
+        </button>
         {onSso && (
           <>
             <div className="flex justify-center items-center gap-2.5 text-base-content/60 font-semibold leading-4">
@@ -77,14 +77,14 @@ export const Login = loginProps => {
               OR
               <hr className="inline w-16 text-base-content/50" />
             </div>
-            <Button
-              variant="secondary"
+            <button
               type="button"
+              className="kbtn kbtn-lg kbtn-outline"
               onClick={onSso}
               disabled={pending}
             >
               Enterprise Single Sign-On
-            </Button>
+            </button>
           </>
         )}
         <Link

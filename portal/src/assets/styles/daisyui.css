@@ -1,5 +1,3 @@
-@import './badge.css';
-@import './menu.css';
 @plugin "daisyui" {
   prefix: 'k';
 }

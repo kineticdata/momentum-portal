@@ -114,12 +114,12 @@ Form elements (inputs, selects, etc) will automatically be styled to match the d
 - **Max Width**
   - `max-w-0` `max-w-none` `max-w-full` `max-w-screen` `max-w-xs` `max-w-sm` `max-w-md` `max-w-lg` `max-w-xl` `max-w-screen-sm` `max-w-screen-md` `max-w-screen-lg` `max-w-screen-xl` `max-w-screen-2xl`
 - **Min Width**
-  - `max-w-0` `max-w-auto` `max-w-full` `max-w-screen`
+  - `min-w-0` `min-w-auto` `min-w-full` `min-w-screen`
 - **Max Height**
   - `max-h-none` `max-h-full` `max-h-screem`
   - `max-h-#` where `#` is between `0` and `96` (inclusive) in steps of `16`. Numeric values increase in `4px` increments (so `16` is `64px`).
 - **Min Height**
-  - `max-h-0` `max-h-auto` `max-h-full` `max-h-screen`
+  - `min-h-0` `min-h-auto` `min-h-full` `min-h-screen`
 
 ### Typography
 

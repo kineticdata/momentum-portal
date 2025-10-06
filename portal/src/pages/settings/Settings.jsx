@@ -2,7 +2,6 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import { updateSpace } from '@kineticdata/react';
-import { Button } from '../../atoms/Button.jsx';
 import { Icon } from '../../atoms/Icon.jsx';
 import { Menu } from '../../atoms/Menu.jsx';
 import { Loading } from '../../components/states/Loading.jsx';
@@ -11,30 +10,6 @@ import { openConfirm } from '../../helpers/confirm.js';
 import { getAttributeValue } from '../../helpers/records.js';
 import { appActions } from '../../helpers/state.js';
 import { toastError, toastSuccess } from '../../helpers/toasts.js';
-
-export const SettingsHeading = ({ pageName }) => {
-  const mobile = useSelector(state => state.view.mobile);
-
-  return (
-    <div
-      className={clsx('relative flex gap-3 items-center my-8', {
-        'justify-start': mobile,
-        'justify-center': !mobile,
-      })}
-    >
-      <Button
-        variant="tertiary"
-        icon="arrow-left"
-        to="./.."
-        aria-label="Back"
-        className={clsx(!mobile && 'absolute left-0')}
-      />
-      <span className="text-xl font-semibold text-center text-balance">
-        Settings{pageName && ` / ${pageName}`}
-      </span>
-    </div>
-  );
-};
 
 export const SettingsCard = ({
   icon = 'settings',
@@ -95,10 +70,6 @@ export const Settings = ({ settings }) => {
     'Service Portal Kapp Slug',
     'service-portal',
   );
-  const portalKapp = space?.kapps?.find(k => k.slug === portalKappSlug) || {
-    name: 'Invalid Kapp',
-    slug: portalKappSlug,
-  };
 
   return (
     <div className="max-w-screen-lg pt-1 pb-6">
@@ -115,7 +86,7 @@ export const Settings = ({ settings }) => {
                     <>
                       {k.name}
                       {k.slug === portalKappSlug && (
-                        <span className="ml-2 kbadge kbadge-neutral kbadge-xs">
+                        <span className="ml-2 kbadge kbadge-neutral kbadge-sm">
                           Current
                         </span>
                       )}

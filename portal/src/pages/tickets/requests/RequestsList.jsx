@@ -71,6 +71,7 @@ export const RequestsList = ({
                       className="kbtn kbtn-ghost kbtn-lg kbtn-circle"
                       onClick={previousPage}
                       disabled={!previousPage || loading}
+                      aria-label="Previous Page"
                     >
                       <Icon name="chevrons-left" />
                     </button>
@@ -84,6 +85,7 @@ export const RequestsList = ({
                       className="kbtn kbtn-ghost kbtn-lg kbtn-circle"
                       onClick={nextPage}
                       disabled={!nextPage || loading}
+                      aria-label="Next Page"
                     >
                       <Icon name="chevrons-right" />
                     </button>

@@ -27,6 +27,8 @@
  *    Use on a button to align it and any buttons after it to the right.
  *    This class only works if the relevant elements aren't full width, and is
  *    mainly useful for buttons.
+ *  .full-width-form
+ *    Use anywhere inside a form to make it span the full width of the page.
  ******************************************************************************/
 
 @layer base {
@@ -74,6 +76,7 @@
     }
   }
 
+  /* Styling within a Kinetic form */
   .embedded-core-form form {
     > .errors {
       @apply kalert kalert-error kalert-vertical w-full justify-start justify-items-start text-left gap-1;

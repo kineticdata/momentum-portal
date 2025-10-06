@@ -1,11 +1,16 @@
 import { useCallback, useState } from 'react';
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import {
+  Link,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from 'react-router-dom';
 import { createSubmission, getCsrfToken } from '@kineticdata/react';
 import { useSelector } from 'react-redux';
-import { Button } from '../../atoms/Button.jsx';
 import { toastSuccess } from '../../helpers/toasts.js';
 import { LoginCardWrapper } from './Login.jsx';
 import logo from '../../assets/images/logo-full.svg';
+import { Icon } from '../../atoms/Icon.jsx';
 
 export const ResetPassword = () => {
   let { token } = useParams();
@@ -14,12 +19,13 @@ export const ResetPassword = () => {
   return (
     <LoginCardWrapper>
       <div className="flex-ss w-full">
-        <Button
-          variant="tertiary"
-          icon="arrow-left"
-          to=".."
+        <Link
+          to="./.."
+          className="kbtn kbtn-circle kbtn-ghost kbtn-lg"
           aria-label="Back to Login"
-        ></Button>
+        >
+          <Icon name="arrow-left" />
+        </Link>
       </div>
       {token ? (
         <ResetPasswordChangeForm
@@ -97,13 +103,14 @@ const ResetPasswordRequestForm = () => {
           {error}
         </p>
       )}
-      <Button
+      <button
         type="submit"
+        className="kbtn kbtn-lg kbtn-primary"
         onClick={submitRequest}
         disabled={!username || submitted}
       >
         Reset Password
-      </Button>
+      </button>
     </form>
   );
 };
@@ -223,27 +230,28 @@ const ResetPasswordChangeForm = ({ token, username }) => {
             />
           </div>
           {passwordMismatch && (
-            <p className="flex-cc gap-2 text-base-content/80">
+            <p className="flex-sc gap-2 text-base-content/80">
               <span className="kstatus kstatus-error"></span>
               Passwords must match.
             </p>
           )}
           {error && (
-            <p className="flex-cc gap-2 text-base-content/80">
+            <p className="flex-sc gap-2 text-base-content/80">
               <span className="kstatus kstatus-error"></span>
               {error}
             </p>
           )}
 
-          <Button
+          <button
             type="submit"
+            className="kbtn kbtn-lg kbtn-primary"
             onClick={submitRequest}
             disabled={
               submitted || !password || !confirmPassword || passwordMismatch
             }
           >
             Reset Password
-          </Button>
+          </button>
         </>
       )}
     </form>

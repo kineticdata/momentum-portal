@@ -54,30 +54,6 @@
   @apply gutter-sm md:gutter-md xl:gutter-lg 2xl:gutter-xl;
 }
 
-/* Utility for logo sizing */
-
-@utility logo {
-  @apply h-10 w-full max-w-45 object-contain;
-}
-@utility icon-box {
-  @apply flex-none flex-cc h-9 w-9 bg-base-200 rounded-box;
-}
-@utility icon-box-lg {
-  @apply icon-box h-12 w-12;
-}
-
-/* Update border utility to default the color */
-
-@utility border {
-  border-color: var(--color-base-300);
-}
-@utility kcard {
-  @apply border;
-}
-@utility klist-row {
-  @apply items-center;
-}
-
 /* Additional flex utility */
 
 @utility flex-full {

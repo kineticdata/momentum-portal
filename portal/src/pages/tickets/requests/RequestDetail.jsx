@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import clsx from 'clsx';
 import { fetchSubmission } from '@kineticdata/react';
-import { Button } from '../../../atoms/Button.jsx';
 import { Icon } from '../../../atoms/Icon.jsx';
 import { Modal } from '../../../atoms/Modal.jsx';
 import {
@@ -141,9 +140,9 @@ const WorkNotes = ({ id }) => {
                   />
                 </div>
                 <div slot="footer">
-                  <Button
-                    className="w-full"
-                    variant="primary"
+                  <button
+                    type="button"
+                    className="kbtn kbtn-lg kbtn-primary w-full"
                     disabled={!newNote}
                     onClick={() =>
                       createWorkNote({
@@ -158,7 +157,7 @@ const WorkNotes = ({ id }) => {
                     }
                   >
                     Save
-                  </Button>
+                  </button>
                 </div>
               </Modal>
             </div>

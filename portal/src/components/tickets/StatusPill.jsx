@@ -12,7 +12,15 @@ export const StatusPill = ({ className, status }) => {
 };
 
 StatusPill.propTypes = {
-  status: t.oneOf(['Open', 'Closed', 'Draft', 'Submitted']),
+  status: t.oneOf([
+    'Open',
+    'Closed',
+    'Draft',
+    'Submitted',
+    'Success',
+    'Failure',
+    'None',
+  ]),
 };
 
 export const StatusDot = ({ status }) => (
@@ -28,5 +36,13 @@ export const StatusDot = ({ status }) => (
 );
 
 StatusDot.propTypes = {
-  status: t.oneOf(['Open', 'Closed', 'Draft', 'Submitted']),
+  status: t.oneOf([
+    'Open',
+    'Closed',
+    'Draft',
+    'Submitted',
+    'Success',
+    'Failure',
+    'None',
+  ]),
 };

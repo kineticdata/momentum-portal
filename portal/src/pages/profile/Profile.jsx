@@ -77,7 +77,7 @@ export const Profile = () => {
         <div className="flex-cc mb-4">
           <Avatar username={profile.username} size="2xl" />
         </div>
-        <form className="flex-c-st gap-6 w-full">
+        <form className="flex-c-st gap-6 w-full pb-6">
           <div
             className={clsx('field required', {
               'has-error': validationErrors.newEmail,
@@ -175,6 +175,16 @@ export const Profile = () => {
             Save
           </button>
         </form>
+        <hr />
+        <div className="flex-c-st gap-6 w-full">
+          <a
+            href="/app/logout"
+            className="kbtn kbtn-ghost kbtn-lg text-base text-base-content/80 w-70 self-center mt-6"
+          >
+            <Icon name="logout" />
+            <span>Log Out</span>
+          </a>
+        </div>
       </div>
     </div>
   );
