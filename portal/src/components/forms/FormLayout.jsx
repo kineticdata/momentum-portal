@@ -46,57 +46,50 @@ export const generateFormLayout = ({
     return (
       <div className="gutter">
         <div className="max-w-screen-lg mx-auto full-form:max-w-full full-form:mx-0 pt-1 pb-6">
-          <div className={clsx('rounded-box md:border md:p-8 flex-c-st gap-6')}>
-            <PageHeading
-              title={form?.name}
-              before={
-                <div className="icon-box-lg">
-                  <Icon name={form ? icon : 'blank'} />
-                </div>
-              }
-              after={
-                form &&
-                spaceAdmin && (
-                  <a
-                    className="kbtn kbtn-ghost kbtn kbtn-circle"
-                    href={`/app/console#/kapps/${form.kapp?.slug}/forms/edit/${form.slug}/general`}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label="Open Form Settings in Platform Console"
-                  >
-                    <Icon name="settings-share" size={20} />
-                  </a>
-                )
-              }
-            >
-              <span className="ml-auto">
-                {Action && (
-                  <Action
-                    form={form}
-                    submission={submission}
-                    backTo={backTo || backPath}
-                  />
-                )}
-              </span>
-            </PageHeading>
-            {form?.description && (
-              <div className="text-sm md:text-base line-clamp-2">
-                {form?.description}
+          <PageHeading
+            title={form?.name}
+            before={
+              <div className="icon-box-lg">
+                <Icon name={form ? icon : 'blank'} />
               </div>
-            )}
-            {form && Heading && (
-              <div className="">
-                <Heading
+            }
+            after={
+              form &&
+              spaceAdmin && (
+                <a
+                  className="kbtn kbtn-ghost kbtn kbtn-circle"
+                  href={`/app/console#/kapps/${form.kapp?.slug}/forms/edit/${form.slug}/general`}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Open Form Settings in Platform Console"
+                >
+                  <Icon name="settings-share" size={20} />
+                </a>
+              )
+            }
+          >
+            <span className="ml-auto">
+              {Action && (
+                <Action
                   form={form}
                   submission={submission}
                   backTo={backTo || backPath}
                 />
-              </div>
-            )}
-            <div className="">
-              {content}
-              {reviewPaginationControl}
+              )}
+            </span>
+          </PageHeading>
+          {form && Heading && (
+            <div className="mb-6">
+              <Heading
+                form={form}
+                submission={submission}
+                backTo={backTo || backPath}
+              />
             </div>
+          )}
+          <div className={clsx('rounded-box md:border md:p-8 flex-c-st gap-6')}>
+            {content}
+            {reviewPaginationControl}
           </div>
         </div>
       </div>

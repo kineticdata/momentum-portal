@@ -152,7 +152,10 @@ export const TicketFilters = ({ type, filters, setFilters }) => {
       >
         <button
           type="button"
-          className={clsx('kbtn kbtn-lg', { 'kbtn-circle': !hasNone })}
+          className={clsx('kbtn', {
+            'kbtn-circle': !hasNone,
+            'kbtn-lg': !mobile,
+          })}
           slot="trigger"
         >
           {hasNone && `All ${type}`}

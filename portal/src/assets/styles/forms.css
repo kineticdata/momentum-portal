@@ -239,7 +239,7 @@
 
       /* Attachments */
       .fileinput-button {
-        @apply kbtn kbtn-outline kbtn-lg border-dashed bg-no-repeat !pl-11 py-2.25;
+        @apply kbtn kbtn-outline kbtn-lg border-dashed bg-no-repeat focus-within:outline-2 !pl-11 py-2.25;
         &:before {
           content: 'x';
           @apply block absolute left-4 size-6 bg-base-content;
@@ -281,6 +281,35 @@
         display: none;
       }
     }
+  }
+}
+
+@utility kinput {
+  &:focus,
+  &:focus-within {
+    --kinput-color: oklch(from var(--color-primary) l c h / 0.7);
+  }
+}
+@utility kselect {
+  &:focus,
+  &:focus-within {
+    --kinput-color: oklch(from var(--color-primary) l c h / 0.7);
+  }
+}
+@utility ktextarea {
+  &:focus,
+  &:focus-within {
+    --kinput-color: oklch(from var(--color-primary) l c h / 0.7);
+  }
+}
+@utility kcheckbox {
+  &:focus-visible {
+    --kinput-color: oklch(from var(--color-primary) l c h / 0.7);
+  }
+}
+@utility kradio {
+  &:focus-visible {
+    --kinput-color: oklch(from var(--color-primary) l c h / 0.7);
   }
 }
 

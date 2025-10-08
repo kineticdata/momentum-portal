@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import logo from '../../assets/images/logo-full.svg';
+import logo from '../../assets/images/logo.svg';
 import { Icon } from '../../atoms/Icon.jsx';
 import { HeaderPortal } from './HeaderPortal.jsx';
 import { Avatar } from '../../atoms/Avatar.jsx';
@@ -44,7 +44,7 @@ const getMenuItems = profile =>
     {
       items: [
         { label: 'Home', to: '/' },
-        { label: 'Submit a Request', to: '/submit' },
+        { label: 'Submit a Request', onClick: () => openSearch() },
         { label: 'Check Status', to: '/requests' },
         { label: 'My Work', to: '/actions' },
       ],
@@ -130,6 +130,7 @@ const HeaderMenuItem = ({
   label,
   to,
   href,
+  onClick,
   icon,
   endIcon,
   title,
@@ -159,7 +160,19 @@ const HeaderMenuItem = ({
   }
   return (
     <li>
-      {href ? (
+      {typeof onClick === 'function' ? (
+        <button
+          className="content-cemter h12 text-base"
+          onClick={() => {
+            onClick();
+            close();
+          }}
+        >
+          {icon && <Icon name={icon} />}
+          <span>{label || to}</span>
+          {endIcon && <Icon name={endIcon} size={20} className="ml-auto" />}
+        </button>
+      ) : href ? (
         <a
           className="content-center h-12 text-base"
           href={href}

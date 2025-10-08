@@ -42,13 +42,13 @@ export const Home = () => {
                 </button>
                 <Link
                   to="/requests"
-                  className="kbtn kbtn-outline kbtn-xl flex-1"
+                  className="kbtn kbtn-outline kbtn-base kbtn-xl flex-1"
                 >
                   Check Status
                 </Link>
                 <Link
                   to="/actions"
-                  className="kbtn kbtn-outline kbtn-xl flex-1"
+                  className="kbtn kbtn-outline kbtn-base kbtn-xl flex-1"
                 >
                   See My Work
                 </Link>
@@ -162,7 +162,10 @@ const ActivityList = () => {
     ) : (
       <ul className="klist text-base">
         {submissions?.map(submission => (
-          <li className="klist-row min-h-20 hover:bg-base-200" key={submission.id}>
+          <li
+            className="klist-row min-h-20 hover:bg-base-200"
+            key={submission.id}
+          >
             <div className="icon-box -my-3">
               <Icon
                 name={getAttributeValue(submission?.form, 'Icon', 'checklist')}
@@ -226,7 +229,10 @@ const WorkList = () => {
     ) : (
       <ul className="klist text-base">
         {submissions?.map(submission => (
-          <li className="klist-row min-h-20 hover:bg-base-200" key={submission.id}>
+          <li
+            className="klist-row min-h-20 hover:bg-base-200"
+            key={submission.id}
+          >
             <div className="icon-box -my-3">
               <Icon
                 name={getAttributeValue(submission?.form, 'Icon', 'checklist')}

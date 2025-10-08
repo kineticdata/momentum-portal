@@ -143,14 +143,13 @@ const TableRenderer = ({
                 autoComplete="off"
                 aria-label="Filter"
                 className={clsx(
-                  'kbtn kbtn-circle kbtn-lg kbtn-outline md:transition-all',
+                  'kbtn kbtn-circle kbtn-lg kbtn-outline border-base-300 bg-base-100 md:transition-all',
                   'text-left max-md:text-sm font-medium',
                   'pl-11 pr-0.5 group-focus-within:px-12 group-[.is-filtered]:px-12',
                   'group-focus-within:w-64 group-[.is-filtered]:w-64',
                   'max-sm:group-focus-within:w-full max-sm:group-[.is-filtered]:w-full',
                   'group-focus-within:cursor-auto group-[.is-filtered]:cursor-auto',
-                  'group-focus-within:bg-base-100 group-[.is-filtered]:bg-base-100',
-                  'group-focus-within:border-base-300 group-[.is-filtered]:border-base-300',
+                  'not-group-focus-within:not-group-[.is-filtered]:hover:bg-base-300',
                 )}
                 onFocus={() => setFilterFocused(true)}
                 onBlur={() => setFilterFocused(false)}
@@ -189,7 +188,7 @@ const TableRenderer = ({
                 <button
                   slot="trigger"
                   type="button"
-                  className="kbtn kbtn-circle kbtn-lg kbtn-outline"
+                  className="kbtn kbtn-circle kbtn-lg kbtn-outline kbtn-base"
                   aria-label="Columns"
                 >
                   <Icon name="layout-columns" />
@@ -241,7 +240,7 @@ const TableRenderer = ({
             <button
               slot="trigger"
               type="button"
-              className="kbtn kbtn-circle kbtn-lg kbtn-outline"
+              className="kbtn kbtn-circle kbtn-lg kbtn-outline kbtn-base"
               aria-label="Export"
               onClick={() => {
                 const data = tableApi.getData();
@@ -263,9 +262,12 @@ const TableRenderer = ({
             <button
               slot="trigger"
               type="button"
-              className={clsx('kbtn kbtn-circle kbtn-lg kbtn-outline', {
-                'animate-spin': loading,
-              })}
+              className={clsx(
+                'kbtn kbtn-circle kbtn-lg kbtn-outline kbtn-base',
+                {
+                  'animate-spin': loading,
+                },
+              )}
               aria-label="Reload"
               onClick={tableApi.reloadData}
             >

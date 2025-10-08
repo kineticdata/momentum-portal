@@ -136,7 +136,7 @@ export const ChipButton = ({
     <button
       type="button"
       className={clsx(
-        'kbtn kbtn-sm',
+        'kbtn',
         active && 'kbtn-neutral',
         !active && 'kbtn-outline',
         className,
