@@ -73,7 +73,6 @@ export const Notifications = () => {
         loading: false,
       }));
     } catch (err) {
-      console.error('Preview error:', err);
       toastError({
         title: 'Failed to load preview',
         message: 'An unexpected error occurred',

@@ -9,7 +9,7 @@ import { SettingsRouting } from './settings/index.jsx';
 import { Header } from '../components/header/Header.jsx';
 import { SearchModal } from '../components/search/SearchModal.jsx';
 import { Theme } from './theme/index.jsx';
-import {Notifications} from "./Notifications/Notifications.jsx";
+import { Notifications } from "./Notifications/Notifications.jsx";
 
 const Redirect = ({ to }) => {
   const params = useParams();
