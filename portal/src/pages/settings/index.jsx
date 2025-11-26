@@ -55,6 +55,13 @@ export const SettingsRouting = () => {
             to: '/profile',
             state: { backPath: '/settings' },
           },
+          {
+            label: 'Notifications',
+            description: 'Management of your Notifications.',
+            icon: 'bell',
+            to: '/notifications',
+            state: { backPath: '/settings' },
+          },
           ...(settingsForms?.response?.forms?.map(form => ({
             label: form.name,
             description: form.description,

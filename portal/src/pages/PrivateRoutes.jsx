@@ -9,6 +9,7 @@ import { SettingsRouting } from './settings/index.jsx';
 import { Header } from '../components/header/Header.jsx';
 import { SearchModal } from '../components/search/SearchModal.jsx';
 import { Theme } from './theme/index.jsx';
+import {Notifications} from "./Notifications/Notifications.jsx";
 
 const Redirect = ({ to }) => {
   const params = useParams();
@@ -63,6 +64,7 @@ export const PrivateRoutes = () => {
                 element={<Form />}
               />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/notifications" element={<Notifications />} />
               <Route path="/settings/*" element={<SettingsRouting />} />
               <Route path="/login" element={<Navigate to="/" />} />
               <Route path="/*" element={<Home />} />
