@@ -23,7 +23,7 @@ const mapSubmissionToRow = (templateType, submission) => {
 
 export const Notifications = () => {
   const { kappSlug } = useSelector(state => state.app);
-  const [activeTab, setActiveTab] = useState('Template');
+  const [activeTab, setActiveTab] = useState('Templates');
   const [previewModal, setPreviewModal] = useState({
     open: false,
     title: '',
@@ -203,7 +203,7 @@ export const Notifications = () => {
         <div className="rounded-box md:border md:p-8">
           <div className="mb-6">
             <div className="flex-ss gap-2">
-              {['Template', 'Snippet', 'Date Formats'].map(tab => (
+              {['Templates', 'Snippets', 'Date Formats'].map(tab => (
                 <button
                   key={tab}
                   className={clsx(
@@ -218,7 +218,7 @@ export const Notifications = () => {
             </div>
           </div>
 
-          {activeTab === 'Template' && (
+          {activeTab === 'Templates' && (
             <TableComponent
               integration={templatesIntegration}
               rowTransform={rowTransform}
@@ -232,8 +232,8 @@ export const Notifications = () => {
                 { label: 'Status', property: 'status' },
                 { label: 'Name', property: 'name' },
               ]}
-              addAction={createAddAction('Template', 'notification-data')}
-              rowActions={createRowActions('Template')}
+              addAction={createAddAction('Templates', 'notification-data')}
+              rowActions={createRowActions('Templates')}
               title="Templates"
               messages={{
                 loading: 'Loading templates',
@@ -243,7 +243,7 @@ export const Notifications = () => {
             />
           )}
 
-          {activeTab === 'Snippet' && (
+          {activeTab === 'Snippets' && (
             <TableComponent
               integration={snippetsIntegration}
               rowTransform={rowTransform}
@@ -257,8 +257,8 @@ export const Notifications = () => {
                 { label: 'Status', property: 'status' },
                 { label: 'Name', property: 'name' },
               ]}
-              addAction={createAddAction('Snippet', 'notification-data')}
-              rowActions={createRowActions('Snippet')}
+              addAction={createAddAction('Snippets', 'notification-data')}
+              rowActions={createRowActions('Snippets')}
               title="Snippets"
               messages={{
                 loading: 'Loading snippets',
