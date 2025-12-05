@@ -114,7 +114,7 @@ export const Notifications = () => {
     onClick: function (tableApi) {
       tableApi.actions.subform({
         config: {
-          kappSlug: 'service-portal',
+          kappSlug,
           formSlug,
           modalTitle: `Add ${templateType}`,
           modalSize: 'lg',
