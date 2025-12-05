@@ -4,11 +4,17 @@ import { login } from "../helpers";
 test.describe("Sidebar Menu", () => {
   test.beforeEach(async ({ page }) => {
     await login(page);
+    
+    // Ensure we're on the home page before each test
+    await page.goto('/#/');
   });
 
   test("Go To Submit a Request", async ({ page }) => {
     // Open the navigation menu
     await page.locator("button:has(svg.tabler-icon-menu-2)").click();
+
+    // Wait for popover to be visible
+    await page.locator('[data-scope="popover"][data-part="content"]').waitFor({ state: 'visible' });
 
     // Click Submit a Request in the sidebar
     await page
@@ -26,7 +32,10 @@ test.describe("Sidebar Menu", () => {
     // Open the navigation menu
     await page.locator("button:has(svg.tabler-icon-menu-2)").click();
 
-    // Click Submit a Request in the sidebar
+    // Wait for popover to be visible
+    await page.locator('[data-scope="popover"][data-part="content"]').waitFor({ state: 'visible' });
+
+    // Click Check Status in the sidebar
     await page
       .locator('[data-scope="popover"][data-part="content"]')
       .locator('a:has-text("Check Status")')
@@ -42,13 +51,16 @@ test.describe("Sidebar Menu", () => {
     // Open the navigation menu
     await page.locator("button:has(svg.tabler-icon-menu-2)").click();
 
-    // Click Submit a Request in the sidebar
+    // Wait for popover to be visible
+    await page.locator('[data-scope="popover"][data-part="content"]').waitFor({ state: 'visible' });
+
+    // Click My Work in the sidebar
     await page
       .locator('[data-scope="popover"][data-part="content"]')
       .locator('a:has-text("My Work")')
       .click();
 
-    // Verify that it navigated to the Check Status page
+    // Verify that it navigated to the My Work page
     await expect(
       page.locator("span.text-lg.md\\:text-xl.font-semibold")
     ).toContainText("My Work");
