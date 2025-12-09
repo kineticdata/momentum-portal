@@ -1,10 +1,9 @@
 import { useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { fetchSubmission } from '@kineticdata/react';
 import { PageHeading } from '../../components/PageHeading.jsx';
 import { TableComponent } from '../../components/kinetic-form/widgets/table.js';
 import { Modal } from '../../atoms/Modal.jsx';
-import { toastSuccess, toastError } from '../../helpers/toasts.js';
+import { toastSuccess } from '../../helpers/toasts.js';
 import clsx from 'clsx';
 
 // Transform the data to a single level map
@@ -17,7 +16,7 @@ const mapSubmissionToRow = (templateType, submission) => {
     id,
     status: values['status'],
     name: values['name'],
-    ...(templateType === 'Date Format' && { format: values['format'] }),
+    format: values['format'],
   };
 };
 
@@ -40,45 +39,13 @@ export const Notifications = () => {
     });
   };
 
-  const previewTemplate = async (submissionId, name) => {
+  const previewTemplate = row => {
     setPreviewModal({
       open: true,
-      title: `Preview: ${name}`,
-      htmlContent: '',
-      loading: true,
+      title: `Preview: ${row.name}`,
+      htmlContent: row.format || '',
+      loading: false,
     });
-
-    try {
-      const { submission, error } = await fetchSubmission({
-        id: submissionId,
-        include: 'values',
-      });
-
-      if (error) {
-        toastError({
-          title: 'Failed to load preview',
-          message: error.message || 'An unexpected error occurred',
-        });
-        return closePreviewModal();
-      }
-
-      if (!submission) {
-        toastError({ title: 'Submission not found' });
-        return closePreviewModal();
-      }
-
-      setPreviewModal(prev => ({
-        ...prev,
-        htmlContent: submission.values?.['HTML Content'] || '',
-        loading: false,
-      }));
-    } catch (err) {
-      toastError({
-        title: 'Failed to load preview',
-        message: 'An unexpected error occurred',
-      });
-      closePreviewModal();
-    }
   };
 
   const templatesIntegration = useMemo(
@@ -145,7 +112,7 @@ export const Notifications = () => {
       label: `Preview ${templateType}`,
       icon: 'eye',
       onClick: function (row) {
-        previewTemplate(row.id, row.name);
+        previewTemplate(row);
       },
     },
     {

@@ -8,6 +8,7 @@ import { Datastore } from './Datastore.jsx';
 import { DatastoreRecords } from './DatastoreRecords.jsx';
 import { useSelector } from 'react-redux';
 import { useMemo } from 'react';
+import { Notifications } from '../Notifications/Notifications.jsx';
 
 export const SettingsRouting = () => {
   const kappSlug = useSelector(state => state.app.kappSlug);
@@ -59,7 +60,7 @@ export const SettingsRouting = () => {
             label: 'Notifications',
             description: 'Management of your Notifications.',
             icon: 'bell',
-            to: '/notifications',
+            to: 'notifications',
             state: { backPath: '/settings' },
           },
           ...(settingsForms?.response?.forms?.map(form => ({
@@ -81,6 +82,7 @@ export const SettingsRouting = () => {
           path="/datastore"
           element={<Datastore datastores={datastores} />}
         />
+        <Route path="/notifications" element={<Notifications />} />
         <Route
           path="/datastore/:formSlug/:id?"
           element={<DatastoreRecords datastores={datastores} />}
