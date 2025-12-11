@@ -5,8 +5,8 @@ import { TableComponent } from '../../components/kinetic-form/widgets/table.js';
 import { Modal } from '../../atoms/Modal.jsx';
 import { toastError, toastSuccess } from '../../helpers/toasts.js';
 import clsx from 'clsx';
-import { K } from '@kineticdata/react/lib/helpers/index.js';
 import { openConfirm } from '../../helpers/confirm.js';
+import { deleteSubmission } from '@kineticdata/react';
 
 // Transform the data to a single level map
 const rowTransform = ({ Values, ...row }) => ({ ...row, ...Values });
@@ -155,19 +155,17 @@ export const Notifications = () => {
           description: `Are you sure you want to delete the ${templateType.toLowerCase()}: ${row.name}?`,
           successMessage: `${templateType} was successfully deleted`,
           accept: function () {
-            K.api('DELETE', bundle.apiLocation() + '/submissions/' + row.id, {
-              complete: function (response) {
-                if (response.status === 200) {
-                  // Delete the row in the table so it is removed immediately before the table reloads
-                  tableApi.deleteRow(index);
-                  // Reload the table data in the background
-                  tableApi.reloadData();
-                } else {
-                  toastError({
-                    title: `There was an error deleting the ${templateType.toLowerCase()}: ${row.name}`,
-                  });
-                }
-              },
+            deleteSubmission({ id: row.id }).then(({ error }) => {
+              if (error) {
+                toastError({
+                  title: `There was an error deleting the ${templateType.toLowerCase()}: ${row.name}`,
+                });
+              } else {
+                // Delete the row in the table so it is removed immediately before the table reloads
+                tableApi.deleteRow(index);
+                // Reload the table data in the background
+                tableApi.reloadData();
+              }
             });
           },
         });
