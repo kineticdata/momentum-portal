@@ -1,5 +1,5 @@
 import test, { expect } from "@playwright/test";
-import { deleteSubmissionById, login } from "../helpers";
+import { login, deleteSubmissionById, openSidebar } from "../helpers";
 
 test.describe("Notifications", () => {
   test.beforeEach(async ({ page }) => {
@@ -10,15 +10,9 @@ test.describe("Notifications", () => {
   });
 
   test("Add Template", async ({ page }) => {
-    // Open the navigation menu
-    await page.locator("button:has(svg.tabler-icon-menu-2)").click();
+    await openSidebar(page);
 
-    // Wait for popover to be visible
-    await page
-      .locator('[data-scope="popover"][data-part="content"]')
-      .waitFor({ state: "visible" });
-
-    // Click Setttings in the sidebar
+    // Click Settings in the sidebar
     await page.getByRole("link", { name: "Settings" }).click();
 
     // Locate and click the notifications tab
@@ -41,22 +35,23 @@ test.describe("Notifications", () => {
       .fill("Playwright Test Template Text Content");
     await page.getByRole("button", { name: "Create" }).click();
 
-    // Verify Created Template
-    await expect(
-      page.locator("td", { hasText: "_Playwright Test Template Name" })
-    ).toHaveCount(1);
+    // Verify Created Template and get submission ID
+    const templateRow = page.locator("tr", {
+      hasText: "_Playwright Test Template Name",
+    });
+    await expect(templateRow).toBeVisible();
+    const submissionId = await templateRow.getAttribute("data-test-id");
+
+    // Clean up - delete the submission
+    if (submissionId) {
+      await deleteSubmissionById(submissionId);
+    }
   });
 
   test("Preview Template", async ({ page }) => {
-    // Open the navigation menu
-    await page.locator("button:has(svg.tabler-icon-menu-2)").click();
+    await openSidebar(page);
 
-    // Wait for popover to be visible
-    await page
-      .locator('[data-scope="popover"][data-part="content"]')
-      .waitFor({ state: "visible" });
-
-    // Click Setttings in the sidebar
+    // Click Settings in the sidebar
     await page.getByRole("link", { name: "Settings" }).click();
 
     // Locate and click the notifications tab
@@ -79,33 +74,30 @@ test.describe("Notifications", () => {
       .fill("Playwright Test Template Text Content");
     await page.getByRole("button", { name: "Create" }).click();
 
-    // Find and preview the created template
+    // Preview the created template
     const templateRow = page.locator("tr", {
-      hasText: "Playwright Test Template Name",
+      hasText: "_Playwright Test Template Name",
     });
-    await templateRow.waitFor({ state: "visible" });
+    await expect(templateRow).toBeVisible();
     await templateRow.locator("svg.tabler-icon-eye").click();
     await page
       .locator('[data-scope="dialog"][data-part="content"][data-state="open"]')
       .waitFor({ state: "visible" });
     await page.getByRole("button", { name: "Close" }).click();
 
-    // Verify Created Template
-    await expect(
-      page.locator("td", { hasText: "_Playwright Test Template Name" })
-    ).toHaveCount(1);
+    // Get submission ID from data-test-id attribute
+    const submissionId = await templateRow.getAttribute("data-test-id");
+
+    // Clean up - delete the submission
+    if (submissionId) {
+      await deleteSubmissionById(submissionId);
+    }
   });
 
   test("Edit Template", async ({ page }) => {
-    // Open the navigation menu
-    await page.locator("button:has(svg.tabler-icon-menu-2)").click();
+    await openSidebar(page);
 
-    // Wait for popover to be visible
-    await page
-      .locator('[data-scope="popover"][data-part="content"]')
-      .waitFor({ state: "visible" });
-
-    // Click Setttings in the sidebar
+    // Click Settings in the sidebar
     await page.getByRole("link", { name: "Settings" }).click();
 
     // Locate and click the notifications tab
@@ -128,11 +120,15 @@ test.describe("Notifications", () => {
       .fill("Playwright Test Template Text Content");
     await page.getByRole("button", { name: "Create" }).click();
 
-    // Find and Edit the created template
+    // Edit the created template
     const templateRow = page.locator("tr", {
-      hasText: "Playwright Test Template Name",
+      hasText: "_Playwright Test Template Name",
     });
-    await templateRow.waitFor({ state: "visible" });
+    await expect(templateRow).toBeVisible();
+
+    // Get submission ID from data-test-id attribute before editing
+    const submissionId = await templateRow.getAttribute("data-test-id");
+
     await templateRow.locator("svg.tabler-icon-pencil").click();
     await page.locator('input[name="Name"]').clear();
     await page
@@ -144,18 +140,17 @@ test.describe("Notifications", () => {
     await expect(
       page.locator("td", { hasText: "_Playwright Test Template Name Edited" })
     ).toHaveCount(1);
+
+    // Clean up - delete the submission
+    if (submissionId) {
+      await deleteSubmissionById(submissionId);
+    }
   });
 
   test("Delete Template", async ({ page }) => {
-    // Open the navigation menu
-    await page.locator("button:has(svg.tabler-icon-menu-2)").click();
+    await openSidebar(page);
 
-    // Wait for popover to be visible
-    await page
-      .locator('[data-scope="popover"][data-part="content"]')
-      .waitFor({ state: "visible" });
-
-    // Click Setttings in the sidebar
+    // Click Settings in the sidebar
     await page.getByRole("link", { name: "Settings" }).click();
 
     // Locate and click the notifications tab
@@ -180,9 +175,9 @@ test.describe("Notifications", () => {
 
     // Find and delete the created template
     const templateRow = page.locator("tr", {
-      hasText: "Playwright Test Template Name",
+      hasText: "_Playwright Test Template Name",
     });
-    await templateRow.waitFor({ state: "visible" });
+    await expect(templateRow).toBeVisible();
     await templateRow.locator("svg.tabler-icon-trash").click();
     await page.getByRole("button", { name: "Yes" }).click();
 
@@ -193,21 +188,15 @@ test.describe("Notifications", () => {
   });
 
   test("Add Snippet", async ({ page }) => {
-    // Open the navigation menu
-    await page.locator("button:has(svg.tabler-icon-menu-2)").click();
+    await openSidebar(page);
 
-    // Wait for popover to be visible
-    await page
-      .locator('[data-scope="popover"][data-part="content"]')
-      .waitFor({ state: "visible" });
-
-    // Click Setttings in the sidebar
+    // Click Settings in the sidebar
     await page.getByRole("link", { name: "Settings" }).click();
 
     // Locate and click the notifications tab
     await page.click('a:has-text("notifications")');
 
-    // Go to Snippets Click then Add Snippet
+    // Click Snippets tab then Add Snippet
     await page.getByRole("button", { name: "Snippets" }).click();
     await page.getByRole("button", { name: "Add Snippet" }).click();
 
@@ -224,28 +213,29 @@ test.describe("Notifications", () => {
       .fill("Playwright Test Snippet Text Content");
     await page.getByRole("button", { name: "Create" }).click();
 
-    // Verify Created Template
-    await expect(
-      page.locator("td", { hasText: "_Playwright Test Snippet Name" })
-    ).toHaveCount(1);
+    // Verify Created Snippet and get submission ID
+    const snippetRow = page.locator("tr", {
+      hasText: "_Playwright Test Snippet Name",
+    });
+    await expect(snippetRow).toBeVisible();
+    const submissionId = await snippetRow.getAttribute("data-test-id");
+
+    // Clean up - delete the submission
+    if (submissionId) {
+      await deleteSubmissionById(submissionId);
+    }
   });
 
   test("Add Date Format", async ({ page }) => {
-    // Open the navigation menu
-    await page.locator("button:has(svg.tabler-icon-menu-2)").click();
+    await openSidebar(page);
 
-    // Wait for popover to be visible
-    await page
-      .locator('[data-scope="popover"][data-part="content"]')
-      .waitFor({ state: "visible" });
-
-    // Click Setttings in the sidebar
+    // Click Settings in the sidebar
     await page.getByRole("link", { name: "Settings" }).click();
 
     // Locate and click the notifications tab
     await page.click('a:has-text("notifications")');
 
-    // Go to Date Formats Click then Add Date Format
+    // Click Date Formats tab then Add Date Format
     await page.getByRole("button", { name: "Date Formats" }).click();
     await page.getByRole("button", { name: "Add Date Format" }).click();
 
@@ -257,9 +247,16 @@ test.describe("Notifications", () => {
     await page.locator('input[name="Format"]').fill("%m-%e-%y %H:%M");
     await page.getByRole("button", { name: "Create" }).click();
 
-    // Verify Created Template
-    await expect(
-      page.locator("td", { hasText: "_Playwright Test Date Format Name" })
-    ).toHaveCount(1);
+    // Verify Created Date Format and get submission ID
+    const dateFormatRow = page.locator("tr", {
+      hasText: "_Playwright Test Date Format Name",
+    });
+    await expect(dateFormatRow).toBeVisible();
+    const submissionId = await dateFormatRow.getAttribute("data-test-id");
+
+    // Clean up - delete the submission
+    if (submissionId) {
+      await deleteSubmissionById(submissionId);
+    }
   });
 });
