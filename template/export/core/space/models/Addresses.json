@@ -1,0 +1,41 @@
+{
+  "activeMappingName": "Addresses",
+  "attributes": [
+    {
+      "name": "Handle"
+    }
+  ],
+  "mappings": [
+    {
+      "agentSlug": "system",
+      "attributes": [
+        {
+          "name": "Handle",
+          "structureField": "${fields(\"handle\")}"
+        }
+      ],
+      "bridgeSlug": "kinetic-platform",
+      "name": "Addresses",
+      "qualifications": [
+        {
+          "name": "Search",
+          "query": "q=values[City] = \"${parameters(\"City\")}\""
+        }
+      ],
+      "structure": "Submissions > service-portal > subform"
+    }
+  ],
+  "name": "Addresses",
+  "qualifications": [
+    {
+      "name": "Search",
+      "parameters": [
+        {
+          "name": "City"
+        }
+      ],
+      "resultType": "Multiple"
+    }
+  ],
+  "status": "Active"
+}

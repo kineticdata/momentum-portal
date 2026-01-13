@@ -1,6 +1,7 @@
 .bundle
 .devbox
 .envrc
+momentum_export.rb
 devbox.json
 devbox.lock
 Gemfile.lock

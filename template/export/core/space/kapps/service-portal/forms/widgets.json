@@ -70,14 +70,37 @@
       "unique": false
     },
     {
+      "name": "values[Requested For Name]",
+      "parts": [
+        "values[Requested For Name]"
+      ],
+      "unique": false
+    },
+    {
       "name": "values[Requested For]",
       "parts": [
         "values[Requested For]"
       ],
       "unique": false
+    },
+    {
+      "name": "values[Table Data]",
+      "parts": [
+        "values[Table Data]"
+      ],
+      "unique": false
     }
   ],
   "integrations": [
+    {
+      "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
+      "inputMappings": {
+        "Form Slug": "subform",
+        "Kapp Slug": "service-portal"
+      },
+      "name": "Addresses",
+      "operationId": "cb8cbf5b-a370-4318-b3da-3d254501a4f5"
+    },
     {
       "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
       "inputMappings": {
@@ -98,11 +121,32 @@
         {
           "type": "section",
           "renderType": null,
+          "name": "Icons",
+          "title": "Icons",
+          "visible": true,
+          "omitWhenHidden": null,
+          "renderAttributes": {},
+          "elements": [
+            {
+              "type": "content",
+              "renderType": "html",
+              "name": "Icons",
+              "text": "<kd-icon name=\"home\"></kd-icon>\n<kd-icon name=\"device-laptop\" props=\"width:36;height:36;strokeWidth:1;\"></kd-icon>\n<kd-icon name=\"dog\" props=\"className:text-primary-500 bg-primary-200\"></kd-icon>\n<kd-icon name=\"cat\" props=\"size:48\"></kd-icon>",
+              "visible": true,
+              "renderAttributes": {}
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "renderType": null,
           "name": "Search Widget",
           "title": "Search Widget",
           "visible": true,
           "omitWhenHidden": null,
-          "renderAttributes": {},
+          "renderAttributes": {
+            "class": "cols-2"
+          },
           "elements": [
             {
               "type": "section",
@@ -117,6 +161,25 @@
                   "type": "content",
                   "renderType": "html",
                   "name": "Search Not Supported",
+                  "text": "<em>The search widget is not supported by this front end code.</em>",
+                  "visible": true,
+                  "renderAttributes": {}
+                }
+              ]
+            },
+            {
+              "type": "section",
+              "renderType": null,
+              "name": "Static Search Widget",
+              "title": null,
+              "visible": true,
+              "omitWhenHidden": null,
+              "renderAttributes": {},
+              "elements": [
+                {
+                  "type": "content",
+                  "renderType": "html",
+                  "name": "Static Search Not Supported",
                   "text": "<em>The search widget is not supported by this front end code.</em>",
                   "visible": true,
                   "renderAttributes": {}
@@ -142,6 +205,78 @@
               "defaultResourceName": null,
               "type": "field",
               "key": "b4ac03a83a5f427d8633e3102b09bc72",
+              "required": false
+            },
+            {
+              "enabled": false,
+              "dataType": "string",
+              "defaultDataSource": "none",
+              "requiredMessage": null,
+              "name": "Requested For Name",
+              "omitWhenHidden": null,
+              "renderAttributes": {},
+              "renderType": "text",
+              "pattern": null,
+              "defaultValue": null,
+              "visible": true,
+              "label": "Requested For Name",
+              "constraints": [],
+              "events": [],
+              "rows": 1,
+              "defaultResourceName": null,
+              "type": "field",
+              "key": "514a1c1b6dc646d2b4ab7a61e759e40d",
+              "required": false
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "renderType": null,
+          "name": "Table Widget",
+          "title": "Table Widget",
+          "visible": true,
+          "omitWhenHidden": null,
+          "renderAttributes": {},
+          "elements": [
+            {
+              "type": "section",
+              "renderType": null,
+              "name": "Table",
+              "title": null,
+              "visible": true,
+              "omitWhenHidden": null,
+              "renderAttributes": {},
+              "elements": [
+                {
+                  "type": "content",
+                  "renderType": "html",
+                  "name": "Table Not Supported",
+                  "text": "<em>The table widget is not supported by this front end code.</em>",
+                  "visible": true,
+                  "renderAttributes": {}
+                }
+              ]
+            },
+            {
+              "enabled": false,
+              "dataType": "string",
+              "defaultDataSource": "none",
+              "requiredMessage": null,
+              "name": "Table Data",
+              "omitWhenHidden": null,
+              "renderAttributes": {},
+              "renderType": "text",
+              "pattern": null,
+              "defaultValue": null,
+              "visible": true,
+              "label": "Table Data",
+              "constraints": [],
+              "events": [],
+              "rows": 4,
+              "defaultResourceName": null,
+              "type": "field",
+              "key": "1c93d5b29d014d84965c68ad81393749",
               "required": false
             }
           ]
@@ -270,7 +405,7 @@
       "events": [
         {
           "name": "Load Search Widget",
-          "code": "bundle.widgets.Search?.({ \n  container: K('section[Requested For Widget]').element(), \n  config: {\n    integration: {\n      kappSlug: K('kapp').slug(),\n      formSlug: K('form').slug(),\n      integrationName: 'Search Users',\n      listProperty: 'users',\n      parameters: [{ name: 'Requested For' }]\n    },\n    optionToValue: function(o) { return o.username; },\n    optionToLabel: function(o) { return o.displayName || o.username; },\n    onChange: function(obj, value) {\n      console.log('search change', obj, value);\n      K('field[Requested For]').value(value);\n    },\n    placeholder: 'Search users...'\n  }, \n  id: 'requested-for' \n});",
+          "code": "bundle.widgets.Search?.({ \n  container: K('section[Requested For Widget]').element(), \n  config: {\n    integration: {\n      kappSlug: K('kapp').slug(),\n      formSlug: K('form').slug(),\n      integrationName: 'Search Users',\n      listProperty: 'users',\n      parameters: [{ name: 'Requested For' }]\n    },\n    optionToValue: function(o) { return o.username; },\n    optionToLabel: function(o) { return o.displayName || o.username; },\n    initialSelection: K('field[Requested For]').value() ? {\n      username: K('field[Requested For Name]').value()\n    } : null,\n    onChange: function(obj, value) {\n      K('field[Requested For]').value(value);\n      K('field[Requested For Name]').value(obj ? obj.displayName : '');\n    },\n    placeholder: 'Search users...'\n  }, \n  id: 'requested-for' \n});\n\nbundle.widgets.Search?.({ \n  container: K('section[Static Search Widget]').element(), \n  config: {\n    options: [\n      { value: 'low', label: 'Low Priority'},\n      { value: 'medium', label: 'Medium Priority'},\n      { value: 'high', label: 'High Priority'},\n      { value: 'urgent', label: 'Urgent Priority'},\n    ],\n    search: { fields: [{ name: 'value' }] },\n    placeholder: 'Find priority',\n    minSearchLength: 0\n  }, \n  id: 'static-search' \n});",
           "integrationResourceName": "",
           "action": "Custom",
           "integrationResourceProperty": null,
@@ -291,6 +426,14 @@
           "action": "Custom",
           "integrationResourceProperty": "",
           "type": "Load"
+        },
+        {
+          "name": "Load Table Widget",
+          "code": "const table = bundle.widgets.Table?.({ \n  container: K('section[Table]').element(), \n  field: K('field[Table Data]'),\n  config: {\n    integration: {\n      kappSlug: K('kapp').slug(),\n      formSlug: K('form').slug(),\n      integrationName: 'Addresses',\n      listProperty: 'Data',\n      errorProperty: 'Error'\n    },\n    // data: [], \n    rowTransform: ({ Values, ...row }) => ({ ...row, ...Values }),\n    columns: [\n      {\n        label: 'Id',\n        property: 'Handle',\n        displayTransform: (value, row, index) => value + '(' + row['Core State'] + ')',\n        onClick: editRow,\n        sortable: true,\n        toggleable: false,\n        sortTransform: (value, row, index) => value,\n        filterable: false,\n      },{\n        label: 'Address',\n        property: 'Address Line 1',\n        sortable: true,\n        sortTransform: (value) => (value || '').match(/^\\d*\\s*(.*)$/)[1],\n        filterable: true,\n        filterFn: function(query, value) {\n          const match = (value || '').match(/^\\d*\\s*(.*)$/);\n          if (match[1] && match[1].toLowerCase().startsWith(query.toLowerCase())) return true;\n          return false;\n        }\n      },{\n        label: 'City',\n        property: 'City',\n        sortable: true,\n        sortTransform: (value, row, index) => value,\n        filterable: true,\n        filterOperator: 'matches',\n      },{\n        label: 'State',\n        property: 'State',\n        sortable: true,\n        sortTransform: (value, row, index) => value,\n        filterable: true,\n        filterOperator: 'equals',\n      },{\n        label: 'Zip Code',\n        property: 'Zip Code',\n        sortable: false,\n        filterable: true,\n        filterOperator: 'startsWith',\n      }\n    ],\n    actions: [\n      { label: 'Edit', onClick: editRow, icon: 'edit' },\n      { label: 'Delete', onClick: deleteRow, icon: 'trash' },\n    ],\n    pageSize: 3,\n    // defaultSort: [0, 'asc'],\n    messages: {\n      loading: 'Loading Data',\n      empty: 'No Data',\n    }\n  }, \n  id: 'table' \n});\n\nfunction editRow(value, row, index) {\n  console.log('EDIT', { value, row, index, table });\n}\n\nfunction deleteRow(value, row, index) {\n  console.log('DELETE', { value, row, index, table });\n}",
+          "integrationResourceName": null,
+          "action": "Custom",
+          "integrationResourceProperty": "",
+          "type": "Load"
         }
       ],
       "name": "Page 1",
@@ -301,6 +444,6 @@
   "securityPolicies": [],
   "slug": "widgets",
   "status": "Active",
-  "submissionLabelExpression": "",
+  "submissionLabelExpression": "IT Request ${values('Table Data') ? ' - Software' : ' - Hardware'}",
   "type": "Service"
 }

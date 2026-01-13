@@ -63,9 +63,37 @@
       "unique": false
     },
     {
+      "name": "values[Current]",
+      "parts": [
+        "values[Current]"
+      ],
+      "unique": false
+    },
+    {
+      "name": "values[DateTime]",
+      "parts": [
+        "values[DateTime]"
+      ],
+      "unique": false
+    },
+    {
+      "name": "values[Date]",
+      "parts": [
+        "values[Date]"
+      ],
+      "unique": false
+    },
+    {
       "name": "values[State]",
       "parts": [
         "values[State]"
+      ],
+      "unique": false
+    },
+    {
+      "name": "values[Time]",
+      "parts": [
+        "values[Time]"
       ],
       "unique": false
     },
@@ -86,6 +114,36 @@
       "displayCondition": "",
       "displayPage": null,
       "elements": [
+        {
+          "enabled": true,
+          "dataType": "json",
+          "defaultDataSource": "none",
+          "requiredMessage": null,
+          "name": "Current",
+          "choicesResourceName": null,
+          "omitWhenHidden": null,
+          "renderAttributes": {},
+          "renderType": "checkbox",
+          "pattern": null,
+          "defaultValue": null,
+          "visible": true,
+          "choices": [
+            {
+              "label": "Current",
+              "value": "Current"
+            }
+          ],
+          "label": "",
+          "choicesResourceProperty": null,
+          "choicesRunIf": null,
+          "constraints": [],
+          "choicesDataSource": "custom",
+          "events": [],
+          "defaultResourceName": null,
+          "type": "field",
+          "key": "64474d64d40145698fe2b5c2509aebec",
+          "required": false
+        },
         {
           "enabled": true,
           "dataType": "string",
@@ -184,11 +242,107 @@
           "visible": true,
           "label": "Zip Code",
           "constraints": [],
-          "events": [],
+          "events": [
+            {
+              "name": "Change",
+              "code": "console.log('ZIP CHANGE', event.newValue);",
+              "integrationResourceName": null,
+              "action": "Custom",
+              "integrationResourceProperty": "",
+              "type": "Change"
+            }
+          ],
           "rows": 1,
           "defaultResourceName": null,
           "type": "field",
           "key": "214a6afef6ad415c9b7b9ed87492b283",
+          "required": false
+        },
+        {
+          "enabled": true,
+          "dataType": "string",
+          "defaultDataSource": "none",
+          "requiredMessage": null,
+          "name": "Date",
+          "omitWhenHidden": null,
+          "renderAttributes": {},
+          "renderType": "date",
+          "pattern": null,
+          "defaultValue": null,
+          "visible": true,
+          "label": "Date",
+          "constraints": [],
+          "events": [
+            {
+              "name": "Change",
+              "code": "console.log('DATE CHANGE', event.newValue);",
+              "integrationResourceName": null,
+              "action": "Custom",
+              "integrationResourceProperty": "",
+              "type": "Change"
+            }
+          ],
+          "defaultResourceName": null,
+          "type": "field",
+          "key": "638b30b87ca5424d8156ae4080ea41a2",
+          "required": false
+        },
+        {
+          "enabled": true,
+          "dataType": "string",
+          "defaultDataSource": "none",
+          "requiredMessage": null,
+          "name": "Time",
+          "omitWhenHidden": null,
+          "renderAttributes": {},
+          "renderType": "time",
+          "pattern": null,
+          "defaultValue": null,
+          "visible": true,
+          "label": "Time",
+          "constraints": [],
+          "events": [
+            {
+              "name": "Change",
+              "code": "console.log('TIME CHANGE', event.newValue);",
+              "integrationResourceName": null,
+              "action": "Custom",
+              "integrationResourceProperty": "",
+              "type": "Change"
+            }
+          ],
+          "defaultResourceName": null,
+          "type": "field",
+          "key": "8304d47b0fe3495887018b0c84ff1f01",
+          "required": false
+        },
+        {
+          "enabled": true,
+          "dataType": "string",
+          "defaultDataSource": "none",
+          "requiredMessage": null,
+          "name": "DateTime",
+          "omitWhenHidden": null,
+          "renderAttributes": {},
+          "renderType": "datetime",
+          "pattern": null,
+          "defaultValue": null,
+          "visible": true,
+          "label": "DateTime",
+          "constraints": [],
+          "events": [
+            {
+              "name": "Change",
+              "code": "console.log('DATETIME CHANGE', event.newValue);",
+              "integrationResourceName": null,
+              "action": "Custom",
+              "integrationResourceProperty": "",
+              "type": "Change"
+            }
+          ],
+          "defaultResourceName": null,
+          "type": "field",
+          "key": "99f59b147d0c4782a18f68e244c7567d",
           "required": false
         }
       ],
@@ -201,6 +355,6 @@
   "securityPolicies": [],
   "slug": "subform",
   "status": "Active",
-  "submissionLabelExpression": null,
+  "submissionLabelExpression": "${values('Address Line 1')}, ${values('City')} ${values('State')} ${values('Zip Code')}",
   "type": "Utility"
 }

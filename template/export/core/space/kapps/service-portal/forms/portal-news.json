@@ -257,5 +257,5 @@
   "slug": "portal-news",
   "status": "Active",
   "submissionLabelExpression": "${values('Sort Order') || 999}. ${values('Title')} ${values('Status') === 'Inactive' ? '[Inactive]' : ''}",
-  "type": "Data"
+  "type": "Datastore"
 }

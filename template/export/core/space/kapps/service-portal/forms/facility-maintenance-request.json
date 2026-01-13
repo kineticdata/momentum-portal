@@ -68,6 +68,13 @@
       "unique": false
     },
     {
+      "name": "values[Incident Number]",
+      "parts": [
+        "values[Incident Number]"
+      ],
+      "unique": false
+    },
+    {
       "name": "values[Issue Type]",
       "parts": [
         "values[Issue Type]"
@@ -138,6 +145,14 @@
       },
       "name": "Get Team",
       "operationId": "e20b8b5d-da67-410b-a527-bd3ae1cfe07b"
+    },
+    {
+      "connectionId": "b080b901-bb64-4be6-9853-edd15c47ca45",
+      "inputMappings": {
+        "Sys Id": "00e11ea6c3365a106af3bb02b4013188"
+      },
+      "name": "Incident Number",
+      "operationId": "a30b6418-af4e-4c93-aa29-bcb12bc0fb44"
     }
   ],
   "name": "Facility Maintenance Request",
@@ -227,6 +242,51 @@
                   "defaultResourceName": null,
                   "type": "field",
                   "key": "f24226e17d8e461199c7ce00346f4918",
+                  "required": false
+                },
+                {
+                  "enabled": true,
+                  "dataType": "string",
+                  "defaultDataSource": "integration",
+                  "requiredMessage": null,
+                  "name": "Incident Number",
+                  "choicesResourceName": null,
+                  "omitWhenHidden": null,
+                  "renderAttributes": {},
+                  "renderType": "dropdown",
+                  "pattern": null,
+                  "defaultValue": "${integration('')}",
+                  "visible": true,
+                  "choices": [
+                    {
+                      "label": "Incident ",
+                      "value": "Incident "
+                    }
+                  ],
+                  "label": "Incident Number",
+                  "choicesResourceProperty": null,
+                  "choicesRunIf": null,
+                  "constraints": [],
+                  "choicesDataSource": "custom",
+                  "events": [
+                    {
+                      "mappings": [
+                        {
+                          "field": "Manager",
+                          "value": "${integration('Manager')}",
+                          "visible": null
+                        }
+                      ],
+                      "name": "Set Manager",
+                      "integrationResourceName": "Get Team",
+                      "action": "Set Fields",
+                      "integrationResourceProperty": null,
+                      "type": "Change"
+                    }
+                  ],
+                  "defaultResourceName": "Incident Number",
+                  "type": "field",
+                  "key": "59dcc5a3a1884bc080134c69b2e50e0e",
                   "required": false
                 },
                 {

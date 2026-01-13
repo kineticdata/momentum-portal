@@ -1,0 +1,334 @@
+{
+  "anonymous": false,
+  "attributes": [],
+  "bridgedResources": [],
+  "categorizations": [],
+  "customHeadContent": null,
+  "description": "",
+  "indexDefinitions": [
+    {
+      "name": "closedBy",
+      "parts": [
+        "closedBy"
+      ],
+      "unique": false
+    },
+    {
+      "name": "createdBy",
+      "parts": [
+        "createdBy"
+      ],
+      "unique": false
+    },
+    {
+      "name": "handle",
+      "parts": [
+        "handle"
+      ],
+      "unique": false
+    },
+    {
+      "name": "submittedBy",
+      "parts": [
+        "submittedBy"
+      ],
+      "unique": false
+    },
+    {
+      "name": "updatedBy",
+      "parts": [
+        "updatedBy"
+      ],
+      "unique": false
+    },
+    {
+      "name": "values[Form Param]",
+      "parts": [
+        "values[Form Param]"
+      ],
+      "unique": false
+    },
+    {
+      "name": "values[Table Static Edit Data]",
+      "parts": [
+        "values[Table Static Edit Data]"
+      ],
+      "unique": false
+    }
+  ],
+  "integrations": [
+    {
+      "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
+      "inputMappings": {
+        "Form Slug": "${values('Form Param')}",
+        "Kapp Slug": "service-portal"
+      },
+      "name": "Addresses",
+      "operationId": "cb8cbf5b-a370-4318-b3da-3d254501a4f5"
+    }
+  ],
+  "name": "Widgets - Table",
+  "notes": null,
+  "pages": [
+    {
+      "advanceCondition": null,
+      "displayCondition": null,
+      "displayPage": null,
+      "elements": [
+        {
+          "enabled": true,
+          "dataType": "string",
+          "defaultDataSource": "none",
+          "requiredMessage": null,
+          "name": "Form Param",
+          "omitWhenHidden": null,
+          "renderAttributes": {},
+          "renderType": "text",
+          "pattern": null,
+          "defaultValue": "subform",
+          "visible": true,
+          "label": "Param",
+          "constraints": [],
+          "events": [],
+          "rows": 1,
+          "defaultResourceName": null,
+          "type": "field",
+          "key": "ff44405cb1eb49aea89c2605662d85fa",
+          "required": false
+        },
+        {
+          "type": "section",
+          "renderType": null,
+          "name": "Table Integration View",
+          "title": "",
+          "visible": true,
+          "omitWhenHidden": null,
+          "renderAttributes": {},
+          "elements": [
+            {
+              "type": "button",
+              "renderType": "custom",
+              "name": "Toggle Table Integration View",
+              "label": "Toggle Table - Integration Data - View Only",
+              "visible": true,
+              "enabled": true,
+              "renderAttributes": {},
+              "events": [
+                {
+                  "name": "Toggle Table",
+                  "code": "const tableId = 'table-integration-view';\n\nif (bundle.widgets.Table.get(tableId)) {\n  bundle.widgets.Table.get(tableId).destroy();\n  return;\n}\n\nconst table = bundle.widgets.Table?.({ \n  container: K('content[Table Integration View]').element(), \n  config: {\n    title: 'Addresses',\n    integration: {\n      kappSlug: K('kapp').slug(),\n      formSlug: K('form').slug(),\n      integrationName: 'Addresses',\n      listProperty: 'Data',\n      errorProperty: 'Error',\n      parameters: { \"Form Param\": K('field[Form Param]').value() }\n    },\n    onDataSuccess: function(rows){\n      // callback for each time the data is fetched from the integration\n    },\n    // Transform the data to a single level map\n    rowTransform: ({ Values, ...row }) => ({ ...row, ...Values }),\n    columns: [\n      {\n        label: 'Id',\n        property: 'Handle',\n        displayTransform: (value, row, index) => value + ' (' + row['Core State'] + ')',\n        // Don't allow hiding this column\n        toggleable: false,\n      },{\n        label: 'Address',\n        property: 'Address Line 1',\n        // Sort by street name by removing any leading digits\n        sortTransform: (value) => (value || '').match(/^\\d*\\s*(.*)$/)[1],\n      },{\n        label: 'Address Line 2',\n        property: 'Address Line 2',\n        // Hide column by default\n        visible: false,\n      },{\n        label: 'City',\n        property: 'City'\n      },{\n        label: 'State',\n        property: 'State',\n        footerTransform: function(currentRows, tableApi) {\n          const uniqueStates = Object.keys(\n            tableApi.getData().reduce((result,row) => ({...result, [row['State']]: true }), {})\n          ).length;\n          return `${uniqueStates} States`;\n        },\n        headerCellClass: 'foo-h',\n        bodyCellClass: 'foo-b',\n        footerCellClass: 'foo-f',\n        headerCellStyles: { color: 'red' },\n        bodyCellStyles: { color: 'red' },\n        footerCellStyles: { color: 'red' }\n      },{\n        label: 'Zip Code',\n        property: 'Zip Code',\n        // Search zip code using starts with \n        filterOperator: 'startsWith',\n      }\n    ],\n    pageSize: 5,\n    pageSizes: [1,5,10,20,50,0],\n    // Sort using the first column in ascending order by default\n    defaultSort: [0, 'asc'],\n    messages: {\n      loading: 'Loading addresses',\n      empty: 'There are no addresses',\n      noMatches: 'No addresses match your filter query'\n    }\n  }, \n  id: tableId\n});",
+                  "integrationResourceName": null,
+                  "action": "Custom",
+                  "integrationResourceProperty": "",
+                  "type": "Click"
+                }
+              ]
+            },
+            {
+              "type": "content",
+              "renderType": "html",
+              "name": "Table Integration View",
+              "text": "",
+              "visible": true,
+              "renderAttributes": {}
+            },
+            {
+              "type": "content",
+              "renderType": "html",
+              "name": "Table Integration View Info",
+              "text": "<p>\n  This table retrieves submission data from an integration. \n</p>\n<br />\n<hr />",
+              "visible": true,
+              "renderAttributes": {}
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "renderType": null,
+          "name": "Table Integration Edit",
+          "title": "",
+          "visible": true,
+          "omitWhenHidden": null,
+          "renderAttributes": {},
+          "elements": [
+            {
+              "type": "button",
+              "renderType": "custom",
+              "name": "Toggle Table Integration Edit",
+              "label": "Toggle Table - Integration Data - Editable",
+              "visible": true,
+              "enabled": true,
+              "renderAttributes": {},
+              "events": [
+                {
+                  "name": "Toggle Table",
+                  "code": "const tableId = 'table-integration-edit';\n\nif (bundle.widgets.Table.get(tableId)) {\n  bundle.widgets.Table.get(tableId).destroy();\n  return;\n}\n\nconst table = bundle.widgets.Table?.({ \n  container: K('content[Table Integration Edit]').element(), \n  config: {\n    title: 'Addresses',\n    integration: {\n      kappSlug: K('kapp').slug(),\n      formSlug: K('form').slug(),\n      integrationName: 'Addresses',\n      listProperty: 'Data',\n      errorProperty: 'Error',\n      parameters: { \"Form Param\": K('field[Form Param]').value() }\n    },\n    // Transform the data to a single level map\n    rowTransform: ({ Values, ...row }) => ({ ...row, ...Values }),\n    columns: [\n      {\n        label: 'Submission Id',\n        property: 'Submission Id',\n        visible: false,\n        toggleable: false,\n      },{\n        label: 'Id',\n        property: 'Handle',\n        displayTransform: (value, row, index) => value + ' (' + row['Core State'] + ')',\n        // Don't allow hiding this column\n        toggleable: false,\n      },{\n        label: 'Address',\n        property: 'Address Line 1',\n        // Sort by street name by removing any leading digits\n        sortTransform: (value) => (value || '').match(/^\\d*\\s*(.*)$/)[1],\n      },{\n        label: 'Address Line 2',\n        property: 'Address Line 2',\n        // Hide column by default\n        visible: false,\n      },{\n        label: 'City',\n        property: 'City'\n      },{\n        label: 'State',\n        property: 'State'\n      },{\n        label: 'Zip Code',\n        property: 'Zip Code',\n        // Search zip code using starts with \n        filterOperator: 'startsWith',\n      }\n    ],\n    addAction: {\n      label: 'Add Row',\n      onClick: function(tableApi) {\n        tableApi.actions.subform({\n          config: {\n            kappSlug: kapp('slug'),\n            formSlug: 'subform',\n            modalTitle: \"New Address\",\n            saveLabel: 'Create',\n            onSave: function(data, api){\n              api.submit(function(result){\n                // Add row to the table so it appears immediately before the table reloads\n                tableApi.addRow({\n                  Handle: result.submission.handle,\n                  'Core State': result.submission.coreState,\n                  'Address Line 1': result.submission.values['Address Line 1'],\n                  'Address Line 2': result.submission.values['Address Line 2'],\n                  'City': result.submission.values['City'],\n                  'State': result.submission.values['State'],\n                  'Zip Code': result.submission.values['Zip Code'],\n                });\n                // Reload the table data in the background\n                tableApi.reloadData();\n                // Show toast and close subform\n                bundle.utils.toastSuccess({ title: 'Address added successfully' });\n                api.destroy();\n              });\n            }\n          },\n        });\n      }\n    },\n    rowActions: [\n      {\n        label: 'Edit Row',\n        icon: 'pencil',\n        onClick: function(row, index, tableApi){\n          tableApi.actions.subform({\n            config: {\n              submissionId: row['Submission Id'],\n              modalTitle: \"Edit Address\",\n              saveLabel: 'Update',\n              onSave: function(data, api){\n                api.submit(function(result){\n                  // Update the row in the table so it appears immediately before the table reloads\n                  tableApi.updateRow({\n                    Handle: result.submission.handle,\n                    'Core State': result.submission.coreState,\n                    'Address Line 1': result.submission.values['Address Line 1'],\n                    'Address Line 2': result.submission.values['Address Line 2'],\n                    'City': result.submission.values['City'],\n                    'State': result.submission.values['State'],\n                    'Zip Code': result.submission.values['Zip Code'],\n                  }, index);\n                  // Reload the table data in the background\n                  tableApi.reloadData();\n                  // Show toast and close subform\n                  bundle.utils.toastSuccess({ title: 'Address updated successfully' });\n                  api.destroy();\n                });\n              }\n            },\n          });\n        }\n      },{\n        label: 'Delete Row',\n        icon: 'trash',\n        onClick: function(row, index, tableApi){\n          bundle.utils.openConfirm({\n            title: 'Delete Address',\n            description: `Are you sure you want to delete address ${row['Handle']}?`,\n            acceptLabel: 'Yes',\n            accept: function(){\n              K.api('DELETE', bundle.apiLocation() + '/submissions/' + row['Submission Id'], {\n                complete: function(response){\n                  if (response.status === 200) {\n                    bundle.utils.toastSuccess({ title: 'Address was successfully deleted' });\n                    tableApi.deleteRow(index);\n                    tableApi.reloadData();\n                  } else {\n                    bundle.utils.toastError({ title: 'There was an error deleting the address' });\n                  }\n                }\n              })\n              \n            }\n          });\n        }\n      }\n    ],\n    pageSize: 5,\n    pageSizes: [1,5,10,20,50,0],\n    // Sort using the first column in ascending order by default\n    defaultSort: [0, 'asc'],\n    messages: {\n      loading: 'Loading addresses',\n      empty: 'There are no addresses',\n      noMatches: 'No addresses match your filter query'\n    }\n  }, \n  id: tableId\n});",
+                  "integrationResourceName": null,
+                  "action": "Custom",
+                  "integrationResourceProperty": "",
+                  "type": "Click"
+                }
+              ]
+            },
+            {
+              "type": "content",
+              "renderType": "html",
+              "name": "Table Integration Edit",
+              "text": null,
+              "visible": true,
+              "renderAttributes": {}
+            },
+            {
+              "type": "content",
+              "renderType": "html",
+              "name": "Table Integration Edit Subform",
+              "text": null,
+              "visible": true,
+              "renderAttributes": {}
+            },
+            {
+              "type": "content",
+              "renderType": "html",
+              "name": "Table Integration Edit Info",
+              "text": "<p>\n  This table retrieves submission data from an integration, and allows you to manage the data by rendering a subform that creates/updates the submissions.\n</p>\n<br />\n<hr />",
+              "visible": true,
+              "renderAttributes": {}
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "renderType": null,
+          "name": "Table Static View",
+          "title": "",
+          "visible": true,
+          "omitWhenHidden": null,
+          "renderAttributes": {},
+          "elements": [
+            {
+              "type": "button",
+              "renderType": "custom",
+              "name": "Toggle Table Static View",
+              "label": "Toggle Table - Static Data - View Only",
+              "visible": true,
+              "enabled": true,
+              "renderAttributes": {},
+              "events": [
+                {
+                  "name": "Toggle Table",
+                  "code": "const tableId = 'table-static-view';\n\nif (bundle.widgets.Table.get(tableId)) {\n  bundle.widgets.Table.get(tableId).destroy();\n  K('content[Table Static View Select]').hide();\n  K('content[Table Static View Select]').element().style.backgroundColor = \"transparent\";\n  return;\n}\n\nconst table = bundle.widgets.Table?.({ \n  container: K('content[Table Static View]').element(), \n  config: {\n    title: 'Colors',\n    filterable: false,\n    toggleable: false,\n    data: [\n      { Name: \"Mindaro\", Hex: \"#D6FF79\" },\n      { Name: \"Light Green\", Hex: \"#B0FF92\" },\n      { Name: \"Lavender Blush\", Hex: \"#FFF2F1\" },\n      { Name: \"Tropical Indigo\", Hex: \"#A09BE7\" },\n      { Name: \"Chrysler Blue\", Hex: \"#5F00BA\" },\n    ],\n    columns: [\n      {\n        label: 'Name',\n        property: 'Name',\n        fieldConfig: { type: 'text' }\n      },{\n        label: 'Hex Value',\n        property: 'Hex',\n        fieldConfig: { type: 'text' }\n      }\n    ],\n    selectAction: {\n      label: 'Select Row',\n      onClick: function(row, index, tableApi) {\n        K('content[Table Static View Select]').show();\n        K('content[Table Static View Select]').element().style.backgroundColor = row['Hex'];\n      }\n    },\n    pageSize: 0,\n    pageSizes: [5,10,25,0],\n    allowExport: false,\n    messages: {\n      loading: 'Loading colors'\n    }\n  }, \n  id: tableId\n});",
+                  "integrationResourceName": null,
+                  "action": "Custom",
+                  "integrationResourceProperty": "",
+                  "type": "Click"
+                }
+              ]
+            },
+            {
+              "type": "content",
+              "renderType": "html",
+              "name": "Table Static View",
+              "text": null,
+              "visible": true,
+              "renderAttributes": {}
+            },
+            {
+              "type": "content",
+              "renderType": "html",
+              "name": "Table Static View Select",
+              "text": "<div style=\"display:inline-block;background-color:white;margin:1rem;border-radius:1rem;padding:0.25rem 0.75rem;\">Selected Color</div>",
+              "visible": false,
+              "renderAttributes": {
+                "style": "border-radius:1rem;"
+              }
+            },
+            {
+              "type": "content",
+              "renderType": "html",
+              "name": "Table Static View Info",
+              "text": "<p>\n  This table renders static data that is passed directly to the table. It allows for clicking on a row to trigger a callback, which in this case will show a div with the selected color below the table.\n</p>\n<br />\n<hr />",
+              "visible": true,
+              "renderAttributes": {}
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "renderType": null,
+          "name": "Table Static Edit",
+          "title": "",
+          "visible": true,
+          "omitWhenHidden": null,
+          "renderAttributes": {},
+          "elements": [
+            {
+              "type": "button",
+              "renderType": "custom",
+              "name": "Toggle Table Static Edit",
+              "label": "Toggle Table - Static Data - Editable",
+              "visible": true,
+              "enabled": true,
+              "renderAttributes": {},
+              "events": [
+                {
+                  "name": "Toggle Table",
+                  "code": "const tableId = 'table-static-edit';\nK('field[Table Static Edit Data]').show();\n\nif (bundle.widgets.Table.get(tableId)) {\n  bundle.widgets.Table.get(tableId).destroy();\n  return;\n}\n\nconst table = bundle.widgets.Table?.({ \n  container: K('content[Table Static Edit]').element(), \n  field: K('field[Table Static Edit Data]'),\n  config: {\n    title: 'Contacts',\n    columns: [\n      {\n        label: 'Name',\n        property: 'Name',\n        onClick: function(row, index, tableApi){\n          tableApi.actions.update(row, index);\n        },\n        fieldConfig: {\n          type: 'text',\n          required: true,\n          label: 'Full Name'\n        }\n      },{\n        label: 'Email',\n        property: 'Email',\n        fieldConfig: {\n          type: 'text',\n          validate: function(value, data){\n            if (!value && !data['Phone']) return ['Either Email or Phone must be provided.'];\n          }\n        }\n      },{\n        label: 'Phone',\n        property: 'Phone',\n        fieldConfig: {\n          type: 'text'\n        }\n      }\n    ],\n    addAction: {\n      label: 'Add Row',\n      onClick: function(tableApi) {\n        tableApi.actions.add();\n      }\n    },\n    rowActions: [\n      {\n        label: 'Delete Row',\n        icon: 'trash',\n        onClick: function(row, index, tableApi){\n          tableApi.actions.delete(index);\n        }\n      }\n    ],\n    pageSize: 5,\n    pageSizes: [],\n    // Sort using the first column in ascending order by default\n    defaultSort: [0, 'asc'],\n    allowExport: false,\n    messages: {\n      loading: 'Loading contacts',\n      empty: 'There are no contacts',\n      noMatches: 'No contacts match your filter query'\n    }\n  }, \n  id: tableId\n});",
+                  "integrationResourceName": null,
+                  "action": "Custom",
+                  "integrationResourceProperty": "",
+                  "type": "Click"
+                }
+              ]
+            },
+            {
+              "type": "content",
+              "renderType": "html",
+              "name": "Table Static Edit",
+              "text": null,
+              "visible": true,
+              "renderAttributes": {}
+            },
+            {
+              "enabled": false,
+              "dataType": "string",
+              "defaultDataSource": "none",
+              "requiredMessage": null,
+              "name": "Table Static Edit Data",
+              "omitWhenHidden": false,
+              "renderAttributes": {},
+              "renderType": "text",
+              "pattern": null,
+              "defaultValue": "[{\"Name\": \"John\", \"Email\": \"j@kd.com\"}]",
+              "visible": false,
+              "label": "Table Static Edit Data",
+              "constraints": [],
+              "events": [],
+              "rows": 3,
+              "defaultResourceName": null,
+              "type": "field",
+              "key": "b2125740412a40f7ae4a38952038c5ae",
+              "required": false
+            },
+            {
+              "type": "content",
+              "renderType": "html",
+              "name": "Table Static Edit Info",
+              "text": "<p>\n  This table renders static data sourced from a field on the form and allows for managing the data, without needing a subform.\n</p>\n<br />\n<hr />",
+              "visible": true,
+              "renderAttributes": {}
+            }
+          ]
+        }
+      ],
+      "events": [],
+      "name": "Page 1",
+      "renderType": "submittable",
+      "type": "page"
+    }
+  ],
+  "securityPolicies": [],
+  "slug": "widgets-table",
+  "status": "Active",
+  "submissionLabelExpression": null,
+  "type": "Service"
+}

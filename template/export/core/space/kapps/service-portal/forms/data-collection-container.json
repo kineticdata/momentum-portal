@@ -1,0 +1,422 @@
+{
+  "anonymous": false,
+  "attributes": [
+    {
+      "name": "Custom Submission Workflow",
+      "values": [
+        "Submitted"
+      ]
+    }
+  ],
+  "bridgedResources": [],
+  "categorizations": [],
+  "customHeadContent": null,
+  "description": "",
+  "indexDefinitions": [
+    {
+      "name": "closedBy",
+      "parts": [
+        "closedBy"
+      ],
+      "unique": false
+    },
+    {
+      "name": "createdBy",
+      "parts": [
+        "createdBy"
+      ],
+      "unique": false
+    },
+    {
+      "name": "handle",
+      "parts": [
+        "handle"
+      ],
+      "unique": false
+    },
+    {
+      "name": "submittedBy",
+      "parts": [
+        "submittedBy"
+      ],
+      "unique": false
+    },
+    {
+      "name": "updatedBy",
+      "parts": [
+        "updatedBy"
+      ],
+      "unique": false
+    },
+    {
+      "name": "values[Area 1 - Error Count]",
+      "parts": [
+        "values[Area 1 - Error Count]"
+      ],
+      "unique": false
+    },
+    {
+      "name": "values[Area 1 - File Processing Status]",
+      "parts": [
+        "values[Area 1 - File Processing Status]"
+      ],
+      "unique": false
+    },
+    {
+      "name": "values[Area 1 - File Sequence]",
+      "parts": [
+        "values[Area 1 - File Sequence]"
+      ],
+      "unique": false
+    },
+    {
+      "name": "values[Area 1 File Upload]",
+      "parts": [
+        "values[Area 1 File Upload]"
+      ],
+      "unique": false
+    },
+    {
+      "name": "values[Customer Identifier]",
+      "parts": [
+        "values[Customer Identifier]"
+      ],
+      "unique": false
+    },
+    {
+      "name": "values[First Name]",
+      "parts": [
+        "values[First Name]"
+      ],
+      "unique": false
+    }
+  ],
+  "integrations": [
+    {
+      "connectionId": "2b8ad0c5-313a-498e-8f06-e7d9fe802a75",
+      "inputMappings": {
+        "Customer Identifier": "${values('Customer Identifier')}"
+      },
+      "name": "Area 1 - Draft",
+      "operationId": "a1987dcd-d901-4de8-a96a-c60bb9059c0c"
+    },
+    {
+      "connectionId": "2b8ad0c5-313a-498e-8f06-e7d9fe802a75",
+      "inputMappings": {
+        "Customer Identifier": "${values('Customer Identifier')}"
+      },
+      "name": "Area 1 - Submitted",
+      "operationId": "2337a4c7-7f09-4cc1-b0dd-4235759b06ce"
+    }
+  ],
+  "name": "Data Collection Container 1",
+  "notes": null,
+  "pages": [
+    {
+      "advanceCondition": null,
+      "displayCondition": null,
+      "displayPage": null,
+      "elements": [
+        {
+          "type": "section",
+          "renderType": null,
+          "name": "Company Name",
+          "title": null,
+          "visible": true,
+          "omitWhenHidden": null,
+          "renderAttributes": {},
+          "elements": [
+            {
+              "type": "content",
+              "renderType": "html",
+              "name": "Company Name Headline",
+              "text": "<h6>${values('Customer Identifier')}</h6>",
+              "visible": true,
+              "renderAttributes": {}
+            },
+            {
+              "enabled": true,
+              "dataType": "string",
+              "defaultDataSource": "none",
+              "requiredMessage": null,
+              "name": "Customer Identifier",
+              "omitWhenHidden": false,
+              "renderAttributes": {},
+              "renderType": "text",
+              "pattern": null,
+              "defaultValue": "KD Construction, Inc.",
+              "visible": false,
+              "label": "Customer Identifier",
+              "constraints": [],
+              "events": [],
+              "rows": 1,
+              "defaultResourceName": null,
+              "type": "field",
+              "key": "4723ec0a600d4d89a15cffdaad8e4266",
+              "required": false
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "renderType": null,
+          "name": "Area 1",
+          "title": null,
+          "visible": true,
+          "omitWhenHidden": null,
+          "renderAttributes": {},
+          "elements": [
+            {
+              "type": "section",
+              "renderType": null,
+              "name": "Area 1 - File or Manual Entry",
+              "title": null,
+              "visible": true,
+              "omitWhenHidden": null,
+              "renderAttributes": {
+                "class": "clear clearfix"
+              },
+              "elements": [
+                {
+                  "enabled": true,
+                  "dataType": "string",
+                  "defaultDataSource": "none",
+                  "requiredMessage": null,
+                  "name": "Area 1 File Upload",
+                  "choicesResourceName": null,
+                  "omitWhenHidden": null,
+                  "renderAttributes": {
+                    "class": "float-left"
+                  },
+                  "renderType": "radio",
+                  "pattern": null,
+                  "defaultValue": "No",
+                  "visible": true,
+                  "choices": [
+                    {
+                      "label": "No",
+                      "value": "No"
+                    },
+                    {
+                      "label": "Yes",
+                      "value": "Yes"
+                    }
+                  ],
+                  "label": "File Upload",
+                  "choicesResourceProperty": null,
+                  "choicesRunIf": null,
+                  "constraints": [],
+                  "choicesDataSource": "custom",
+                  "events": [],
+                  "defaultResourceName": null,
+                  "type": "field",
+                  "key": "f999d73a4f0e4ada8ab9d53427c763aa",
+                  "required": false
+                },
+                {
+                  "enabled": true,
+                  "dataType": "file",
+                  "defaultDataSource": "none",
+                  "requiredMessage": null,
+                  "name": "Area 1 File Attachment",
+                  "omitWhenHidden": false,
+                  "renderAttributes": {
+                    "class": "float-right"
+                  },
+                  "renderType": "attachment",
+                  "pattern": null,
+                  "defaultValue": null,
+                  "visible": "values('Area 1 File Upload') === \"Yes\"",
+                  "label": "Area 1 File Attachment",
+                  "constraints": [],
+                  "allowMultiple": false,
+                  "events": [],
+                  "defaultResourceName": null,
+                  "type": "field",
+                  "key": "90dbe0e084d244afb089a9abf190946e",
+                  "required": false
+                }
+              ]
+            },
+            {
+              "type": "content",
+              "renderType": "html",
+              "name": "Area 1 - File Processing Message",
+              "text": "Area 1 Data file is processing.",
+              "visible": "submission('id') !== null && values('Area 1 - File Processing Status') !== \"Complete\"",
+              "renderAttributes": {}
+            },
+            {
+              "type": "content",
+              "renderType": "html",
+              "name": "Table - Data Collection 1 - Draft",
+              "text": null,
+              "visible": "submission('id') !== null && values('Area 1 - File Processing Status') === \"Complete\"",
+              "renderAttributes": {}
+            },
+            {
+              "type": "content",
+              "renderType": "html",
+              "name": "Table - Data Collection 1 - Submitted",
+              "text": null,
+              "visible": "values('Area 1 File Upload') === \"No\" || (values('Area 1 File Upload') === \"Yes\" && submission('id') !== null && values('Area 1 - File Processing Status') === \"Complete\")",
+              "renderAttributes": {}
+            },
+            {
+              "type": "section",
+              "renderType": null,
+              "name": "Area 1 - File Summary",
+              "title": null,
+              "visible": "values('Area 1 File Upload') === \"Yes\"",
+              "omitWhenHidden": false,
+              "renderAttributes": {},
+              "elements": [
+                {
+                  "enabled": false,
+                  "dataType": "string",
+                  "defaultDataSource": "none",
+                  "requiredMessage": null,
+                  "name": "Area 1 - File Sequence",
+                  "omitWhenHidden": null,
+                  "renderAttributes": {},
+                  "renderType": "text",
+                  "pattern": null,
+                  "defaultValue": "001",
+                  "visible": true,
+                  "label": "File Sequence",
+                  "constraints": [],
+                  "events": [],
+                  "rows": 1,
+                  "defaultResourceName": null,
+                  "type": "field",
+                  "key": "38a80933f7c2423385220f25be358cbb",
+                  "required": false
+                },
+                {
+                  "enabled": false,
+                  "dataType": "string",
+                  "defaultDataSource": "none",
+                  "requiredMessage": null,
+                  "name": "Area 1 - Error Count",
+                  "omitWhenHidden": null,
+                  "renderAttributes": {},
+                  "renderType": "text",
+                  "pattern": null,
+                  "defaultValue": null,
+                  "visible": true,
+                  "label": "Error Count",
+                  "constraints": [],
+                  "events": [],
+                  "rows": 1,
+                  "defaultResourceName": null,
+                  "type": "field",
+                  "key": "f10666302af845db8f93fd3966d49892",
+                  "required": false
+                },
+                {
+                  "enabled": false,
+                  "dataType": "string",
+                  "defaultDataSource": "none",
+                  "requiredMessage": null,
+                  "name": "Area 1 - File Processing Status",
+                  "omitWhenHidden": null,
+                  "renderAttributes": {},
+                  "renderType": "text",
+                  "pattern": null,
+                  "defaultValue": null,
+                  "visible": true,
+                  "label": "Area 1 - File Processing Status",
+                  "constraints": [],
+                  "events": [],
+                  "rows": 1,
+                  "defaultResourceName": null,
+                  "type": "field",
+                  "key": "c23f22f62a9440d18839f5dfeee0e609",
+                  "required": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "renderType": null,
+          "name": "Area 2",
+          "title": null,
+          "visible": false,
+          "omitWhenHidden": false,
+          "renderAttributes": {},
+          "elements": [
+            {
+              "enabled": true,
+              "dataType": "string",
+              "defaultDataSource": "none",
+              "requiredMessage": null,
+              "name": "First Name",
+              "omitWhenHidden": null,
+              "renderAttributes": {},
+              "renderType": "text",
+              "pattern": null,
+              "defaultValue": null,
+              "visible": true,
+              "label": "First Name",
+              "constraints": [],
+              "events": [],
+              "rows": 1,
+              "defaultResourceName": null,
+              "type": "field",
+              "key": "86b139029f1c42f88ece51587936862c",
+              "required": false
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "renderType": null,
+          "name": "Data Collection Form Buttons",
+          "title": null,
+          "visible": true,
+          "omitWhenHidden": null,
+          "renderAttributes": {},
+          "elements": [
+            {
+              "visible": true,
+              "renderAttributes": {},
+              "name": "Submit Button",
+              "label": "Submit",
+              "type": "button",
+              "renderType": "submit-page",
+              "enabled": true
+            }
+          ]
+        }
+      ],
+      "events": [
+        {
+          "name": "Load Area 1 - Draft Table",
+          "code": "const formSlug = K('form').slug();\n// Confirm bundle.ext exists, or create it\nbundle.ext = bundle.ext || {};\n// Confirm bundle.ext.forms.<form_slug> exists, or create it\nbundle.ext.forms = bundle.ext.forms || {};\nbundle.ext.forms[formSlug] = bundle.ext.forms[formSlug] || {};\n// Create variable to make defining functions easier\nlet customCode = bundle.ext.forms[formSlug];\n\ncustomCode.draftTableId = 'table-area-1-draft';\nconst tableId = 'table-area-1-draft';\n\nif (bundle.widgets.Table.get(tableId)) {\n  bundle.widgets.Table.get(tableId).destroy();\n  return;\n}\n\nconst table = bundle.widgets.Table?.({ \n  container: K('content[Table - Data Collection 1 - Draft]').element(), \n  config: {\n    title: 'Area 1 - Errors',\n    integration: {\n      kappSlug: K('kapp').slug(),\n      formSlug: K('form').slug(),\n      integrationName: 'Area 1 - Draft',\n      listProperty: 'Submissions',\n      errorProperty: '_Error',\n      parameters: { 'Customer Identifier': values('Customer Identifier') }\n    },\n    // Transform the data to a single level map\n    rowTransform: ({ Values, ...row }) => ({ ...row, ...Values }),\n    columns: [\n      {\n        label: 'Submission Id',\n        property: 'Submission Id',\n        visible: false,\n        toggleable: false,\n      },{\n        label: 'Id',\n        property: 'Handle',\n        //displayTransform: (value, row, index) => value + ' (' + row['Core State'] + ')',\n        // Don't allow hiding this column\n        toggleable: false,\n      },{\n        label: 'Errors',\n        property: 'Data Errors',\n        // Sort by street name by removing any leading digits\n        //sortTransform: (value) => (value || '').match(/^\\d*\\s*(.*)$/)[1],\n      },{\n        label: 'Employee Number',\n        property: 'Employee Number'\n      },{\n        label: 'Base Salary',\n        property: 'Base Salary'\n      },{\n        label: 'Bonus Percent',\n        property: 'Bonus Percent',\n        // Search zip code using starts with \n        //filterOperator: 'startsWith',\n      },\n      {\n        label: 'Merit Increase Percent',\n        property: 'Merit Increase Percent',\n        // Search zip code using starts with \n        //filterOperator: 'startsWith',\n      }\n    ],\n    rowActions: [\n      {\n        label: 'Edit Row',\n        icon: 'pencil',\n        onClick: function(row, index, tableApi){\n          tableApi.actions.subform({\n            config: {\n              submissionId: row['Submission Id'],\n              modalTitle: \"Edit Area 1 Data\",\n              saveLabel: 'Update',\n              onSave: function(data, api){\n                api.submit(function(result){\n                  // Update the row in the table so it appears immediately before the table reloads\n                  bundle.utils.toastSuccess({ title: 'Data was successfully updated' });\n                  tableApi.deleteRow(index);\n                  \n                  // Reload the table data in the background\n                  tableApi.reloadData();\n                  // Reload the related table data\n                  bundle.widgets.Table.get( customCode.submittedTableId ).reloadData();\n                  // Show toast and close subform\n                  api.destroy();\n                });\n              }\n            },\n          });\n        }\n      },{\n        label: 'Delete Row',\n        icon: 'trash',\n        onClick: function(row, index, tableApi){\n          bundle.utils.openConfirm({\n            title: 'Delete Record',\n            description: `Are you sure you want to delete record for ${row['Employee Number']}?`,\n            acceptLabel: 'Yes',\n            accept: function(){\n              K.api('DELETE', bundle.apiLocation() + '/submissions/' + row['Submission Id'], {\n                complete: function(response){\n                  if (response.status === 200) {\n                    bundle.utils.toastSuccess({ title: 'Record was successfully deleted' });\n                    tableApi.deleteRow(index);\n                    tableApi.reloadData();\n                  } else {\n                    bundle.utils.toastError({ title: 'There was an error deleting the record' });\n                  }\n                }\n              })\n              \n            }\n          });\n        }\n      }\n    ],\n    pageSize: 10,\n    pageSizes: [10,20,50,100,0],\n    // Sort using the first column in ascending order by default\n    //defaultSort: [0, 'asc'],\n    messages: {\n      loading: 'Loading Area 1 Error data',\n      empty: 'There is no Area 1 Error data',\n      noMatches: 'No Area 1 Error records match your filter query'\n    }\n  }, \n  id: tableId\n});",
+          "integrationResourceName": null,
+          "action": "Custom",
+          "integrationResourceProperty": "",
+          "type": "Load"
+        },
+        {
+          "name": "Load Area 1 - Submitted",
+          "code": "const formSlug = K('form').slug();\n// Confirm bundle.ext exists, or create it\nbundle.ext = bundle.ext || {};\n// Confirm bundle.ext.forms.<form_slug> exists, or create it\nbundle.ext.forms = bundle.ext.forms || {};\nbundle.ext.forms[formSlug] = bundle.ext.forms[formSlug] || {};\n// Create variable to make defining functions easier\nlet customCode = bundle.ext.forms[formSlug];\n\ncustomCode.submittedTableId = 'table-area-1-submitted';\nconst tableId = 'table-area-1-submitted';\n\nif (bundle.widgets.Table.get(tableId)) {\n  bundle.widgets.Table.get(tableId).destroy();\n  return;\n}\n\nconst table = bundle.widgets.Table?.({ \n  container: K('content[Table - Data Collection 1 - Submitted]').element(), \n  config: {\n    title: 'Area 1 Data',\n    integration: {\n      kappSlug: K('kapp').slug(),\n      formSlug: K('form').slug(),\n      integrationName: 'Area 1 - Submitted',\n      listProperty: 'Submissions',\n      errorProperty: '_Error',\n      parameters: { 'Customer Identifier': values('Customer Identifier') }\n    },\n    // Transform the data to a single level map\n    rowTransform: ({ Values, ...row }) => ({ ...row, ...Values }),\n    columns: [\n      {\n        label: 'Submission Id',\n        property: 'Submission Id',\n        visible: false,\n        toggleable: false,\n      },{\n        label: 'Id',\n        property: 'Handle',\n        //displayTransform: (value, row, index) => value + ' (' + row['Core State'] + ')',\n        // Don't allow hiding this column\n        toggleable: false,\n      },{\n        label: 'Updated At',\n        property: 'Updated At',\n        displayTransform: (value, row, index) => moment(value).format('YYYY-MM-DD h:mm:ss A'),\n      },{\n        label: 'Employee Number',\n        property: 'Employee Number'\n      },{\n        label: 'Base Salary',\n        property: 'Base Salary'\n      },{\n        label: 'Bonus Percent',\n        property: 'Bonus Percent',\n        // Search zip code using starts with \n        //filterOperator: 'startsWith',\n      },\n      {\n        label: 'Merit Increase Percent',\n        property: 'Merit Increase Percent',\n        // Search zip code using starts with \n        //filterOperator: 'startsWith',\n      }\n    ],\n    addAction: {\n      label: 'Add Row',\n      onClick: function(tableApi) {\n        tableApi.actions.subform({\n          config: {\n            kappSlug: kapp('slug'),\n            formSlug: 'data-collection-form-1',\n            modalTitle: \"New Area 1 Data\",\n            values: { 'Customer Identifier': values('Customer Identifier') },\n            saveLabel: 'Add Data',\n            onSave: function(data, api){\n              api.submit(function(result){\n                // Add row to the table so it appears immediately before the table reloads\n                tableApi.addRow({\n                  Handle: result.submission.handle,\n                  'Core State': result.submission.coreState,\n                  'Updated At': result.submission.updatedAt,\n                  'Employee Number': result.submission.values['Employee Number'],\n                  'Base Salary': result.submission.values['Base Salary'],\n                  'Bonus Percent': result.submission.values['Bonus Percent'],\n                  'Merit Increase Percent': result.submission.values['Merit Increase Percent'],\n                });\n                // Reload the table data in the background\n                tableApi.reloadData();\n                // Show toast and close subform\n                bundle.utils.toastSuccess({ title: 'Data added successfully' });\n                api.destroy();\n              });\n            }\n          },\n        });\n      }\n    },\n    rowActions: [\n      {\n        label: 'Edit Row',\n        icon: 'pencil',\n        onClick: function(row, index, tableApi){\n          tableApi.actions.subform({\n            config: {\n              submissionId: row['Submission Id'],\n              modalTitle: \"Edit Address\",\n              saveLabel: 'Update',\n              onSave: function(data, api){\n                api.submit(function(result){\n                  // Update the row in the table so it appears immediately before the table reloads\n                  tableApi.updateRow({\n                    Handle: result.submission.handle,\n                    'Core State': result.submission.coreState,\n                    'Updated At': result.submission.updatedAt,\n                    'Employee Number': result.submission.values['Employee Number'],\n                    'Base Salary': result.submission.values['Base Salary'],\n                    'Bonus Percent': result.submission.values['Bonus Percent'],\n                    'Merit Increase Percent': result.submission.values['Merit Increase Percent'],\n                  }, index);\n                  // Reload the table data in the background\n                  tableApi.reloadData();\n                  // Show toast and close subform\n                  bundle.utils.toastSuccess({ title: 'Data updated successfully' });\n                  api.destroy();\n                });\n              }\n            },\n          });\n        }\n      },{\n        label: 'Delete Row',\n        icon: 'trash',\n        onClick: function(row, index, tableApi){\n          bundle.utils.openConfirm({\n            title: 'Delete Address',\n            description: `Are you sure you want to delete the data for ${row['Employee Number']}?`,\n            acceptLabel: 'Yes',\n            accept: function(){\n              K.api('DELETE', bundle.apiLocation() + '/submissions/' + row['Submission Id'], {\n                complete: function(response){\n                  if (response.status === 200) {\n                    bundle.utils.toastSuccess({ title: 'Data was successfully deleted' });\n                    tableApi.deleteRow(index);\n                    tableApi.reloadData();\n                  } else {\n                    bundle.utils.toastError({ title: 'There was an error deleting the data' });\n                  }\n                }\n              })\n              \n            }\n          });\n        }\n      }\n    ],\n    pageSize: 10,\n    pageSizes: [10,20,50,100,0],\n    // Sort using the first column in ascending order by default\n    //defaultSort: [0, 'asc'],\n    messages: {\n      loading: 'Loading Area 1 data',\n      empty: 'There is no Area 1 data',\n      noMatches: 'No Area 1 records match your filter query'\n    }\n  }, \n  id: tableId\n});",
+          "integrationResourceName": null,
+          "action": "Custom",
+          "integrationResourceProperty": "",
+          "type": "Load"
+        }
+      ],
+      "name": "Page 1",
+      "renderType": "submittable",
+      "type": "page"
+    }
+  ],
+  "securityPolicies": [],
+  "slug": "data-collection-container",
+  "status": "New",
+  "submissionLabelExpression": "",
+  "type": "Service"
+}

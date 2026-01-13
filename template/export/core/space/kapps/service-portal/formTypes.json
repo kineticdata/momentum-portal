@@ -3,18 +3,21 @@
     "name": "Approval"
   },
   {
-    "name": "Task"
+    "name": "Datastore"
   },
   {
-    "name": "Data"
-  },
-  {
-    "name": "Utility"
+    "name": "Exercise"
   },
   {
     "name": "Service"
   },
   {
-    "name": "Exercise"
+    "name": "Settings"
+  },
+  {
+    "name": "Task"
+  },
+  {
+    "name": "Utility"
   }
 ]

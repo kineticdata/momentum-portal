@@ -81,7 +81,7 @@
                 <messages></messages>
                 <dependents></dependents>
             </task>
-            <task definition_id="system_integration_v1" id="system_integration_v1_4" name="Close Submission" x="211" y="123.5">
+            <task definition_id="system_integration_v1" id="system_integration_v1_4" name="Close Submission" x="220" y="122.5">
                 <version>1</version>
                 <configured>true</configured>
                 <defers>false</defers>

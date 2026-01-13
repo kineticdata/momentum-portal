@@ -19,64 +19,13 @@
     "documentationLink": "",
     "operations": [
       {
-        "id": "c69716b8-f9dc-45f1-ab3f-2eed5d2a22b8",
-        "name": "Get Submission",
-        "config": {
-          "path": "/submissions/{{Submission Id}}",
-          "params": {
-            "include": "details,values,form"
-          },
-          "body": {
-            "form": {},
-            "bodyType": "www_form_urlencoded"
-          },
-          "headers": {
-            "content-type": "application/json"
-          },
-          "configType": "http",
-          "method": "GET",
-          "includeEmptyParams": false,
-          "followRedirect": false,
-          "streamResponse": false
-        },
-        "outputs": {
-          "Core State": {
-            "value": "body.submission['coreState']"
-          },
-          "Created At": {
-            "value": "body.submission['createdAt']"
-          },
-          "Created By": {
-            "value": "body.submission['createdBy']"
-          },
-          "Form Name": {
-            "value": "body.submission['form']['name']"
-          },
-          "Handle": {
-            "value": "body.submission['handle']"
-          },
-          "Label": {
-            "value": "body.submission['label']"
-          },
-          "Submission Id": {
-            "value": "body.submission['id']"
-          },
-          "Values": {
-            "value": "body.submission['values']"
-          }
-        },
-        "documentationLink": "",
-        "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
-        "notes": ""
-      },
-      {
         "id": "3ad53519-e058-48a1-b114-5745533526ad",
         "name": "Update Submission",
         "config": {
-          "path": "/submissions/{{Submission Id}}",
+          "path": "/submissions/{{Submission Id*}}",
           "params": {},
           "body": {
-            "raw": "{   \"coreState\": \"{{Core State}}\",   \"values\":  {{{Values}}}  }",
+            "raw": "{  \n  {{#Core State}}\n    \"coreState\": \"{{Core State}}\",\n  {{/Core State}}\n  {{#Current Page}}\n    \"currentPage\": {\n          \"name\": \"{{Current Page}}\"\n    },\n  {{/Current Page}}\n  \"label\": \"{{Label}}\",  \n  \"type\": \"{{Type}}\",  \n  \"values\": {{{Values}}},\n  {{#Origin}}\n    \"origin\": {\n        \"id\": \"{{Origin}}\"\n    },\n  {{/Origin}}\n  {{#Parent}}\n    \"parent\": {\n        \"id\": \"{{Parent}}\"\n    },\n  {{/Parent}}\n}",
             "bodyType": "raw"
           },
           "headers": {
@@ -89,7 +38,11 @@
           "followRedirect": false,
           "streamResponse": false
         },
-        "outputs": {},
+        "outputs": {
+          "Id": {
+            "value": "body.submission?.id"
+          }
+        },
         "documentationLink": "",
         "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
         "notes": ""
@@ -127,6 +80,130 @@
         "notes": ""
       },
       {
+        "id": "e20b8b5d-da67-410b-a527-bd3ae1cfe07b",
+        "name": "Get Team",
+        "config": {
+          "path": "teams/{{Slug}}",
+          "params": {
+            "include": "details,attributesMap,memberships,memberships.user"
+          },
+          "body": {
+            "form": {},
+            "bodyType": "www_form_urlencoded"
+          },
+          "headers": {
+            "content-type": "application/json"
+          },
+          "configType": "http",
+          "method": "GET",
+          "includeEmptyParams": false,
+          "followRedirect": false,
+          "streamResponse": false
+        },
+        "outputs": {
+          "Description": {
+            "value": "body.team?.description"
+          },
+          "Manager": {
+            "value": "body.team?.attributesMap.Manager[0]"
+          },
+          "Member Email List": {
+            "value": "body.team?.memberships.map(m => m.user.email).join(',')"
+          },
+          "Memberships": {
+            "children": {
+              "User Display Name": "current.user['displayName']",
+              "User Email": "current.user['email']",
+              "User Name": "current.user['username']"
+            },
+            "value": "body.team?.memberships"
+          },
+          "Name": {
+            "value": "body.team?.name"
+          },
+          "Slug": {
+            "value": "body.team?.slug"
+          }
+        },
+        "documentationLink": "",
+        "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
+        "notes": ""
+      },
+      {
+        "id": "771f279a-988d-4b91-9b8f-85861c5c13fe",
+        "name": "Get User",
+        "config": {
+          "path": "/users/{{Username}}",
+          "params": {
+            "include": "details,attributesMap"
+          },
+          "body": {
+            "form": {},
+            "bodyType": "www_form_urlencoded"
+          },
+          "headers": {
+            "accept": "application/json",
+            "content-type": "application/json"
+          },
+          "configType": "http",
+          "method": "GET",
+          "includeEmptyParams": false,
+          "followRedirect": false,
+          "streamResponse": false
+        },
+        "outputs": {
+          "Attributes": {
+            "value": "body.user?.attributesMap"
+          },
+          "Display Name": {
+            "value": "body.user?.displayName"
+          },
+          "Email": {
+            "value": "body.user?.email"
+          },
+          "Username": {
+            "value": "body.user?.username"
+          }
+        },
+        "documentationLink": "",
+        "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
+        "notes": ""
+      },
+      {
+        "id": "92b6a327-5f5a-4377-80f7-b7223bd787ac",
+        "name": "Create Submission Activity",
+        "config": {
+          "path": "/submissions/{{Submission Id}}/activities",
+          "params": {},
+          "body": {
+            "raw": "{\n  \"description\": \"{{Description}}\",\n  \"data\": \"{{Data}}\",\n  \"label\": \"{{Label}}\",\n  \"type\": \"{{Type}}\"\n}",
+            "bodyType": "raw"
+          },
+          "headers": {
+            "content-type": "application/json"
+          },
+          "configType": "http",
+          "method": "POST",
+          "includeEmptyParams": false,
+          "followRedirect": false,
+          "streamResponse": false
+        },
+        "outputs": {
+          "Activity Id": {
+            "value": "body.activity?.id"
+          },
+          "Error": {
+            "value": "body.error"
+          },
+          "Status Code": {
+            "value": "statusCode"
+          }
+        },
+        "documentationLink": "",
+        "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
+        "notes": ""
+      },
+      {
         "id": "018c5373-af69-48f2-9ebb-5870ec8a4e3b",
         "name": "Get Form Attributes Map",
         "config": {
@@ -141,59 +218,6 @@
           "headers": {},
           "configType": "http",
           "method": "GET",
-          "includeEmptyParams": false,
-          "followRedirect": false,
-          "streamResponse": false
-        },
-        "outputs": {},
-        "documentationLink": "",
-        "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
-        "notes": ""
-      },
-      {
-        "id": "cee2ccc2-76d7-4ed4-8f90-b90dd6d2351b",
-        "name": "Get Test",
-        "config": {
-          "path": "/submissions/35230208-9702-11ef-85d7-534218953e47",
-          "params": {},
-          "body": {
-            "form": {
-              "body": "{}"
-            },
-            "bodyType": "www_form_urlencoded"
-          },
-          "headers": {},
-          "configType": "http",
-          "method": "GET",
-          "includeEmptyParams": false,
-          "followRedirect": false,
-          "streamResponse": false
-        },
-        "outputs": {
-          "Submission": {
-            "value": "body.submission"
-          }
-        },
-        "documentationLink": "",
-        "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
-        "notes": ""
-      },
-      {
-        "id": "0ef69bcb-c052-4b16-9814-166c3eef85ed",
-        "name": "Update Submission - Values Only",
-        "config": {
-          "path": "/submissions/{{Submission Id}}",
-          "params": {},
-          "body": {
-            "raw": "{  \"values\":  {{{Values}}}  }",
-            "bodyType": "raw"
-          },
-          "headers": {
-            "accept": "application/json",
-            "content-type": "application/json"
-          },
-          "configType": "http",
-          "method": "PUT",
           "includeEmptyParams": false,
           "followRedirect": false,
           "streamResponse": false
@@ -236,6 +260,31 @@
             "value": "body.space['attributesMap']['Web Server Url'][0]"
           }
         },
+        "documentationLink": "",
+        "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
+        "notes": ""
+      },
+      {
+        "id": "0ef69bcb-c052-4b16-9814-166c3eef85ed",
+        "name": "Update Submission - Values Only",
+        "config": {
+          "path": "/submissions/{{Submission Id}}",
+          "params": {},
+          "body": {
+            "raw": "{  \"values\":  {{{Values}}}  }",
+            "bodyType": "raw"
+          },
+          "headers": {
+            "accept": "application/json",
+            "content-type": "application/json"
+          },
+          "configType": "http",
+          "method": "PUT",
+          "includeEmptyParams": false,
+          "followRedirect": false,
+          "streamResponse": false
+        },
+        "outputs": {},
         "documentationLink": "",
         "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
         "notes": ""
@@ -341,197 +390,6 @@
         "notes": ""
       },
       {
-        "id": "771f279a-988d-4b91-9b8f-85861c5c13fe",
-        "name": "Get User",
-        "config": {
-          "path": "/users/{{Username}}",
-          "params": {
-            "include": "details,attributesMap"
-          },
-          "body": {
-            "form": {},
-            "bodyType": "www_form_urlencoded"
-          },
-          "headers": {
-            "accept": "application/json",
-            "content-type": "application/json"
-          },
-          "configType": "http",
-          "method": "GET",
-          "includeEmptyParams": false,
-          "followRedirect": false,
-          "streamResponse": false
-        },
-        "outputs": {
-          "Attributes": {
-            "value": "body.user?.attributesMap"
-          },
-          "Display Name": {
-            "value": "body.user?.displayName"
-          },
-          "Email": {
-            "value": "body.user?.email"
-          },
-          "Username": {
-            "value": "body.user?.username"
-          }
-        },
-        "documentationLink": "",
-        "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
-        "notes": ""
-      },
-      {
-        "id": "92b6a327-5f5a-4377-80f7-b7223bd787ac",
-        "name": "Create Submission Activity",
-        "config": {
-          "path": "/submissions/{{Submission Id}}/activities",
-          "params": {},
-          "body": {
-            "raw": "{\n  \"description\": \"{{Description}}\",\n  \"data\": \"{{Data}}\",\n  \"label\": \"{{Label}}\",\n  \"type\": \"{{Type}}\"\n}",
-            "bodyType": "raw"
-          },
-          "headers": {
-            "content-type": "application/json"
-          },
-          "configType": "http",
-          "method": "POST",
-          "includeEmptyParams": false,
-          "followRedirect": false,
-          "streamResponse": false
-        },
-        "outputs": {
-          "Activity Id": {
-            "value": "body.activity?.id"
-          },
-          "Error": {
-            "value": "body.error"
-          },
-          "Status Code": {
-            "value": "statusCode"
-          }
-        },
-        "documentationLink": "",
-        "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
-        "notes": ""
-      },
-      {
-        "id": "cb8cbf5b-a370-4318-b3da-3d254501a4f5",
-        "name": "Get Submissions",
-        "config": {
-          "path": "/kapps/{{Kapp Slug}}/forms/{{Form Slug}}/submissions",
-          "params": {
-            "include": "details,values,form"
-          },
-          "body": {
-            "form": {},
-            "bodyType": "www_form_urlencoded"
-          },
-          "headers": {
-            "content-type": "application/json"
-          },
-          "configType": "http",
-          "method": "GET",
-          "includeEmptyParams": false,
-          "followRedirect": false,
-          "streamResponse": false
-        },
-        "outputs": {
-          "Data": {
-            "children": {
-              "Core State": "current.coreState",
-              "Handle": "current.handle",
-              "Label": "current.label",
-              "Submission Id": "current.id",
-              "Values": "current.values"
-            },
-            "value": "body['submissions'] || []"
-          },
-          "Error": {
-            "value": "body['error']"
-          }
-        },
-        "documentationLink": "",
-        "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
-        "notes": ""
-      },
-      {
-        "id": "16f70295-86eb-4624-b2f8-7bc2fa62de96",
-        "name": "List Users",
-        "config": {
-          "path": "/users/",
-          "params": {
-            "include": "attributesMap"
-          },
-          "body": {
-            "raw": "",
-            "bodyType": "raw"
-          },
-          "headers": {
-            "accept": "application/json",
-            "content-type": "application/json"
-          },
-          "configType": "http",
-          "method": "GET",
-          "includeEmptyParams": false,
-          "followRedirect": false,
-          "streamResponse": false
-        },
-        "outputs": {
-          "Users": {
-            "children": {
-              "Attributes": "current.attributesMap",
-              "Display Name": "current.displayName",
-              "Email": "current.email",
-              "Username": "current.username"
-            },
-            "value": "body.users"
-          }
-        },
-        "documentationLink": "",
-        "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
-        "notes": ""
-      },
-      {
-        "id": "ffbbe197-1247-4b77-a5a3-335f60a95b18",
-        "name": "_test",
-        "config": {
-          "path": "/users/{{Username}}",
-          "params": {
-            "include": "details,attributesMap"
-          },
-          "body": {
-            "form": {},
-            "bodyType": "www_form_urlencoded"
-          },
-          "headers": {
-            "accept": "application/json",
-            "content-type": "application/json"
-          },
-          "configType": "http",
-          "method": "GET",
-          "includeEmptyParams": false,
-          "followRedirect": false,
-          "streamResponse": false
-        },
-        "outputs": {
-          "Attributes": {
-            "value": "body.user?.attributesMap"
-          },
-          "Display Name": {
-            "value": "body.user?.displayName"
-          },
-          "Email": {
-            "value": "body.user?.email"
-          },
-          "Username": {
-            "value": "body.user?.username"
-          }
-        },
-        "documentationLink": "",
-        "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
-        "notes": ""
-      },
-      {
         "id": "9c3a3309-536e-4e3d-a3b3-be072d652a51",
         "name": "List Departments",
         "config": {
@@ -599,18 +457,19 @@
         "notes": ""
       },
       {
-        "id": "e20b8b5d-da67-410b-a527-bd3ae1cfe07b",
-        "name": "Get Team",
+        "id": "16f70295-86eb-4624-b2f8-7bc2fa62de96",
+        "name": "List Users",
         "config": {
-          "path": "teams/{{Slug}}",
+          "path": "/users/",
           "params": {
-            "include": "details,attributesMap,memberships,memberships.user"
+            "include": "attributesMap"
           },
           "body": {
-            "form": {},
-            "bodyType": "www_form_urlencoded"
+            "raw": "",
+            "bodyType": "raw"
           },
           "headers": {
+            "accept": "application/json",
             "content-type": "application/json"
           },
           "configType": "http",
@@ -620,28 +479,14 @@
           "streamResponse": false
         },
         "outputs": {
-          "Description": {
-            "value": "body.team?.description"
-          },
-          "Manager": {
-            "value": "body.team?.attributesMap.Manager[0]"
-          },
-          "Member Email List": {
-            "value": "body.team?.memberships.map(m => m.user.email).join(',')"
-          },
-          "Memberships": {
+          "Users": {
             "children": {
-              "User Display Name": "current.user['displayName']",
-              "User Email": "current.user['email']",
-              "User Name": "current.user['username']"
+              "Attributes": "current.attributesMap",
+              "Display Name": "current.displayName",
+              "Email": "current.email",
+              "Username": "current.username"
             },
-            "value": "body.team?.memberships"
-          },
-          "Name": {
-            "value": "body.team?.name"
-          },
-          "Slug": {
-            "value": "body.team?.slug"
+            "value": "body.users"
           }
         },
         "documentationLink": "",
@@ -673,12 +518,416 @@
         "documentationLink": "",
         "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
         "notes": ""
+      },
+      {
+        "id": "cb8cbf5b-a370-4318-b3da-3d254501a4f5",
+        "name": "List Submissions by Form",
+        "config": {
+          "path": "/kapps/{{Kapp Slug}}/forms/{{Form Slug}}/submissions",
+          "params": {
+            "include": "details,values,form"
+          },
+          "body": {
+            "form": {},
+            "bodyType": "www_form_urlencoded"
+          },
+          "headers": {
+            "content-type": "application/json"
+          },
+          "configType": "http",
+          "method": "GET",
+          "includeEmptyParams": false,
+          "followRedirect": false,
+          "streamResponse": false
+        },
+        "outputs": {
+          "Data": {
+            "children": {
+              "Core State": "current.coreState",
+              "Handle": "current.handle",
+              "Label": "current.label",
+              "Submission Id": "current.id",
+              "Values": "current.values"
+            },
+            "value": "body['submissions']"
+          },
+          "Error": {
+            "value": "body['error']"
+          }
+        },
+        "documentationLink": "",
+        "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
+        "notes": ""
+      },
+      {
+        "id": "5ab031af-e91d-415f-b861-e9f4827c56e2",
+        "name": "Kitchen Sink Operation",
+        "config": {
+          "path": "{{example_endpoint}}",
+          "params": {
+            "url_parameter_1": "url_parameter_1_value",
+            "url_parameter_2": "url_parameter_2_value"
+          },
+          "body": {
+            "raw": "{\n  \"raw_json_key_1\": \"raw_json_value_1\",\n  \"raw_json_key_2\": \"raw_json_value_2\"\n}",
+            "bodyType": "raw"
+          },
+          "headers": {
+            "header_1": "header_1_value",
+            "header_2": "header_2_value"
+          },
+          "configType": "http",
+          "method": "GET",
+          "includeEmptyParams": false,
+          "followRedirect": false,
+          "streamResponse": false
+        },
+        "outputs": {
+          "Error": {
+            "value": "body.error"
+          },
+          "Response": {
+            "children": {
+              "Nested Key": "current['Desired Key']"
+            },
+            "value": "body['Desired Key']"
+          },
+          "Status Code": {
+            "value": "statusCode"
+          }
+        },
+        "documentationLink": "",
+        "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
+        "notes": ""
+      },
+      {
+        "id": "06bbb405-688b-40f9-be1d-d8ebfcfd684d",
+        "name": "Query Submissions",
+        "config": {
+          "path": "/kapps/{{Kapp Slug}}/forms/{{Form Slug}}/submissions",
+          "params": {
+            "count": "{{Count}}",
+            "direction": "{{Direction}}",
+            "include": "{{Includes}}",
+            "limit": "{{Limit}}",
+            "orderBy": "{{Order By}}",
+            "pageToken": "{{Page Token}}",
+            "q": "{{Query}}"
+          },
+          "body": {
+            "form": {},
+            "bodyType": "www_form_urlencoded"
+          },
+          "headers": {
+            "content-type": "application/json"
+          },
+          "configType": "http",
+          "method": "GET",
+          "includeEmptyParams": false,
+          "followRedirect": false,
+          "streamResponse": false
+        },
+        "outputs": {
+          "Submissions": {
+            "children": {
+              "Activities": "current.activities",
+              "Children": "current.children",
+              "Core State": "current.coreState",
+              "Created At": "current.createdAt",
+              "Created By": "current.createdBy",
+              "Descendants": "current.descendants",
+              "Form": "current.form",
+              "Handle": "current.handle",
+              "Label": "current.label",
+              "Origin": "current.origin",
+              "Parent": "current.parent",
+              "Submission Id": "current.id",
+              "Type": "current.type",
+              "Updated At": "current.updatedAt",
+              "Updated By": "current.updatedBy",
+              "Values": "current.values"
+            },
+            "value": "body.submissions"
+          },
+          "_Correlation ID": {
+            "value": "me"
+          },
+          "_Count": {
+            "value": "body.submissions?.length ?? 0"
+          },
+          "_Error": {
+            "value": "body.error"
+          },
+          "_Exists": {
+            "value": "body.submissions?.length > 0"
+          },
+          "_Message": {
+            "value": "body.message"
+          },
+          "_Status Code": {
+            "value": "statusCode"
+          }
+        },
+        "documentationLink": "",
+        "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
+        "notes": ""
+      },
+      {
+        "id": "e382ceff-2ac0-4541-b8aa-1c49d9580c42",
+        "name": "Create User",
+        "config": {
+          "path": "/users",
+          "params": {},
+          "body": {
+            "raw": "{\n  \"username\":\"{{Username}}\",\n  \"email\":\"{{Email}}\",\n  \"displayName\":\"{{Display Name}}\",\n  \"spaceAdmin\":{{Is Space Admin [true or false]}},\n  \"enabled\": {{Enabled [true or false]}},\n  {{#Password}}\n    \"password\":\"{{Password}}\"\n  {{/Password}},\n  {{#Attributes Map [Optional]}}\n    \"attributesMap\":{{{Attributes Map [Optional]}}}\n  {{/Attributes Map [Optional]}},\n  {{#Profile Attributes Map [Optional]}}\n    \"profileAttributesMap\":{{{Profile Attributes Map [Optional]}}}\n  {{/Profile Attributes Map [Optional]}},\n  {{#Memberships [Optional]}}\n    \"memberships\":{{{Memberships [Optional]}}}\n  {{/Memberships [Optional]}}\n}",
+            "bodyType": "raw"
+          },
+          "headers": {
+            "accept": "application/json",
+            "content-type": "application/json"
+          },
+          "configType": "http",
+          "method": "POST",
+          "includeEmptyParams": false,
+          "followRedirect": false,
+          "streamResponse": false
+        },
+        "outputs": {
+          "Attributes": {
+            "value": "body.user?.attributesMap"
+          },
+          "Display Name": {
+            "value": "body.user?.displayName"
+          },
+          "Email": {
+            "value": "body.user?.email"
+          },
+          "Username": {
+            "value": "body.user?.username"
+          }
+        },
+        "documentationLink": "",
+        "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
+        "notes": ""
+      },
+      {
+        "id": "6904708d-7292-4a05-abda-6ad91819e1e9",
+        "name": "Create Team",
+        "config": {
+          "path": "teams",
+          "params": {
+            "include": "details,attributesMap,attributes,memberships"
+          },
+          "body": {
+            "raw": "{ \n  \"name\":\"{{Name}}\", \n  \"description\": \"{{Description}}\",\n  {{#Attributes Map [Optional]}}\n    \"attributesMap\":{{{Attributes Map [Optional]}}}\n  {{/Attributes Map [Optional]}},\n  {{#Memberships [Optional]}}\n    \"memberships\":{{{Memberships [Optional]}}}\n  {{/Memberships [Optional]}},\n}",
+            "bodyType": "raw"
+          },
+          "headers": {
+            "content-type": "application/json"
+          },
+          "configType": "http",
+          "method": "POST",
+          "includeEmptyParams": false,
+          "followRedirect": false,
+          "streamResponse": false
+        },
+        "outputs": {
+          "Slug": {
+            "value": "body.team?.slug"
+          },
+          "_Correlation Id": {
+            "value": "body.correlationId"
+          },
+          "_Error Key": {
+            "value": "body.errorKey"
+          },
+          "_Errror": {
+            "value": "body.error"
+          },
+          "_Message": {
+            "value": "body.message"
+          },
+          "_Status Code": {
+            "value": "statusCode"
+          }
+        },
+        "documentationLink": "",
+        "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
+        "notes": ""
+      },
+      {
+        "id": "5bb1c214-a071-4020-8e9c-5dbef659b883",
+        "name": "Delete Team",
+        "config": {
+          "path": "teams/ed0482c4a3d0f4065cad69c3614eb03f",
+          "params": {
+            "include": "details,attributesMap,memberships,memberships.user"
+          },
+          "body": {
+            "raw": "{\n\n}",
+            "bodyType": "raw"
+          },
+          "headers": {
+            "content-type": "application/json"
+          },
+          "configType": "http",
+          "method": "DELETE",
+          "includeEmptyParams": false,
+          "followRedirect": false,
+          "streamResponse": false
+        },
+        "outputs": {
+          "Name": {
+            "value": "body.team?.name"
+          },
+          "_Correlation Id": {
+            "value": "body.correlationId"
+          },
+          "_Error Key": {
+            "value": "body.errorKey"
+          },
+          "_Errror": {
+            "value": "body.error"
+          },
+          "_Message": {
+            "value": "body.message"
+          },
+          "_Status Code": {
+            "value": "body.statusCode"
+          },
+          "slug": {
+            "value": "body.slug"
+          }
+        },
+        "documentationLink": "",
+        "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
+        "notes": ""
+      },
+      {
+        "id": "c69716b8-f9dc-45f1-ab3f-2eed5d2a22b8",
+        "name": "Get Submission",
+        "config": {
+          "path": "/submissions/{{Submission Id}}",
+          "params": {
+            "count": "{{Count}}",
+            "direction": "{{Direction}}",
+            "include": "{{Include}}",
+            "limit": "{{Limit}}",
+            "orderBy": "{{Order By}}",
+            "pageToken": "{{Page Token}}",
+            "q": "{{Query}}"
+          },
+          "body": {
+            "form": {},
+            "bodyType": "www_form_urlencoded"
+          },
+          "headers": {
+            "content-type": "application/json"
+          },
+          "configType": "http",
+          "method": "GET",
+          "includeEmptyParams": false,
+          "followRedirect": false,
+          "streamResponse": false
+        },
+        "outputs": {
+          "Activities": {
+            "value": "body.submission.activities"
+          },
+          "Children": {
+            "value": "body.submsission?.children"
+          },
+          "Closed At": {
+            "value": "body.closedAt"
+          },
+          "Closed By": {
+            "value": "body.closedBy"
+          },
+          "Core State": {
+            "value": "body.submission?.coreState"
+          },
+          "Created At": {
+            "value": "body.submission?.createdAt"
+          },
+          "Created By": {
+            "value": "body.submission?.createdBy"
+          },
+          "Current Page": {
+            "value": "body.currentPage"
+          },
+          "Descendants": {
+            "value": "body.descendants"
+          },
+          "Displayed Page": {
+            "value": "body.displayedPage"
+          },
+          "Form": {
+            "value": "body.form"
+          },
+          "Handle": {
+            "value": "body.submission?.handle"
+          },
+          "Id": {
+            "value": "body.id"
+          },
+          "Label": {
+            "value": "body.submission?.label"
+          },
+          "Origin": {
+            "value": "body.origin"
+          },
+          "Parent": {
+            "value": "body.parent"
+          },
+          "Submission Id": {
+            "value": "body.submission?.id"
+          },
+          "SubmittedAt": {
+            "value": "body.submittedAt"
+          },
+          "SubmittedBy": {
+            "value": "body.submittedBy"
+          },
+          "Type": {
+            "value": "body.type"
+          },
+          "UpdatedAt": {
+            "value": "body.updatedAt"
+          },
+          "UpdatedBy": {
+            "value": "body.updatedBy"
+          },
+          "Values": {
+            "value": "body.submission?.values"
+          },
+          "_Correlation Id": {
+            "value": "body.correlationId"
+          },
+          "_Count": {
+            "value": "body? 1 : 0"
+          },
+          "_Error": {
+            "value": "body.error"
+          },
+          "_Exists": {
+            "value": "!!body.submission"
+          },
+          "_Message": {
+            "value": "body.messages"
+          },
+          "_Status Code": {
+            "value": "statusCode"
+          }
+        },
+        "documentationLink": "",
+        "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
+        "notes": ""
       }
     ]
   },
   {
     "id": "b080b901-bb64-4be6-9853-edd15c47ca45",
-    "name": "dev207658.service-now",
+    "name": "SNOW",
     "type": "http",
     "config": {
       "auth": {
@@ -689,11 +938,11 @@
       "configType": "http",
       "caCert": null,
       "baseUrl": "https://update.me",
-      "testPath": null
+      "testPath": "/table/sys_user/00bf88901b0d5a5076c187f4604bcbb3"
     },
     "description": "",
     "secrets": {},
-    "documentationLink": "https://www.servicenow.com/docs/bundle/xanadu-api-reference/page/build/applications/concept/api-rest.html",
+    "documentationLink": "",
     "operations": [
       {
         "id": "95f495c2-4611-426b-aa21-b0dc184aa555",
@@ -714,6 +963,41 @@
         },
         "outputs": {},
         "documentationLink": "",
+        "connectionId": "b080b901-bb64-4be6-9853-edd15c47ca45",
+        "notes": ""
+      },
+      {
+        "id": "9d441062-fbb2-4287-9844-9dfb33eccd66",
+        "name": "Create Incident",
+        "config": {
+          "path": "/table/incidentX",
+          "params": {},
+          "body": {
+            "raw": "{\n\"short_description\":\"{{Short Description}}\", \n\"description\":\"{{Description}}\",\n\"category\":\"{{Category}}\",\n\"assignment_group\": \"{{Assignment Group}}\",\n\"assigned_to\":\"{{Assigned To}}\",\n\"x_1569849_momentum_kinetic_submission_id\":\"{{Original Submission ID}}\",\n\"x_1569849_momentum_kinetic_deferral_token\":\"{{Deferral Token}}\"  \n}",
+            "bodyType": "raw"
+          },
+          "headers": {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+          },
+          "configType": "http",
+          "method": "POST",
+          "includeEmptyParams": false,
+          "followRedirect": false,
+          "streamResponse": false
+        },
+        "outputs": {
+          "Number": {
+            "value": "body.result.number"
+          },
+          "Status Code": {
+            "value": "statusCode"
+          },
+          "Sys Id": {
+            "value": "body.result.sys_id"
+          }
+        },
+        "documentationLink": "https://www.servicenow.com/docs/bundle/xanadu-api-reference/page/integrate/inbound-rest/task/t_GetStartedCreateInt.html",
         "connectionId": "b080b901-bb64-4be6-9853-edd15c47ca45",
         "notes": ""
       },
@@ -757,76 +1041,6 @@
           }
         },
         "documentationLink": "https://www.servicenow.com/docs/bundle/xanadu-api-reference/page/integrate/inbound-rest/task/t_GetStartedRetrieveExisting.html",
-        "connectionId": "b080b901-bb64-4be6-9853-edd15c47ca45",
-        "notes": ""
-      },
-      {
-        "id": "ca6d3c30-d335-46a9-86fb-8f57fed0fffb",
-        "name": "Create Incident Work Notes",
-        "config": {
-          "path": "/table/incident/{{SYS ID}}",
-          "params": {},
-          "body": {
-            "raw": "{\"work_notes\":\"{{Work Notes}}\"}",
-            "bodyType": "raw"
-          },
-          "headers": {
-            "Accept": "application/json",
-            "Content-Type": "application/json"
-          },
-          "configType": "http",
-          "method": "PUT",
-          "includeEmptyParams": false,
-          "followRedirect": false,
-          "streamResponse": false
-        },
-        "outputs": {
-          "Number": {
-            "value": "body.result.number"
-          },
-          "Status Code": {
-            "value": "statusCode"
-          },
-          "Sys Id": {
-            "value": "body.result.sys_id"
-          }
-        },
-        "documentationLink": "https://www.servicenow.com/docs/bundle/xanadu-api-reference/page/integrate/inbound-rest/task/t_GetStartedCreateInt.html",
-        "connectionId": "b080b901-bb64-4be6-9853-edd15c47ca45",
-        "notes": ""
-      },
-      {
-        "id": "9d441062-fbb2-4287-9844-9dfb33eccd66",
-        "name": "Create Incident",
-        "config": {
-          "path": "/table/incidentX",
-          "params": {},
-          "body": {
-            "raw": "{\n\"short_description\":\"{{Short Description}}\", \n\"description\":\"{{Description}}\",\n\"category\":\"{{Category}}\",\n\"assignment_group\": \"{{Assignment Group}}\",\n\"assigned_to\":\"{{Assigned To}}\",\n\"x_1569849_momentum_kinetic_submission_id\":\"{{Original Submission ID}}\",\n\"x_1569849_momentum_kinetic_deferral_token\":\"{{Deferral Token}}\"  \n}",
-            "bodyType": "raw"
-          },
-          "headers": {
-            "Accept": "application/json",
-            "Content-Type": "application/json"
-          },
-          "configType": "http",
-          "method": "POST",
-          "includeEmptyParams": false,
-          "followRedirect": false,
-          "streamResponse": false
-        },
-        "outputs": {
-          "Number": {
-            "value": "body.result.number"
-          },
-          "Status Code": {
-            "value": "statusCode"
-          },
-          "Sys Id": {
-            "value": "body.result.sys_id"
-          }
-        },
-        "documentationLink": "https://www.servicenow.com/docs/bundle/xanadu-api-reference/page/integrate/inbound-rest/task/t_GetStartedCreateInt.html",
         "connectionId": "b080b901-bb64-4be6-9853-edd15c47ca45",
         "notes": ""
       },
@@ -880,6 +1094,120 @@
         "notes": "Journal Entries contain several different types of comments or data.  \n\nThe Journal Element parameter references this type. Common values are:\n-work_notes\n-comments\n- approval_history\n\n\nThe Element ID parameter is the sys_id of the related record such as the Incident record"
       },
       {
+        "id": "ca6d3c30-d335-46a9-86fb-8f57fed0fffb",
+        "name": "Create Incident Work Notes",
+        "config": {
+          "path": "/table/incident/{{SYS ID}}",
+          "params": {},
+          "body": {
+            "raw": "{\"work_notes\":\"{{Work Notes}}\"}",
+            "bodyType": "raw"
+          },
+          "headers": {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+          },
+          "configType": "http",
+          "method": "PUT",
+          "includeEmptyParams": false,
+          "followRedirect": false,
+          "streamResponse": false
+        },
+        "outputs": {
+          "Number": {
+            "value": "body.result.number"
+          },
+          "Status Code": {
+            "value": "statusCode"
+          },
+          "Sys Id": {
+            "value": "body.result.sys_id"
+          }
+        },
+        "documentationLink": "https://www.servicenow.com/docs/bundle/xanadu-api-reference/page/integrate/inbound-rest/task/t_GetStartedCreateInt.html",
+        "connectionId": "b080b901-bb64-4be6-9853-edd15c47ca45",
+        "notes": ""
+      },
+      {
+        "id": "60fbef43-571c-4a09-bca6-58c90356d54f",
+        "name": "Create Incident Using Template",
+        "config": {
+          "path": "/table/incident",
+          "params": {},
+          "body": {
+            "raw": "{\n    \"template_id\": \"6b3dcc2ec3c796106af3bb02b4013149\",\n}",
+            "bodyType": "raw"
+          },
+          "headers": {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+          },
+          "configType": "http",
+          "method": "POST",
+          "includeEmptyParams": false,
+          "followRedirect": false,
+          "streamResponse": false
+        },
+        "outputs": {
+          "Number": {
+            "value": "body.result.number"
+          },
+          "Status Code": {
+            "value": "statusCode"
+          },
+          "Sys Id": {
+            "value": "body.result.sys_id"
+          }
+        },
+        "documentationLink": "https://www.servicenow.com/docs/bundle/xanadu-api-reference/page/integrate/inbound-rest/task/t_GetStartedCreateInt.html",
+        "connectionId": "b080b901-bb64-4be6-9853-edd15c47ca45",
+        "notes": ""
+      },
+      {
+        "id": "bfd78b32-28ae-43c5-86ca-b68fc4513f53",
+        "name": "Create Change Request",
+        "config": {
+          "path": "/table/change_request",
+          "params": {},
+          "body": {
+            "raw": "{\n\"short_description\":\"{{Short Description}}\",\n\"assignment_group\": \"Change Management\"\n}",
+            "bodyType": "raw"
+          },
+          "headers": {},
+          "configType": "http",
+          "method": "POST",
+          "includeEmptyParams": false,
+          "followRedirect": false,
+          "streamResponse": false
+        },
+        "outputs": {},
+        "documentationLink": "",
+        "connectionId": "b080b901-bb64-4be6-9853-edd15c47ca45",
+        "notes": ""
+      },
+      {
+        "id": "ab0b0561-ddf3-4e67-9c4f-59afa1ade47a",
+        "name": "Update Change State",
+        "config": {
+          "path": "/table/change_request/{{Sys Id}}",
+          "params": {},
+          "body": {
+            "raw": "{\n\"state\":\"{{State}}\"\n}",
+            "bodyType": "raw"
+          },
+          "headers": {},
+          "configType": "http",
+          "method": "PUT",
+          "includeEmptyParams": false,
+          "followRedirect": false,
+          "streamResponse": false
+        },
+        "outputs": {},
+        "documentationLink": "",
+        "connectionId": "b080b901-bb64-4be6-9853-edd15c47ca45",
+        "notes": ""
+      },
+      {
         "id": "846933d8-0fd5-48b6-a3fa-a5c712f1245f",
         "name": "Get Change by Sys Id",
         "config": {
@@ -919,41 +1247,6 @@
           }
         },
         "documentationLink": "https://www.servicenow.com/docs/bundle/xanadu-api-reference/page/integrate/inbound-rest/task/t_GetStartedRetrieveExisting.html",
-        "connectionId": "b080b901-bb64-4be6-9853-edd15c47ca45",
-        "notes": ""
-      },
-      {
-        "id": "60fbef43-571c-4a09-bca6-58c90356d54f",
-        "name": "Create Incident Using Template",
-        "config": {
-          "path": "/table/incident",
-          "params": {},
-          "body": {
-            "raw": "{\n    \"template_id\": \"6b3dcc2ec3c796106af3bb02b4013149\",\n}",
-            "bodyType": "raw"
-          },
-          "headers": {
-            "Accept": "application/json",
-            "Content-Type": "application/json"
-          },
-          "configType": "http",
-          "method": "POST",
-          "includeEmptyParams": false,
-          "followRedirect": false,
-          "streamResponse": false
-        },
-        "outputs": {
-          "Number": {
-            "value": "body.result.number"
-          },
-          "Status Code": {
-            "value": "statusCode"
-          },
-          "Sys Id": {
-            "value": "body.result.sys_id"
-          }
-        },
-        "documentationLink": "https://www.servicenow.com/docs/bundle/xanadu-api-reference/page/integrate/inbound-rest/task/t_GetStartedCreateInt.html",
         "connectionId": "b080b901-bb64-4be6-9853-edd15c47ca45",
         "notes": ""
       },
@@ -998,28 +1291,6 @@
           }
         },
         "documentationLink": "https://www.servicenow.com/docs/bundle/xanadu-api-reference/page/integrate/inbound-rest/task/t_GetStartedRetrieveExisting.html",
-        "connectionId": "b080b901-bb64-4be6-9853-edd15c47ca45",
-        "notes": ""
-      },
-      {
-        "id": "ab0b0561-ddf3-4e67-9c4f-59afa1ade47a",
-        "name": "Update Change State",
-        "config": {
-          "path": "/table/change_request/{{Sys Id}}",
-          "params": {},
-          "body": {
-            "raw": "{\n\"state\":\"{{State}}\"\n}",
-            "bodyType": "raw"
-          },
-          "headers": {},
-          "configType": "http",
-          "method": "PUT",
-          "includeEmptyParams": false,
-          "followRedirect": false,
-          "streamResponse": false
-        },
-        "outputs": {},
-        "documentationLink": "",
         "connectionId": "b080b901-bb64-4be6-9853-edd15c47ca45",
         "notes": ""
       },
@@ -1106,27 +1377,828 @@
         "documentationLink": "https://www.servicenow.com/docs/bundle/xanadu-api-reference/page/integrate/inbound-rest/task/t_GetStartedRetrieveExisting.html",
         "connectionId": "b080b901-bb64-4be6-9853-edd15c47ca45",
         "notes": "Journal Entries contain several different types of comments or data.  \n\nThe Journal Element parameter references this type. Common values are:\n-work_notes\n-comments\n- approval_history\n\n\nThe Element ID parameter is the sys_id of the related record such as the Incident record"
+      }
+    ]
+  },
+  {
+    "id": "2b8ad0c5-313a-498e-8f06-e7d9fe802a75",
+    "name": "FMI Testing",
+    "type": "http",
+    "config": {
+      "auth": {
+        "password": "changeit",
+        "authType": "basic",
+        "username": "changeit"
       },
+      "configType": "http",
+      "caCert": null,
+      "baseUrl": "https://update.me",
+      "testPath": "/version"
+    },
+    "description": "",
+    "secrets": {},
+    "documentationLink": "",
+    "operations": [
       {
-        "id": "bfd78b32-28ae-43c5-86ca-b68fc4513f53",
-        "name": "Create Change Request",
+        "id": "a1987dcd-d901-4de8-a96a-c60bb9059c0c",
+        "name": "Data Collection Form 1 - Draft",
         "config": {
-          "path": "/table/change_request",
-          "params": {},
+          "path": "/kapps/service-portal/forms/data-collection-form-1/submissions",
+          "params": {
+            "coreState": "Draft",
+            "direction": "DESC",
+            "include": "values,details",
+            "limit": "1000",
+            "orderBy": "createdAt",
+            "q": "values[Customer Identifier] = \"{{Customer Identifier}}\""
+          },
           "body": {
-            "raw": "{\n\"short_description\":\"{{Short Description}}\",\n\"assignment_group\": \"Change Management\"\n}",
-            "bodyType": "raw"
+            "form": {},
+            "bodyType": "www_form_urlencoded"
           },
           "headers": {},
+          "configType": "http",
+          "method": "GET",
+          "includeEmptyParams": false,
+          "followRedirect": false,
+          "streamResponse": false
+        },
+        "outputs": {
+          "Submissions": {
+            "children": {
+              "Handle": "current.handle",
+              "Submission Id": "current.id",
+              "Updated At": "current.updatedAt",
+              "Values": "current.values"
+            },
+            "value": "body.submissions"
+          },
+          "_Error": {
+            "value": "body.error"
+          },
+          "_Returned Count": {
+            "value": "body.submissions?.length"
+          },
+          "_Status Code": {
+            "value": "body.status"
+          }
+        },
+        "documentationLink": "",
+        "connectionId": "2b8ad0c5-313a-498e-8f06-e7d9fe802a75",
+        "notes": ""
+      },
+      {
+        "id": "2337a4c7-7f09-4cc1-b0dd-4235759b06ce",
+        "name": "Data Collection Form 1 - Submitted",
+        "config": {
+          "path": "/kapps/service-portal/forms/data-collection-form-1/submissions",
+          "params": {
+            "coreState": "Submitted",
+            "direction": "DESC",
+            "include": "values,details",
+            "limit": "1000",
+            "orderBy": "updatedAt",
+            "q": "values[Customer Identifier] = \"{{Customer Identifier}}\""
+          },
+          "body": {
+            "form": {},
+            "bodyType": "www_form_urlencoded"
+          },
+          "headers": {},
+          "configType": "http",
+          "method": "GET",
+          "includeEmptyParams": false,
+          "followRedirect": false,
+          "streamResponse": false
+        },
+        "outputs": {
+          "Submissions": {
+            "children": {
+              "Handle": "current.handle",
+              "Submission Id": "current.id",
+              "Updated At": "current.updatedAt",
+              "Values": "current.values"
+            },
+            "value": "body.submissions"
+          },
+          "_Error": {
+            "value": "body.error"
+          },
+          "_Returned Count": {
+            "value": "body.submissions?.length"
+          },
+          "_Status Code": {
+            "value": "body.status"
+          }
+        },
+        "documentationLink": "",
+        "connectionId": "2b8ad0c5-313a-498e-8f06-e7d9fe802a75",
+        "notes": ""
+      },
+      {
+        "id": "a1f3f877-0032-48ae-9e29-f5f05bee30b8",
+        "name": "Retrieve File URL",
+        "config": {
+          "path": "/submissions/{{Submission Id}}/files/{{Field Name}}/{{File Index}}/{{URL Encoded File Name}}/url",
+          "params": {},
+          "body": {
+            "form": {},
+            "bodyType": "www_form_urlencoded"
+          },
+          "headers": {},
+          "configType": "http",
+          "method": "GET",
+          "includeEmptyParams": false,
+          "followRedirect": false,
+          "streamResponse": false
+        },
+        "outputs": {
+          "URL": {
+            "value": "body.url"
+          },
+          "_Error": {
+            "value": "body.error"
+          },
+          "_Status Code": {
+            "value": "statusCode"
+          }
+        },
+        "documentationLink": "",
+        "connectionId": "2b8ad0c5-313a-498e-8f06-e7d9fe802a75",
+        "notes": ""
+      }
+    ]
+  },
+  {
+    "id": "65f42772-be26-4a93-aac3-6b6442d000b1",
+    "name": "SNOW Basic",
+    "type": "http",
+    "config": {
+      "auth": {
+        "password": "changeit",
+        "authType": "basic",
+        "username": "changeit"
+      },
+      "configType": "http",
+      "caCert": null,
+      "baseUrl": "https://update.me",
+      "testPath": "/table/sys_user/00bf88901b0d5a5076c187f4604bcbb3"
+    },
+    "description": "",
+    "secrets": {},
+    "documentationLink": "",
+    "operations": []
+  },
+  {
+    "id": "e9b37416-1b8e-42e1-a2c4-5631313c38cf",
+    "name": "SNOW Backup",
+    "type": "http",
+    "config": {
+      "auth": {
+        "scope": null,
+        "authType": "client_credentials",
+        "tokenUrl": "https://myusda2dev.servicenowservices.com/oauth_token.do",
+        "clientId": "bf18581ce198446f98665ee75f56b2d5",
+        "clientSecret": null,
+        "clientAuth": "basic_auth",
+        "caCert": null
+      },
+      "configType": "http",
+      "caCert": null,
+      "baseUrl": "https://update.me",
+      "testPath": "/table/cmdb_ci_computer/961de1291beb9a1476c187f4604bcbba"
+    },
+    "description": "",
+    "secrets": {},
+    "documentationLink": "",
+    "operations": []
+  },
+  {
+    "id": "aed6351e-d72c-47c7-8428-7f726dc66cc6",
+    "name": "Kinetic Platform AI Test",
+    "type": "http",
+    "config": {
+      "auth": {
+        "password": "changeit",
+        "authType": "basic",
+        "username": "changeit"
+      },
+      "configType": "http",
+      "caCert": null,
+      "baseUrl": "https://update.me",
+      "testPath": "/space"
+    },
+    "description": "",
+    "secrets": {},
+    "documentationLink": "",
+    "operations": [
+      {
+        "id": "d32ea89d-42e1-46ca-b884-bf29f95ab19e",
+        "name": "Create User",
+        "config": {
+          "path": "/users",
+          "params": {},
+          "body": {
+            "raw": "{\n  \"username\": \"{{username}}\",\n  \"email\": \"{{email}}\",\n  \"displayName\": \"{{displayName}}\",\n  \"enabled\": {{enabled}},\n  \"spaceAdmin\": {{spaceAdmin}},\n  \"preferredLocale\": \"{{preferredLocale}}\",\n  \"profileAttributesMap\": {{profileAttributesMap}},\n  \"memberships\": {{memberships}}\n}",
+            "bodyType": "raw"
+          },
+          "headers": {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+          },
           "configType": "http",
           "method": "POST",
           "includeEmptyParams": false,
           "followRedirect": false,
           "streamResponse": false
         },
-        "outputs": {},
+        "outputs": {
+          "Error": {
+            "value": "body.error"
+          },
+          "Status Code": {
+            "value": "statusCode"
+          },
+          "User": {
+            "children": {
+              "Created At": "current['createdAt']",
+              "Display Name": "current['displayName']",
+              "Email": "current['email']",
+              "Enabled": "current['enabled']",
+              "Preferred Locale": "current['preferredLocale']",
+              "Space Admin": "current['spaceAdmin']",
+              "Updated At": "current['updatedAt']",
+              "Username": "current['username']"
+            },
+            "value": "body['user']"
+          }
+        },
+        "documentationLink": "https://docs.kineticdata.com/reference/core-api-overview",
+        "connectionId": "aed6351e-d72c-47c7-8428-7f726dc66cc6",
+        "notes": "Creates a new user in the Kinetic Platform. Required fields: username, email. Optional fields: displayName, enabled (default: true), spaceAdmin (default: false), preferredLocale, profileAttributesMap (JSON object), memberships (JSON array)."
+      }
+    ]
+  },
+  {
+    "id": "a7f3c891-2b4e-4d19-9c3a-8f1e5a6d7b2c",
+    "name": "Cat Facts API",
+    "type": "http",
+    "config": {
+      "auth": null,
+      "configType": "http",
+      "caCert": null,
+      "baseUrl": "https://update.me",
+      "testPath": "/fact"
+    },
+    "description": "Free API for retrieving random cat facts",
+    "secrets": {},
+    "documentationLink": "https://catfact.ninja/",
+    "operations": [
+      {
+        "id": "9d2e4f1a-8c3b-4e5f-a6d7-1b9c8e7f6a5d",
+        "name": "Get Random Cat Fact",
+        "config": {
+          "path": "/fact",
+          "params": {},
+          "body": {
+            "raw": "",
+            "bodyType": "raw"
+          },
+          "headers": {
+            "Accept": "application/json"
+          },
+          "configType": "http",
+          "method": "GET",
+          "includeEmptyParams": false,
+          "followRedirect": true,
+          "streamResponse": false
+        },
+        "outputs": {
+          "Cat Fact": {
+            "value": "body.fact"
+          },
+          "Error": {
+            "value": "body.error"
+          },
+          "Fact Length": {
+            "value": "body.length"
+          },
+          "Status Code": {
+            "value": "statusCode"
+          }
+        },
+        "documentationLink": "https://catfact.ninja/",
+        "connectionId": "a7f3c891-2b4e-4d19-9c3a-8f1e5a6d7b2c",
+        "notes": "Returns a random cat fact with its character length"
+      }
+    ]
+  },
+  {
+    "id": "7f1f8282-4603-4552-a006-30553d2466c8",
+    "name": "Kinetic Platform - Notifications",
+    "type": "http",
+    "config": {
+      "auth": {
+        "password": "changeit",
+        "authType": "basic",
+        "username": "changeit"
+      },
+      "configType": "http",
+      "caCert": null,
+      "baseUrl": "https://update.me",
+      "testPath": "/space"
+    },
+    "description": "",
+    "secrets": {},
+    "documentationLink": "",
+    "operations": [
+      {
+        "id": "5f4eeb23-838a-4a06-a87f-798c8be3259f",
+        "name": "Get Form by Slug",
+        "config": {
+          "path": "/kapps/{{kapp-slug}}/forms/{{form-slug}}",
+          "params": {
+            "include": "fields,attributesMap,details"
+          },
+          "body": {
+            "form": {},
+            "bodyType": "www_form_urlencoded"
+          },
+          "headers": {},
+          "configType": "http",
+          "method": "GET",
+          "includeEmptyParams": false,
+          "followRedirect": false,
+          "streamResponse": false
+        },
+        "outputs": {
+          "Attributes Map": {
+            "value": "body.form?.attributesMap"
+          },
+          "Description": {
+            "value": "body.form?.description"
+          },
+          "Fields": {
+            "children": {
+              "Field Name": "current.name"
+            },
+            "value": "body.form?.fields"
+          },
+          "Name": {
+            "value": "body.form?.name"
+          },
+          "Notes": {
+            "value": "body.form?.notes"
+          },
+          "Slug": {
+            "value": "body.form?.slug"
+          },
+          "Status": {
+            "value": "body.form?.status"
+          },
+          "Type": {
+            "value": "body.form?.type"
+          },
+          "_Error": {
+            "value": "body.error"
+          },
+          "_Status Code": {
+            "value": "statusCode"
+          }
+        },
         "documentationLink": "",
-        "connectionId": "b080b901-bb64-4be6-9853-edd15c47ca45",
+        "connectionId": "7f1f8282-4603-4552-a006-30553d2466c8",
+        "notes": ""
+      },
+      {
+        "id": "88472916-9e91-4508-85bd-b88fbcf40433",
+        "name": "Get Forms By Kapp",
+        "config": {
+          "path": "/kapps/{{Kapp Slug}}/forms",
+          "params": {},
+          "body": {
+            "form": {},
+            "bodyType": "www_form_urlencoded"
+          },
+          "headers": {},
+          "configType": "http",
+          "method": "GET",
+          "includeEmptyParams": false,
+          "followRedirect": false,
+          "streamResponse": false
+        },
+        "outputs": {
+          "Forms": {
+            "children": {
+              "Name": "current.name",
+              "Slug": "current.slug"
+            },
+            "value": "body.forms"
+          },
+          "_Error": {
+            "value": "body.error"
+          },
+          "_Returned Count": {
+            "value": "body.forms?.length"
+          },
+          "_Status Code": {
+            "value": "statusCode"
+          }
+        },
+        "documentationLink": "",
+        "connectionId": "7f1f8282-4603-4552-a006-30553d2466c8",
+        "notes": ""
+      },
+      {
+        "id": "4e21f169-b8ac-40f7-aa03-6b3350a47cc2",
+        "name": "Get Kapp by Slug",
+        "config": {
+          "path": "/kapps/{{Kapp Slug}}",
+          "params": {
+            "include": "attributesMap"
+          },
+          "body": {
+            "form": {},
+            "bodyType": "www_form_urlencoded"
+          },
+          "headers": {},
+          "configType": "http",
+          "method": "GET",
+          "includeEmptyParams": false,
+          "followRedirect": false,
+          "streamResponse": false
+        },
+        "outputs": {
+          "Attributes Map": {
+            "value": "body.kapp?.attributesMap"
+          },
+          "Name": {
+            "value": "body.kapp?.name"
+          },
+          "Slug": {
+            "value": "body.kapp?.slug"
+          }
+        },
+        "documentationLink": "",
+        "connectionId": "7f1f8282-4603-4552-a006-30553d2466c8",
+        "notes": ""
+      },
+      {
+        "id": "7cf02631-6804-4e32-86c2-832b3e8d9c85",
+        "name": "Get Kapps",
+        "config": {
+          "path": "/kapps",
+          "params": {
+            "include": "attributesMap"
+          },
+          "body": {
+            "form": {},
+            "bodyType": "www_form_urlencoded"
+          },
+          "headers": {},
+          "configType": "http",
+          "method": "GET",
+          "includeEmptyParams": false,
+          "followRedirect": false,
+          "streamResponse": false
+        },
+        "outputs": {
+          "Kapps": {
+            "children": {
+              "Attributes Map": "current.attributesMap",
+              "Name": "current.name",
+              "Slug": "current.slug"
+            },
+            "value": "body.kapps"
+          },
+          "_Error": {
+            "value": "body.error"
+          },
+          "_Returned Count": {
+            "value": "body.kapps?.length"
+          },
+          "_Status Code": {
+            "value": "statusCode"
+          }
+        },
+        "documentationLink": "",
+        "connectionId": "7f1f8282-4603-4552-a006-30553d2466c8",
+        "notes": ""
+      },
+      {
+        "id": "20914f71-72de-4e58-93f0-6ce50ae850a2",
+        "name": "Get Notification Dates",
+        "config": {
+          "path": "/kapps/service-portal/forms/notification-template-dates/submissions",
+          "params": {
+            "direction": "ASC",
+            "include": "values",
+            "limit": "1000",
+            "orderBy": "values[Name]"
+          },
+          "body": {
+            "form": {},
+            "bodyType": "www_form_urlencoded"
+          },
+          "headers": {},
+          "configType": "http",
+          "method": "GET",
+          "includeEmptyParams": false,
+          "followRedirect": false,
+          "streamResponse": false
+        },
+        "outputs": {
+          "submissions": {
+            "children": {
+              "format": "current.values['Format']",
+              "id": "current.id",
+              "name": "current.values['Name']",
+              "status": "current.values['Status']"
+            },
+            "value": "body.submissions"
+          }
+        },
+        "documentationLink": "",
+        "connectionId": "7f1f8282-4603-4552-a006-30553d2466c8",
+        "notes": ""
+      },
+      {
+        "id": "1ab9e768-20b3-4bcd-9824-9d8527597d2b",
+        "name": "Get Notification Snippets",
+        "config": {
+          "path": "/kapps/service-portal/forms/notification-data/submissions",
+          "params": {
+            "direction": "ASC",
+            "include": "values",
+            "limit": "1000",
+            "orderBy": "values[Name]",
+            "q": "values[Type]=\"Snippet\""
+          },
+          "body": {
+            "form": {},
+            "bodyType": "www_form_urlencoded"
+          },
+          "headers": {},
+          "configType": "http",
+          "method": "GET",
+          "includeEmptyParams": false,
+          "followRedirect": false,
+          "streamResponse": false
+        },
+        "outputs": {
+          "submissions": {
+            "children": {
+              "format": "current.values['HTML Content']",
+              "id": "current.id",
+              "name": "current.values['Name']",
+              "status": "current.values['Status']",
+              "text content": "current.values['Text Content']",
+              "type": "current.values['Type']"
+            },
+            "value": "body.submissions"
+          }
+        },
+        "documentationLink": "",
+        "connectionId": "7f1f8282-4603-4552-a006-30553d2466c8",
+        "notes": ""
+      },
+      {
+        "id": "05910d4e-2346-4722-8557-b8918698ae50",
+        "name": "Get Notification Template - By Name",
+        "config": {
+          "path": "/kapps/service-portal/forms/notification-data/submissions",
+          "params": {
+            "direction": "ASC",
+            "include": "values",
+            "limit": "1000",
+            "orderBy": "values[Name]",
+            "q": "values[Type]=\"Template\" AND values[Name]=\"{{Template Name}}\""
+          },
+          "body": {
+            "form": {},
+            "bodyType": "www_form_urlencoded"
+          },
+          "headers": {},
+          "configType": "http",
+          "method": "GET",
+          "includeEmptyParams": false,
+          "followRedirect": false,
+          "streamResponse": false
+        },
+        "outputs": {
+          "Submissions": {
+            "children": {
+              "HTML Content": "current.values['HTML Content']",
+              "Id": "current.id",
+              "Name": "current.values['Name']",
+              "Status": "current.values['Status']",
+              "Subject": "current.values['Subject']",
+              "Text Content": "current.values['Text Content']",
+              "Type": "current.values['Type']"
+            },
+            "value": "body.submissions"
+          },
+          "_Error": {
+            "value": "body.error"
+          },
+          "_Returned Count": {
+            "value": "body.submissions?.length"
+          },
+          "_Status Code": {
+            "value": "statusCode"
+          }
+        },
+        "documentationLink": "",
+        "connectionId": "7f1f8282-4603-4552-a006-30553d2466c8",
+        "notes": ""
+      },
+      {
+        "id": "acb41442-2507-4f74-854e-2aee887936fe",
+        "name": "Get Notification Templates",
+        "config": {
+          "path": "/kapps/service-portal/forms/notification-data/submissions",
+          "params": {
+            "direction": "ASC",
+            "include": "values",
+            "limit": "1000",
+            "orderBy": "values[Name]",
+            "q": "values[Type]=\"Template\""
+          },
+          "body": {
+            "form": {},
+            "bodyType": "www_form_urlencoded"
+          },
+          "headers": {},
+          "configType": "http",
+          "method": "GET",
+          "includeEmptyParams": false,
+          "followRedirect": false,
+          "streamResponse": false
+        },
+        "outputs": {
+          "submissions": {
+            "children": {
+              "format": "current.values['HTML Content']",
+              "id": "current.id",
+              "name": "current.values['Name']",
+              "status": "current.values['Status']",
+              "subject": "current.values['Subject']",
+              "type": "current.values['Type']"
+            },
+            "value": "body.submissions"
+          }
+        },
+        "documentationLink": "",
+        "connectionId": "7f1f8282-4603-4552-a006-30553d2466c8",
+        "notes": ""
+      },
+      {
+        "id": "740626de-7ca1-4a3f-b100-32561d8b4dd1",
+        "name": "Get Space",
+        "config": {
+          "path": "/space",
+          "params": {
+            "include": "details,attributesMap"
+          },
+          "body": {
+            "form": {},
+            "bodyType": "www_form_urlencoded"
+          },
+          "headers": {},
+          "configType": "http",
+          "method": "GET",
+          "includeEmptyParams": false,
+          "followRedirect": false,
+          "streamResponse": false
+        },
+        "outputs": {
+          "Attributes Map": {
+            "value": "body.space['attributesMap']"
+          },
+          "Name": {
+            "value": "body.space['name']"
+          },
+          "Slug": {
+            "value": "body.space['slug']"
+          },
+          "Web Server Url": {
+            "value": "body.space['attributesMap']['Web Server Url'][0]"
+          }
+        },
+        "documentationLink": "",
+        "connectionId": "7f1f8282-4603-4552-a006-30553d2466c8",
+        "notes": ""
+      },
+      {
+        "id": "57ed4ca8-ec37-4bc6-bcca-95850b18cc02",
+        "name": "Get Team - By Name",
+        "config": {
+          "path": "teams",
+          "params": {
+            "include": "details,attributesMap,memberships,memberships.user,memberships.user.details,memberships.user.profileAttributesMap",
+            "limit": "1",
+            "q": "name=\"{{Name}}\""
+          },
+          "body": {
+            "form": {},
+            "bodyType": "www_form_urlencoded"
+          },
+          "headers": {
+            "content-type": "application/json"
+          },
+          "configType": "http",
+          "method": "GET",
+          "includeEmptyParams": false,
+          "followRedirect": false,
+          "streamResponse": false
+        },
+        "outputs": {
+          "CID": {
+            "value": "body.teams[0]?.attributesMap['CID']"
+          },
+          "Description": {
+            "value": "body.teams[0]?.description"
+          },
+          "Manager": {
+            "value": "body.teams[0]?.attributesMap.Manager[0]"
+          },
+          "Member Email List": {
+            "value": "body.teams[0]?.memberships.map(m => m.user.email).join(',')"
+          },
+          "Memberships": {
+            "children": {
+              "Profile Attributes Map": "current.user['profileAttributesMap']",
+              "User Display Name": "current.user['displayName']",
+              "User Email": "current.user['email']",
+              "User Name": "current.user['username']",
+              "User Preferred Locale": "current.user['preferredLocale']"
+            },
+            "value": "body.teams[0]?.memberships"
+          },
+          "Name": {
+            "value": "body.teams[0]?.name"
+          },
+          "Notification Delivery Method": {
+            "value": "body.teams[0]?.attributesMap['Notification Delivery Method'][0]"
+          },
+          "Notification Delivery Target": {
+            "value": "body.teams[0]?.attributesMap['Notification Delivery Target']"
+          },
+          "Slug": {
+            "value": "body.teams[0]?.slug"
+          },
+          "_Total Count": {
+            "value": "body.count"
+          }
+        },
+        "documentationLink": "",
+        "connectionId": "7f1f8282-4603-4552-a006-30553d2466c8",
+        "notes": ""
+      },
+      {
+        "id": "6b2ca65d-bf7b-4b86-9c86-fe3d3f23e5a8",
+        "name": "Get User",
+        "config": {
+          "path": "/users/{{Username}}",
+          "params": {
+            "include": "details,attributesMap,profileAttributesMap"
+          },
+          "body": {
+            "form": {},
+            "bodyType": "www_form_urlencoded"
+          },
+          "headers": {
+            "accept": "application/json",
+            "content-type": "application/json"
+          },
+          "configType": "http",
+          "method": "GET",
+          "includeEmptyParams": false,
+          "followRedirect": false,
+          "streamResponse": false
+        },
+        "outputs": {
+          "Attributes": {
+            "value": "body.user?.attributesMap"
+          },
+          "Display Name": {
+            "value": "body.user?.displayName"
+          },
+          "Email": {
+            "value": "body.user?.email"
+          },
+          "Preferred Locale": {
+            "value": "body.user?.preferredLocale"
+          },
+          "Profile Attributes": {
+            "value": "body.user?.profileAttributesMap"
+          },
+          "Username": {
+            "value": "body.user?.username"
+          }
+        },
+        "documentationLink": "",
+        "connectionId": "7f1f8282-4603-4552-a006-30553d2466c8",
         "notes": ""
       }
     ]

@@ -4,9 +4,9 @@
   "allowedIpsEnabled": false,
   "attributes": [
     {
-      "name": "Theme",
+      "name": "Service Portal Kapp Slug",
       "values": [
-        "{\"colors\":{\"primary\":\"\",\"secondary\":\"\"}}"
+        "service-portal"
       ]
     },
     {
@@ -69,9 +69,11 @@
   "sharedBundleBase": null,
   "slug": "momentum-dev",
   "trustedFrameDomains": [
-    "localhost:3000"
+    "localhost:3000",
+    "*.jumpcloud.com"
   ],
   "trustedResourceDomains": [
-    "http://localhost:3000"
+    "http://localhost:3000",
+    "https://sso.jumpcloud.com"
   ]
 }

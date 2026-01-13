@@ -224,6 +224,6 @@
   "securityPolicies": [],
   "slug": "mz-laptop-request",
   "status": "Active",
-  "submissionLabelExpression": "",
+  "submissionLabelExpression": "Laptop Request ${values('Signature').length > 0 ? '[Signed Off]' : ''}",
   "type": "Service"
 }

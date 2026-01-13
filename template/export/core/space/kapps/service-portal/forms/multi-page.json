@@ -1,0 +1,178 @@
+{
+  "anonymous": false,
+  "attributes": [],
+  "bridgedResources": [],
+  "categorizations": [],
+  "customHeadContent": null,
+  "description": "",
+  "indexDefinitions": [
+    {
+      "name": "closedBy",
+      "parts": [
+        "closedBy"
+      ],
+      "unique": false
+    },
+    {
+      "name": "createdBy",
+      "parts": [
+        "createdBy"
+      ],
+      "unique": false
+    },
+    {
+      "name": "handle",
+      "parts": [
+        "handle"
+      ],
+      "unique": false
+    },
+    {
+      "name": "submittedBy",
+      "parts": [
+        "submittedBy"
+      ],
+      "unique": false
+    },
+    {
+      "name": "updatedBy",
+      "parts": [
+        "updatedBy"
+      ],
+      "unique": false
+    },
+    {
+      "name": "values[Text One]",
+      "parts": [
+        "values[Text One]"
+      ],
+      "unique": false
+    },
+    {
+      "name": "values[Text Two]",
+      "parts": [
+        "values[Text Two]"
+      ],
+      "unique": false
+    }
+  ],
+  "integrations": [],
+  "name": "Multi Page",
+  "notes": null,
+  "pages": [
+    {
+      "advanceCondition": null,
+      "displayCondition": null,
+      "displayPage": null,
+      "elements": [
+        {
+          "enabled": true,
+          "dataType": "string",
+          "defaultDataSource": "none",
+          "requiredMessage": null,
+          "name": "Text One",
+          "omitWhenHidden": null,
+          "renderAttributes": {},
+          "renderType": "text",
+          "pattern": null,
+          "defaultValue": null,
+          "visible": true,
+          "label": "Text One",
+          "constraints": [],
+          "events": [],
+          "rows": 1,
+          "defaultResourceName": null,
+          "type": "field",
+          "key": "2deb9d15b0d4475f9271695bbb3e896e",
+          "required": false
+        },
+        {
+          "type": "button",
+          "renderType": "save",
+          "name": "Save",
+          "label": "Save",
+          "visible": true,
+          "enabled": true,
+          "renderAttributes": {}
+        },
+        {
+          "visible": true,
+          "renderAttributes": {},
+          "name": "Submit Button",
+          "label": "Submit",
+          "type": "button",
+          "renderType": "submit-page",
+          "enabled": true
+        }
+      ],
+      "events": [],
+      "name": "Page 1",
+      "renderType": "submittable",
+      "type": "page"
+    },
+    {
+      "advanceCondition": null,
+      "displayCondition": null,
+      "displayPage": null,
+      "elements": [
+        {
+          "enabled": true,
+          "dataType": "string",
+          "defaultDataSource": "none",
+          "requiredMessage": null,
+          "name": "Text Two",
+          "omitWhenHidden": null,
+          "renderAttributes": {},
+          "renderType": "text",
+          "pattern": null,
+          "defaultValue": null,
+          "visible": true,
+          "label": "Text Two",
+          "constraints": [],
+          "events": [],
+          "rows": 1,
+          "defaultResourceName": null,
+          "type": "field",
+          "key": "f4aaa8ccd14948d1b5a155b5f57fe6d8",
+          "required": false
+        },
+        {
+          "type": "button",
+          "renderType": "previous-page",
+          "name": "Previous",
+          "label": "Previous",
+          "visible": true,
+          "enabled": true,
+          "renderAttributes": {}
+        },
+        {
+          "type": "button",
+          "renderType": "save",
+          "name": "Save",
+          "label": "Save",
+          "visible": true,
+          "enabled": true,
+          "renderAttributes": {}
+        },
+        {
+          "type": "button",
+          "renderType": "submit-page",
+          "name": "Submit",
+          "label": "Submit",
+          "visible": true,
+          "enabled": true,
+          "renderAttributes": {}
+        }
+      ],
+      "events": [],
+      "name": "Page 2",
+      "renderType": "submittable",
+      "type": "page"
+    }
+  ],
+  "securityPolicies": [],
+  "slug": "multi-page",
+  "status": "Active",
+  "submissionLabelExpression": null,
+  "type": "Service"
+}

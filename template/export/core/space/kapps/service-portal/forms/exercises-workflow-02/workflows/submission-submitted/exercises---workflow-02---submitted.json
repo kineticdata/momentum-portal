@@ -748,8 +748,8 @@
       },
       "id": "system_integration_v1_9",
       "position": {
-        "x": -68,
-        "y": 311.5
+        "x": -148,
+        "y": 303.5
       },
       "version": 1,
       "parameters": [
@@ -805,8 +805,8 @@
       },
       "id": "smtp_email_send_v1_10",
       "position": {
-        "x": -65,
-        "y": 462.5
+        "x": -147,
+        "y": 460.5
       },
       "version": 1,
       "parameters": [
@@ -1047,8 +1047,8 @@
       "dependents": "",
       "id": "system_integration_v1_13",
       "position": {
-        "x": -64,
-        "y": 620.5
+        "x": -146,
+        "y": 616.5
       },
       "version": 1,
       "parameters": [

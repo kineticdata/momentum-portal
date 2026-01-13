@@ -225,6 +225,25 @@
         {
           "type": "section",
           "renderType": null,
+          "name": "Summary Review Section",
+          "title": null,
+          "visible": true,
+          "omitWhenHidden": null,
+          "renderAttributes": {},
+          "elements": [
+            {
+              "type": "content",
+              "renderType": "html",
+              "name": "Summary Review HTML",
+              "text": "",
+              "visible": true,
+              "renderAttributes": {}
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "renderType": null,
           "name": "Form",
           "title": null,
           "visible": true,
@@ -315,6 +334,59 @@
           "omitWhenHidden": false,
           "renderAttributes": {},
           "elements": [
+            {
+              "type": "section",
+              "renderType": null,
+              "name": "Summary Review Data",
+              "title": null,
+              "visible": true,
+              "omitWhenHidden": null,
+              "renderAttributes": {},
+              "elements": [
+                {
+                  "enabled": true,
+                  "dataType": "string",
+                  "defaultDataSource": "none",
+                  "requiredMessage": null,
+                  "name": "Details",
+                  "omitWhenHidden": null,
+                  "renderAttributes": {},
+                  "renderType": "text",
+                  "pattern": null,
+                  "defaultValue": null,
+                  "visible": true,
+                  "label": "Details",
+                  "constraints": [],
+                  "events": [],
+                  "rows": 2,
+                  "defaultResourceName": null,
+                  "type": "field",
+                  "key": "f23",
+                  "required": false
+                },
+                {
+                  "enabled": true,
+                  "dataType": "string",
+                  "defaultDataSource": "none",
+                  "requiredMessage": null,
+                  "name": "Summary",
+                  "omitWhenHidden": null,
+                  "renderAttributes": {},
+                  "renderType": "text",
+                  "pattern": null,
+                  "defaultValue": null,
+                  "visible": true,
+                  "label": "Summary",
+                  "constraints": [],
+                  "events": [],
+                  "rows": 1,
+                  "defaultResourceName": null,
+                  "type": "field",
+                  "key": "f21",
+                  "required": false
+                }
+              ]
+            },
             {
               "enabled": true,
               "dataType": "string",
@@ -425,27 +497,6 @@
               "dataType": "string",
               "defaultDataSource": "none",
               "requiredMessage": null,
-              "name": "Details",
-              "omitWhenHidden": null,
-              "renderAttributes": {},
-              "renderType": "text",
-              "pattern": null,
-              "defaultValue": null,
-              "visible": true,
-              "label": "Details",
-              "constraints": [],
-              "events": [],
-              "rows": 2,
-              "defaultResourceName": null,
-              "type": "field",
-              "key": "f23",
-              "required": false
-            },
-            {
-              "enabled": true,
-              "dataType": "string",
-              "defaultDataSource": "none",
-              "requiredMessage": null,
               "name": "Due Date",
               "omitWhenHidden": null,
               "renderAttributes": {},
@@ -460,27 +511,6 @@
               "type": "field",
               "key": "f22",
               "required": false
-            },
-            {
-              "enabled": true,
-              "dataType": "string",
-              "defaultDataSource": "none",
-              "requiredMessage": null,
-              "name": "Summary",
-              "omitWhenHidden": null,
-              "renderAttributes": {},
-              "renderType": "text",
-              "pattern": null,
-              "defaultValue": null,
-              "visible": true,
-              "label": "Summary",
-              "constraints": [],
-              "events": [],
-              "rows": 1,
-              "defaultResourceName": null,
-              "type": "field",
-              "key": "f21",
-              "required": false
             }
           ]
         },
@@ -494,7 +524,16 @@
           "renderAttributes": {}
         }
       ],
-      "events": [],
+      "events": [
+        {
+          "name": "Load Summary Review",
+          "code": "// Loads Data from the 'Summary Review Data' Section into the 'Summary Review HTML' for display to the user.\n// Use descriptive variable names and proper declarations\nconst displaySection = K('section[Summary Review Data]').element();\nconst reviewTarget = K('content[Summary Review HTML]').element();\n\n// Early exit if elements don't exist\nif (!displaySection || !reviewTarget) {\n  console.error('Required elements not found');\n  return;\n}\n\n// Get field names from labels\nconst labels = displaySection.querySelectorAll('label.field-label');\nconst fieldNames = Array.from(labels)\n  .map(label => {\n    const forAttr = label.getAttribute('for');\n    const input = forAttr ? document.getElementById(forAttr) : null;\n    return input?.getAttribute('name');\n  })\n  .filter(name => name);\n\n// Create outer container for non-Summary fields\nconst outerContainer = document.createElement('div');\nouterContainer.className = 'bg-base-200 rounded-box px-2 py-1.5 md:py-3';\n\n// Create dl element - changed to single column\nconst dl = document.createElement('dl');\ndl.className = 'max-md:text-xs flex flex-col gap-3';\ndl.style.overflowWrap = 'anywhere';\n\n// Build review content\nfieldNames.forEach(fieldName => {\n  const field = K(`field[${fieldName}]`);\n  const value = field.value();\n  const label = field.label();\n  \n  if (!value) return;\n  \n  // Check if this is the Summary field\n  const isSummary = label === 'Summary';\n  \n  if (isSummary) {\n    // Append Summary directly to reviewTarget as first child\n    const summaryDiv = document.createElement('div');\n    summaryDiv.className = 'text-lg md:text-xl font-semibold';\n    \n    // Add value with line breaks\n    const lines = value.split('\\n');\n    lines.forEach((line, index) => {\n      summaryDiv.appendChild(document.createTextNode(line));\n      if (index < lines.length - 1) {\n        summaryDiv.appendChild(document.createElement('br'));\n      }\n    });\n    \n    reviewTarget.appendChild(summaryDiv);\n  } else {\n    // Create field container div for non-Summary fields\n    const fieldDiv = document.createElement('div');\n    fieldDiv.className = 'flex flex-col gap-0.5 md:gap-1';\n    \n    const dt = document.createElement('dt');\n    dt.className = 'text-base-content/60 font-medium';\n    dt.textContent = label;\n    fieldDiv.appendChild(dt);\n    \n    // Create dd (value) element\n    const dd = document.createElement('dd');\n    \n    // Add value with line breaks\n    const lines = value.split('\\n');\n    lines.forEach((line, index) => {\n      dd.appendChild(document.createTextNode(line));\n      if (index < lines.length - 1) {\n        dd.appendChild(document.createElement('br'));\n      }\n    });\n    \n    fieldDiv.appendChild(dd);\n    dl.appendChild(fieldDiv);\n  }\n});\n\n// Only append outer container if there's data in dl\nif (dl.children.length > 0) {\n  outerContainer.appendChild(dl);\n  reviewTarget.appendChild(outerContainer);\n}",
+          "integrationResourceName": null,
+          "action": "Custom",
+          "integrationResourceProperty": "",
+          "type": "Load"
+        }
+      ],
       "name": "Page One",
       "renderType": "submittable",
       "type": "page"

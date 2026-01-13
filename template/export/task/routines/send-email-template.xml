@@ -1,0 +1,321 @@
+<tree schema_version="1.0">
+    <sourceName>-</sourceName>
+    <sourceGroup>-</sourceGroup>
+    <definitionId>routine_send_email_template</definitionId>
+    <type>Global Routine</type>
+    <status>Active</status>
+    <taskTree builder_version="" schema_version="1.0" version="">
+        <name>Send Email Template</name>
+        <author></author>
+        <notes></notes>
+        <lastID>10</lastID>
+        <taskDefinition id="routine_send_email_template" name="Send Email Template" schema_version="1.0" version="1">
+            <visible>false</visible>
+            <deferrable>true</deferrable>
+            <parameters>
+                <parameter id="Email Recipient " label="Email Recipient " required="true" tooltip="">alexa.fleming@kineticdata.com</parameter>
+                <parameter id="Email Subject" label="Email Subject" required="false" tooltip="">Testing Notification</parameter>
+                <parameter id="Header Image" label="Header Image" required="false" tooltip="">https://s3.amazonaws.com/kinetic-portals/portals/momentum-portal/versions/latest/Momentum-Logo.png</parameter>
+                <parameter id="Action Button Label" label="Action Button Label" required="false" tooltip="">Complete Task Now</parameter>
+                <parameter id="Content Title" label="Content Title" required="false" tooltip="">Action Required &lt;br&gt; Complete Your Pending Task</parameter>
+                <parameter id="Content Body" label="Content Body" required="false" tooltip="">You have an important task waiting for your attention:</parameter>
+                <parameter id="Content Body Bold" label="Content Body Bold" required="false" tooltip="">New standard laptop</parameter>
+                <parameter id="Content Date Title" label="Content Date Title" required="false" tooltip="">Due date:</parameter>
+                <parameter id="Content Date" label="Content Date" required="false" tooltip="">January 15, 2025</parameter>
+                <parameter id="Content Details" label="Content Details" required="false" tooltip="">You can view more details and take action using the &lt;br&gt;  link below</parameter>
+                <parameter id="Action Button URL" label="Action Button URL" required="false" tooltip="">https://kineticdata.com/</parameter>
+                <parameter id="Social Facebook" label="Social Facebook" required="false" tooltip="">https://www.facebook.com/share/18JSBMAaD9</parameter>
+                <parameter id="Social X" label="Social X" required="false" tooltip="">https://x.com/kineticdata</parameter>
+                <parameter id="Social Instagram" label="Social Instagram" required="false" tooltip="">https://kineticdata.com/</parameter>
+                <parameter id="Social LinkedIn" label="Social LinkedIn" required="false" tooltip="">https://www.linkedin.com/company/kinetic-data</parameter>
+            </parameters>
+            <handler name="system_tree_call" version="1"></handler>
+            <results format="xml"></results>
+        </taskDefinition>
+        <request>
+            <task definition_id="system_start_v1" id="start" name="Start" x="102" y="-6">
+                <version>1</version>
+                <configured>true</configured>
+                <defers>false</defers>
+                <deferrable>false</deferrable>
+                <visible>false</visible>
+                <parameters></parameters>
+                <messages></messages>
+                <dependents>
+                    <task label="" type="Complete" value="">utilities_echo_v1_7</task>
+                </dependents>
+            </task>
+            <task definition_id="utilities_echo_v1" id="utilities_echo_v1_4" name="Assemble Email Content" x="276.5480501065753" y="497.8932304136917">
+                <version>1</version>
+                <configured>true</configured>
+                <defers>false</defers>
+                <deferrable>false</deferrable>
+                <visible>true</visible>
+                <parameters>
+                    <parameter dependsOnId="" dependsOnValue="" id="input" label="Input" menu="" required="true" tooltip="">&lt;%= @results['Email Header']['output'] %&gt;
+&lt;%= @results['Email Content']['output'] %&gt;
+&lt;%= @results['Email Action Button']['output'] %&gt;
+&lt;%= @results['Email Footer']['output'] %&gt;</parameter>
+                </parameters>
+                <messages></messages>
+                <dependents>
+                    <task label="" type="Complete" value="">smtp_email_send_v1_5</task>
+                </dependents>
+            </task>
+            <task definition_id="smtp_email_send_v1" id="smtp_email_send_v1_5" name="Send Email" x="640.8619226679477" y="497.71748748583394">
+                <version>1</version>
+                <configured>true</configured>
+                <defers>false</defers>
+                <deferrable>false</deferrable>
+                <visible>true</visible>
+                <parameters>
+                    <parameter dependsOnId="" dependsOnValue="" id="error_handling" label="Error Handling" menu="Error Message,Raise Error" required="true" tooltip="Determine what to return if an error is encountered.">Error Message</parameter>
+                    <parameter dependsOnId="" dependsOnValue="" id="from" label="From (Email Address)" menu="" required="true" tooltip="The email address of the simulated sender.">wally@kineticdata.com</parameter>
+                    <parameter dependsOnId="" dependsOnValue="" id="to" label="To (Email Address)" menu="" required="true" tooltip="The email address of the intended recipient.">&lt;%= @inputs['Email Recipient '] %&gt;</parameter>
+                    <parameter dependsOnId="" dependsOnValue="" id="bcc" label="Bcc (Email Address)" menu="" required="false" tooltip="The email address of the intended recipient."></parameter>
+                    <parameter dependsOnId="" dependsOnValue="" id="subject" label="Subject" menu="" required="false" tooltip="The subject of the email.">&lt;%= @inputs['Email Subject'] %&gt;</parameter>
+                    <parameter dependsOnId="" dependsOnValue="" id="htmlbody" label="HTML Body" menu="" required="false" tooltip="HTML representing the body of a rich email.">&lt;%= @results['Assemble Email Content']['output'] %&gt;</parameter>
+                    <parameter dependsOnId="" dependsOnValue="" id="textbody" label="Alternate (text) Body" menu="" required="false" tooltip="A plaintext message that will be displayed if the recipient can't display multipart HTML emails.">&lt;%= @inputs['Content Title'] %&gt;
+&lt;%= @inputs['Content Body'] %&gt;
+&lt;%= @inputs['Content Body Bold'] %&gt;
+&lt;%= @inputs['Content Date Title'] %&gt;
+&lt;%= @inputs['Content Date'] %&gt;
+&lt;%= @inputs['Content Details'] %&gt;</parameter>
+                </parameters>
+                <messages></messages>
+                <dependents></dependents>
+            </task>
+            <task definition_id="utilities_echo_v1" id="utilities_echo_v1_7" name="Email Header" x="271.23078991386114" y="3.5">
+                <version>1</version>
+                <configured>true</configured>
+                <defers>false</defers>
+                <deferrable>false</deferrable>
+                <visible>true</visible>
+                <parameters>
+                    <parameter dependsOnId="" dependsOnValue="" id="input" label="Input" menu="" required="true" tooltip="">&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+    &lt;title&gt;Momentum Portal&lt;/title&gt;
+    &lt;style&gt;
+        @media screen and (max-width: 600px) {
+            body &gt; table {
+                width: 90% !important;
+                padding: 0 30px 24px 30px; !important;
+            }
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body
+        style="
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      font-family: Verdana, sans-serif;
+      letter-spacing: 0.75px;
+      background-color: #f9f9f9;
+      overflow-x: hidden;
+    "
+&gt;
+&lt;table
+        role="presentation"
+        style="
+        width: 600px;
+        text-align: center;
+        margin: 60px auto;
+        padding: 0px 60px 22px 60px;
+        background: #ffffff;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: -2px 8px 17px 4px rgba(123, 119, 119, 0.15);
+      "
+&gt;
+    &lt;tr&gt;
+        &lt;td&gt;
+            &lt;img
+                    src=&lt;%= @inputs['Header Image'] %&gt;
+            style="
+            padding-top: 22px;
+            padding-bottom: 8px;
+            text-align: center;
+            width: 148px;
+            "
+            /&gt;
+        &lt;/td&gt;
+    &lt;/tr&gt;</parameter>
+                </parameters>
+                <messages></messages>
+                <dependents>
+                    <task label="" type="Complete" value="">utilities_echo_v1_8</task>
+                </dependents>
+            </task>
+            <task definition_id="utilities_echo_v1" id="utilities_echo_v1_8" name="Email Footer" x="275" y="130.5">
+                <version>1</version>
+                <configured>true</configured>
+                <defers>false</defers>
+                <deferrable>false</deferrable>
+                <visible>true</visible>
+                <parameters>
+                    <parameter dependsOnId="" dependsOnValue="" id="input" label="Input" menu="" required="true" tooltip="">&lt;tr&gt;
+    &lt;td style="text-align: center; font-size: 12px; color: #636077"&gt;
+        &lt;table
+                role="presentation"
+                style="margin: 15px auto 0 auto; border-spacing: 30px 13px"
+        &gt;
+            &lt;tr&gt;
+                &lt;% if @inputs['Social Facebook'] %&gt;
+                &lt;td style="padding: 0"&gt;
+                    &lt;a href="&lt;%= @inputs['Social Facebook'] %&gt;"&gt;
+                        &lt;img
+                                style="width: 24px; height: 24px; display: block"
+                                src="https://s3.amazonaws.com/kinetic-portals/portals/momentum-portal/versions/latest/facebook-icon.png"
+                        /&gt;
+                    &lt;/a&gt;
+                &lt;/td&gt;
+                &lt;% end %&gt;
+                &lt;% if @inputs['Social X'] %&gt;
+                &lt;td style="padding: 0"&gt;
+                    &lt;a href="&lt;%= @inputs['Social X'] %&gt;"&gt;
+                        &lt;img
+                                style="width: 24px; height: 24px; display: block"
+                                src="https://s3.amazonaws.com/kinetic-portals/portals/momentum-portal/versions/latest/x-icon.png"
+                        /&gt;
+                    &lt;/a&gt;
+                &lt;/td&gt;
+                &lt;% end %&gt;
+                &lt;% if @inputs['Social Instagram'] %&gt;
+                &lt;td style="padding: 0"&gt;
+                    &lt;a href="&lt;%= @inputs['Social Instagram'] %&gt;"&gt;
+                        &lt;img
+                                style="width: 24px; height: 24px; display: block"
+                                src="https://s3.amazonaws.com/kinetic-portals/portals/momentum-portal/versions/latest/instagram-icon.png"
+                        /&gt;
+                    &lt;/a&gt;
+                &lt;/td&gt;
+                &lt;% end %&gt;
+                &lt;% if @inputs['Social LinkedIn'] %&gt;
+                &lt;td style="padding: 0"&gt;
+                    &lt;a href="&lt;%= @inputs['Social LinkedIn'] %&gt;"&gt;
+                        &lt;img
+                                style="width: 24px; height: 24px; display: block"
+                                src="https://s3.amazonaws.com/kinetic-portals/portals/momentum-portal/versions/latest/linkedin-icon.png"
+                        /&gt;
+                    &lt;/a&gt;
+                &lt;/td&gt;
+                &lt;% end %&gt;
+            &lt;/tr&gt;
+        &lt;/table&gt;
+        &lt;p style="font-size: 14px; font-weight: 500; margin: 0 color: #636077;"&gt;
+            If you need assistance, feel free to contact our support &lt;br /&gt;team
+            at kineticdata.com
+        &lt;/p&gt;
+    &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;</parameter>
+                </parameters>
+                <messages></messages>
+                <dependents>
+                    <task label="" type="Complete" value="">utilities_echo_v1_9</task>
+                </dependents>
+            </task>
+            <task definition_id="utilities_echo_v1" id="utilities_echo_v1_9" name="Email Content" x="274" y="253.5">
+                <version>1</version>
+                <configured>true</configured>
+                <defers>false</defers>
+                <deferrable>false</deferrable>
+                <visible>true</visible>
+                <parameters>
+                    <parameter dependsOnId="" dependsOnValue="" id="input" label="Input" menu="" required="true" tooltip="">&lt;tr&gt;
+  &lt;td style="text-align: center;"&gt;
+    &lt;% if @inputs['Content Title'] %&gt;
+    &lt;p
+      style="
+        font-size: 16px;
+        font-weight: 700;
+        color: #11005E;
+      "
+    &gt;
+      &lt;%= @inputs['Content Title'] %&gt;
+    &lt;/p&gt;
+    &lt;% end %&gt; &lt;% if @inputs['Content Body'] %&gt;
+    &lt;p style="font-size: 14px; color: #11005E;"&gt;&lt;%= @inputs['Content Body'] %&gt;&lt;/p&gt;
+    &lt;% end %&gt;
+
+    &lt;p&gt;
+      &lt;% if @inputs['Content Body Bold'] %&gt;
+      &lt;span style="font-size: 14px; font-weight: 700; color: #11005E;"&gt;
+        &lt;%= @inputs['Content Body Bold'] %&gt; &lt;/span
+      &gt;&lt;br /&gt;
+      &lt;% end %&gt; &lt;% if @inputs['Content Date Title'] %&gt;
+      &lt;span style="font-size: 14px; color: #11005E;"&gt;
+        &lt;%= @inputs['Content Date Title'] %&gt;
+      &lt;/span&gt;
+      &lt;% end %&gt; &lt;% if @inputs['Content Date'] %&gt;
+      &lt;span style="font-size: 14px; color: #11005E;"&gt;
+        &lt;%= @inputs['Content Date'] %&gt;
+      &lt;/span&gt;
+      &lt;% end %&gt;
+    &lt;/p&gt;
+
+    &lt;% if @inputs['Content Details'] %&gt;
+    &lt;p style="font-size: 14px; color: #11005E;"&gt;&lt;%= @inputs['Content Details'] %&gt;&lt;/p&gt;
+    &lt;% end %&gt;
+  &lt;/td&gt;
+&lt;/tr&gt;</parameter>
+                </parameters>
+                <messages></messages>
+                <dependents>
+                    <task label="" type="Complete" value="">utilities_echo_v1_10</task>
+                </dependents>
+            </task>
+            <task definition_id="utilities_echo_v1" id="utilities_echo_v1_10" name="Email Action Button" x="276" y="376.5">
+                <version>1</version>
+                <configured>true</configured>
+                <defers>false</defers>
+                <deferrable>false</deferrable>
+                <visible>true</visible>
+                <parameters>
+                    <parameter dependsOnId="" dependsOnValue="" id="input" label="Input" menu="" required="true" tooltip="">&lt;tr&gt;
+  &lt;td style="padding-top: 24px; text-align: center"&gt;
+    &lt;% if @inputs['Action Button Label'] and @inputs['Action Button URL'] %&gt;
+    &lt;a
+      href="&lt;%= @inputs['Action Button URL'] %&gt;"
+      style="
+      background-color: #f4ef89;
+        color: #11005e;
+        border: 0.5px solid #11005e;
+        max-width: 284px;
+        width:  90%;
+        height: auto;
+        min-height: 52px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 16px;
+        text-decoration: none;
+        box-sizing: border-box;
+        padding: 15px;
+        margin-bottom: 10px;
+        display: inline-block;
+        text-align: center;
+      "
+    &gt;
+      &lt;%= @inputs['Action Button Label'] %&gt;
+    &lt;/a&gt;
+  &lt;% end %&gt;
+  &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;%=</parameter>
+                </parameters>
+                <messages></messages>
+                <dependents>
+                    <task label="" type="Complete" value="">utilities_echo_v1_4</task>
+                </dependents>
+            </task>
+        </request>
+    </taskTree>
+</tree>

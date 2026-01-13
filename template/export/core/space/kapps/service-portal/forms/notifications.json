@@ -1,0 +1,167 @@
+{
+  "anonymous": false,
+  "attributes": [],
+  "bridgedResources": [],
+  "categorizations": [],
+  "customHeadContent": null,
+  "description": "",
+  "indexDefinitions": [
+    {
+      "name": "closedBy",
+      "parts": [
+        "closedBy"
+      ],
+      "unique": false
+    },
+    {
+      "name": "createdBy",
+      "parts": [
+        "createdBy"
+      ],
+      "unique": false
+    },
+    {
+      "name": "handle",
+      "parts": [
+        "handle"
+      ],
+      "unique": false
+    },
+    {
+      "name": "submittedBy",
+      "parts": [
+        "submittedBy"
+      ],
+      "unique": false
+    },
+    {
+      "name": "updatedBy",
+      "parts": [
+        "updatedBy"
+      ],
+      "unique": false
+    },
+    {
+      "name": "values[Type]",
+      "parts": [
+        "values[Type]"
+      ],
+      "unique": false
+    }
+  ],
+  "integrations": [
+    {
+      "connectionId": "7f1f8282-4603-4552-a006-30553d2466c8",
+      "inputMappings": {},
+      "name": "Notification Date Formats",
+      "operationId": "20914f71-72de-4e58-93f0-6ce50ae850a2"
+    },
+    {
+      "connectionId": "7f1f8282-4603-4552-a006-30553d2466c8",
+      "inputMappings": {},
+      "name": "Notification Snippets",
+      "operationId": "1ab9e768-20b3-4bcd-9824-9d8527597d2b"
+    },
+    {
+      "connectionId": "7f1f8282-4603-4552-a006-30553d2466c8",
+      "inputMappings": {},
+      "name": "Notification Templates",
+      "operationId": "acb41442-2507-4f74-854e-2aee887936fe"
+    }
+  ],
+  "name": "Notifications",
+  "notes": null,
+  "pages": [
+    {
+      "advanceCondition": null,
+      "displayCondition": null,
+      "displayPage": null,
+      "elements": [
+        {
+          "enabled": true,
+          "dataType": "string",
+          "defaultDataSource": "none",
+          "requiredMessage": null,
+          "name": "Type",
+          "choicesResourceName": null,
+          "omitWhenHidden": null,
+          "renderAttributes": {},
+          "renderType": "radio",
+          "pattern": null,
+          "defaultValue": "Template",
+          "visible": true,
+          "choices": [
+            {
+              "label": "Template",
+              "value": "Template"
+            },
+            {
+              "label": "Snippet",
+              "value": "Snippet"
+            },
+            {
+              "label": "Date Formats",
+              "value": "Date Formats"
+            }
+          ],
+          "label": "Type",
+          "choicesResourceProperty": null,
+          "choicesRunIf": null,
+          "constraints": [],
+          "choicesDataSource": "custom",
+          "events": [],
+          "defaultResourceName": null,
+          "type": "field",
+          "key": "b995c4afccdf42e791d0463fbdc416b3",
+          "required": false
+        },
+        {
+          "type": "content",
+          "renderType": "html",
+          "name": "Notification Table",
+          "text": null,
+          "visible": "values('Type') === \"Template\"",
+          "renderAttributes": {}
+        },
+        {
+          "type": "content",
+          "renderType": "html",
+          "name": "Notification Snippets Table",
+          "text": null,
+          "visible": "values('Type') === \"Snippet\"",
+          "renderAttributes": {}
+        },
+        {
+          "type": "content",
+          "renderType": "html",
+          "name": "Notification Template Dates Table",
+          "text": null,
+          "visible": "values('Type') === \"Date Formats\"",
+          "renderAttributes": {}
+        }
+      ],
+      "events": [],
+      "name": "Page 1",
+      "renderType": "submittable",
+      "type": "page"
+    }
+  ],
+  "securityPolicies": [
+    {
+      "endpoint": "Display",
+      "name": "Data Admins"
+    },
+    {
+      "endpoint": "Submission Access",
+      "name": "Data Admins"
+    },
+    {
+      "endpoint": "Submission Modification",
+      "name": "Data Admins"
+    }
+  ],
+  "slug": "notifications",
+  "status": "New",
+  "submissionLabelExpression": "",
+  "type": null
+}

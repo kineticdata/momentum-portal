@@ -1,0 +1,308 @@
+{
+  "anonymous": false,
+  "attributes": [
+    {
+      "name": "Icon",
+      "values": [
+        "user-plus"
+      ]
+    },
+    {
+      "name": "Owning Team",
+      "values": [
+        "Administration"
+      ]
+    }
+  ],
+  "bridgedResources": [],
+  "categorizations": [],
+  "customHeadContent": null,
+  "description": "Create a new user in the Kinetic Platform",
+  "indexDefinitions": [
+    {
+      "name": "createdBy",
+      "parts": [
+        "createdBy"
+      ],
+      "unique": false
+    },
+    {
+      "name": "submittedBy",
+      "parts": [
+        "submittedBy"
+      ],
+      "unique": false
+    },
+    {
+      "name": "values[Requested By]",
+      "parts": [
+        "values[Requested By]"
+      ],
+      "unique": false
+    },
+    {
+      "name": "values[Status]",
+      "parts": [
+        "values[Status]"
+      ],
+      "unique": false
+    },
+    {
+      "name": "values[User Email]",
+      "parts": [
+        "values[User Email]"
+      ],
+      "unique": false
+    },
+    {
+      "name": "values[User Username]",
+      "parts": [
+        "values[User Username]"
+      ],
+      "unique": false
+    }
+  ],
+  "integrations": [],
+  "name": "User Creation Form - Aerynne",
+  "notes": null,
+  "pages": [
+    {
+      "advanceCondition": null,
+      "displayCondition": null,
+      "displayPage": null,
+      "elements": [
+        {
+          "type": "section",
+          "renderType": null,
+          "name": "User Information",
+          "title": "User Information",
+          "visible": true,
+          "omitWhenHidden": null,
+          "renderAttributes": {},
+          "elements": [
+            {
+              "enabled": true,
+              "dataType": "string",
+              "defaultDataSource": "none",
+              "requiredMessage": "Display Name is required.",
+              "name": "User Display Name",
+              "omitWhenHidden": null,
+              "renderAttributes": {
+                "placeholder": "Enter user's full name"
+              },
+              "renderType": "text",
+              "pattern": null,
+              "defaultValue": null,
+              "visible": true,
+              "label": "Display Name",
+              "constraints": [],
+              "events": [],
+              "rows": 1,
+              "defaultResourceName": null,
+              "type": "field",
+              "key": "f001",
+              "required": true
+            },
+            {
+              "enabled": true,
+              "dataType": "string",
+              "defaultDataSource": "none",
+              "requiredMessage": "Email is required.",
+              "name": "User Email",
+              "omitWhenHidden": null,
+              "renderAttributes": {
+                "placeholder": "user@example.com"
+              },
+              "renderType": "text",
+              "pattern": {
+                "regex": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+                "message": "Must be a valid email address."
+              },
+              "defaultValue": null,
+              "visible": true,
+              "label": "Email",
+              "constraints": [],
+              "events": [],
+              "rows": 1,
+              "defaultResourceName": null,
+              "type": "field",
+              "key": "f002",
+              "required": true
+            },
+            {
+              "enabled": true,
+              "dataType": "string",
+              "defaultDataSource": "none",
+              "requiredMessage": "Username is required.",
+              "name": "User Username",
+              "omitWhenHidden": null,
+              "renderAttributes": {
+                "placeholder": "Enter username"
+              },
+              "renderType": "text",
+              "pattern": null,
+              "defaultValue": null,
+              "visible": true,
+              "label": "Username",
+              "constraints": [],
+              "events": [],
+              "rows": 1,
+              "defaultResourceName": null,
+              "type": "field",
+              "key": "f003",
+              "required": true
+            },
+            {
+              "enabled": true,
+              "dataType": "json",
+              "defaultDataSource": "none",
+              "requiredMessage": null,
+              "name": "Space Admin",
+              "choicesResourceName": null,
+              "omitWhenHidden": null,
+              "renderAttributes": {},
+              "renderType": "checkbox",
+              "pattern": null,
+              "defaultValue": null,
+              "visible": true,
+              "choices": [
+                {
+                  "label": "Grant Space Admin privileges to this user",
+                  "value": "true"
+                }
+              ],
+              "label": "Space Admin",
+              "choicesRunIf": null,
+              "constraints": [],
+              "choicesDataSource": "custom",
+              "events": [],
+              "defaultResourceName": null,
+              "type": "field",
+              "key": "f004",
+              "required": false
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "renderType": null,
+          "name": "Footer",
+          "title": null,
+          "visible": true,
+          "omitWhenHidden": null,
+          "renderAttributes": {
+            "class": "text-right"
+          },
+          "elements": [
+            {
+              "type": "button",
+              "label": "Save",
+              "name": "Save",
+              "visible": true,
+              "enabled": true,
+              "renderType": "save",
+              "renderAttributes": {}
+            },
+            {
+              "type": "button",
+              "label": "Submit",
+              "name": "Submit",
+              "visible": true,
+              "enabled": true,
+              "renderType": "submit-page",
+              "renderAttributes": {}
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "renderType": null,
+          "name": "Hidden System Questions Do Not Delete",
+          "title": "Hidden System Questions Do Not Delete",
+          "visible": false,
+          "omitWhenHidden": false,
+          "renderAttributes": {},
+          "elements": [
+            {
+              "enabled": true,
+              "dataType": "string",
+              "defaultDataSource": "none",
+              "requiredMessage": null,
+              "name": "Requested By",
+              "omitWhenHidden": null,
+              "renderAttributes": {},
+              "renderType": "text",
+              "pattern": null,
+              "defaultValue": "${identity('username')}",
+              "visible": true,
+              "label": "Requested By",
+              "constraints": [],
+              "events": [],
+              "rows": 1,
+              "defaultResourceName": null,
+              "type": "field",
+              "key": "f005",
+              "required": false
+            },
+            {
+              "enabled": true,
+              "dataType": "string",
+              "defaultDataSource": "none",
+              "requiredMessage": null,
+              "name": "Requested By Display Name",
+              "omitWhenHidden": null,
+              "renderAttributes": {},
+              "renderType": "text",
+              "pattern": null,
+              "defaultValue": "${identity('displayName')}",
+              "visible": true,
+              "label": "Requested By Display Name",
+              "constraints": [],
+              "events": [],
+              "rows": 1,
+              "defaultResourceName": null,
+              "type": "field",
+              "key": "f006",
+              "required": false
+            },
+            {
+              "enabled": true,
+              "dataType": "string",
+              "defaultDataSource": "none",
+              "requiredMessage": null,
+              "name": "Status",
+              "omitWhenHidden": null,
+              "renderAttributes": {},
+              "renderType": "text",
+              "pattern": null,
+              "defaultValue": "Draft",
+              "visible": true,
+              "label": "Status",
+              "constraints": [],
+              "events": [],
+              "rows": 1,
+              "defaultResourceName": null,
+              "type": "field",
+              "key": "f007",
+              "required": false
+            }
+          ]
+        }
+      ],
+      "events": [],
+      "name": "User Creation",
+      "renderType": "submittable",
+      "type": "page"
+    }
+  ],
+  "securityPolicies": [
+    {
+      "endpoint": "Display",
+      "name": "Authenticated Users"
+    }
+  ],
+  "slug": "user-creation-form",
+  "status": "Active",
+  "submissionLabelExpression": "User: ${values('User Username')}",
+  "type": "Service"
+}
