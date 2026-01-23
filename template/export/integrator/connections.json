@@ -25,7 +25,7 @@
           "path": "/submissions/{{Submission Id*}}",
           "params": {},
           "body": {
-            "raw": "{  \n  {{#Core State}}\n    \"coreState\": \"{{Core State}}\",\n  {{/Core State}}\n  {{#Current Page}}\n    \"currentPage\": {\n          \"name\": \"{{Current Page}}\"\n    },\n  {{/Current Page}}\n  \"label\": \"{{Label}}\",  \n  \"type\": \"{{Type}}\",  \n  \"values\": {{{Values}}},\n  {{#Origin}}\n    \"origin\": {\n        \"id\": \"{{Origin}}\"\n    },\n  {{/Origin}}\n  {{#Parent}}\n    \"parent\": {\n        \"id\": \"{{Parent}}\"\n    },\n  {{/Parent}}\n}",
+            "raw": "{  \n  {{#Core State}}\n    \"coreState\": \"{{Core State}}\",\n  {{/Core State}}\n  {{#Current Page}}\n    \"currentPage\": {\n          \"name\": \"{{Current Page}}\"\n    },\n  {{/Current Page}}\n  \"label\": \"{{Label}}\",  \n  \"type\": \"{{Type}}\",  \n  \"values\": {{{Values [object]}}},\n  {{#Origin}}\n    \"origin\": {\n        \"id\": \"{{Origin}}\"\n    },\n  {{/Origin}}\n  {{#Parent}}\n    \"parent\": {\n        \"id\": \"{{Parent}}\"\n    },\n  {{/Parent}}\n}",
             "bodyType": "raw"
           },
           "headers": {
@@ -41,88 +41,12 @@
         "outputs": {
           "Id": {
             "value": "body.submission?.id"
-          }
-        },
-        "documentationLink": "",
-        "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
-        "notes": ""
-      },
-      {
-        "id": "ea6546cb-e8e7-4083-85c9-cb535b81e58a",
-        "name": "Get form Approvers by Submission Id",
-        "config": {
-          "path": "/submissions/{{Submission Id}}",
-          "params": {
-            "include": "form.attributesMap"
           },
-          "body": {
-            "form": {
-              "body": "{}"
-            },
-            "bodyType": "www_form_urlencoded"
+          "_Error": {
+            "value": "body.error"
           },
-          "headers": {
-            "content-type": "application/json"
-          },
-          "configType": "http",
-          "method": "GET",
-          "includeEmptyParams": false,
-          "followRedirect": false,
-          "streamResponse": false
-        },
-        "outputs": {
-          "Approvers": {
-            "value": "body.submission.form.attributesMap.Approvers[0].split(\",\")"
-          }
-        },
-        "documentationLink": "",
-        "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
-        "notes": ""
-      },
-      {
-        "id": "e20b8b5d-da67-410b-a527-bd3ae1cfe07b",
-        "name": "Get Team",
-        "config": {
-          "path": "teams/{{Slug}}",
-          "params": {
-            "include": "details,attributesMap,memberships,memberships.user"
-          },
-          "body": {
-            "form": {},
-            "bodyType": "www_form_urlencoded"
-          },
-          "headers": {
-            "content-type": "application/json"
-          },
-          "configType": "http",
-          "method": "GET",
-          "includeEmptyParams": false,
-          "followRedirect": false,
-          "streamResponse": false
-        },
-        "outputs": {
-          "Description": {
-            "value": "body.team?.description"
-          },
-          "Manager": {
-            "value": "body.team?.attributesMap.Manager[0]"
-          },
-          "Member Email List": {
-            "value": "body.team?.memberships.map(m => m.user.email).join(',')"
-          },
-          "Memberships": {
-            "children": {
-              "User Display Name": "current.user['displayName']",
-              "User Email": "current.user['email']",
-              "User Name": "current.user['username']"
-            },
-            "value": "body.team?.memberships"
-          },
-          "Name": {
-            "value": "body.team?.name"
-          },
-          "Slug": {
-            "value": "body.team?.slug"
+          "_Status Code": {
+            "value": "statusCode"
           }
         },
         "documentationLink": "",
@@ -131,11 +55,11 @@
       },
       {
         "id": "771f279a-988d-4b91-9b8f-85861c5c13fe",
-        "name": "Get User",
+        "name": "Retrieve User",
         "config": {
           "path": "/users/{{Username}}",
           "params": {
-            "include": "details,attributesMap"
+            "include": "{{Include}}"
           },
           "body": {
             "form": {},
@@ -204,36 +128,12 @@
         "notes": ""
       },
       {
-        "id": "018c5373-af69-48f2-9ebb-5870ec8a4e3b",
-        "name": "Get Form Attributes Map",
-        "config": {
-          "path": "/kapps/{{Kapp Slug}}/forms/{{Form Slug}}",
-          "params": {
-            "include": "attributesMap"
-          },
-          "body": {
-            "form": {},
-            "bodyType": "www_form_urlencoded"
-          },
-          "headers": {},
-          "configType": "http",
-          "method": "GET",
-          "includeEmptyParams": false,
-          "followRedirect": false,
-          "streamResponse": false
-        },
-        "outputs": {},
-        "documentationLink": "",
-        "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
-        "notes": ""
-      },
-      {
         "id": "7ad51a20-8bab-422b-a0f7-247e082dccd5",
-        "name": "Get Space",
+        "name": "*UPDATE ME* Get Space",
         "config": {
           "path": "/space",
           "params": {
-            "include": "details,attributesMap"
+            "include": "{{Include}}"
           },
           "body": {
             "form": {},
@@ -248,43 +148,15 @@
         },
         "outputs": {
           "Attributes Map": {
-            "value": "body.space['attributesMap']"
+            "value": "body.space?.attributesMap"
           },
           "Name": {
-            "value": "body.space['name']"
+            "value": "body.space?.name"
           },
           "Slug": {
-            "value": "body.space['slug']"
-          },
-          "Web Server Url": {
-            "value": "body.space['attributesMap']['Web Server Url'][0]"
+            "value": "body.space?.slug"
           }
         },
-        "documentationLink": "",
-        "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
-        "notes": ""
-      },
-      {
-        "id": "0ef69bcb-c052-4b16-9814-166c3eef85ed",
-        "name": "Update Submission - Values Only",
-        "config": {
-          "path": "/submissions/{{Submission Id}}",
-          "params": {},
-          "body": {
-            "raw": "{  \"values\":  {{{Values}}}  }",
-            "bodyType": "raw"
-          },
-          "headers": {
-            "accept": "application/json",
-            "content-type": "application/json"
-          },
-          "configType": "http",
-          "method": "PUT",
-          "includeEmptyParams": false,
-          "followRedirect": false,
-          "streamResponse": false
-        },
-        "outputs": {},
         "documentationLink": "",
         "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
         "notes": ""
@@ -390,48 +262,16 @@
         "notes": ""
       },
       {
-        "id": "9c3a3309-536e-4e3d-a3b3-be072d652a51",
-        "name": "List Departments",
-        "config": {
-          "path": "/teams",
-          "params": {
-            "include": "attributesMap",
-            "q": "name =* \"Departments::\""
-          },
-          "body": {
-            "form": {},
-            "bodyType": "www_form_urlencoded"
-          },
-          "headers": {},
-          "configType": "http",
-          "method": "GET",
-          "includeEmptyParams": false,
-          "followRedirect": false,
-          "streamResponse": false
-        },
-        "outputs": {
-          "Departments": {
-            "children": {
-              "Full Name": "current['name']",
-              "Manager": "current['attributesMap']['Manager'][0]",
-              "Name": "current['name'].replace(\"Departments::\", \"\")",
-              "Slug": "current['slug']"
-            },
-            "value": "body.teams"
-          }
-        },
-        "documentationLink": "",
-        "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
-        "notes": ""
-      },
-      {
         "id": "625584c3-32e0-415f-a181-4405057e5fca",
         "name": "Search Users",
         "config": {
           "path": "/users",
           "params": {
-            "include": "attributesMap,profileAttributesMap",
-            "q": "(username =* \"{{query}}\" OR email =* \"{{query}}\"  OR displayName =* \"{{query}}\")"
+            "direction": "{[Direction  [ASC, DESC]}}",
+            "include": "{{Include}}",
+            "limit": "{{Limit [0-1000]}}",
+            "orderby": "{{orderBy}}",
+            "q": "{{Query}}"
           },
           "body": {
             "form": {},
@@ -449,43 +289,6 @@
             "value": "body.error"
           },
           "users": {
-            "value": "body.users"
-          }
-        },
-        "documentationLink": "",
-        "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
-        "notes": ""
-      },
-      {
-        "id": "16f70295-86eb-4624-b2f8-7bc2fa62de96",
-        "name": "List Users",
-        "config": {
-          "path": "/users/",
-          "params": {
-            "include": "attributesMap"
-          },
-          "body": {
-            "raw": "",
-            "bodyType": "raw"
-          },
-          "headers": {
-            "accept": "application/json",
-            "content-type": "application/json"
-          },
-          "configType": "http",
-          "method": "GET",
-          "includeEmptyParams": false,
-          "followRedirect": false,
-          "streamResponse": false
-        },
-        "outputs": {
-          "Users": {
-            "children": {
-              "Attributes": "current.attributesMap",
-              "Display Name": "current.displayName",
-              "Email": "current.email",
-              "Username": "current.username"
-            },
             "value": "body.users"
           }
         },
@@ -513,46 +316,6 @@
         "outputs": {
           "Token": {
             "value": "body.token"
-          }
-        },
-        "documentationLink": "",
-        "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
-        "notes": ""
-      },
-      {
-        "id": "cb8cbf5b-a370-4318-b3da-3d254501a4f5",
-        "name": "List Submissions by Form",
-        "config": {
-          "path": "/kapps/{{Kapp Slug}}/forms/{{Form Slug}}/submissions",
-          "params": {
-            "include": "details,values,form"
-          },
-          "body": {
-            "form": {},
-            "bodyType": "www_form_urlencoded"
-          },
-          "headers": {
-            "content-type": "application/json"
-          },
-          "configType": "http",
-          "method": "GET",
-          "includeEmptyParams": false,
-          "followRedirect": false,
-          "streamResponse": false
-        },
-        "outputs": {
-          "Data": {
-            "children": {
-              "Core State": "current.coreState",
-              "Handle": "current.handle",
-              "Label": "current.label",
-              "Submission Id": "current.id",
-              "Values": "current.values"
-            },
-            "value": "body['submissions']"
-          },
-          "Error": {
-            "value": "body['error']"
           }
         },
         "documentationLink": "",
@@ -601,85 +364,13 @@
         "notes": ""
       },
       {
-        "id": "06bbb405-688b-40f9-be1d-d8ebfcfd684d",
-        "name": "Query Submissions",
-        "config": {
-          "path": "/kapps/{{Kapp Slug}}/forms/{{Form Slug}}/submissions",
-          "params": {
-            "count": "{{Count}}",
-            "direction": "{{Direction}}",
-            "include": "{{Includes}}",
-            "limit": "{{Limit}}",
-            "orderBy": "{{Order By}}",
-            "pageToken": "{{Page Token}}",
-            "q": "{{Query}}"
-          },
-          "body": {
-            "form": {},
-            "bodyType": "www_form_urlencoded"
-          },
-          "headers": {
-            "content-type": "application/json"
-          },
-          "configType": "http",
-          "method": "GET",
-          "includeEmptyParams": false,
-          "followRedirect": false,
-          "streamResponse": false
-        },
-        "outputs": {
-          "Submissions": {
-            "children": {
-              "Activities": "current.activities",
-              "Children": "current.children",
-              "Core State": "current.coreState",
-              "Created At": "current.createdAt",
-              "Created By": "current.createdBy",
-              "Descendants": "current.descendants",
-              "Form": "current.form",
-              "Handle": "current.handle",
-              "Label": "current.label",
-              "Origin": "current.origin",
-              "Parent": "current.parent",
-              "Submission Id": "current.id",
-              "Type": "current.type",
-              "Updated At": "current.updatedAt",
-              "Updated By": "current.updatedBy",
-              "Values": "current.values"
-            },
-            "value": "body.submissions"
-          },
-          "_Correlation ID": {
-            "value": "me"
-          },
-          "_Count": {
-            "value": "body.submissions?.length ?? 0"
-          },
-          "_Error": {
-            "value": "body.error"
-          },
-          "_Exists": {
-            "value": "body.submissions?.length > 0"
-          },
-          "_Message": {
-            "value": "body.message"
-          },
-          "_Status Code": {
-            "value": "statusCode"
-          }
-        },
-        "documentationLink": "",
-        "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
-        "notes": ""
-      },
-      {
         "id": "e382ceff-2ac0-4541-b8aa-1c49d9580c42",
         "name": "Create User",
         "config": {
           "path": "/users",
           "params": {},
           "body": {
-            "raw": "{\n  \"username\":\"{{Username}}\",\n  \"email\":\"{{Email}}\",\n  \"displayName\":\"{{Display Name}}\",\n  \"spaceAdmin\":{{Is Space Admin [true or false]}},\n  \"enabled\": {{Enabled [true or false]}},\n  {{#Password}}\n    \"password\":\"{{Password}}\"\n  {{/Password}},\n  {{#Attributes Map [Optional]}}\n    \"attributesMap\":{{{Attributes Map [Optional]}}}\n  {{/Attributes Map [Optional]}},\n  {{#Profile Attributes Map [Optional]}}\n    \"profileAttributesMap\":{{{Profile Attributes Map [Optional]}}}\n  {{/Profile Attributes Map [Optional]}},\n  {{#Memberships [Optional]}}\n    \"memberships\":{{{Memberships [Optional]}}}\n  {{/Memberships [Optional]}}\n}",
+            "raw": "{\n  \"username\":\"{{Username}}\",\n  \"email\":\"{{Email}}\",\n  \"displayName\":\"{{Display Name}}\",\n  \"spaceAdmin\":{{Is Space Admin [true/false]}},\n  \"enabled\": {{Enabled [true/false]}},\n  {{#Password}}\n    \"password\":\"{{Password}}\"\n  {{/Password}},\n  {{#Attributes Map [Optional]}}\n    \"attributesMap\":{{{Attributes Map [Object]}}}\n  {{/Attributes Map [Object]}},\n  {{#Profile Attributes Map [Object]}}\n    \"profileAttributesMap\":{{{Profile Attributes Map [Object]}}}\n  {{/Profile Attributes Map [Object]}},\n  {{#Memberships [Array of Objects]}}\n    \"memberships\":{{{Memberships [Array of Objects]}}}\n  {{/Memberships [Array of Objects]}}\n}",
             "bodyType": "raw"
           },
           "headers": {
@@ -716,10 +407,10 @@
         "config": {
           "path": "teams",
           "params": {
-            "include": "details,attributesMap,attributes,memberships"
+            "include": "{{Include}}"
           },
           "body": {
-            "raw": "{ \n  \"name\":\"{{Name}}\", \n  \"description\": \"{{Description}}\",\n  {{#Attributes Map [Optional]}}\n    \"attributesMap\":{{{Attributes Map [Optional]}}}\n  {{/Attributes Map [Optional]}},\n  {{#Memberships [Optional]}}\n    \"memberships\":{{{Memberships [Optional]}}}\n  {{/Memberships [Optional]}},\n}",
+            "raw": "{ \n  \"name\":\"{{Name}}\", \n  \"description\": \"{{Description}}\",\n  {{#Attributes Map [Object]}}\n    \"attributesMap\":{{{Attributes Map [Object]}}}\n  {{/Attributes Map [Object]}},\n  {{#Memberships [Array of Objects]}}\n    \"memberships\":{{{Memberships [Array of Objects]}}}\n  {{/Memberships [Array of Objects]}},\n}",
             "bodyType": "raw"
           },
           "headers": {
@@ -738,14 +429,8 @@
           "_Correlation Id": {
             "value": "body.correlationId"
           },
-          "_Error Key": {
-            "value": "body.errorKey"
-          },
           "_Errror": {
             "value": "body.error"
-          },
-          "_Message": {
-            "value": "body.message"
           },
           "_Status Code": {
             "value": "statusCode"
@@ -759,12 +444,10 @@
         "id": "5bb1c214-a071-4020-8e9c-5dbef659b883",
         "name": "Delete Team",
         "config": {
-          "path": "teams/ed0482c4a3d0f4065cad69c3614eb03f",
-          "params": {
-            "include": "details,attributesMap,memberships,memberships.user"
-          },
+          "path": "teams/{{Slug*}}",
+          "params": {},
           "body": {
-            "raw": "{\n\n}",
+            "raw": "",
             "bodyType": "raw"
           },
           "headers": {
@@ -777,26 +460,11 @@
           "streamResponse": false
         },
         "outputs": {
-          "Name": {
-            "value": "body.team?.name"
-          },
-          "_Correlation Id": {
-            "value": "body.correlationId"
-          },
-          "_Error Key": {
-            "value": "body.errorKey"
-          },
           "_Errror": {
             "value": "body.error"
           },
-          "_Message": {
-            "value": "body.message"
-          },
           "_Status Code": {
-            "value": "body.statusCode"
-          },
-          "slug": {
-            "value": "body.slug"
+            "value": "statusCode"
           }
         },
         "documentationLink": "",
@@ -805,17 +473,16 @@
       },
       {
         "id": "c69716b8-f9dc-45f1-ab3f-2eed5d2a22b8",
-        "name": "Get Submission",
+        "name": "Retrieve Submission",
         "config": {
-          "path": "/submissions/{{Submission Id}}",
+          "path": "/submissions/{{Submission Id*}}",
           "params": {
-            "count": "{{Count}}",
-            "direction": "{{Direction}}",
+            "count": "{{Count [true/false]}}",
+            "direction": "{[Direction  [ASC, DESC]}}",
             "include": "{{Include}}",
-            "limit": "{{Limit}}",
+            "limit": "{{Limit [0-1000]}}",
             "orderBy": "{{Order By}}",
-            "pageToken": "{{Page Token}}",
-            "q": "{{Query}}"
+            "pageToken": "{{Page Token}}"
           },
           "body": {
             "form": {},
@@ -832,7 +499,7 @@
         },
         "outputs": {
           "Activities": {
-            "value": "body.submission.activities"
+            "value": "body.submission?.activities"
           },
           "Children": {
             "value": "body.submsission?.children"
@@ -904,7 +571,7 @@
             "value": "body.correlationId"
           },
           "_Count": {
-            "value": "body? 1 : 0"
+            "value": "body.submission ? 1 : 0"
           },
           "_Error": {
             "value": "body.error"
@@ -912,8 +579,604 @@
           "_Exists": {
             "value": "!!body.submission"
           },
-          "_Message": {
-            "value": "body.messages"
+          "_Status Code": {
+            "value": "statusCode"
+          }
+        },
+        "documentationLink": "",
+        "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
+        "notes": ""
+      },
+      {
+        "id": "16f70295-86eb-4624-b2f8-7bc2fa62de96",
+        "name": "List Users",
+        "config": {
+          "path": "/users/",
+          "params": {
+            "direction": "{[Direction  [ASC, DESC]}}",
+            "include": "{{Include}}",
+            "limit": "{{Limit [0-100]}}",
+            "orderBy": "{{Order By}}"
+          },
+          "body": {
+            "raw": "",
+            "bodyType": "raw"
+          },
+          "headers": {
+            "accept": "application/json",
+            "content-type": "application/json"
+          },
+          "configType": "http",
+          "method": "GET",
+          "includeEmptyParams": false,
+          "followRedirect": false,
+          "streamResponse": false
+        },
+        "outputs": {
+          "Users": {
+            "children": {
+              "Attributes": "current.attributesMap",
+              "Display Name": "current.displayName",
+              "Email": "current.email",
+              "Username": "current.username"
+            },
+            "value": "body.users"
+          }
+        },
+        "documentationLink": "",
+        "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
+        "notes": ""
+      },
+      {
+        "id": "e6612cf0-8136-4049-a39c-88ccd835edbe",
+        "name": "Search Submissions - by Kapp",
+        "config": {
+          "path": "/kapps/{{Kapp*}}/submissions-search",
+          "params": {
+            "count": "{{Count [true/false]}}",
+            "direction": "{{Direction  [ASC, DESC]}}",
+            "include": "{{Include}}",
+            "limit": "{{Limit [0-1000]}}",
+            "orderBy": "{{Order By}}",
+            "q": "{{Query}}"
+          },
+          "body": {
+            "form": {},
+            "bodyType": "www_form_urlencoded"
+          },
+          "headers": {
+            "content-type": "application/json"
+          },
+          "configType": "http",
+          "method": "POST",
+          "includeEmptyParams": false,
+          "followRedirect": false,
+          "streamResponse": false
+        },
+        "outputs": {
+          "Submissions": {
+            "children": {
+              "Activities": "current['activities']",
+              "Children": "current['children']",
+              "Closed At": "current['closedAt']",
+              "Closed By": "current['closedBy']",
+              "Core State": "current['coreState']",
+              "Created At": "current['createdAt']",
+              "Created By": "current['createdBy']",
+              "Current Page": "current['currentPage']",
+              "Descendants": "current['descendants']",
+              "Displayed Page": "current['displayedPage']",
+              "Form": "current['form']",
+              "Handle": "current['handle']",
+              "Id": "current['id']",
+              "Label": "current['label']",
+              "Origin": "current['origin']",
+              "Parent": "current['parent']",
+              "Submission Id": "current['id']",
+              "SubmittedAt": "current['submittedAt']",
+              "SubmittedBy": "current['submittedBy']",
+              "Type": "current['type']",
+              "UpdatedAt": "current['updatedAt']",
+              "UpdatedBy": "current['updatedBy']",
+              "Values": "current['values']"
+            },
+            "value": "body.submissions"
+          },
+          "_Correlation Id": {
+            "value": "body.correlationId"
+          },
+          "_Count": {
+            "value": "body.submissions?.length ?? 0"
+          },
+          "_Error": {
+            "value": "body.error"
+          },
+          "_Exists": {
+            "value": "body.submissions?.length > 0"
+          },
+          "_Status Code": {
+            "value": "statusCode"
+          }
+        },
+        "documentationLink": "",
+        "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
+        "notes": ""
+      },
+      {
+        "id": "651666f6-a381-4230-b3c5-11457fd15a92",
+        "name": "Search Submissions - by Form",
+        "config": {
+          "path": "/kapps/{{Kapp*}}/forms/{{Form*}}/submissions-search",
+          "params": {
+            "count": "{{Count [true/false]}}",
+            "direction": "{[Direction  [ASC, DESC]}}",
+            "include": "{{Include}}",
+            "limit": "{{Limit [0-1000]}}",
+            "orderBy": "{{Order By}}",
+            "q": "{{Query}}"
+          },
+          "body": {
+            "form": {},
+            "bodyType": "www_form_urlencoded"
+          },
+          "headers": {
+            "content-type": "application/json"
+          },
+          "configType": "http",
+          "method": "POST",
+          "includeEmptyParams": false,
+          "followRedirect": false,
+          "streamResponse": false
+        },
+        "outputs": {
+          "Submissions": {
+            "children": {
+              "Activities": "current['activities']",
+              "Children": "current['children']",
+              "Closed At": "current['closedAt']",
+              "Closed By": "current['closedBy']",
+              "Core State": "current['coreState']",
+              "Created At": "current['createdAt']",
+              "Created By": "current['createdBy']",
+              "Current Page": "current['currentPage']",
+              "Descendants": "current['descendants']",
+              "Displayed Page": "current['displayedPage']",
+              "Form": "current['form']",
+              "Handle": "current['handle']",
+              "Id": "current['id']",
+              "Label": "current['label']",
+              "Origin": "current['origin']",
+              "Parent": "current['parent']",
+              "Submission Id": "current['id']",
+              "SubmittedAt": "current['submittedAt']",
+              "SubmittedBy": "current['submittedBy']",
+              "Type": "current['type']",
+              "UpdatedAt": "current['updatedAt']",
+              "UpdatedBy": "current['updatedBy']",
+              "Values": "current['values']"
+            },
+            "value": "body.submissions"
+          },
+          "_Correlation Id": {
+            "value": "body.correlationId"
+          },
+          "_Count": {
+            "value": "body.submissions?.length ?? 0"
+          },
+          "_Error": {
+            "value": "body.error"
+          },
+          "_Exists": {
+            "value": "body.submissions?.length > 0"
+          },
+          "_Status Code": {
+            "value": "statusCode"
+          }
+        },
+        "documentationLink": "",
+        "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
+        "notes": ""
+      },
+      {
+        "id": "2df289ae-9be4-456a-a47f-66771a4bace2",
+        "name": "Create Submission",
+        "config": {
+          "path": "/kapps/{{Kapp*}}/forms/{{Form*}}/submissions",
+          "params": {
+            "completed": "{{Completed [true/false]}}",
+            "staged": "{{Staged [true/false]}}"
+          },
+          "body": {
+            "raw": "{  \n  {{#Core State}}\n    \"coreState\": \"{{Core State}}\",\n  {{/Core State}}\n  {{#Current Page}}\n    \"currentPage\": {\n          \"name\": \"{{Current Page}}\"\n    },\n  {{/Current Page}}\n  \"label\": \"{{Label}}\",  \n  \"type\": \"{{Type}}\",  \n  \"values\": {{{Values [object]}}},\n  {{#Origin}}\n    \"origin\": {\n        \"id\": \"{{Origin}}\"\n    },\n  {{/Origin}}\n  {{#Parent}}\n    \"parent\": {\n        \"id\": \"{{Parent}}\"\n    },\n  {{/Parent}}\n}",
+            "bodyType": "raw"
+          },
+          "headers": {
+            "accept": "application/json",
+            "content-type": "application/json"
+          },
+          "configType": "http",
+          "method": "POST",
+          "includeEmptyParams": false,
+          "followRedirect": false,
+          "streamResponse": false
+        },
+        "outputs": {
+          "Id": {
+            "value": "body.submission?.id"
+          },
+          "_Error": {
+            "value": "body.error"
+          },
+          "_Status Code": {
+            "value": "statusCode"
+          }
+        },
+        "documentationLink": "",
+        "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
+        "notes": ""
+      },
+      {
+        "id": "60e27cfb-e5e6-4c6e-b0cf-b89296d0137a",
+        "name": "Patch Submission",
+        "config": {
+          "path": "/submissions/{{Submission Id*}}",
+          "params": {},
+          "body": {
+            "raw": "{  \n  {{#Core State}}\n    \"coreState\": \"{{Core State}}\",\n  {{/Core State}}\n  {{#Current Page}}\n    \"currentPage\": {\n          \"name\": \"{{Current Page}}\"\n    },\n  {{/Current Page}}\n  \"label\": \"{{Label}}\",  \n  \"type\": \"{{Type}}\",  \n  \"values\": {{{Values [object]}}},\n  {{#Origin}}\n    \"origin\": {\n        \"id\": \"{{Origin}}\"\n    },\n  {{/Origin}}\n  {{#Parent}}\n    \"parent\": {\n        \"id\": \"{{Parent}}\"\n    },\n  {{/Parent}}\n}",
+            "bodyType": "raw"
+          },
+          "headers": {
+            "accept": "application/json",
+            "content-type": "application/json"
+          },
+          "configType": "http",
+          "method": "PATCH",
+          "includeEmptyParams": false,
+          "followRedirect": false,
+          "streamResponse": false
+        },
+        "outputs": {
+          "Id": {
+            "value": "body.submission?.id"
+          },
+          "_Error": {
+            "value": "body.error"
+          },
+          "_Status Code": {
+            "value": "statusCode"
+          }
+        },
+        "documentationLink": "",
+        "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
+        "notes": ""
+      },
+      {
+        "id": "dfcefc93-a29f-471e-a131-9a61189083e7",
+        "name": "Delete Submission",
+        "config": {
+          "path": "/submissions/{{Submission Id*}}",
+          "params": {},
+          "body": {
+            "raw": "",
+            "bodyType": "raw"
+          },
+          "headers": {
+            "accept": "application/json",
+            "content-type": "application/json"
+          },
+          "configType": "http",
+          "method": "DELETE",
+          "includeEmptyParams": false,
+          "followRedirect": false,
+          "streamResponse": false
+        },
+        "outputs": {
+          "_Error": {
+            "value": "body.error"
+          },
+          "_Status Code": {
+            "value": "statusCode"
+          }
+        },
+        "documentationLink": "",
+        "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
+        "notes": ""
+      },
+      {
+        "id": "768c3f3a-96fa-4d9b-bd7c-8b51b0cb176f",
+        "name": "Find Submissions by Form and Core State",
+        "config": {
+          "path": "/kapps/{{Kapp*}}/forms/{{Form*}}/submissions",
+          "params": {
+            "count": "{{Count [true/false]}}",
+            "direction": "{[Direction  [ASC, DESC]}}",
+            "include": "{{Include}}",
+            "limit": "{{Limit [0-1000]}}",
+            "orderBy": "{{Order By}}",
+            "pageToken": "{{Page Token}}",
+            "q": "coreState = \"{{Core State*}}\""
+          },
+          "body": {
+            "form": {},
+            "bodyType": "www_form_urlencoded"
+          },
+          "headers": {
+            "content-type": "application/json"
+          },
+          "configType": "http",
+          "method": "GET",
+          "includeEmptyParams": false,
+          "followRedirect": false,
+          "streamResponse": false
+        },
+        "outputs": {
+          "Submissions": {
+            "children": {
+              "Activities": "current['activities']",
+              "Children": "current['children']",
+              "Closed At": "current['closedAt']",
+              "Closed By": "current['closedBy']",
+              "Core State": "current['coreState']",
+              "Created At": "current['createdAt']",
+              "Created By": "current['createdBy']",
+              "Current Page": "current['currentPage']",
+              "Descendants": "current['descendants']",
+              "Displayed Page": "current['displayedPage']",
+              "Form": "current['form']",
+              "Handle": "current['handle']",
+              "Id": "current['id']",
+              "Label": "current['label']",
+              "Origin": "current['origin']",
+              "Parent": "current['parent']",
+              "Submission Id": "current['id']",
+              "SubmittedAt": "current['submittedAt']",
+              "SubmittedBy": "current['submittedBy']",
+              "Type": "current['type']",
+              "UpdatedAt": "current['updatedAt']",
+              "UpdatedBy": "current['updatedBy']",
+              "Values": "current['values']"
+            },
+            "value": "body.submissions"
+          },
+          "_Correlation Id": {
+            "value": "body.correlationId"
+          },
+          "_Count": {
+            "value": "body.submissions?.length ?? 0"
+          },
+          "_Error": {
+            "value": "body.error"
+          },
+          "_Exists": {
+            "value": "body.submissions?.length > 0"
+          },
+          "_Status Code": {
+            "value": "statusCode"
+          }
+        },
+        "documentationLink": "",
+        "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
+        "notes": ""
+      },
+      {
+        "id": "7750b186-952a-4b43-bb85-34913951e5fe",
+        "name": "Search Teams",
+        "config": {
+          "path": "/teams",
+          "params": {
+            "direction": "{[Direction  [ASC, DESC]}}",
+            "include": "{{Include}}",
+            "limit": "{{Limit [0-1000]}}",
+            "orderBy": "{{Order By}}",
+            "q": "{{Query}}"
+          },
+          "body": {
+            "form": {},
+            "bodyType": "www_form_urlencoded"
+          },
+          "headers": {},
+          "configType": "http",
+          "method": "GET",
+          "includeEmptyParams": false,
+          "followRedirect": false,
+          "streamResponse": false
+        },
+        "outputs": {
+          "Teams": {
+            "children": {
+              "Attributes": "current.attributes",
+              "Created At": "current.createdAt",
+              "Created By": "current.createdBy",
+              "Description": "current.description",
+              "Memberships": "current.memberships",
+              "Name": "current.name",
+              "Slug": "current.slug",
+              "Updated At": "current.updatedAt",
+              "Updated By": "current.updatedBy"
+            },
+            "value": "body.teams"
+          },
+          "_Count": {
+            "value": "body.teams?.length ?? 0"
+          },
+          "_Error": {
+            "value": "body.error"
+          },
+          "_Exists": {
+            "value": "body.teams?.length > 0"
+          },
+          "_Status Code": {
+            "value": "statusCode"
+          }
+        },
+        "documentationLink": "",
+        "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
+        "notes": ""
+      },
+      {
+        "id": "c7ff9473-55a4-47e8-a03f-863c16fe9440",
+        "name": "List Teams",
+        "config": {
+          "path": "/teams",
+          "params": {
+            "direction": "{[Direction  [ASC, DESC]}}",
+            "include": "{{Include}}",
+            "limit": "{{Limit [0-1000]}}",
+            "orderBy": "{{Order By}}"
+          },
+          "body": {
+            "form": {},
+            "bodyType": "www_form_urlencoded"
+          },
+          "headers": {},
+          "configType": "http",
+          "method": "GET",
+          "includeEmptyParams": false,
+          "followRedirect": false,
+          "streamResponse": false
+        },
+        "outputs": {
+          "Teams": {
+            "children": {
+              "Attributes": "current.attributes",
+              "Created At": "current.createdAt",
+              "Created By": "current.createdBy",
+              "Description": "current.description",
+              "Memberships": "current.memberships",
+              "Name": "current.name",
+              "Slug": "current.slug",
+              "Updated At": "current.updatedAt",
+              "Updated By": "current.updatedBy"
+            },
+            "value": "body.teams"
+          },
+          "_Count": {
+            "value": "body.teams?.length ?? 0"
+          },
+          "_Error": {
+            "value": "body.error"
+          },
+          "_Exists": {
+            "value": "body.teams?.length > 0"
+          },
+          "_Status Code": {
+            "value": "statusCode"
+          }
+        },
+        "documentationLink": "",
+        "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
+        "notes": ""
+      },
+      {
+        "id": "5555f9e7-d387-4004-be3c-e4ba12ac7f78",
+        "name": "Find Teams by Name",
+        "config": {
+          "path": "/teams",
+          "params": {
+            "direction": "{[Direction  [ASC, DESC]}}",
+            "include": "{{Include}}",
+            "limit": "{{Limit [0-1000]}}",
+            "orderBy": "{{Order By}}",
+            "q": "name = \"{{Name*}}\""
+          },
+          "body": {
+            "form": {},
+            "bodyType": "www_form_urlencoded"
+          },
+          "headers": {},
+          "configType": "http",
+          "method": "GET",
+          "includeEmptyParams": false,
+          "followRedirect": false,
+          "streamResponse": false
+        },
+        "outputs": {
+          "Teams": {
+            "children": {
+              "Attributes": "current.attributes",
+              "Created At": "current.createdAt",
+              "Created By": "current.createdBy",
+              "Description": "current.description",
+              "Memberships": "current.memberships",
+              "Name": "current.name",
+              "Slug": "current.slug",
+              "Updated At": "current.updatedAt",
+              "Updated By": "current.updatedBy"
+            },
+            "value": "body.teams"
+          },
+          "_Count": {
+            "value": "body.teams?.length ?? 0"
+          },
+          "_Error": {
+            "value": "body.error"
+          },
+          "_Exists": {
+            "value": "body.teams?.length > 0"
+          },
+          "_Status Code": {
+            "value": "statusCode"
+          }
+        },
+        "documentationLink": "",
+        "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
+        "notes": ""
+      },
+      {
+        "id": "e20b8b5d-da67-410b-a527-bd3ae1cfe07b",
+        "name": "Retrieve Team",
+        "config": {
+          "path": "/teams/{{Slug*}}",
+          "params": {
+            "include": "{{Include}}"
+          },
+          "body": {
+            "form": {},
+            "bodyType": "www_form_urlencoded"
+          },
+          "headers": {},
+          "configType": "http",
+          "method": "GET",
+          "includeEmptyParams": false,
+          "followRedirect": false,
+          "streamResponse": false
+        },
+        "outputs": {
+          "AttributesMap": {
+            "value": "body.team.attributesMap"
+          },
+          "Created At": {
+            "value": "body.team.createdAt"
+          },
+          "Created By": {
+            "value": "body.team.createdBy"
+          },
+          "Description": {
+            "value": "body.team.description"
+          },
+          "Memberships": {
+            "value": "body.team.memberships"
+          },
+          "Name": {
+            "value": "body.team.name"
+          },
+          "Slug": {
+            "value": "body.team.slug"
+          },
+          "Updated At": {
+            "value": "body.team.updatedAt"
+          },
+          "Updated By": {
+            "value": "body.team.updatedBy"
+          },
+          "_Count": {
+            "value": "body.team ? 1 : 0"
+          },
+          "_Error": {
+            "value": "body.error"
+          },
+          "_Exists": {
+            "value": "!!body.team"
           },
           "_Status Code": {
             "value": "statusCode"

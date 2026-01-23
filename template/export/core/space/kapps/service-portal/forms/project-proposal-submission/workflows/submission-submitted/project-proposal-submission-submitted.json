@@ -719,8 +719,48 @@
           "dependsOnId": "",
           "dependsOnValue": "",
           "description": "",
-          "id": "parameters.Submission Id",
-          "label": "Submission Id",
+          "id": "parameters.Current Page",
+          "label": "Current Page",
+          "menu": "",
+          "value": "",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.Label",
+          "label": "Label",
+          "menu": "",
+          "value": "",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.Origin",
+          "label": "Origin",
+          "menu": "",
+          "value": "",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.Parent",
+          "label": "Parent",
+          "menu": "",
+          "value": "",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.Submission Id*",
+          "label": "Submission Id*",
           "menu": "",
           "value": "<%= @submission['Id'] %>",
           "required": false
@@ -729,8 +769,18 @@
           "dependsOnId": "",
           "dependsOnValue": "",
           "description": "",
-          "id": "parameters.Values",
-          "label": "Values",
+          "id": "parameters.Type",
+          "label": "Type",
+          "menu": "",
+          "value": "",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.Values [object]",
+          "label": "Values [object]",
           "menu": "",
           "value": "<%=\n  {\"Status\"=>\"Complete\"}.to_json\n%>",
           "required": false

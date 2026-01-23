@@ -42,7 +42,13 @@
                 <parameters>
                     <parameter dependsOnId="" dependsOnValue="" id="connection" label="Connection ID" menu="" required="true" tooltip="Connection ID">1415539c-bb98-48bb-ad33-11be25189ad0</parameter>
                     <parameter dependsOnId="" dependsOnValue="" id="operation" label="Operation ID" menu="" required="true" tooltip="Operation ID">c69716b8-f9dc-45f1-ab3f-2eed5d2a22b8</parameter>
-                    <parameter dependsOnId="" dependsOnValue="" id="parameters.Submission Id" label="Submission Id" menu="" required="false" tooltip="">&lt;%= @inputs['Original Submission Id'] %&gt;</parameter>
+                    <parameter dependsOnId="" dependsOnValue="" id="parameters.Count" label="Count" menu="" required="false" tooltip=""></parameter>
+                    <parameter dependsOnId="" dependsOnValue="" id="parameters.Direction" label="Direction" menu="" required="false" tooltip=""></parameter>
+                    <parameter dependsOnId="" dependsOnValue="" id="parameters.Include" label="Include" menu="" required="false" tooltip="">values</parameter>
+                    <parameter dependsOnId="" dependsOnValue="" id="parameters.Limit [integer]" label="Limit [integer]" menu="" required="false" tooltip=""></parameter>
+                    <parameter dependsOnId="" dependsOnValue="" id="parameters.Order By" label="Order By" menu="" required="false" tooltip=""></parameter>
+                    <parameter dependsOnId="" dependsOnValue="" id="parameters.Page Token" label="Page Token" menu="" required="false" tooltip=""></parameter>
+                    <parameter dependsOnId="" dependsOnValue="" id="parameters.Submission Id*" label="Submission Id*" menu="" required="false" tooltip="">&lt;%= @inputs['Original Submission Id'] %&gt;</parameter>
                 </parameters>
                 <messages></messages>
                 <dependents>
@@ -91,8 +97,13 @@
                     <parameter dependsOnId="" dependsOnValue="" id="connection" label="Connection ID" menu="" required="true" tooltip="Connection ID">1415539c-bb98-48bb-ad33-11be25189ad0</parameter>
                     <parameter dependsOnId="" dependsOnValue="" id="operation" label="Operation ID" menu="" required="true" tooltip="Operation ID">3ad53519-e058-48a1-b114-5745533526ad</parameter>
                     <parameter dependsOnId="" dependsOnValue="" id="parameters.Core State" label="Core State" menu="" required="false" tooltip="">Closed</parameter>
-                    <parameter dependsOnId="" dependsOnValue="" id="parameters.Submission Id" label="Submission Id" menu="" required="false" tooltip="">&lt;%= @inputs['Original Submission Id'] %&gt;</parameter>
-                    <parameter dependsOnId="" dependsOnValue="" id="parameters.Values" label="Values" menu="" required="false" tooltip="">&lt;%=
+                    <parameter dependsOnId="" dependsOnValue="" id="parameters.Current Page" label="Current Page" menu="" required="false" tooltip=""></parameter>
+                    <parameter dependsOnId="" dependsOnValue="" id="parameters.Label" label="Label" menu="" required="false" tooltip=""></parameter>
+                    <parameter dependsOnId="" dependsOnValue="" id="parameters.Origin" label="Origin" menu="" required="false" tooltip=""></parameter>
+                    <parameter dependsOnId="" dependsOnValue="" id="parameters.Parent" label="Parent" menu="" required="false" tooltip=""></parameter>
+                    <parameter dependsOnId="" dependsOnValue="" id="parameters.Submission Id*" label="Submission Id*" menu="" required="false" tooltip="">&lt;%= @inputs['Original Submission Id'] %&gt;</parameter>
+                    <parameter dependsOnId="" dependsOnValue="" id="parameters.Type" label="Type" menu="" required="false" tooltip=""></parameter>
+                    <parameter dependsOnId="" dependsOnValue="" id="parameters.Values [object]" label="Values [object]" menu="" required="false" tooltip="">&lt;%=
   {"Status"=&gt;"#{@inputs['Outcome']}"}.to_json
 %&gt;</parameter>
                 </parameters>

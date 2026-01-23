@@ -95,11 +95,18 @@
     {
       "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
       "inputMappings": {
-        "Form Slug": "subform",
-        "Kapp Slug": "service-portal"
+        "Form*": "subform",
+        "Include": "details,values,form",
+        "Query": "",
+        "Page Token": "",
+        "Order By": "",
+        "Count": "",
+        "Kapp*": "service-portal",
+        "Limit": "",
+        "Direction": ""
       },
       "name": "Addresses",
-      "operationId": "cb8cbf5b-a370-4318-b3da-3d254501a4f5"
+      "operationId": "651666f6-a381-4230-b3c5-11457fd15a92"
     },
     {
       "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
@@ -429,7 +436,7 @@
         },
         {
           "name": "Load Table Widget",
-          "code": "const table = bundle.widgets.Table?.({ \n  container: K('section[Table]').element(), \n  field: K('field[Table Data]'),\n  config: {\n    integration: {\n      kappSlug: K('kapp').slug(),\n      formSlug: K('form').slug(),\n      integrationName: 'Addresses',\n      listProperty: 'Data',\n      errorProperty: 'Error'\n    },\n    // data: [], \n    rowTransform: ({ Values, ...row }) => ({ ...row, ...Values }),\n    columns: [\n      {\n        label: 'Id',\n        property: 'Handle',\n        displayTransform: (value, row, index) => value + '(' + row['Core State'] + ')',\n        onClick: editRow,\n        sortable: true,\n        toggleable: false,\n        sortTransform: (value, row, index) => value,\n        filterable: false,\n      },{\n        label: 'Address',\n        property: 'Address Line 1',\n        sortable: true,\n        sortTransform: (value) => (value || '').match(/^\\d*\\s*(.*)$/)[1],\n        filterable: true,\n        filterFn: function(query, value) {\n          const match = (value || '').match(/^\\d*\\s*(.*)$/);\n          if (match[1] && match[1].toLowerCase().startsWith(query.toLowerCase())) return true;\n          return false;\n        }\n      },{\n        label: 'City',\n        property: 'City',\n        sortable: true,\n        sortTransform: (value, row, index) => value,\n        filterable: true,\n        filterOperator: 'matches',\n      },{\n        label: 'State',\n        property: 'State',\n        sortable: true,\n        sortTransform: (value, row, index) => value,\n        filterable: true,\n        filterOperator: 'equals',\n      },{\n        label: 'Zip Code',\n        property: 'Zip Code',\n        sortable: false,\n        filterable: true,\n        filterOperator: 'startsWith',\n      }\n    ],\n    actions: [\n      { label: 'Edit', onClick: editRow, icon: 'edit' },\n      { label: 'Delete', onClick: deleteRow, icon: 'trash' },\n    ],\n    pageSize: 3,\n    // defaultSort: [0, 'asc'],\n    messages: {\n      loading: 'Loading Data',\n      empty: 'No Data',\n    }\n  }, \n  id: 'table' \n});\n\nfunction editRow(value, row, index) {\n  console.log('EDIT', { value, row, index, table });\n}\n\nfunction deleteRow(value, row, index) {\n  console.log('DELETE', { value, row, index, table });\n}",
+          "code": "const table = bundle.widgets.Table?.({ \n  container: K('section[Table]').element(), \n  field: K('field[Table Data]'),\n  config: {\n    integration: {\n      kappSlug: K('kapp').slug(),\n      formSlug: K('form').slug(),\n      integrationName: 'Addresses',\n      listProperty: 'Submissions',\n      errorProperty: '_Error'\n    },\n    // data: [], \n    rowTransform: ({ Values, ...row }) => ({ ...row, ...Values }),\n    columns: [\n      {\n        label: 'Id',\n        property: 'Handle',\n        displayTransform: (value, row, index) => value + '(' + row['Core State'] + ')',\n        onClick: editRow,\n        sortable: true,\n        toggleable: false,\n        sortTransform: (value, row, index) => value,\n        filterable: false,\n      },{\n        label: 'Address',\n        property: 'Address Line 1',\n        sortable: true,\n        sortTransform: (value) => (value || '').match(/^\\d*\\s*(.*)$/)[1],\n        filterable: true,\n        filterFn: function(query, value) {\n          const match = (value || '').match(/^\\d*\\s*(.*)$/);\n          if (match[1] && match[1].toLowerCase().startsWith(query.toLowerCase())) return true;\n          return false;\n        }\n      },{\n        label: 'City',\n        property: 'City',\n        sortable: true,\n        sortTransform: (value, row, index) => value,\n        filterable: true,\n        filterOperator: 'matches',\n      },{\n        label: 'State',\n        property: 'State',\n        sortable: true,\n        sortTransform: (value, row, index) => value,\n        filterable: true,\n        filterOperator: 'equals',\n      },{\n        label: 'Zip Code',\n        property: 'Zip Code',\n        sortable: false,\n        filterable: true,\n        filterOperator: 'startsWith',\n      }\n    ],\n    actions: [\n      { label: 'Edit', onClick: editRow, icon: 'edit' },\n      { label: 'Delete', onClick: deleteRow, icon: 'trash' },\n    ],\n    pageSize: 3,\n    // defaultSort: [0, 'asc'],\n    messages: {\n      loading: 'Loading Data',\n      empty: 'No Data',\n    }\n  }, \n  id: 'table' \n});\n\nfunction editRow(value, row, index) {\n  console.log('EDIT', { value, row, index, table });\n}\n\nfunction deleteRow(value, row, index) {\n  console.log('DELETE', { value, row, index, table });\n}",
           "integrationResourceName": null,
           "action": "Custom",
           "integrationResourceProperty": "",

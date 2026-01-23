@@ -134,14 +134,20 @@
   "integrations": [
     {
       "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
-      "inputMappings": {},
+      "inputMappings": {
+        "Include": "attributesMap",
+        "Limit [integer]": "1000",
+        "Order By": "name",
+        "Query": "name =* \"Departments::\""
+      },
       "name": "Departments",
-      "operationId": "9c3a3309-536e-4e3d-a3b3-be072d652a51"
+      "operationId": "7750b186-952a-4b43-bb85-34913951e5fe"
     },
     {
       "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
       "inputMappings": {
-        "Slug": "${values('Department')}"
+        "Slug*": "${values('Department')}",
+        "Include": "attributesMap"
       },
       "name": "Get Team",
       "operationId": "e20b8b5d-da67-410b-a527-bd3ae1cfe07b"
@@ -215,11 +221,11 @@
                   "defaultValue": null,
                   "visible": true,
                   "choices": {
-                    "label": "${integration('Name')}",
+                    "label": "${integration('Name').replace(\"Departments::\", \"\")}",
                     "value": "${integration('Slug')}"
                   },
                   "label": "Department",
-                  "choicesResourceProperty": "Departments",
+                  "choicesResourceProperty": "Teams",
                   "choicesRunIf": null,
                   "constraints": [],
                   "choicesDataSource": "integration",
@@ -228,7 +234,7 @@
                       "mappings": [
                         {
                           "field": "Manager",
-                          "value": "${integration('Manager')}",
+                          "value": "${integration('AttributesMap')['Manager']}",
                           "visible": null
                         }
                       ],
@@ -247,7 +253,7 @@
                 {
                   "enabled": true,
                   "dataType": "string",
-                  "defaultDataSource": "integration",
+                  "defaultDataSource": "none",
                   "requiredMessage": null,
                   "name": "Incident Number",
                   "choicesResourceName": null,
@@ -255,14 +261,9 @@
                   "renderAttributes": {},
                   "renderType": "dropdown",
                   "pattern": null,
-                  "defaultValue": "${integration('')}",
+                  "defaultValue": "",
                   "visible": true,
-                  "choices": [
-                    {
-                      "label": "Incident ",
-                      "value": "Incident "
-                    }
-                  ],
+                  "choices": [],
                   "label": "Incident Number",
                   "choicesResourceProperty": null,
                   "choicesRunIf": null,
@@ -273,7 +274,7 @@
                       "mappings": [
                         {
                           "field": "Manager",
-                          "value": "${integration('Manager')}",
+                          "value": "${integration('AttributesMap')['Manager']}",
                           "visible": null
                         }
                       ],
@@ -284,7 +285,7 @@
                       "type": "Change"
                     }
                   ],
-                  "defaultResourceName": "Incident Number",
+                  "defaultResourceName": null,
                   "type": "field",
                   "key": "59dcc5a3a1884bc080134c69b2e50e0e",
                   "required": false
