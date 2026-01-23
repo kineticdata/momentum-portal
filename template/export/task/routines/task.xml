@@ -232,7 +232,7 @@ approvers.collect(&amp;:strip)
                     <parameter dependsOnId="" dependsOnValue="" id="parameters.Count" label="Count" menu="" required="false" tooltip=""></parameter>
                     <parameter dependsOnId="" dependsOnValue="" id="parameters.Direction" label="Direction" menu="" required="false" tooltip=""></parameter>
                     <parameter dependsOnId="" dependsOnValue="" id="parameters.Include" label="Include" menu="" required="false" tooltip="">values</parameter>
-                    <parameter dependsOnId="" dependsOnValue="" id="parameters.Limit [integer]" label="Limit [integer]" menu="" required="false" tooltip=""></parameter>
+                    <parameter dependsOnId="" dependsOnValue="" id="parameters.Limit [0-1000]" label="Limit [0-1000]" menu="" required="false" tooltip=""></parameter>
                     <parameter dependsOnId="" dependsOnValue="" id="parameters.Order By" label="Order By" menu="" required="false" tooltip=""></parameter>
                     <parameter dependsOnId="" dependsOnValue="" id="parameters.Page Token" label="Page Token" menu="" required="false" tooltip=""></parameter>
                     <parameter dependsOnId="" dependsOnValue="" id="parameters.Submission Id*" label="Submission Id*" menu="" required="false" tooltip="">&lt;%= @inputs['Originating Submission Id'] %&gt;</parameter>
