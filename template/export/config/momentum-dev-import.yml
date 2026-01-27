@@ -1,0 +1,18 @@
+---
+core:
+  # server_url: https://<SPACE>.kinops.io  OR https://<SERVER_NAME>.com/kinetic/<SPACE_SLUG>
+  server_url: https://momentum-dev.kinopsdev.io
+  space_slug: service-portal
+  space_name: Service Portal
+  service_user_username: brian.peterson@kineticdata.com
+  service_user_password: ZJH5vmq3cka@ecq*bpu
+options:
+  delete: false
+task:
+  # server_url: https://<SPACE>.kinops.io/app/components/task   OR https://<SERVER_NAME>.com/kinetic-task
+  server_url: https://momentum-dev.kinopsdev.io/app/components/task
+  service_user_username: brian.peterson@kineticdata.com
+  service_user_password: ZJH5vmq3cka@ecq*bpu
+http_options:
+  log_level: info
+  log_output: stderr
