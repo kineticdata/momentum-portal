@@ -51,7 +51,7 @@
                     <parameter dependsOnId="" dependsOnValue="" id="parameters.Label" label="Label" menu="" required="false" tooltip=""></parameter>
                     <parameter dependsOnId="" dependsOnValue="" id="parameters.Staged [true/false]" label="Staged [true/false]" menu="" required="false" tooltip=""></parameter>
                     <parameter dependsOnId="" dependsOnValue="" id="parameters.Type" label="Type" menu="" required="false" tooltip=""></parameter>
-                    <parameter dependsOnId="" dependsOnValue="" id="parameters.Values [object]" label="Values [object]" menu="" required="false" tooltip="">{
+                    <parameter dependsOnId="" dependsOnValue="" id="parameters.Values [Object]" label="Values [Object]" menu="" required="false" tooltip="">{
   "Assigned Individual":"&lt;%= @results['Validate Assignment']['Username'] %&gt;",
   "Assigned Team":"&lt;%= @results['Validate Assignment']['Team'] %&gt;",
   "Deferral Token":"&lt;%= @results['Wait for Approval']['deferral_token'] %&gt;"
@@ -183,7 +183,7 @@ approvers.collect(&amp;:strip)
                 <parameters>
                     <parameter dependsOnId="" dependsOnValue="" id="connection" label="Connection ID" menu="" required="true" tooltip="Connection ID">1415539c-bb98-48bb-ad33-11be25189ad0</parameter>
                     <parameter dependsOnId="" dependsOnValue="" id="operation" label="Operation ID" menu="" required="true" tooltip="Operation ID">92b6a327-5f5a-4377-80f7-b7223bd787ac</parameter>
-                    <parameter dependsOnId="" dependsOnValue="" id="parameters.Data" label="Data" menu="" required="false" tooltip="">&lt;%
+                    <parameter dependsOnId="" dependsOnValue="" id="parameters.Data [Object]" label="Data [Object]" menu="" required="false" tooltip="">&lt;%
 {
 "Assigned Team"=&gt;"#{@results['Validate Assignment']['Team']}",
 "Assigned Individual"=&gt;"#{@results['Validate Assignment']['Username']}",
@@ -193,7 +193,7 @@ approvers.collect(&amp;:strip)
 %&gt;</parameter>
                     <parameter dependsOnId="" dependsOnValue="" id="parameters.Description" label="Description" menu="" required="false" tooltip="">An Approval was created</parameter>
                     <parameter dependsOnId="" dependsOnValue="" id="parameters.Label" label="Label" menu="" required="false" tooltip="">Approval Created</parameter>
-                    <parameter dependsOnId="" dependsOnValue="" id="parameters.Submission Id" label="Submission Id" menu="" required="false" tooltip="">&lt;%= @inputs['Submission Id'] %&gt;</parameter>
+                    <parameter dependsOnId="" dependsOnValue="" id="parameters.Submission Id*" label="Submission Id*" menu="" required="false" tooltip="">&lt;%= @inputs['Submission Id'] %&gt;</parameter>
                     <parameter dependsOnId="" dependsOnValue="" id="parameters.Type" label="Type" menu="" required="false" tooltip="">Approval</parameter>
                 </parameters>
                 <messages></messages>

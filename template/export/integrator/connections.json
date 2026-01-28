@@ -177,7 +177,7 @@
       },
       {
         "id": "7ad51a20-8bab-422b-a0f7-247e082dccd5",
-        "name": "*UPDATE ME* Get Space",
+        "name": "Get Space",
         "config": {
           "path": "/space",
           "params": {
@@ -1272,31 +1272,31 @@
         },
         "outputs": {
           "AttributesMap": {
-            "value": "body.team.attributesMap"
+            "value": "body.team?.attributesMap"
           },
           "Created At": {
-            "value": "body.team.createdAt"
+            "value": "body.team?.createdAt"
           },
           "Created By": {
-            "value": "body.team.createdBy"
+            "value": "body.team?.createdBy"
           },
           "Description": {
-            "value": "body.team.description"
+            "value": "body.team?.description"
           },
           "Memberships": {
-            "value": "body.team.memberships"
+            "value": "body.team?.memberships"
           },
           "Name": {
-            "value": "body.team.name"
+            "value": "body.team?.name"
           },
           "Slug": {
-            "value": "body.team.slug"
+            "value": "body.team?.slug"
           },
           "Updated At": {
-            "value": "body.team.updatedAt"
+            "value": "body.team?.updatedAt"
           },
           "Updated By": {
-            "value": "body.team.updatedBy"
+            "value": "body.team?.updatedBy"
           },
           "_Count": {
             "value": "body.team ? 1 : 0"
@@ -1924,6 +1924,64 @@
           "_Correlation Id": {
             "value": "body.correlationId"
           },
+          "_Error": {
+            "value": "body.error"
+          },
+          "_Status Code": {
+            "value": "statusCode"
+          }
+        },
+        "documentationLink": "",
+        "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
+        "notes": ""
+      },
+      {
+        "id": "17128569-e797-41c5-bfcf-76672e066d50",
+        "name": "Create Memberships",
+        "config": {
+          "path": "/memberships",
+          "params": {},
+          "body": {
+            "raw": "{\n  \"team\": {\n    \"name\": \"{{Name}}\"\n  },\n  \"user\": {\n    \"username\": \"{{User Name}}\"\n  }\n}",
+            "bodyType": "raw"
+          },
+          "headers": {},
+          "configType": "http",
+          "method": "POST",
+          "includeEmptyParams": false,
+          "followRedirect": false,
+          "streamResponse": false
+        },
+        "outputs": {
+          "_Error": {
+            "value": "body.error"
+          },
+          "_Status Code": {
+            "value": "statusCode"
+          }
+        },
+        "documentationLink": "",
+        "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
+        "notes": ""
+      },
+      {
+        "id": "0397f489-17c5-4ef3-b156-0088a9cc5633",
+        "name": "Delete Memberships",
+        "config": {
+          "path": "/memberships/{{Slug [teamslug_username]}}",
+          "params": {},
+          "body": {
+            "form": {},
+            "bodyType": "www_form_urlencoded"
+          },
+          "headers": {},
+          "configType": "http",
+          "method": "DELETE",
+          "includeEmptyParams": false,
+          "followRedirect": false,
+          "streamResponse": false
+        },
+        "outputs": {
           "_Error": {
             "value": "body.error"
           },

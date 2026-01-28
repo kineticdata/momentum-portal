@@ -65,6 +65,7 @@
                     <parameter dependsOnId="" dependsOnValue="" id="connection" label="Connection ID" menu="" required="true" tooltip="Connection ID">1415539c-bb98-48bb-ad33-11be25189ad0</parameter>
                     <parameter dependsOnId="" dependsOnValue="" id="operation" label="Operation ID" menu="" required="true" tooltip="Operation ID">771f279a-988d-4b91-9b8f-85861c5c13fe</parameter>
                     <parameter dependsOnId="" dependsOnValue="" id="parameters.Username" label="Username" menu="" required="false" tooltip="">&lt;%= @results['Get Original Submission Details']['Created By'] %&gt;</parameter>
+                    <parameter dependsOnId="" dependsOnValue="" id="parameters.Include" label="Include" menu="" required="false" tooltip=""></parameter>
                 </parameters>
                 <messages></messages>
                 <dependents>
@@ -103,7 +104,7 @@
                     <parameter dependsOnId="" dependsOnValue="" id="parameters.Parent" label="Parent" menu="" required="false" tooltip=""></parameter>
                     <parameter dependsOnId="" dependsOnValue="" id="parameters.Submission Id*" label="Submission Id*" menu="" required="false" tooltip="">&lt;%= @inputs['Original Submission Id'] %&gt;</parameter>
                     <parameter dependsOnId="" dependsOnValue="" id="parameters.Type" label="Type" menu="" required="false" tooltip=""></parameter>
-                    <parameter dependsOnId="" dependsOnValue="" id="parameters.Values [object]" label="Values [object]" menu="" required="false" tooltip="">&lt;%=
+                    <parameter dependsOnId="" dependsOnValue="" id="parameters.Values [Object]" label="Values [Object]" menu="" required="false" tooltip="">&lt;%=
   {"Status"=&gt;"#{@inputs['Outcome']}"}.to_json
 %&gt;</parameter>
                 </parameters>

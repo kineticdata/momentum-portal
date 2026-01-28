@@ -234,6 +234,16 @@
           "menu": "",
           "value": "<%= @user['Username'] %>",
           "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.Include",
+          "label": "Include",
+          "menu": "",
+          "value": "",
+          "required": false
         }
       ],
       "definitionId": "system_integration_v1"

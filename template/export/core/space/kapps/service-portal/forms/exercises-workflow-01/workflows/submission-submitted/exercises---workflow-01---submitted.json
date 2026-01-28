@@ -209,8 +209,8 @@
           "dependsOnId": "",
           "dependsOnValue": "",
           "description": "",
-          "id": "parameters.Values [object]",
-          "label": "Values [object]",
+          "id": "parameters.Values [Object]",
+          "label": "Values [Object]",
           "menu": "",
           "value": "{\n  \"Assigned Team\":\"Human Resources\",\n  \"Deferral Token\":\"<%= @results['Wait for Approval to be Complete']['deferral_token'] %>\",\n  \"Summary\":\"Approval for <%= @form['Name'] %> Submission (<%= @submission['Handle'] %>)\"\n}",
           "required": false
@@ -357,8 +357,8 @@
           "dependsOnId": "",
           "dependsOnValue": "",
           "description": "",
-          "id": "parameters.Values [object]",
-          "label": "Values [object]",
+          "id": "parameters.Values [Object]",
+          "label": "Values [Object]",
           "menu": "",
           "value": "{\n  \"Assigned Team\":\"Information Technology\",\n  \"Deferral Token\":\"<%= @results['Wait for Task to be Complete']['deferral_token'] %>\",\n  \"Summary\":\"Complete a task for <%= @form['Name'] %> submission (<%= @submission['Handle'] %>)\"\n}",
           "required": false
@@ -561,8 +561,8 @@
           "dependsOnId": "",
           "dependsOnValue": "",
           "description": "",
-          "id": "parameters.Values [object]",
-          "label": "Values [object]",
+          "id": "parameters.Values [Object]",
+          "label": "Values [Object]",
           "menu": "",
           "value": "<%=\n  {\"Status\"=>\"Complete\"}.to_json\n%>",
           "required": false

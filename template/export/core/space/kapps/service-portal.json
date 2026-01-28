@@ -200,11 +200,19 @@
     {
       "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
       "inputMappings": {
-        "query": "${values('Text')}"
+        "Include": "attributesMap,profileAttributesMap",
+        "Limit [0-1000]": "1000",
+        "Query": "(username =* \"${values('Requested for Display Name')}\" OR email =* \"${values('Requested for Display Name')}\"  OR displayName =* \"${values('Requested for Display Name')}\")",
+        "orderBy": "username"
       },
       "name": "Search Users",
       "operationId": "625584c3-32e0-415f-a181-4405057e5fca",
-      "securityPolicies": []
+      "securityPolicies": [
+        {
+          "endpoint": "Execution",
+          "name": "Everyone"
+        }
+      ]
     }
   ],
   "loginPage": null,

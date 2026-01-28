@@ -287,8 +287,8 @@
           "dependsOnId": "",
           "dependsOnValue": "",
           "description": "",
-          "id": "parameters.Values [object]",
-          "label": "Values [object]",
+          "id": "parameters.Values [Object]",
+          "label": "Values [Object]",
           "menu": "",
           "value": "{\n  \"Assigned Team\":\"<%= @results['Get Approver']['output'] %>\",\n  \"Deferral Token\":\"<%= @results['Wait for Approval to be Complete']['deferral_token'] %>\",\n  \"Summary\":\"Approval for <%= @form['Name'] %> Submission (<%= @submission['Handle'] %>)\"\n}",
           "required": false
@@ -435,8 +435,8 @@
           "dependsOnId": "",
           "dependsOnValue": "",
           "description": "",
-          "id": "parameters.Values [object]",
-          "label": "Values [object]",
+          "id": "parameters.Values [Object]",
+          "label": "Values [Object]",
           "menu": "",
           "value": "{\n  \"Assigned Team\":\"Information Technology\",\n  \"Deferral Token\":\"<%= @results['Wait for Task to be Complete']['deferral_token'] %>\",\n  \"Summary\":\"Complete a task for <%= @form['Name'] %> submission (<%= @submission['Handle'] %>)\"\n}",
           "required": false
@@ -645,8 +645,8 @@
           "dependsOnId": "",
           "dependsOnValue": "",
           "description": "",
-          "id": "parameters.Values [object]",
-          "label": "Values [object]",
+          "id": "parameters.Values [Object]",
+          "label": "Values [Object]",
           "menu": "",
           "value": "<%=\n  {\"Status\"=>\"Complete\"}.to_json\n%>",
           "required": false
@@ -808,6 +808,16 @@
           "label": "Username",
           "menu": "",
           "value": "<%= @submission['Created By'] %>",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.Include",
+          "label": "Include",
+          "menu": "",
+          "value": "",
           "required": false
         }
       ],
@@ -1019,8 +1029,8 @@
           "dependsOnId": "",
           "dependsOnValue": "",
           "description": "",
-          "id": "parameters.Values [object]",
-          "label": "Values [object]",
+          "id": "parameters.Values [Object]",
+          "label": "Values [Object]",
           "menu": "",
           "value": "<%=\n  {\"Status\"=>\"Denied\"}.to_json\n%>",
           "required": false
@@ -1081,6 +1091,16 @@
           "menu": "",
           "value": "<%= @submission['Created By'] %>",
           "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.Include",
+          "label": "Include",
+          "menu": "",
+          "value": "",
+          "required": false
         }
       ],
       "definitionId": "system_integration_v1"
@@ -1124,8 +1144,8 @@
           "dependsOnId": "",
           "dependsOnValue": "",
           "description": "",
-          "id": "parameters.Data",
-          "label": "Data",
+          "id": "parameters.Data [Object]",
+          "label": "Data [Object]",
           "menu": "",
           "value": "<%\n{\n\"Assigned Team\"=>\"#{@results['Get Approver']['output']}\",\n\"Status\"=>\"In Progress\",\n\"Comments\"=>\"\"\n}.to_json\n%>",
           "required": false
@@ -1154,8 +1174,8 @@
           "dependsOnId": "",
           "dependsOnValue": "",
           "description": "",
-          "id": "parameters.Submission Id",
-          "label": "Submission Id",
+          "id": "parameters.Submission Id*",
+          "label": "Submission Id*",
           "menu": "",
           "value": "<%= @submission['Id'] %>",
           "required": false
@@ -1319,8 +1339,8 @@
           "dependsOnId": "",
           "dependsOnValue": "",
           "description": "",
-          "id": "parameters.Values [object]",
-          "label": "Values [object]",
+          "id": "parameters.Values [Object]",
+          "label": "Values [Object]",
           "menu": "",
           "value": "<%= @results['Set Observers']['output'] %>",
           "required": false

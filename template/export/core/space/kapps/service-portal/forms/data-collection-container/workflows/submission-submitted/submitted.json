@@ -389,8 +389,8 @@
           "dependsOnId": "",
           "dependsOnValue": "",
           "description": "",
-          "id": "parameters.Values [object]",
-          "label": "Values [object]",
+          "id": "parameters.Values [Object]",
+          "label": "Values [Object]",
           "menu": "",
           "value": "<%=\n{\n  \"Area 1 - File Processing Status\" => \"Complete\"\n}.to_json\n%>",
           "required": false

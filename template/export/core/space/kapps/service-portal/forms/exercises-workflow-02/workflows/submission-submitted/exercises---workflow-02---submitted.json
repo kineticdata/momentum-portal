@@ -258,8 +258,8 @@
           "dependsOnId": "",
           "dependsOnValue": "",
           "description": "",
-          "id": "parameters.Values [object]",
-          "label": "Values [object]",
+          "id": "parameters.Values [Object]",
+          "label": "Values [Object]",
           "menu": "",
           "value": "{\n  \"Assigned Team\":\"<%= @results['Get Approver']['output'] %>\",\n  \"Deferral Token\":\"<%= @results['Wait for Approval to be Complete']['deferral_token'] %>\",\n  \"Summary\":\"Approval for <%= @form['Name'] %> Submission (<%= @submission['Handle'] %>)\",\n  \"Details\":\"<%= @results['Set Submission  Details']['output'] %>\"\n}",
           "required": false
@@ -406,8 +406,8 @@
           "dependsOnId": "",
           "dependsOnValue": "",
           "description": "",
-          "id": "parameters.Values [object]",
-          "label": "Values [object]",
+          "id": "parameters.Values [Object]",
+          "label": "Values [Object]",
           "menu": "",
           "value": "{\n  \"Assigned Team\":\"Information Technology\",\n  \"Deferral Token\":\"<%= @results['Wait for Task to be Complete']['deferral_token'] %>\",\n  \"Summary\":\"Complete a task for <%= @form['Name'] %> submission (<%= @submission['Handle'] %>)\"\n}",
           "required": false
@@ -616,8 +616,8 @@
           "dependsOnId": "",
           "dependsOnValue": "",
           "description": "",
-          "id": "parameters.Values [object]",
-          "label": "Values [object]",
+          "id": "parameters.Values [Object]",
+          "label": "Values [Object]",
           "menu": "",
           "value": "<%=\n  {\"Status\"=>\"Complete\"}.to_json\n%>",
           "required": false
@@ -751,6 +751,16 @@
           "label": "Username",
           "menu": "",
           "value": "<%= @submission['Created By'] %>",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.Include",
+          "label": "Include",
+          "menu": "",
+          "value": "",
           "required": false
         }
       ],
@@ -1003,6 +1013,16 @@
           "menu": "",
           "value": "<%= @submission['Created By'] %>",
           "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.Include",
+          "label": "Include",
+          "menu": "",
+          "value": "",
+          "required": false
         }
       ],
       "definitionId": "system_integration_v1"
@@ -1116,8 +1136,8 @@
           "dependsOnId": "",
           "dependsOnValue": "",
           "description": "",
-          "id": "parameters.Values [object]",
-          "label": "Values [object]",
+          "id": "parameters.Values [Object]",
+          "label": "Values [Object]",
           "menu": "",
           "value": "<%=\n  {\"Status\"=>\"Denied\"}.to_json\n%>",
           "required": false

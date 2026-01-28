@@ -44,7 +44,8 @@
                 <parameters>
                     <parameter dependsOnId="" dependsOnValue="" id="connection" label="Connection ID" menu="" required="true" tooltip="Connection ID">1415539c-bb98-48bb-ad33-11be25189ad0</parameter>
                     <parameter dependsOnId="" dependsOnValue="" id="operation" label="Operation ID" menu="" required="true" tooltip="Operation ID">e20b8b5d-da67-410b-a527-bd3ae1cfe07b</parameter>
-                    <parameter dependsOnId="" dependsOnValue="" id="parameters.Slug" label="Slug" menu="" required="false" tooltip="">&lt;%=Digest::MD5.hexdigest @inputs['Assignment']%&gt;</parameter>
+                    <parameter dependsOnId="" dependsOnValue="" id="parameters.Slug*" label="Slug*" menu="" required="false" tooltip="">&lt;%=Digest::MD5.hexdigest @inputs['Assignment']%&gt;</parameter>
+                    <parameter dependsOnId="" dependsOnValue="" id="parameters.Include" label="Include" menu="" required="false" tooltip="">details</parameter>
                 </parameters>
                 <messages></messages>
                 <dependents>
@@ -61,6 +62,7 @@
                     <parameter dependsOnId="" dependsOnValue="" id="connection" label="Connection ID" menu="" required="true" tooltip="Connection ID">1415539c-bb98-48bb-ad33-11be25189ad0</parameter>
                     <parameter dependsOnId="" dependsOnValue="" id="operation" label="Operation ID" menu="" required="true" tooltip="Operation ID">771f279a-988d-4b91-9b8f-85861c5c13fe</parameter>
                     <parameter dependsOnId="" dependsOnValue="" id="parameters.Username" label="Username" menu="" required="false" tooltip="">&lt;%= @inputs['Assignment'] %&gt;</parameter>
+                    <parameter dependsOnId="" dependsOnValue="" id="parameters.Include" label="Include" menu="" required="false" tooltip=""></parameter>
                 </parameters>
                 <messages></messages>
                 <dependents>

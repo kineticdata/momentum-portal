@@ -23,7 +23,7 @@
     },
     {
       "from": "utilities_defer_v1_4",
-      "to": "system_submission_create_v1_2",
+      "to": "system_integration_v1_2",
       "label": "Task Created",
       "value": "",
       "type": "Create"
@@ -139,7 +139,7 @@
           "id": "Approvers",
           "label": "Approvers",
           "menu": "",
-          "value": "<%= @results['Get Approver']['output'] %>, brian.peterson@kinticdata.com",
+          "value": "<%= @results['Get Approver']['output'] %>, brian.peterson@kineticdata.com",
           "required": true
         },
         {
@@ -173,7 +173,7 @@
       "name": "Create Task",
       "messages": [],
       "dependents": "",
-      "id": "system_submission_create_v1_2",
+      "id": "system_integration_v1_2",
       "position": {
         "x": 659,
         "y": 532.5
@@ -304,8 +304,8 @@
           "dependsOnId": "",
           "dependsOnValue": "",
           "description": "",
-          "id": "parameters.Values [object]",
-          "label": "Values [object]",
+          "id": "parameters.Values [Object]",
+          "label": "Values [Object]",
           "menu": "",
           "value": "{\n  \"Assigned Team\":\"Information Technology\",\n  \"Deferral Token\":\"<%= @results['Wait for Task to be Complete']['deferral_token'] %>\",\n  \"Summary\":\"Complete a task for <%= @form['Name'] %> submission (<%= @submission['Handle'] %>)\"\n}",
           "required": false
@@ -326,7 +326,7 @@
             "label": "Task Created",
             "type": "Create",
             "value": "",
-            "content": "system_submission_create_v1_2"
+            "content": "system_integration_v1_2"
           },
           {
             "label": "",
@@ -465,8 +465,8 @@
           "dependsOnId": "",
           "dependsOnValue": "",
           "description": "",
-          "id": "parameters.Values [object]",
-          "label": "Values [object]",
+          "id": "parameters.Values [Object]",
+          "label": "Values [Object]",
           "menu": "",
           "value": "<%=\n  {\"Status\"=>\"Complete\"}.to_json\n%>",
           "required": false
