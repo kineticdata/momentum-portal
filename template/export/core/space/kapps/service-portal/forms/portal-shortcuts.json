@@ -56,6 +56,13 @@
       "unique": false
     },
     {
+      "name": "values[Image]",
+      "parts": [
+        "values[Image]"
+      ],
+      "unique": false
+    },
+    {
       "name": "values[Sort Order]",
       "parts": [
         "values[Sort Order]"
@@ -154,12 +161,12 @@
           "defaultDataSource": "none",
           "requiredMessage": null,
           "name": "Description",
-          "omitWhenHidden": null,
+          "omitWhenHidden": false,
           "renderAttributes": {},
           "renderType": "text",
           "pattern": null,
           "defaultValue": null,
-          "visible": true,
+          "visible": false,
           "label": "Description",
           "constraints": [],
           "events": [],
@@ -192,16 +199,67 @@
         },
         {
           "enabled": true,
+          "dataType": "json",
+          "defaultDataSource": "none",
+          "requiredMessage": null,
+          "name": "New Tab",
+          "choicesResourceName": null,
+          "omitWhenHidden": null,
+          "renderAttributes": {},
+          "renderType": "checkbox",
+          "pattern": null,
+          "defaultValue": "Yes",
+          "visible": true,
+          "choices": [
+            {
+              "label": "Open in new tab?",
+              "value": "Yes"
+            }
+          ],
+          "label": "",
+          "choicesResourceProperty": null,
+          "choicesRunIf": null,
+          "constraints": [],
+          "choicesDataSource": "custom",
+          "events": [],
+          "defaultResourceName": null,
+          "type": "field",
+          "key": "4acc7bea91ff4e10acb24511df223604",
+          "required": false
+        },
+        {
+          "enabled": true,
           "dataType": "string",
           "defaultDataSource": "none",
           "requiredMessage": null,
-          "name": "Icon Name",
+          "name": "Image",
           "omitWhenHidden": null,
           "renderAttributes": {},
           "renderType": "text",
           "pattern": null,
           "defaultValue": null,
           "visible": true,
+          "label": "Background Image URL",
+          "constraints": [],
+          "events": [],
+          "rows": 1,
+          "defaultResourceName": null,
+          "type": "field",
+          "key": "c05a15eeb705403989bf6e0e429e996e",
+          "required": false
+        },
+        {
+          "enabled": true,
+          "dataType": "string",
+          "defaultDataSource": "none",
+          "requiredMessage": null,
+          "name": "Icon Name",
+          "omitWhenHidden": false,
+          "renderAttributes": {},
+          "renderType": "text",
+          "pattern": null,
+          "defaultValue": null,
+          "visible": false,
           "label": "Icon Name",
           "constraints": [],
           "events": [],
@@ -260,5 +318,5 @@
   "slug": "portal-shortcuts",
   "status": "Active",
   "submissionLabelExpression": "${values('Sort Order') || 999}. ${values('Title')} ${values('Status') === 'Inactive' ? '[Inactive]' : ''}",
-  "type": "Data"
+  "type": "Datastore"
 }

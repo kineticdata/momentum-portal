@@ -3,5 +3,15 @@
     "allowsMultiple": false,
     "description": "",
     "name": "Department Head"
+  },
+  {
+    "allowsMultiple": false,
+    "description": "",
+    "name": "Theme"
+  },
+  {
+    "allowsMultiple": false,
+    "description": "",
+    "name": "ThemeAlt"
   }
 ]

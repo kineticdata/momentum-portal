@@ -2,7 +2,9 @@
   "name": "_Handlers",
   "description": null,
   "type": "Stored",
-  "handlers": [],
+  "handlers": [
+    "upsert_submissions_from_csv_v1"
+  ],
   "policyRules": [],
   "trees": []
 }

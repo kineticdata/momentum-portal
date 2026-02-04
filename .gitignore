@@ -38,3 +38,13 @@ dist-ssr
 .env.development.local
 .env.test.local
 .env.production.local
+
+# claude    
+.claude/
+CLAUDE.*
+
+# sdk export
+*run.rb
+**/config/*.yml
+!**/config/servername_environment_import_config.yml
+!**/config/servername_environment_export_config.yml

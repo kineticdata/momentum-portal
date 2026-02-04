@@ -247,7 +247,7 @@
           "id": "Assignees",
           "label": "Assignees",
           "menu": "",
-          "value": "approvers@kineticdata.com",
+          "value": "Departments::Finance",
           "required": true
         },
         {
@@ -498,6 +498,16 @@
           "menu": "",
           "value": "<%= @submission['Created By'] %>",
           "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.Include",
+          "label": "Include",
+          "menu": "",
+          "value": "",
+          "required": false
         }
       ],
       "definitionId": "system_integration_v1"
@@ -543,7 +553,7 @@
           "id": "Assignees",
           "label": "Assignees",
           "menu": "",
-          "value": "approvers@kineticdata.com",
+          "value": "Executive Team",
           "required": true
         },
         {
@@ -719,8 +729,48 @@
           "dependsOnId": "",
           "dependsOnValue": "",
           "description": "",
-          "id": "parameters.Submission Id",
-          "label": "Submission Id",
+          "id": "parameters.Current Page",
+          "label": "Current Page",
+          "menu": "",
+          "value": "",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.Label",
+          "label": "Label",
+          "menu": "",
+          "value": "",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.Origin",
+          "label": "Origin",
+          "menu": "",
+          "value": "",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.Parent",
+          "label": "Parent",
+          "menu": "",
+          "value": "",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.Submission Id*",
+          "label": "Submission Id*",
           "menu": "",
           "value": "<%= @submission['Id'] %>",
           "required": false
@@ -729,8 +779,18 @@
           "dependsOnId": "",
           "dependsOnValue": "",
           "description": "",
-          "id": "parameters.Values",
-          "label": "Values",
+          "id": "parameters.Type",
+          "label": "Type",
+          "menu": "",
+          "value": "",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.Values [Object]",
+          "label": "Values [Object]",
           "menu": "",
           "value": "<%=\n  {\"Status\"=>\"Complete\"}.to_json\n%>",
           "required": false

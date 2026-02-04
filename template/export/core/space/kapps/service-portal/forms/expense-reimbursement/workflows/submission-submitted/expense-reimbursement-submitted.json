@@ -109,8 +109,8 @@
       },
       "id": "routine_approval_1",
       "position": {
-        "x": 236,
-        "y": 398.5
+        "x": 238,
+        "y": 403.5
       },
       "version": 1,
       "parameters": [
@@ -198,7 +198,7 @@
           "id": "Assignees",
           "label": "Assignees",
           "menu": "",
-          "value": "Finance",
+          "value": "Departments::Finance",
           "required": true
         },
         {
@@ -265,7 +265,7 @@
           "id": "input",
           "label": "Input",
           "menu": "",
-          "value": "<%= \n# Use the Manager defined in the Employees User's Profile or use the default value.\n# User Profile Attributes are Arrays of values [\"\",\"\"]\napprover = [\"Executive Team\"] #Default value\nmanager = JSON.parse(@results['Get Employee']['Attributes'])['Manager']\nif !manager.nil? && manager.any? && !manager.first.empty?\n  approver = [manager.first]\nend\napprover\n%>",
+          "value": "<%= \n# Use the Manager defined in the Employees User's Profile or use the default value.\n# User Profile Attributes are Arrays of values [\"\",\"\"]\napprover = [\"Executive Team\"]\nattributes_json = @results['Get Employee']['User Attributes Map']\n\nif attributes_json && !attributes_json.empty?\n  attributes = JSON.parse(attributes_json)\n  manager = attributes['Manager']\n  if manager.is_a?(Array) && manager.any? && !manager.first.to_s.empty?\n    approver = [manager.first]\n  end\nend\n\napprover.push(\"Departments::HR\")\n%>",
           "required": true
         }
       ],
@@ -436,6 +436,16 @@
           "label": "Username",
           "menu": "",
           "value": "<%= @values['Requested for Username'] %>",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.Include",
+          "label": "Include",
+          "menu": "",
+          "value": "attributesMap",
           "required": false
         }
       ],

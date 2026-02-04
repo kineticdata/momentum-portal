@@ -15,14 +15,14 @@
       "type": "Complete"
     },
     {
-      "from": "system_submission_create_v1_1",
+      "from": "system_integration_v1_1",
       "to": "system_integration_v1_13",
       "label": "",
       "value": "",
       "type": "Complete"
     },
     {
-      "from": "system_submission_create_v1_1",
+      "from": "system_integration_v1_1",
       "to": "utilities_echo_v1_14",
       "label": "",
       "value": "",
@@ -37,7 +37,7 @@
     },
     {
       "from": "utilities_defer_v1_3",
-      "to": "system_submission_create_v1_1",
+      "to": "system_integration_v1_1",
       "label": "Approval Created",
       "value": "",
       "type": "Create"
@@ -51,7 +51,7 @@
     },
     {
       "from": "utilities_defer_v1_4",
-      "to": "system_submission_create_v1_2",
+      "to": "system_integration_v1_2",
       "label": "Task Created",
       "value": "",
       "type": "Create"
@@ -156,7 +156,7 @@
           }
         ]
       },
-      "id": "system_submission_create_v1_1",
+      "id": "system_integration_v1_1",
       "position": {
         "x": 666,
         "y": 308.5
@@ -166,9 +166,39 @@
         {
           "dependsOnId": "",
           "dependsOnValue": "",
+          "description": "Connection ID",
+          "id": "connection",
+          "label": "Connection ID",
+          "menu": "",
+          "value": "1415539c-bb98-48bb-ad33-11be25189ad0",
+          "required": true
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "Operation ID",
+          "id": "operation",
+          "label": "Operation ID",
+          "menu": "",
+          "value": "2df289ae-9be4-456a-a47f-66771a4bace2",
+          "required": true
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
           "description": "",
-          "id": "kappSlug",
-          "label": "Kapp Slug",
+          "id": "parameters.Completed [true/false]",
+          "label": "Completed [true/false]",
+          "menu": "",
+          "value": "",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.Kapp*",
+          "label": "Kapp*",
           "menu": "",
           "value": "service-portal",
           "required": false
@@ -177,8 +207,8 @@
           "dependsOnId": "",
           "dependsOnValue": "",
           "description": "",
-          "id": "formSlug",
-          "label": "Form Slug",
+          "id": "parameters.Form*",
+          "label": "Form*",
           "menu": "",
           "value": "approval",
           "required": false
@@ -187,7 +217,7 @@
           "dependsOnId": "",
           "dependsOnValue": "",
           "description": "",
-          "id": "coreState",
+          "id": "parameters.Core State",
           "label": "Core State",
           "menu": "",
           "value": "Draft",
@@ -197,7 +227,7 @@
           "dependsOnId": "",
           "dependsOnValue": "",
           "description": "",
-          "id": "currentPage",
+          "id": "parameters.Current Page",
           "label": "Current Page",
           "menu": "",
           "value": "",
@@ -207,7 +237,7 @@
           "dependsOnId": "",
           "dependsOnValue": "",
           "description": "",
-          "id": "origin",
+          "id": "parameters.Origin",
           "label": "Origin",
           "menu": "",
           "value": "",
@@ -217,7 +247,7 @@
           "dependsOnId": "",
           "dependsOnValue": "",
           "description": "",
-          "id": "parent",
+          "id": "parameters.Parent",
           "label": "Parent",
           "menu": "",
           "value": "",
@@ -227,8 +257,8 @@
           "dependsOnId": "",
           "dependsOnValue": "",
           "description": "",
-          "id": "values.Decision",
-          "label": "Decision",
+          "id": "parameters.Label",
+          "label": "Label",
           "menu": "",
           "value": "",
           "required": false
@@ -237,8 +267,8 @@
           "dependsOnId": "",
           "dependsOnValue": "",
           "description": "",
-          "id": "values.Reason",
-          "label": "Reason",
+          "id": "parameters.Staged [true/false]",
+          "label": "Staged [true/false]",
           "menu": "",
           "value": "",
           "required": false
@@ -247,8 +277,8 @@
           "dependsOnId": "",
           "dependsOnValue": "",
           "description": "",
-          "id": "values.Notes for Customer",
-          "label": "Notes for Customer",
+          "id": "parameters.Type",
+          "label": "Type",
           "menu": "",
           "value": "",
           "required": false
@@ -257,94 +287,14 @@
           "dependsOnId": "",
           "dependsOnValue": "",
           "description": "",
-          "id": "values.Assigned Individual",
-          "label": "Assigned Individual",
+          "id": "parameters.Values [Object]",
+          "label": "Values [Object]",
           "menu": "",
-          "value": "",
-          "required": false
-        },
-        {
-          "dependsOnId": "",
-          "dependsOnValue": "",
-          "description": "",
-          "id": "values.Assigned Individual Display Name",
-          "label": "Assigned Individual Display Name",
-          "menu": "",
-          "value": "",
-          "required": false
-        },
-        {
-          "dependsOnId": "",
-          "dependsOnValue": "",
-          "description": "",
-          "id": "values.Assigned Team",
-          "label": "Assigned Team",
-          "menu": "",
-          "value": "<%= @results['Get Approver']['output'] %>",
-          "required": false
-        },
-        {
-          "dependsOnId": "",
-          "dependsOnValue": "",
-          "description": "",
-          "id": "values.Assigned Team Display Name",
-          "label": "Assigned Team Display Name",
-          "menu": "",
-          "value": "",
-          "required": false
-        },
-        {
-          "dependsOnId": "",
-          "dependsOnValue": "",
-          "description": "",
-          "id": "values.Deferral Token",
-          "label": "Deferral Token",
-          "menu": "",
-          "value": "<%= @results['Wait for Approval to be Complete']['deferral_token'] %>",
-          "required": false
-        },
-        {
-          "dependsOnId": "",
-          "dependsOnValue": "",
-          "description": "",
-          "id": "values.Status",
-          "label": "Status",
-          "menu": "",
-          "value": "",
-          "required": false
-        },
-        {
-          "dependsOnId": "",
-          "dependsOnValue": "",
-          "description": "",
-          "id": "values.Summary",
-          "label": "Summary",
-          "menu": "",
-          "value": "Approval for <%= @form['Name'] %> Submission (<%= @submission['Handle'] %>)",
-          "required": false
-        },
-        {
-          "dependsOnId": "",
-          "dependsOnValue": "",
-          "description": "",
-          "id": "values.Due Date",
-          "label": "Due Date",
-          "menu": "",
-          "value": "",
-          "required": false
-        },
-        {
-          "dependsOnId": "",
-          "dependsOnValue": "",
-          "description": "",
-          "id": "values.Details",
-          "label": "Details",
-          "menu": "",
-          "value": "",
+          "value": "{\n  \"Assigned Team\":\"<%= @results['Get Approver']['output'] %>\",\n  \"Deferral Token\":\"<%= @results['Wait for Approval to be Complete']['deferral_token'] %>\",\n  \"Summary\":\"Approval for <%= @form['Name'] %> Submission (<%= @submission['Handle'] %>)\"\n}",
           "required": false
         }
       ],
-      "definitionId": "system_submission_create_v1"
+      "definitionId": "system_integration_v1"
     },
     {
       "configured": true,
@@ -354,7 +304,7 @@
       "name": "Create Task",
       "messages": [],
       "dependents": "",
-      "id": "system_submission_create_v1_2",
+      "id": "system_integration_v1_2",
       "position": {
         "x": 665,
         "y": 457.5
@@ -364,9 +314,39 @@
         {
           "dependsOnId": "",
           "dependsOnValue": "",
+          "description": "Connection ID",
+          "id": "connection",
+          "label": "Connection ID",
+          "menu": "",
+          "value": "1415539c-bb98-48bb-ad33-11be25189ad0",
+          "required": true
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "Operation ID",
+          "id": "operation",
+          "label": "Operation ID",
+          "menu": "",
+          "value": "2df289ae-9be4-456a-a47f-66771a4bace2",
+          "required": true
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
           "description": "",
-          "id": "kappSlug",
-          "label": "Kapp Slug",
+          "id": "parameters.Completed [true/false]",
+          "label": "Completed [true/false]",
+          "menu": "",
+          "value": "",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.Kapp*",
+          "label": "Kapp*",
           "menu": "",
           "value": "service-portal",
           "required": false
@@ -375,8 +355,8 @@
           "dependsOnId": "",
           "dependsOnValue": "",
           "description": "",
-          "id": "formSlug",
-          "label": "Form Slug",
+          "id": "parameters.Form*",
+          "label": "Form*",
           "menu": "",
           "value": "task",
           "required": false
@@ -385,7 +365,7 @@
           "dependsOnId": "",
           "dependsOnValue": "",
           "description": "",
-          "id": "coreState",
+          "id": "parameters.Core State",
           "label": "Core State",
           "menu": "",
           "value": "",
@@ -395,7 +375,7 @@
           "dependsOnId": "",
           "dependsOnValue": "",
           "description": "",
-          "id": "currentPage",
+          "id": "parameters.Current Page",
           "label": "Current Page",
           "menu": "",
           "value": "",
@@ -405,7 +385,7 @@
           "dependsOnId": "",
           "dependsOnValue": "",
           "description": "",
-          "id": "origin",
+          "id": "parameters.Origin",
           "label": "Origin",
           "menu": "",
           "value": "",
@@ -415,7 +395,7 @@
           "dependsOnId": "",
           "dependsOnValue": "",
           "description": "",
-          "id": "parent",
+          "id": "parameters.Parent",
           "label": "Parent",
           "menu": "",
           "value": "",
@@ -425,8 +405,8 @@
           "dependsOnId": "",
           "dependsOnValue": "",
           "description": "",
-          "id": "values.Status",
-          "label": "Status",
+          "id": "parameters.Label",
+          "label": "Label",
           "menu": "",
           "value": "",
           "required": false
@@ -435,8 +415,8 @@
           "dependsOnId": "",
           "dependsOnValue": "",
           "description": "",
-          "id": "values.Notes",
-          "label": "Notes",
+          "id": "parameters.Staged [true/false]",
+          "label": "Staged [true/false]",
           "menu": "",
           "value": "",
           "required": false
@@ -445,8 +425,8 @@
           "dependsOnId": "",
           "dependsOnValue": "",
           "description": "",
-          "id": "values.Assigned Individual",
-          "label": "Assigned Individual",
+          "id": "parameters.Type",
+          "label": "Type",
           "menu": "",
           "value": "",
           "required": false
@@ -455,74 +435,14 @@
           "dependsOnId": "",
           "dependsOnValue": "",
           "description": "",
-          "id": "values.Assigned Individual Display Name",
-          "label": "Assigned Individual Display Name",
+          "id": "parameters.Values [Object]",
+          "label": "Values [Object]",
           "menu": "",
-          "value": "",
-          "required": false
-        },
-        {
-          "dependsOnId": "",
-          "dependsOnValue": "",
-          "description": "",
-          "id": "values.Assigned Team",
-          "label": "Assigned Team",
-          "menu": "",
-          "value": "Information Technology",
-          "required": false
-        },
-        {
-          "dependsOnId": "",
-          "dependsOnValue": "",
-          "description": "",
-          "id": "values.Assigned Team Display Name",
-          "label": "Assigned Team Display Name",
-          "menu": "",
-          "value": "",
-          "required": false
-        },
-        {
-          "dependsOnId": "",
-          "dependsOnValue": "",
-          "description": "",
-          "id": "values.Deferral Token",
-          "label": "Deferral Token",
-          "menu": "",
-          "value": "<%= @results['Wait for Task to be Complete']['deferral_token'] %>",
-          "required": false
-        },
-        {
-          "dependsOnId": "",
-          "dependsOnValue": "",
-          "description": "",
-          "id": "values.Details",
-          "label": "Details",
-          "menu": "",
-          "value": "",
-          "required": false
-        },
-        {
-          "dependsOnId": "",
-          "dependsOnValue": "",
-          "description": "",
-          "id": "values.Due Date",
-          "label": "Due Date",
-          "menu": "",
-          "value": "",
-          "required": false
-        },
-        {
-          "dependsOnId": "",
-          "dependsOnValue": "",
-          "description": "",
-          "id": "values.Summary",
-          "label": "Summary",
-          "menu": "",
-          "value": "Complete a task for <%= @form['Name'] %> submission (<%= @submission['Handle'] %>)",
+          "value": "{\n  \"Assigned Team\":\"Departments::IT\",\n  \"Deferral Token\":\"<%= @results['Wait for Task to be Complete']['deferral_token'] %>\",\n  \"Summary\":\"Complete a task for <%= @form['Name'] %> submission (<%= @submission['Handle'] %>)\"\n}",
           "required": false
         }
       ],
-      "definitionId": "system_submission_create_v1"
+      "definitionId": "system_integration_v1"
     },
     {
       "configured": true,
@@ -543,7 +463,7 @@
             "label": "Approval Created",
             "type": "Create",
             "value": "",
-            "content": "system_submission_create_v1_1"
+            "content": "system_integration_v1_1"
           },
           {
             "label": "Approval Denied",
@@ -586,7 +506,7 @@
             "label": "Task Created",
             "type": "Create",
             "value": "",
-            "content": "system_submission_create_v1_2"
+            "content": "system_integration_v1_2"
           },
           {
             "label": "Task Complete",
@@ -665,8 +585,48 @@
           "dependsOnId": "",
           "dependsOnValue": "",
           "description": "",
-          "id": "parameters.Submission Id",
-          "label": "Submission Id",
+          "id": "parameters.Current Page",
+          "label": "Current Page",
+          "menu": "",
+          "value": "",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.Label",
+          "label": "Label",
+          "menu": "",
+          "value": "",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.Origin",
+          "label": "Origin",
+          "menu": "",
+          "value": "",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.Parent",
+          "label": "Parent",
+          "menu": "",
+          "value": "",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.Submission Id*",
+          "label": "Submission Id*",
           "menu": "",
           "value": "<%= @submission['Id'] %>",
           "required": false
@@ -675,8 +635,18 @@
           "dependsOnId": "",
           "dependsOnValue": "",
           "description": "",
-          "id": "parameters.Values",
-          "label": "Values",
+          "id": "parameters.Type",
+          "label": "Type",
+          "menu": "",
+          "value": "",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.Values [Object]",
+          "label": "Values [Object]",
           "menu": "",
           "value": "<%=\n  {\"Status\"=>\"Complete\"}.to_json\n%>",
           "required": false
@@ -839,6 +809,16 @@
           "menu": "",
           "value": "<%= @submission['Created By'] %>",
           "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.Include",
+          "label": "Include",
+          "menu": "",
+          "value": "",
+          "required": false
         }
       ],
       "definitionId": "system_integration_v1"
@@ -989,8 +969,48 @@
           "dependsOnId": "",
           "dependsOnValue": "",
           "description": "",
-          "id": "parameters.Submission Id",
-          "label": "Submission Id",
+          "id": "parameters.Current Page",
+          "label": "Current Page",
+          "menu": "",
+          "value": "",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.Label",
+          "label": "Label",
+          "menu": "",
+          "value": "",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.Origin",
+          "label": "Origin",
+          "menu": "",
+          "value": "",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.Parent",
+          "label": "Parent",
+          "menu": "",
+          "value": "",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.Submission Id*",
+          "label": "Submission Id*",
           "menu": "",
           "value": "<%= @submission['Id'] %>",
           "required": false
@@ -999,8 +1019,18 @@
           "dependsOnId": "",
           "dependsOnValue": "",
           "description": "",
-          "id": "parameters.Values",
-          "label": "Values",
+          "id": "parameters.Type",
+          "label": "Type",
+          "menu": "",
+          "value": "",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.Values [Object]",
+          "label": "Values [Object]",
           "menu": "",
           "value": "<%=\n  {\"Status\"=>\"Denied\"}.to_json\n%>",
           "required": false
@@ -1061,6 +1091,16 @@
           "menu": "",
           "value": "<%= @submission['Created By'] %>",
           "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.Include",
+          "label": "Include",
+          "menu": "",
+          "value": "",
+          "required": false
         }
       ],
       "definitionId": "system_integration_v1"
@@ -1104,8 +1144,8 @@
           "dependsOnId": "",
           "dependsOnValue": "",
           "description": "",
-          "id": "parameters.Data",
-          "label": "Data",
+          "id": "parameters.Data [Object]",
+          "label": "Data [Object]",
           "menu": "",
           "value": "<%\n{\n\"Assigned Team\"=>\"#{@results['Get Approver']['output']}\",\n\"Status\"=>\"In Progress\",\n\"Comments\"=>\"\"\n}.to_json\n%>",
           "required": false
@@ -1134,8 +1174,8 @@
           "dependsOnId": "",
           "dependsOnValue": "",
           "description": "",
-          "id": "parameters.Submission Id",
-          "label": "Submission Id",
+          "id": "parameters.Submission Id*",
+          "label": "Submission Id*",
           "menu": "",
           "value": "<%= @submission['Id'] %>",
           "required": false
@@ -1222,15 +1262,65 @@
           "id": "operation",
           "label": "Operation ID",
           "menu": "",
-          "value": "0ef69bcb-c052-4b16-9814-166c3eef85ed",
+          "value": "3ad53519-e058-48a1-b114-5745533526ad",
           "required": true
         },
         {
           "dependsOnId": "",
           "dependsOnValue": "",
           "description": "",
-          "id": "parameters.Submission Id",
-          "label": "Submission Id",
+          "id": "parameters.Core State",
+          "label": "Core State",
+          "menu": "",
+          "value": "",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.Current Page",
+          "label": "Current Page",
+          "menu": "",
+          "value": "",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.Label",
+          "label": "Label",
+          "menu": "",
+          "value": "",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.Origin",
+          "label": "Origin",
+          "menu": "",
+          "value": "",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.Parent",
+          "label": "Parent",
+          "menu": "",
+          "value": "",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.Submission Id*",
+          "label": "Submission Id*",
           "menu": "",
           "value": "<%= @submission['Id'] %>",
           "required": false
@@ -1239,8 +1329,18 @@
           "dependsOnId": "",
           "dependsOnValue": "",
           "description": "",
-          "id": "parameters.Values",
-          "label": "Values",
+          "id": "parameters.Type",
+          "label": "Type",
+          "menu": "",
+          "value": "",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.Values [Object]",
+          "label": "Values [Object]",
           "menu": "",
           "value": "<%= @results['Set Observers']['output'] %>",
           "required": false

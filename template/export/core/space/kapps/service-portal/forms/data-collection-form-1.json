@@ -1,0 +1,468 @@
+{
+  "anonymous": false,
+  "attributes": [
+    {
+      "name": "Custom Submission Workflow",
+      "values": [
+        "Submitted"
+      ]
+    }
+  ],
+  "bridgedResources": [],
+  "categorizations": [],
+  "customHeadContent": null,
+  "description": "",
+  "indexDefinitions": [
+    {
+      "name": "closedBy",
+      "parts": [
+        "closedBy"
+      ],
+      "unique": false
+    },
+    {
+      "name": "createdBy",
+      "parts": [
+        "createdBy"
+      ],
+      "unique": false
+    },
+    {
+      "name": "handle",
+      "parts": [
+        "handle"
+      ],
+      "unique": false
+    },
+    {
+      "name": "submittedBy",
+      "parts": [
+        "submittedBy"
+      ],
+      "unique": false
+    },
+    {
+      "name": "updatedBy",
+      "parts": [
+        "updatedBy"
+      ],
+      "unique": false
+    },
+    {
+      "name": "values[Base Salary]",
+      "parts": [
+        "values[Base Salary]"
+      ],
+      "unique": false
+    },
+    {
+      "name": "values[Bonus Eligible]",
+      "parts": [
+        "values[Bonus Eligible]"
+      ],
+      "unique": false
+    },
+    {
+      "name": "values[Bonus Percent]",
+      "parts": [
+        "values[Bonus Percent]"
+      ],
+      "unique": false
+    },
+    {
+      "name": "values[Customer Identifier]",
+      "parts": [
+        "values[Customer Identifier]"
+      ],
+      "unique": false
+    },
+    {
+      "name": "values[Customer Identifier],coreState",
+      "parts": [
+        "values[Customer Identifier]",
+        "coreState"
+      ],
+      "unique": false
+    },
+    {
+      "name": "values[Data Errors]",
+      "parts": [
+        "values[Data Errors]"
+      ],
+      "unique": false
+    },
+    {
+      "name": "values[Employee Number]",
+      "parts": [
+        "values[Employee Number]"
+      ],
+      "unique": false
+    },
+    {
+      "name": "values[File Attachment Reference]",
+      "parts": [
+        "values[File Attachment Reference]"
+      ],
+      "unique": false
+    },
+    {
+      "name": "values[Job Title]",
+      "parts": [
+        "values[Job Title]"
+      ],
+      "unique": false
+    },
+    {
+      "name": "values[Merit Increase Percent]",
+      "parts": [
+        "values[Merit Increase Percent]"
+      ],
+      "unique": false
+    },
+    {
+      "name": "values[Overrides]",
+      "parts": [
+        "values[Overrides]"
+      ],
+      "unique": false
+    },
+    {
+      "name": "values[Year]",
+      "parts": [
+        "values[Year]"
+      ],
+      "unique": false
+    }
+  ],
+  "integrations": [],
+  "name": "Data Collection Form 1",
+  "notes": null,
+  "pages": [
+    {
+      "advanceCondition": null,
+      "displayCondition": null,
+      "displayPage": null,
+      "elements": [
+        {
+          "enabled": true,
+          "dataType": "string",
+          "defaultDataSource": "none",
+          "requiredMessage": null,
+          "name": "Employee Number",
+          "omitWhenHidden": null,
+          "renderAttributes": {},
+          "renderType": "text",
+          "pattern": null,
+          "defaultValue": null,
+          "visible": true,
+          "label": "Employee Number",
+          "constraints": [],
+          "events": [],
+          "rows": 1,
+          "defaultResourceName": null,
+          "type": "field",
+          "key": "2341806f44d44395a14657b0cef0eaad",
+          "required": true
+        },
+        {
+          "enabled": true,
+          "dataType": "string",
+          "defaultDataSource": "none",
+          "requiredMessage": null,
+          "name": "Job Title",
+          "omitWhenHidden": null,
+          "renderAttributes": {},
+          "renderType": "text",
+          "pattern": null,
+          "defaultValue": null,
+          "visible": true,
+          "label": "Job Title",
+          "constraints": [],
+          "events": [],
+          "rows": 1,
+          "defaultResourceName": null,
+          "type": "field",
+          "key": "c46f439fe6104570a83806438c53a069",
+          "required": false
+        },
+        {
+          "enabled": true,
+          "dataType": "string",
+          "defaultDataSource": "none",
+          "requiredMessage": null,
+          "name": "Base Salary",
+          "omitWhenHidden": null,
+          "renderAttributes": {},
+          "renderType": "text",
+          "pattern": {
+            "regex": "^\\d+$",
+            "message": "Base Salary only allows digits."
+          },
+          "defaultValue": null,
+          "visible": true,
+          "label": "Base Salary",
+          "constraints": [
+            {
+              "content": "(+values('Base Salary') >= 15000 && +values('Base Salary') <= 500000) || values('Overrides').includes('Base Salary')",
+              "message": "Base Salary should fall in the range of 15000 through 500000, or override the Base Salary constraint."
+            }
+          ],
+          "events": [],
+          "rows": 1,
+          "defaultResourceName": null,
+          "type": "field",
+          "key": "1ac929b694414d45b3ecd8c52a5b7ddb",
+          "required": true
+        },
+        {
+          "enabled": true,
+          "dataType": "string",
+          "defaultDataSource": "none",
+          "requiredMessage": null,
+          "name": "Bonus Eligible",
+          "choicesResourceName": null,
+          "omitWhenHidden": null,
+          "renderAttributes": {},
+          "renderType": "radio",
+          "pattern": null,
+          "defaultValue": null,
+          "visible": true,
+          "choices": [
+            {
+              "label": "No",
+              "value": "No"
+            },
+            {
+              "label": "Yes",
+              "value": "Yes"
+            }
+          ],
+          "label": "Bonus Eligible",
+          "choicesResourceProperty": null,
+          "choicesRunIf": null,
+          "constraints": [
+            {
+              "content": "[\"Yes\", \"No\"].includes(values('Bonus Eligible'))",
+              "message": "Bonus Eligible must be 'Yes' or 'No'"
+            }
+          ],
+          "choicesDataSource": "custom",
+          "events": [],
+          "defaultResourceName": null,
+          "type": "field",
+          "key": "4ae0572bf159452c9b7df5e990a4e9f2",
+          "required": true
+        },
+        {
+          "enabled": true,
+          "dataType": "string",
+          "defaultDataSource": "none",
+          "requiredMessage": null,
+          "name": "Bonus Percent",
+          "omitWhenHidden": null,
+          "renderAttributes": {},
+          "renderType": "text",
+          "pattern": {
+            "regex": "^(\\d+(\\.\\d)?|\\.\\d)$",
+            "message": "Bonus Percent must be entered as digits only."
+          },
+          "defaultValue": null,
+          "visible": true,
+          "label": "Bonus (Percent of Base)",
+          "constraints": [
+            {
+              "content": "(values('Bonus Eligible') == \"Yes\" && (+values('Bonus Percent') > 0 && +values('Bonus Percent') <= 200.0) || values('Overrides').includes('Bonus Percent')) || values('Bonus Eligible') == \"No\"",
+              "message": "Bonus Percent should fall in the range of 0.0 through 200.0, or override the Bonus Percent constraint."
+            }
+          ],
+          "events": [],
+          "rows": 1,
+          "defaultResourceName": null,
+          "type": "field",
+          "key": "9e06511f3e22441a97371f4159d449d9",
+          "required": "values('Bonus Eligible') === \"Yes\""
+        },
+        {
+          "enabled": true,
+          "dataType": "string",
+          "defaultDataSource": "none",
+          "requiredMessage": null,
+          "name": "Merit Increase Percent",
+          "omitWhenHidden": null,
+          "renderAttributes": {},
+          "renderType": "text",
+          "pattern": {
+            "regex": "^(\\d+(\\.\\d)?|\\.\\d)$",
+            "message": "Merit Increase Percent must be digits only."
+          },
+          "defaultValue": null,
+          "visible": true,
+          "label": "Merit Increase (Percentage)",
+          "constraints": [
+            {
+              "content": "(+values('Merit Increase Percent') >= 0 && +values('Merit Increase Percent') <= 10.0) || values('Overrides').includes('Merit Increase Percent')",
+              "message": "Merit Increase Percent should fall in the range of 0.0 through 10.0, or override the Merit Increase Percent constraint."
+            }
+          ],
+          "events": [],
+          "rows": 1,
+          "defaultResourceName": null,
+          "type": "field",
+          "key": "8ba0a014d16d458892671118f7c1ede9",
+          "required": true
+        },
+        {
+          "enabled": true,
+          "dataType": "json",
+          "defaultDataSource": "none",
+          "requiredMessage": null,
+          "name": "Overrides",
+          "choicesResourceName": null,
+          "omitWhenHidden": null,
+          "renderAttributes": {},
+          "renderType": "checkbox",
+          "pattern": null,
+          "defaultValue": null,
+          "visible": true,
+          "choices": [
+            {
+              "label": "Base Salary",
+              "value": "Base Salary"
+            },
+            {
+              "label": "Bonus Percent",
+              "value": "Bonus Percent"
+            },
+            {
+              "label": "Merit Increase Percent",
+              "value": "Merit Increase Percent"
+            }
+          ],
+          "label": "Overrides",
+          "choicesResourceProperty": null,
+          "choicesRunIf": null,
+          "constraints": [],
+          "choicesDataSource": "custom",
+          "events": [],
+          "defaultResourceName": null,
+          "type": "field",
+          "key": "a18d3c97753c43289d0b4c8f60ef1660",
+          "required": false
+        },
+        {
+          "visible": false,
+          "renderAttributes": {},
+          "name": "Submit Button",
+          "label": "Submit",
+          "type": "button",
+          "renderType": "submit-page",
+          "enabled": true
+        },
+        {
+          "type": "section",
+          "renderType": null,
+          "name": "Processing Fields",
+          "title": null,
+          "visible": false,
+          "omitWhenHidden": false,
+          "renderAttributes": {},
+          "elements": [
+            {
+              "enabled": true,
+              "dataType": "string",
+              "defaultDataSource": "none",
+              "requiredMessage": null,
+              "name": "Customer Identifier",
+              "omitWhenHidden": null,
+              "renderAttributes": {},
+              "renderType": "text",
+              "pattern": null,
+              "defaultValue": null,
+              "visible": true,
+              "label": "Customer Identifier",
+              "constraints": [],
+              "events": [],
+              "rows": 1,
+              "defaultResourceName": null,
+              "type": "field",
+              "key": "9ef60f2aab3c4506b1926157517b3402",
+              "required": false
+            },
+            {
+              "enabled": true,
+              "dataType": "string",
+              "defaultDataSource": "none",
+              "requiredMessage": null,
+              "name": "Year",
+              "omitWhenHidden": null,
+              "renderAttributes": {},
+              "renderType": "text",
+              "pattern": null,
+              "defaultValue": "2025",
+              "visible": true,
+              "label": "Year",
+              "constraints": [],
+              "events": [],
+              "rows": 1,
+              "defaultResourceName": null,
+              "type": "field",
+              "key": "307e24c92f374f4e9865c66ee8a49186",
+              "required": false
+            },
+            {
+              "enabled": true,
+              "dataType": "string",
+              "defaultDataSource": "none",
+              "requiredMessage": null,
+              "name": "File Attachment Reference",
+              "omitWhenHidden": null,
+              "renderAttributes": {},
+              "renderType": "text",
+              "pattern": null,
+              "defaultValue": null,
+              "visible": true,
+              "label": "File Attachment Reference (001, 002, etc)",
+              "constraints": [],
+              "events": [],
+              "rows": 1,
+              "defaultResourceName": null,
+              "type": "field",
+              "key": "69e1d9215ccb4fb5a8a0f783aa31df03",
+              "required": false
+            },
+            {
+              "enabled": true,
+              "dataType": "string",
+              "defaultDataSource": "none",
+              "requiredMessage": null,
+              "name": "Data Errors",
+              "omitWhenHidden": null,
+              "renderAttributes": {},
+              "renderType": "text",
+              "pattern": null,
+              "defaultValue": null,
+              "visible": true,
+              "label": "Data Errors",
+              "constraints": [],
+              "events": [],
+              "rows": 3,
+              "defaultResourceName": null,
+              "type": "field",
+              "key": "7879d450849c4ae0b2ee515104ab9e15",
+              "required": false
+            }
+          ]
+        }
+      ],
+      "events": [],
+      "name": "Page 1",
+      "renderType": "submittable",
+      "type": "page"
+    }
+  ],
+  "securityPolicies": [],
+  "slug": "data-collection-form-1",
+  "status": "New",
+  "submissionLabelExpression": "",
+  "type": "Service"
+}

@@ -10,6 +10,7 @@
     "routine_email_approval_denial",
     "routine_email_approval_reminder",
     "routine_email_submission_approved",
-    "routine_email_submission_outcome"
+    "routine_email_submission_outcome",
+    "routine_send_email_template"
   ]
 }

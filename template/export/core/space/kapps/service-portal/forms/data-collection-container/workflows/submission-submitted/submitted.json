@@ -1,0 +1,402 @@
+{
+  "builderVersion": "",
+  "schemaVersion": "1.0",
+  "version": "",
+  "processOwnerEmail": "",
+  "lastId": 4,
+  "name": "Submitted",
+  "notes": "",
+  "connectors": [
+    {
+      "from": "start",
+      "to": "system_integration_v1_1",
+      "label": "",
+      "value": "",
+      "type": "Complete"
+    },
+    {
+      "from": "system_integration_v1_1",
+      "to": "upsert_submissions_from_csv_v1_2",
+      "label": "",
+      "value": "",
+      "type": "Complete"
+    },
+    {
+      "from": "upsert_submissions_from_csv_v1_2",
+      "to": "system_integration_v1_3",
+      "label": "",
+      "value": "",
+      "type": "Complete"
+    }
+  ],
+  "nodes": [
+    {
+      "configured": true,
+      "defers": false,
+      "deferrable": false,
+      "visible": false,
+      "name": "Start",
+      "messages": [],
+      "dependents": {
+        "task": [
+          {
+            "label": "",
+            "type": "Complete",
+            "value": "",
+            "content": "system_integration_v1_1"
+          }
+        ]
+      },
+      "id": "start",
+      "position": {
+        "x": 10,
+        "y": 10
+      },
+      "version": 1,
+      "parameters": [],
+      "definitionId": "system_start_v1"
+    },
+    {
+      "configured": true,
+      "defers": false,
+      "deferrable": false,
+      "visible": true,
+      "name": "Get File URL",
+      "messages": [],
+      "dependents": {
+        "task": [
+          {
+            "label": "",
+            "type": "Complete",
+            "value": "",
+            "content": "upsert_submissions_from_csv_v1_2"
+          }
+        ]
+      },
+      "id": "system_integration_v1_1",
+      "position": {
+        "x": 154,
+        "y": 122.5
+      },
+      "version": 1,
+      "parameters": [
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "Connection ID",
+          "id": "connection",
+          "label": "Connection ID",
+          "menu": "",
+          "value": "2b8ad0c5-313a-498e-8f06-e7d9fe802a75",
+          "required": true
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "Operation ID",
+          "id": "operation",
+          "label": "Operation ID",
+          "menu": "",
+          "value": "a1f3f877-0032-48ae-9e29-f5f05bee30b8",
+          "required": true
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.Field Name",
+          "label": "Field Name",
+          "menu": "",
+          "value": "Area 1 File Attachment",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.File Index",
+          "label": "File Index",
+          "menu": "",
+          "value": "0",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.Submission Id",
+          "label": "Submission Id",
+          "menu": "",
+          "value": "<%= @submission['Id'] %>",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.URL Encoded File Name",
+          "label": "URL Encoded File Name",
+          "menu": "",
+          "value": "<%= ERB::Util.url_encode(@values['Area 1 File Attachment'][0]['name']) %>",
+          "required": false
+        }
+      ],
+      "definitionId": "system_integration_v1"
+    },
+    {
+      "configured": true,
+      "defers": false,
+      "deferrable": false,
+      "visible": false,
+      "name": "Upsert CSV Files",
+      "messages": [],
+      "dependents": {
+        "task": [
+          {
+            "label": "",
+            "type": "Complete",
+            "value": "",
+            "content": "system_integration_v1_3"
+          }
+        ]
+      },
+      "id": "upsert_submissions_from_csv_v1_2",
+      "position": {
+        "x": 494,
+        "y": 124.5
+      },
+      "version": 1,
+      "parameters": [
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "Determine what to return if an error is encountered.",
+          "id": "error_handling",
+          "label": "Error Handling",
+          "menu": "Error Message,Raise Error",
+          "value": "Raise Error",
+          "required": true
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "The URL to retrieve the CSV attachment.",
+          "id": "attachment_retrieve_url",
+          "label": "File Attachment Retrieve URL",
+          "menu": "",
+          "value": "<%= @results['Get File URL']['URL'] %>",
+          "required": true
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "The column name (exactly) which holds the unique row identifier.",
+          "id": "unique_id_column_name",
+          "label": "Name of Unique Id CSV Column",
+          "menu": "",
+          "value": "Employee Number",
+          "required": true
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "The kapp slug where the data resides.",
+          "id": "kapp_slug_data",
+          "label": "Kapp Slug - Data",
+          "menu": "",
+          "value": "service-portal",
+          "required": true
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "The form slug where the data resides.",
+          "id": "form_slug_data",
+          "label": "Form Slug - Data",
+          "menu": "",
+          "value": "data-collection-form-1",
+          "required": true
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "The query to use to retrieve the data. (Ex: values[Status]=\"Active\")",
+          "id": "data_query",
+          "label": "Data Query",
+          "menu": "",
+          "value": "<%=\n  %|values[Customer Identifier]=\"#{@values['Customer Identifier']}\"|\n%>",
+          "required": true
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "The orderBy to use to retrieve the data. (Ex: values[Status],createdAt)",
+          "id": "data_order_by",
+          "label": "Data Order By",
+          "menu": "",
+          "value": "createdAt",
+          "required": true
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "The name of the field on the line item form that stores the unique row identifier from the CSV file (e.g., Employee Number)",
+          "id": "unique_id_field_name",
+          "label": "Name of Unique Id Form Field",
+          "menu": "",
+          "value": "Employee Number",
+          "required": true
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "If provided, a JSON object to restrict which data in the CSV should be imported. Must be in this format [{\"Column\":\"Exact Column Header Name\",\"Operator\":\"One of ==, >, <, !=, empty, !empty\", \"Value\":\"The text value to compare against; not required for Empty or !Empty operators\"},...]. Comparisons are always against text values; not numbers or dates.",
+          "id": "csv_query",
+          "label": "CSV Query as JSON",
+          "menu": "",
+          "value": "",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "Example: {\"Form Field\":\"Header Column\",...} The mapping of line item form fields to the column header that holds that field's data. Must be exact!",
+          "id": "fields_to_compare_mapping",
+          "label": "Field to Header Row Mapping (JSON)",
+          "menu": "",
+          "value": "<%=\n{\n  \"Employee Number\"=> \"Employee Number\",\n  \"Base Salary\" => \"Base Salary\",\n  \"Bonus Percent\" => \"Bonus Percent\",\n  \"Merit Increase Percent\" => \"Merit Increase Percent\",\n  \"Bonus Eligible\" => \"Bonus Eligible\"\n}.to_json\n%>",
+          "required": true
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "Example: {\"Year\":\"2025\",...} These are additional fields that should be populated for each record.",
+          "id": "additional_data_elements",
+          "label": "Additional Data Elements (JSON)",
+          "menu": "",
+          "value": "<%=\n{\n  \"Year\" => \"2025\",\n  \"Customer Identifier\" => @values['Customer Identifier'],\n  \"File Attachment Reference\" => @values['Area 1 - File Sequence']\n}.to_json\n%>",
+          "required": false
+        }
+      ],
+      "definitionId": "upsert_submissions_from_csv_v1"
+    },
+    {
+      "configured": true,
+      "defers": false,
+      "deferrable": false,
+      "visible": true,
+      "name": "Update File Upload Status to Complete",
+      "messages": [],
+      "dependents": "",
+      "id": "system_integration_v1_3",
+      "position": {
+        "x": 845,
+        "y": 123.5
+      },
+      "version": 1,
+      "parameters": [
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "Connection ID",
+          "id": "connection",
+          "label": "Connection ID",
+          "menu": "",
+          "value": "1415539c-bb98-48bb-ad33-11be25189ad0",
+          "required": true
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "Operation ID",
+          "id": "operation",
+          "label": "Operation ID",
+          "menu": "",
+          "value": "3ad53519-e058-48a1-b114-5745533526ad",
+          "required": true
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.Core State",
+          "label": "Core State",
+          "menu": "",
+          "value": "",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.Current Page",
+          "label": "Current Page",
+          "menu": "",
+          "value": "",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.Label",
+          "label": "Label",
+          "menu": "",
+          "value": "",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.Origin",
+          "label": "Origin",
+          "menu": "",
+          "value": "",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.Parent",
+          "label": "Parent",
+          "menu": "",
+          "value": "",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.Submission Id*",
+          "label": "Submission Id*",
+          "menu": "",
+          "value": "<%= @submission['Id'] %>",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.Type",
+          "label": "Type",
+          "menu": "",
+          "value": "",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.Values [Object]",
+          "label": "Values [Object]",
+          "menu": "",
+          "value": "<%=\n{\n  \"Area 1 - File Processing Status\" => \"Complete\"\n}.to_json\n%>",
+          "required": false
+        }
+      ],
+      "definitionId": "system_integration_v1"
+    }
+  ]
+}

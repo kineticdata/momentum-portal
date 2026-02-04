@@ -1,0 +1,182 @@
+{
+  "builderVersion": "",
+  "schemaVersion": "1.0",
+  "version": "",
+  "processOwnerEmail": "",
+  "lastId": 3,
+  "name": "AI Test Workflow",
+  "notes": "",
+  "connectors": [
+    {
+      "from": "start",
+      "to": "utilities_echo_v1_2",
+      "label": "",
+      "value": "",
+      "type": "Complete"
+    },
+    {
+      "from": "system_integration_v1_1",
+      "to": "utilities_echo_v1_3",
+      "label": "",
+      "value": "",
+      "type": "Complete"
+    },
+    {
+      "from": "utilities_echo_v1_2",
+      "to": "system_integration_v1_1",
+      "label": "",
+      "value": "",
+      "type": "Complete"
+    }
+  ],
+  "nodes": [
+    {
+      "configured": true,
+      "defers": false,
+      "deferrable": false,
+      "visible": false,
+      "name": "Start",
+      "messages": [],
+      "dependents": {
+        "task": [
+          {
+            "label": "",
+            "type": "Complete",
+            "value": "",
+            "content": "utilities_echo_v1_2"
+          }
+        ]
+      },
+      "id": "start",
+      "position": {
+        "x": 10,
+        "y": 10
+      },
+      "version": 1,
+      "parameters": [],
+      "definitionId": "system_start_v1"
+    },
+    {
+      "configured": true,
+      "defers": false,
+      "deferrable": false,
+      "visible": true,
+      "name": "Kitchen Sink Operation",
+      "messages": [],
+      "dependents": {
+        "task": [
+          {
+            "label": "",
+            "type": "Complete",
+            "value": "",
+            "content": "utilities_echo_v1_3"
+          }
+        ]
+      },
+      "id": "system_integration_v1_1",
+      "position": {
+        "x": 198,
+        "y": 149.5
+      },
+      "version": 1,
+      "parameters": [
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "Connection ID",
+          "id": "connection",
+          "label": "Connection ID",
+          "menu": "",
+          "value": "1415539c-bb98-48bb-ad33-11be25189ad0",
+          "required": true
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "Operation ID",
+          "id": "operation",
+          "label": "Operation ID",
+          "menu": "",
+          "value": "5ab031af-e91d-415f-b861-e9f4827c56e2",
+          "required": true
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.example_endpoint",
+          "label": "example_endpoint",
+          "menu": "",
+          "value": "example/endpoint",
+          "required": false
+        }
+      ],
+      "definitionId": "system_integration_v1"
+    },
+    {
+      "configured": true,
+      "defers": false,
+      "deferrable": false,
+      "visible": true,
+      "name": "Output Node 1",
+      "messages": [],
+      "dependents": {
+        "task": [
+          {
+            "label": "",
+            "type": "Complete",
+            "value": "",
+            "content": "system_integration_v1_1"
+          }
+        ]
+      },
+      "id": "utilities_echo_v1_2",
+      "position": {
+        "x": 196,
+        "y": 15.5
+      },
+      "version": 1,
+      "parameters": [
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "input",
+          "label": "Input",
+          "menu": "",
+          "value": "<%=\n  \"Echo Node 1 Output\"\n%>",
+          "required": true
+        }
+      ],
+      "definitionId": "utilities_echo_v1"
+    },
+    {
+      "configured": true,
+      "defers": false,
+      "deferrable": false,
+      "visible": true,
+      "name": "Output Node 2",
+      "messages": [],
+      "dependents": "",
+      "id": "utilities_echo_v1_3",
+      "position": {
+        "x": 200,
+        "y": 277.5
+      },
+      "version": 1,
+      "parameters": [
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "input",
+          "label": "Input",
+          "menu": "",
+          "value": "<%=\n  error = @results['Kitchen Sink Operation']['Error']\n  statusCode = @results['Kitchen Sink Operation']['Status Code']\n  response = @results['Kitchen Sink Operation']['Response']\n\n  #Script here to do cool stuff with the response from out integration  \n%>",
+          "required": true
+        }
+      ],
+      "definitionId": "utilities_echo_v1"
+    }
+  ]
+}

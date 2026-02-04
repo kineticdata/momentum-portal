@@ -4,7 +4,19 @@
     {
       "name": "Department Head",
       "values": [
-        "services.manager@kineticdata.com"
+        "taylor.morse@kineticdata.com"
+      ]
+    },
+    {
+      "name": "Theme",
+      "values": [
+        "{}"
+      ]
+    },
+    {
+      "name": "ThemeAlt",
+      "values": [
+        "{\"logo\":{\"default\":\"https://kineticdata.atlassian.net/s/vf1kch/b/0/edb73d46913bb3454a73162beada9d6d/_/jira-logo-scaled.png\"},\"colors\":{\"base-100\":\"#030712\",\"base-200\":\"#101828\",\"base-300\":\"#1C2737\",\"base-content\":\"#F1F2F4\",\"primary\":\"#A683FF\",\"primary-content\":\"#2E0C67\",\"secondary\":\"#99E600\",\"secondary-content\":\"#182D02\",\"accent\":\"#7C85FF\",\"accent-content\":\"#1C184B\",\"neutral\":\"#101828\",\"neutral-content\":\"#F7F8FA\",\"info\":\"#00B6D9\",\"info-content\":\"#1D2229\",\"success\":\"#7ACC00\",\"success-content\":\"#1E2B0A\",\"warning\":\"#EEAF00\",\"warning-content\":\"#4D4710\",\"error\":\"#FE1C55\",\"error-content\":\"#5E0309\"},\"radius\":{\"box\":\"0.5rem\",\"field\":\"0.25rem\",\"selector\":\"0.25rem\"}}"
       ]
     }
   ],
@@ -165,13 +177,42 @@
       ]
     },
     {
+      "connectionId": "7f1f8282-4603-4552-a006-30553d2466c8",
+      "inputMappings": {},
+      "name": "Notification Date Formats",
+      "operationId": "20914f71-72de-4e58-93f0-6ce50ae850a2",
+      "securityPolicies": []
+    },
+    {
+      "connectionId": "7f1f8282-4603-4552-a006-30553d2466c8",
+      "inputMappings": {},
+      "name": "Notification Snippets",
+      "operationId": "1ab9e768-20b3-4bcd-9824-9d8527597d2b",
+      "securityPolicies": []
+    },
+    {
+      "connectionId": "7f1f8282-4603-4552-a006-30553d2466c8",
+      "inputMappings": {},
+      "name": "Notification Templates",
+      "operationId": "acb41442-2507-4f74-854e-2aee887936fe",
+      "securityPolicies": []
+    },
+    {
       "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
       "inputMappings": {
-        "query": "${values('Text')}"
+        "Include": "attributesMap,profileAttributesMap",
+        "Limit [0-1000]": "1000",
+        "Query": "(username =* \"${values('Requested for Display Name')}\" OR email =* \"${values('Requested for Display Name')}\"  OR displayName =* \"${values('Requested for Display Name')}\")",
+        "orderBy": "username"
       },
       "name": "Search Users",
       "operationId": "625584c3-32e0-415f-a181-4405057e5fca",
-      "securityPolicies": []
+      "securityPolicies": [
+        {
+          "endpoint": "Execution",
+          "name": "Everyone"
+        }
+      ]
     }
   ],
   "loginPage": null,

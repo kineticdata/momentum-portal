@@ -4,7 +4,7 @@
   "version": "",
   "processOwnerEmail": "",
   "lastId": 22,
-  "name": "03 - Workflow Exercise - End",
+  "name": "Exercises - Workflow 05 - Submitted",
   "notes": "",
   "connectors": [
     {
@@ -191,7 +191,7 @@
           "id": "Assignees",
           "label": "Assignees",
           "menu": "",
-          "value": "Information Technology",
+          "value": "Departments::IT",
           "required": true
         },
         {
@@ -211,7 +211,7 @@
           "id": "Task Summary",
           "label": "Task Summary",
           "menu": "",
-          "value": "",
+          "value": "Complete a task for <%= @form['Name'] %> submission (<%= @submission['Handle'] %>)",
           "required": false
         },
         {

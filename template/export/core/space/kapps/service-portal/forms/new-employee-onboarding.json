@@ -20,6 +20,11 @@
       "category": {
         "slug": "hr--employee-services"
       }
+    },
+    {
+      "category": {
+        "slug": "popular-services"
+      }
     }
   ],
   "customHeadContent": null,
@@ -29,6 +34,13 @@
       "name": "closedBy",
       "parts": [
         "closedBy"
+      ],
+      "unique": false
+    },
+    {
+      "name": "coreState",
+      "parts": [
+        "coreState"
       ],
       "unique": false
     },
@@ -103,6 +115,13 @@
       "unique": false
     },
     {
+      "name": "values[Fav Color]",
+      "parts": [
+        "values[Fav Color]"
+      ],
+      "unique": false
+    },
+    {
       "name": "values[First Name]",
       "parts": [
         "values[First Name]"
@@ -171,19 +190,32 @@
         "values[Start Date]"
       ],
       "unique": false
+    },
+    {
+      "name": "values[Tshirt Size]",
+      "parts": [
+        "values[Tshirt Size]"
+      ],
+      "unique": false
     }
   ],
   "integrations": [
     {
       "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
-      "inputMappings": {},
+      "inputMappings": {
+        "Include": "attributesMap",
+        "Limit [integer]": "1000",
+        "Order By": "name",
+        "Query": "name =* \"Departments::\""
+      },
       "name": "Departments",
-      "operationId": "9c3a3309-536e-4e3d-a3b3-be072d652a51"
+      "operationId": "7750b186-952a-4b43-bb85-34913951e5fe"
     },
     {
       "connectionId": "1415539c-bb98-48bb-ad33-11be25189ad0",
       "inputMappings": {
-        "Slug": "${values('Department')}"
+        "Slug*": "${values('Department')}",
+        "Include": "attributesMap"
       },
       "name": "Get Team",
       "operationId": "e20b8b5d-da67-410b-a527-bd3ae1cfe07b"
@@ -259,6 +291,44 @@
                   "dataType": "string",
                   "defaultDataSource": "none",
                   "requiredMessage": null,
+                  "name": "Fav Color",
+                  "choicesResourceName": null,
+                  "omitWhenHidden": null,
+                  "renderAttributes": {},
+                  "renderType": "dropdown",
+                  "pattern": null,
+                  "defaultValue": null,
+                  "visible": true,
+                  "choices": [
+                    {
+                      "label": "REd",
+                      "value": "REd"
+                    },
+                    {
+                      "label": "Blue",
+                      "value": "Blue"
+                    },
+                    {
+                      "label": "Green",
+                      "value": "Green"
+                    }
+                  ],
+                  "label": "Fav Color",
+                  "choicesResourceProperty": null,
+                  "choicesRunIf": null,
+                  "constraints": [],
+                  "choicesDataSource": "custom",
+                  "events": [],
+                  "defaultResourceName": null,
+                  "type": "field",
+                  "key": "f201457f746046109071e8e4243363c3",
+                  "required": false
+                },
+                {
+                  "enabled": true,
+                  "dataType": "string",
+                  "defaultDataSource": "none",
+                  "requiredMessage": null,
                   "name": "Last Name",
                   "omitWhenHidden": null,
                   "renderAttributes": {},
@@ -290,6 +360,44 @@
                   "type": "field",
                   "key": "c83e4b29b27348c0ac3589e13c43d6ad",
                   "required": true
+                },
+                {
+                  "enabled": true,
+                  "dataType": "json",
+                  "defaultDataSource": "none",
+                  "requiredMessage": null,
+                  "name": "Tshirt Size",
+                  "choicesResourceName": null,
+                  "omitWhenHidden": null,
+                  "renderAttributes": {},
+                  "renderType": "checkbox",
+                  "pattern": null,
+                  "defaultValue": null,
+                  "visible": true,
+                  "choices": [
+                    {
+                      "label": "smn",
+                      "value": "smn"
+                    },
+                    {
+                      "label": "md",
+                      "value": "md"
+                    },
+                    {
+                      "label": "lg",
+                      "value": "lg"
+                    }
+                  ],
+                  "label": "Tshirt Size",
+                  "choicesResourceProperty": null,
+                  "choicesRunIf": null,
+                  "constraints": [],
+                  "choicesDataSource": "custom",
+                  "events": [],
+                  "defaultResourceName": null,
+                  "type": "field",
+                  "key": "dbaa46c90f214b7fb666325e955e1701",
+                  "required": false
                 },
                 {
                   "enabled": true,
@@ -403,11 +511,11 @@
                   "defaultValue": null,
                   "visible": true,
                   "choices": {
-                    "label": "${integration('Name')}",
+                    "label": "${integration('Name').replace(\"Departments::\", \"\")}",
                     "value": "${integration('Slug')}"
                   },
                   "label": "Department",
-                  "choicesResourceProperty": "Departments",
+                  "choicesResourceProperty": "Teams",
                   "choicesRunIf": null,
                   "constraints": [],
                   "choicesDataSource": "integration",
@@ -416,7 +524,7 @@
                       "mappings": [
                         {
                           "field": "Manager",
-                          "value": "${integration('Manager')}",
+                          "value": "${integration('AttributesMap')['Manager']}",
                           "visible": null
                         }
                       ],

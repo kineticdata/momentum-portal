@@ -198,7 +198,7 @@
           "id": "Assignees",
           "label": "Assignees",
           "menu": "",
-          "value": "Human Resources",
+          "value": "Departments::IT",
           "required": true
         },
         {
@@ -265,7 +265,7 @@
           "id": "input",
           "label": "Input",
           "menu": "",
-          "value": "Human Resources",
+          "value": "Departments::HR",
           "required": true
         }
       ],
@@ -436,6 +436,16 @@
           "label": "Username",
           "menu": "",
           "value": "<%= @values['Requested for Username'] %>",
+          "required": false
+        },
+        {
+          "dependsOnId": "",
+          "dependsOnValue": "",
+          "description": "",
+          "id": "parameters.Include",
+          "label": "Include",
+          "menu": "",
+          "value": "",
           "required": false
         }
       ],
