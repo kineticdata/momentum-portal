@@ -2040,7 +2040,7 @@
         "id": "9d441062-fbb2-4287-9844-9dfb33eccd66",
         "name": "Create Incident",
         "config": {
-          "path": "/table/incidentX",
+          "path": "/table/incident",
           "params": {},
           "body": {
             "raw": "{\n\"short_description\":\"{{Short Description}}\", \n\"description\":\"{{Description}}\",\n\"category\":\"{{Category}}\",\n\"assignment_group\": \"{{Assignment Group}}\",\n\"assigned_to\":\"{{Assigned To}}\",\n\"x_1569849_momentum_kinetic_submission_id\":\"{{Original Submission ID}}\",\n\"x_1569849_momentum_kinetic_deferral_token\":\"{{Deferral Token}}\"  \n}",
@@ -2058,13 +2058,16 @@
         },
         "outputs": {
           "Number": {
-            "value": "body.result.number"
-          },
-          "Status Code": {
-            "value": "statusCode"
+            "value": "body.result?.number"
           },
           "Sys Id": {
-            "value": "body.result.sys_id"
+            "value": "body.result?.sys_id"
+          },
+          "_Error": {
+            "value": "body.error"
+          },
+          "_Status Code": {
+            "value": "statusCode"
           }
         },
         "documentationLink": "https://www.servicenow.com/docs/bundle/xanadu-api-reference/page/integrate/inbound-rest/task/t_GetStartedCreateInt.html",
@@ -2596,170 +2599,6 @@
         "documentationLink": "",
         "connectionId": "2b8ad0c5-313a-498e-8f06-e7d9fe802a75",
         "notes": ""
-      }
-    ]
-  },
-  {
-    "id": "65f42772-be26-4a93-aac3-6b6442d000b1",
-    "name": "SNOW Basic",
-    "type": "http",
-    "config": {
-      "auth": {
-        "password": "changeit",
-        "authType": "basic",
-        "username": "changeit"
-      },
-      "configType": "http",
-      "caCert": null,
-      "baseUrl": "https://update.me",
-      "testPath": "/table/sys_user/00bf88901b0d5a5076c187f4604bcbb3"
-    },
-    "description": "",
-    "secrets": {},
-    "documentationLink": "",
-    "operations": []
-  },
-  {
-    "id": "e9b37416-1b8e-42e1-a2c4-5631313c38cf",
-    "name": "SNOW Backup",
-    "type": "http",
-    "config": {
-      "auth": {
-        "scope": null,
-        "authType": "client_credentials",
-        "tokenUrl": "https://myusda2dev.servicenowservices.com/oauth_token.do",
-        "clientId": "bf18581ce198446f98665ee75f56b2d5",
-        "clientSecret": null,
-        "clientAuth": "basic_auth",
-        "caCert": null
-      },
-      "configType": "http",
-      "caCert": null,
-      "baseUrl": "https://update.me",
-      "testPath": "/table/cmdb_ci_computer/961de1291beb9a1476c187f4604bcbba"
-    },
-    "description": "",
-    "secrets": {},
-    "documentationLink": "",
-    "operations": []
-  },
-  {
-    "id": "aed6351e-d72c-47c7-8428-7f726dc66cc6",
-    "name": "Kinetic Platform AI Test",
-    "type": "http",
-    "config": {
-      "auth": {
-        "password": "changeit",
-        "authType": "basic",
-        "username": "changeit"
-      },
-      "configType": "http",
-      "caCert": null,
-      "baseUrl": "https://update.me",
-      "testPath": "/space"
-    },
-    "description": "",
-    "secrets": {},
-    "documentationLink": "",
-    "operations": [
-      {
-        "id": "d32ea89d-42e1-46ca-b884-bf29f95ab19e",
-        "name": "Create User",
-        "config": {
-          "path": "/users",
-          "params": {},
-          "body": {
-            "raw": "{\n  \"username\": \"{{username}}\",\n  \"email\": \"{{email}}\",\n  \"displayName\": \"{{displayName}}\",\n  \"enabled\": {{enabled}},\n  \"spaceAdmin\": {{spaceAdmin}},\n  \"preferredLocale\": \"{{preferredLocale}}\",\n  \"profileAttributesMap\": {{profileAttributesMap}},\n  \"memberships\": {{memberships}}\n}",
-            "bodyType": "raw"
-          },
-          "headers": {
-            "Accept": "application/json",
-            "Content-Type": "application/json"
-          },
-          "configType": "http",
-          "method": "POST",
-          "includeEmptyParams": false,
-          "followRedirect": false,
-          "streamResponse": false
-        },
-        "outputs": {
-          "Error": {
-            "value": "body.error"
-          },
-          "Status Code": {
-            "value": "statusCode"
-          },
-          "User": {
-            "children": {
-              "Created At": "current['createdAt']",
-              "Display Name": "current['displayName']",
-              "Email": "current['email']",
-              "Enabled": "current['enabled']",
-              "Preferred Locale": "current['preferredLocale']",
-              "Space Admin": "current['spaceAdmin']",
-              "Updated At": "current['updatedAt']",
-              "Username": "current['username']"
-            },
-            "value": "body['user']"
-          }
-        },
-        "documentationLink": "https://docs.kineticdata.com/reference/core-api-overview",
-        "connectionId": "aed6351e-d72c-47c7-8428-7f726dc66cc6",
-        "notes": "Creates a new user in the Kinetic Platform. Required fields: username, email. Optional fields: displayName, enabled (default: true), spaceAdmin (default: false), preferredLocale, profileAttributesMap (JSON object), memberships (JSON array)."
-      }
-    ]
-  },
-  {
-    "id": "a7f3c891-2b4e-4d19-9c3a-8f1e5a6d7b2c",
-    "name": "Cat Facts API",
-    "type": "http",
-    "config": {
-      "auth": null,
-      "configType": "http",
-      "caCert": null,
-      "baseUrl": "https://update.me",
-      "testPath": "/fact"
-    },
-    "description": "Free API for retrieving random cat facts",
-    "secrets": {},
-    "documentationLink": "https://catfact.ninja/",
-    "operations": [
-      {
-        "id": "9d2e4f1a-8c3b-4e5f-a6d7-1b9c8e7f6a5d",
-        "name": "Get Random Cat Fact",
-        "config": {
-          "path": "/fact",
-          "params": {},
-          "body": {
-            "raw": "",
-            "bodyType": "raw"
-          },
-          "headers": {
-            "Accept": "application/json"
-          },
-          "configType": "http",
-          "method": "GET",
-          "includeEmptyParams": false,
-          "followRedirect": true,
-          "streamResponse": false
-        },
-        "outputs": {
-          "Cat Fact": {
-            "value": "body.fact"
-          },
-          "Error": {
-            "value": "body.error"
-          },
-          "Fact Length": {
-            "value": "body.length"
-          },
-          "Status Code": {
-            "value": "statusCode"
-          }
-        },
-        "documentationLink": "https://catfact.ninja/",
-        "connectionId": "a7f3c891-2b4e-4d19-9c3a-8f1e5a6d7b2c",
-        "notes": "Returns a random cat fact with its character length"
       }
     ]
   },

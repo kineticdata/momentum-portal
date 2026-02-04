@@ -13,7 +13,7 @@
             <visible>false</visible>
             <deferrable>true</deferrable>
             <parameters>
-                <parameter id="Email Recipient " label="Email Recipient " required="true" tooltip="">alexa.fleming@kineticdata.com</parameter>
+                <parameter id="Email Recipient " label="Email Recipient " required="true" tooltip=""></parameter>
                 <parameter id="Email Subject" label="Email Subject" required="false" tooltip="">Testing Notification</parameter>
                 <parameter id="Header Image" label="Header Image" required="false" tooltip="">https://s3.amazonaws.com/kinetic-portals/portals/momentum-portal/versions/latest/Momentum-Logo.png</parameter>
                 <parameter id="Action Button Label" label="Action Button Label" required="false" tooltip="">Complete Task Now</parameter>
@@ -24,7 +24,7 @@
                 <parameter id="Content Date" label="Content Date" required="false" tooltip="">January 15, 2025</parameter>
                 <parameter id="Content Details" label="Content Details" required="false" tooltip="">You can view more details and take action using the &lt;br&gt;  link below</parameter>
                 <parameter id="Action Button URL" label="Action Button URL" required="false" tooltip="">https://kineticdata.com/</parameter>
-                <parameter id="Social Facebook" label="Social Facebook" required="false" tooltip="">https://www.facebook.com/share/18JSBMAaD9</parameter>
+                <parameter id="Social Facebook" label="Social Facebook" required="false" tooltip="">https://www.facebook.com/KineticData</parameter>
                 <parameter id="Social X" label="Social X" required="false" tooltip="">https://x.com/kineticdata</parameter>
                 <parameter id="Social Instagram" label="Social Instagram" required="false" tooltip="">https://kineticdata.com/</parameter>
                 <parameter id="Social LinkedIn" label="Social LinkedIn" required="false" tooltip="">https://www.linkedin.com/company/kinetic-data</parameter>

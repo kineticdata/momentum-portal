@@ -139,7 +139,7 @@
           "id": "Approvers",
           "label": "Approvers",
           "menu": "",
-          "value": "<%= @results['Get Approver']['output'] %>, brian.peterson@kineticdata.com",
+          "value": "<%= @results['Get Approver']['output'] %>",
           "required": true
         },
         {
@@ -307,7 +307,7 @@
           "id": "parameters.Values [Object]",
           "label": "Values [Object]",
           "menu": "",
-          "value": "{\n  \"Assigned Team\":\"Information Technology\",\n  \"Deferral Token\":\"<%= @results['Wait for Task to be Complete']['deferral_token'] %>\",\n  \"Summary\":\"Complete a task for <%= @form['Name'] %> submission (<%= @submission['Handle'] %>)\"\n}",
+          "value": "{\n  \"Assigned Team\":\"Departments::IT\",\n  \"Deferral Token\":\"<%= @results['Wait for Task to be Complete']['deferral_token'] %>\",\n  \"Summary\":\"Complete a task for <%= @form['Name'] %> submission (<%= @submission['Handle'] %>)\"\n}",
           "required": false
         }
       ],

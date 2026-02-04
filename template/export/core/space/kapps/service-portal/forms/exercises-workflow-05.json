@@ -4,7 +4,7 @@
     {
       "name": "Approvers",
       "values": [
-        "Human Resources"
+        "Departments::HR"
       ]
     }
   ],

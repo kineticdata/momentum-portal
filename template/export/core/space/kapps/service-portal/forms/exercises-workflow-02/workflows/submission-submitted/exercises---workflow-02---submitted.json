@@ -23,7 +23,7 @@
     },
     {
       "from": "utilities_defer_v1_3",
-      "to": "system_submission_create_v1_1",
+      "to": "system_integration_v1_1",
       "label": "Approval Created",
       "value": "",
       "type": "Create"
@@ -37,7 +37,7 @@
     },
     {
       "from": "utilities_defer_v1_4",
-      "to": "system_submission_create_v1_2",
+      "to": "system_integration_v1_2",
       "label": "Task Created",
       "value": "",
       "type": "Create"
@@ -127,7 +127,7 @@
       "name": "Create Approval",
       "messages": [],
       "dependents": "",
-      "id": "system_submission_create_v1_1",
+      "id": "system_integration_v1_1",
       "position": {
         "x": 665,
         "y": 303.5
@@ -275,7 +275,7 @@
       "name": "Create Task",
       "messages": [],
       "dependents": "",
-      "id": "system_submission_create_v1_2",
+      "id": "system_integration_v1_2",
       "position": {
         "x": 665,
         "y": 457.5
@@ -409,7 +409,7 @@
           "id": "parameters.Values [Object]",
           "label": "Values [Object]",
           "menu": "",
-          "value": "{\n  \"Assigned Team\":\"Information Technology\",\n  \"Deferral Token\":\"<%= @results['Wait for Task to be Complete']['deferral_token'] %>\",\n  \"Summary\":\"Complete a task for <%= @form['Name'] %> submission (<%= @submission['Handle'] %>)\"\n}",
+          "value": "{\n  \"Assigned Team\":\"Departments::IT\",\n  \"Deferral Token\":\"<%= @results['Wait for Task to be Complete']['deferral_token'] %>\",\n  \"Summary\":\"Complete a task for <%= @form['Name'] %> submission (<%= @submission['Handle'] %>)\"\n}",
           "required": false
         }
       ],
@@ -434,7 +434,7 @@
             "label": "Approval Created",
             "type": "Create",
             "value": "",
-            "content": "system_submission_create_v1_1"
+            "content": "system_integration_v1_1"
           },
           {
             "label": "Approval Denied",
@@ -477,7 +477,7 @@
             "label": "Task Created",
             "type": "Create",
             "value": "",
-            "content": "system_submission_create_v1_2"
+            "content": "system_integration_v1_2"
           },
           {
             "label": "Task Complete",

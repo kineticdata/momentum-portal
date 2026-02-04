@@ -253,7 +253,7 @@
                 {
                   "enabled": true,
                   "dataType": "string",
-                  "defaultDataSource": "none",
+                  "defaultDataSource": "integration",
                   "requiredMessage": null,
                   "name": "Incident Number",
                   "choicesResourceName": null,
@@ -285,7 +285,7 @@
                       "type": "Change"
                     }
                   ],
-                  "defaultResourceName": null,
+                  "defaultResourceName": "Incident Number",
                   "type": "field",
                   "key": "59dcc5a3a1884bc080134c69b2e50e0e",
                   "required": false

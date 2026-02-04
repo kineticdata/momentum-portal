@@ -198,7 +198,7 @@
           "id": "Assignees",
           "label": "Assignees",
           "menu": "",
-          "value": "Human Resources",
+          "value": "Departments::IT",
           "required": true
         },
         {
@@ -265,7 +265,7 @@
           "id": "input",
           "label": "Input",
           "menu": "",
-          "value": "Human Resources",
+          "value": "Departments::HR",
           "required": true
         }
       ],

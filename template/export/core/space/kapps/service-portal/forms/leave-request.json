@@ -554,6 +554,6 @@
   "securityPolicies": [],
   "slug": "leave-request",
   "status": "Active",
-  "submissionLabelExpression": "",
+  "submissionLabelExpression": "${form('name')} request for ${values('Requested for Display Name')}",
   "type": "Service"
 }

@@ -198,7 +198,7 @@
           "id": "Assignees",
           "label": "Assignees",
           "menu": "",
-          "value": "Human Resources",
+          "value": "Departments::HR",
           "required": true
         },
         {
@@ -265,7 +265,7 @@
           "id": "input",
           "label": "Input",
           "menu": "",
-          "value": "<%= \n# Use the Manager defined in the Employees User's Profile or use the default value.\n# User Profile Attributes are Arrays of values [\"\",\"\"]\napprover = [\"Executive Team\"] #Default value\nmanager = JSON.parse(@results['Get Employee']['Attributes'])['Manager']\nif !manager.nil? && manager.any? && !manager.first.empty?\n  approver = [manager.first]\nend\napprover\n%>",
+          "value": "<%= \n# Use the Manager defined in the Employees User's Profile or use the default value.\n# User Profile Attributes are Arrays of values [\"\",\"\"]\napprover = [\"Executive Team\"]\nattributes_json = @results['Get Employee']['User Attributes Map']\n\nif attributes_json && !attributes_json.empty?\n  attributes = JSON.parse(attributes_json)\n  manager = attributes['Manager']\n  if manager.is_a?(Array) && manager.any? && !manager.first.to_s.empty?\n    approver = [manager.first]\n  end\nend\n\napprover.push(\"Departments::HR\")\n%>",
           "required": true
         }
       ],
@@ -302,7 +302,7 @@
           "id": "input",
           "label": "Input",
           "menu": "",
-          "value": "Requested For: <%= JSON.parse(@results['Get Employee']['Attributes'])['Display Name'] %>\nAccess Type: <%= @values['Access Type'] %>\nJustification: <%= @values['Justification'] %>",
+          "value": "Requested For: <%= @results['Get Employee']['Display Name'] %>\nAccess Type: <%= @values['Access Type'] %>\nJustification: <%= @values['Justification'] %>",
           "required": true
         }
       ],
@@ -445,7 +445,7 @@
           "id": "parameters.Include",
           "label": "Include",
           "menu": "",
-          "value": "",
+          "value": "attributesMap",
           "required": false
         }
       ],

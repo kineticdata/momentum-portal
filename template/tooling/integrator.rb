@@ -32,7 +32,7 @@ def export_connections(integrator_sdk, integrator_path)
         operations = operations_response.content.map do |operation|
           sanitize_exported_operation(operation)
         end
-        connection = sanitize_exported_connection(connection)
+        # connection = sanitize_exported_connection(connection)
         connections = merge_operations(connections, connection, operations)
       else
         raise "(#{res.code}) Error retrieving operations: #{operations_response.inspect}"

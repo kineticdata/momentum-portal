@@ -97,7 +97,7 @@
           "id": "Assignees",
           "label": "Assignees",
           "menu": "",
-          "value": "Information Technology",
+          "value": "Departments::IT",
           "required": true
         },
         {

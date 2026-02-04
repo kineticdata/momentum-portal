@@ -182,18 +182,6 @@ approvers.collect(&amp;:strip)
                     <task label="" type="Complete" value="">system_tree_return_v1_24</task>
                 </dependents>
             </task>
-            <task definition_id="utilities_echo_v1" id="utilities_echo_v1_16" name="Validate Note" x="377.86679556324293" y="97.63663037210398">
-                <version>1</version>
-                <configured>true</configured>
-                <defers>false</defers>
-                <deferrable>false</deferrable>
-                <visible>true</visible>
-                <parameters>
-                    <parameter dependsOnId="" dependsOnValue="" id="input" label="Input" menu="" required="true" tooltip="">This is way simpler than than the "Queue Assignment Validate" Routine from Kinips. However it also has some valid checking.</parameter>
-                </parameters>
-                <messages></messages>
-                <dependents></dependents>
-            </task>
             <task definition_id="system_integration_v1" id="system_integration_v1_17" name="Create Submission Activity - Awaiting Approval" x="921" y="290.5">
                 <version>1</version>
                 <configured>true</configured>

@@ -62,6 +62,7 @@
   "Assigned Team":"&lt;%= @results['Validate Assignment']['Team'] %&gt;",
   "Deferral Token":"&lt;%= @results['Wait for Task']['deferral_token'] %&gt;",
   "Summary":"&lt;%= @inputs['Task Summary'] %&gt;"
+  "Details":"&lt;%= @inputs['Submission Details'] %&gt;"
 }</parameter>
                 </parameters>
                 <messages></messages>
