@@ -15,7 +15,7 @@
     "@date-fns/utc": "^2.1.0",
     "@kineticdata/react": "7.0.0-rc1",
     "@reduxjs/toolkit": "^2.3.0",
-    "@tabler/icons-react": "^3.19.0",
+    "@tabler/icons-react": "3.34.0",
     "@toast-ui/react-editor": "^3.2.3",
     "clsx": "^2.1.1",
     "daisyui": "^5.0.50",
