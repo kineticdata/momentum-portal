@@ -13,7 +13,7 @@
   "dependencies": {
     "@ark-ui/react": "^5.26.0",
     "@date-fns/utc": "^2.1.0",
-    "@kineticdata/react": "^6.1.1",
+    "@kineticdata/react": "7.0.0-rc1",
     "@reduxjs/toolkit": "^2.3.0",
     "@tabler/icons-react": "^3.19.0",
     "@toast-ui/react-editor": "^3.2.3",
@@ -22,16 +22,19 @@
     "date-fns": "^4.1.0",
     "immer": "^10.1.1",
     "jquery": "^3.5.0",
-    "lodash-es": "^4.17.21",
+    "lodash-es": "^4.18.1",
     "moment": "2.29.4",
     "prop-types": "^15.8.1",
-    "qs": "^6.11.2",
+    "qs": "^6.14.2",
     "react": "^18.2.0",
     "react-app-polyfill": "^1.0.6",
     "react-beautiful-dnd": "^11.0.5",
     "react-dom": "^18.2.0",
     "react-redux": "^9.1.2",
-    "react-router-dom": "^6.21.1"
+    "react-router-dom": "^6.30.3"
+  },
+  "resolutions": {
+    "@kineticdata/react/draft-js/immutable": "3.8.3"
   },
   "devDependencies": {
     "@eslint/compat": "^1.4.0",
