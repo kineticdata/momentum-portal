@@ -58,30 +58,6 @@
       @apply kradio;
     }
 
-    /*
-     * Tailwind v4 preflight resets border-width to 0 on every element
-     * (`*, ::before, ::after { border: 0 solid }` in @layer base). daisyUI
-     * applies the k* component border via a `border: var(--border) solid`
-     * shorthand that loses the width to that reset, so form controls render
-     * with no visible border (style and color still resolve). Re-assert the
-     * width/style as explicit longhands here: higher specificity than `*`
-     * within @layer base wins the reset. Color/focus stay owned by the k*
-     * components. Keep this selector list in sync with the @apply rules above.
-     */
-    input[type='number']:not(.unstyled),
-    input[type='date']:not(.unstyled),
-    input[type='datetime-local']:not(.unstyled),
-    input[type='time']:not(.unstyled),
-    input[type='password']:not(.unstyled),
-    input[type='text']:not(.unstyled),
-    input[type='checkbox']:not(.unstyled),
-    input[type='radio']:not(.unstyled),
-    select:not(.unstyled),
-    textarea:not(.unstyled) {
-      border-width: var(--border);
-      border-style: solid;
-    }
-
     > label {
       @apply block flex-none w-full text-sm font-semibold leading-4 pb-2 text-base-content/70 empty:hidden;
     }
@@ -203,23 +179,6 @@
       }
       input[type='radio']:not(.unstyled) {
         @apply kradio;
-      }
-
-      /* Re-assert border width/style defeated by Tailwind preflight — see the
-       * matching note in the .field block above. Keep this list in sync with
-       * the @apply rules above. */
-      input[type='number']:not(.unstyled),
-      input[type='date']:not(.unstyled),
-      input[type='datetime-local']:not(.unstyled),
-      input[type='time']:not(.unstyled),
-      input[type='password']:not(.unstyled),
-      input[type='text']:not(.unstyled),
-      input[type='checkbox']:not(.unstyled),
-      input[type='radio']:not(.unstyled),
-      select:not(.unstyled),
-      textarea:not(.unstyled) {
-        border-width: var(--border);
-        border-style: solid;
       }
 
       .field-label {
