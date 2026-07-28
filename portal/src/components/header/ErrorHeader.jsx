@@ -6,7 +6,9 @@ import { Avatar } from '../../atoms/Avatar.jsx';
 import { Menu } from '../../atoms/Menu.jsx';
 
 export const ErrorHeader = () => {
-  const { username, displayName } = useSelector(state => state.app.profile);
+  // profile is null until a user is authenticated; guard so the error header can render
+  // (e.g. on an error screen shown while logged out) without crashing.
+  const { username, displayName } = useSelector(state => state.app.profile) || {};
 
   const themeLogo = useSelector(state => state.theme.data?.logo?.default);
 
