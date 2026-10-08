@@ -17,7 +17,8 @@ export const Login = loginProps => {
     onChangePassword,
     onChangeUsername,
     onLogin,
-    onSso,
+    externalSignIns = [],
+    onExternalSignIn,
     password,
     pending,
     username,
@@ -70,21 +71,26 @@ export const Login = loginProps => {
         >
           Sign In
         </button>
-        {onSso && (
+        {/* One button per external sign in the space offers (SAML2, OpenID
+            Connect, or both), labelled by the space's configuration. */}
+        {externalSignIns.length > 0 && (
           <>
             <div className="flex justify-center items-center gap-2.5 text-base-content/60 font-semibold leading-4">
               <hr className="inline w-16 text-base-content/50" />
               OR
               <hr className="inline w-16 text-base-content/50" />
             </div>
-            <button
-              type="button"
-              className="kbtn kbtn-lg kbtn-outline"
-              onClick={onSso}
-              disabled={pending}
-            >
-              Enterprise Single Sign-On
-            </button>
+            {externalSignIns.map(signIn => (
+              <button
+                key={signIn.strategy}
+                type="button"
+                className="kbtn kbtn-lg kbtn-outline"
+                onClick={() => onExternalSignIn(signIn)}
+                disabled={pending}
+              >
+                {signIn.displayName}
+              </button>
+            ))}
           </>
         )}
         <Link

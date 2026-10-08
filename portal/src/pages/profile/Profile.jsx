@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { updateProfile } from '@kineticdata/react';
 import { Avatar } from '../../atoms/Avatar.jsx';
 import { Icon } from '../../atoms/Icon.jsx';
-import { validateEmail } from '../../helpers/index.js';
+import { signOut, validateEmail } from '../../helpers/index.js';
 import { appActions } from '../../helpers/state.js';
 import { toastError, toastSuccess } from '../../helpers/toasts.js';
 import { PageHeading } from '../../components/PageHeading.jsx';
@@ -178,13 +178,14 @@ export const Profile = () => {
           </form>
           <hr />
           <div className="flex-c-st gap-6 w-full">
-            <a
-              href="/app/logout"
+            <button
+              type="button"
+              onClick={signOut}
               className="kbtn kbtn-ghost kbtn-lg text-base text-base-content/80 w-70 self-center mt-6"
             >
               <Icon name="logout" />
               <span>Log Out</span>
-            </a>
+            </button>
           </div>
         </div>
       </div>
