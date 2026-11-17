@@ -3,4 +3,3 @@
 .envrc
 devbox.json
 devbox.lock
-Gemfile.lock
