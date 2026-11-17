@@ -22,6 +22,8 @@ Exporting requires space admin privileges, therefore a space admin user must be 
   bundle install
   ```
 
+  `Gemfile.lock` is resolved in tenant-data-manager's image (`ruby:3.4.11-alpine`, Bundler 2.6.9: `bundle lock`, then `bundle lock --add-platform ruby`), because that is where `install.rb` runs `bundle install` when a space is provisioned. Don't commit `BUNDLED WITH` or `PLATFORMS` changes that a local `bundle install` makes.
+
 - Space to export from has a User with space admin permissions with known credentials
 - Space to export from has an OAuth client with known credentials
 - [Direnv](https://direnv.net/) is installed on the local workstation running export - **NOT a requirement, just nice to have**

@@ -1,0 +1,492 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.25.1
+# ignores vulnerabilities until expiry date; change duration by modifying expiry date
+ignore:
+  SNYK-JS-REACTROUTER-18313144:
+    - 'react-router-dom > react-router':
+        reason: >-
+          Open Redirect (backslash paths), fixed only in react-router 7.18.0;
+          the move to v7 is ENG-437. Not reachable in the portal: it routes
+          with <HashRouter> (declarative, no data router, loaders, actions or
+          redirect()), so every href and navigate() target is the current
+          document URL plus '#' plus the path (createHashHref), and a
+          backslash path stays in the fragment on the same origin. The portal
+          also never builds a navigation target from URL or user input:
+          targets are literals, server-issued submission ids and form slugs,
+          the canonical /kapps/... redirect, or a backPath held in history
+          state that only the portal sets (from location.pathname or
+          constants). Checked for ENG-436 against react-router-dom 6.30.6.
+        expires: 2027-02-15T00:00:00.000Z
+        created: 2026-11-17T19:22:23.000Z
+  SNYK-JS-REACTROUTER-18313130:
+    - 'react-router-dom > react-router':
+        reason: >-
+          Unsafe Reflection in deserializeErrors during SSR hydration, fixed
+          only in react-router 7.18.0; the move to v7 is ENG-437. Not
+          reachable: the advisory applies only to Framework or Data Mode with
+          SSR/hydration, and the portal is a client-only Vite SPA using
+          <HashRouter> (no createBrowserRouter/RouterProvider, no hydrateRoot,
+          no hydration data).
+        expires: 2027-02-15T00:00:00.000Z
+        created: 2026-11-17T19:22:23.000Z
+  SNYK-JS-DOMPURIFY-21460657:
+    - '@toast-ui/react-editor > @toast-ui/editor > dompurify':
+        reason: >-
+          @toast-ui/editor 3.2.2 (its last line; 3.2.3 still requires
+          dompurify ^2.3.3) inlines its own copy of DOMPurify 2.3.3 in
+          dist/esm/index.js, so no resolution or upgrade can reach it, and
+          there is no fixed 2.x release. The portal uses the editor only in
+          the Kinetic form Markdown widget: the Editor for user-written
+          WYSIWYG markdown and HTML, and the Viewer (and the Editor's initial
+          value) for the markdown stored in the field. DOMPurify sanitizes the
+          HTML in that markdown, including HTML embedded in it. The stored
+          value can come from any writer of the field: another user, an
+          anonymous submitter where the form allows anonymous access, or the
+          API or workflow. The copy that ships is DOMPurify 2.3.3, older than
+          the 2.5.9 Snyk evaluates, so these IDs are a lower bound: advisories
+          fixed between 2.3.4 and 2.5.9 apply too. This is real exposure,
+          accepted for 7.0.0 by Matt (2026-11-17). Replacing the editor is
+          ENG-438, which removes these ignores.
+        expires: 2027-02-15T00:00:00.000Z
+        created: 2026-11-17T19:22:23.000Z
+  SNYK-JS-DOMPURIFY-21755401:
+    - '@toast-ui/react-editor > @toast-ui/editor > dompurify':
+        reason: >-
+          @toast-ui/editor 3.2.2 (its last line; 3.2.3 still requires
+          dompurify ^2.3.3) inlines its own copy of DOMPurify 2.3.3 in
+          dist/esm/index.js, so no resolution or upgrade can reach it, and
+          there is no fixed 2.x release. The portal uses the editor only in
+          the Kinetic form Markdown widget: the Editor for user-written
+          WYSIWYG markdown and HTML, and the Viewer (and the Editor's initial
+          value) for the markdown stored in the field. DOMPurify sanitizes the
+          HTML in that markdown, including HTML embedded in it. The stored
+          value can come from any writer of the field: another user, an
+          anonymous submitter where the form allows anonymous access, or the
+          API or workflow. The copy that ships is DOMPurify 2.3.3, older than
+          the 2.5.9 Snyk evaluates, so these IDs are a lower bound: advisories
+          fixed between 2.3.4 and 2.5.9 apply too. This is real exposure,
+          accepted for 7.0.0 by Matt (2026-11-17). Replacing the editor is
+          ENG-438, which removes these ignores.
+        expires: 2027-02-15T00:00:00.000Z
+        created: 2026-11-17T19:22:23.000Z
+  SNYK-JS-DOMPURIFY-15371386:
+    - '@toast-ui/react-editor > @toast-ui/editor > dompurify':
+        reason: >-
+          @toast-ui/editor 3.2.2 (its last line; 3.2.3 still requires
+          dompurify ^2.3.3) inlines its own copy of DOMPurify 2.3.3 in
+          dist/esm/index.js, so no resolution or upgrade can reach it, and
+          there is no fixed 2.x release. The portal uses the editor only in
+          the Kinetic form Markdown widget: the Editor for user-written
+          WYSIWYG markdown and HTML, and the Viewer (and the Editor's initial
+          value) for the markdown stored in the field. DOMPurify sanitizes the
+          HTML in that markdown, including HTML embedded in it. The stored
+          value can come from any writer of the field: another user, an
+          anonymous submitter where the form allows anonymous access, or the
+          API or workflow. The copy that ships is DOMPurify 2.3.3, older than
+          the 2.5.9 Snyk evaluates, so these IDs are a lower bound: advisories
+          fixed between 2.3.4 and 2.5.9 apply too. This is real exposure,
+          accepted for 7.0.0 by Matt (2026-11-17). Replacing the editor is
+          ENG-438, which removes these ignores.
+        expires: 2027-02-15T00:00:00.000Z
+        created: 2026-11-17T19:22:23.000Z
+  SNYK-JS-DOMPURIFY-15810938:
+    - '@toast-ui/react-editor > @toast-ui/editor > dompurify':
+        reason: >-
+          @toast-ui/editor 3.2.2 (its last line; 3.2.3 still requires
+          dompurify ^2.3.3) inlines its own copy of DOMPurify 2.3.3 in
+          dist/esm/index.js, so no resolution or upgrade can reach it, and
+          there is no fixed 2.x release. The portal uses the editor only in
+          the Kinetic form Markdown widget: the Editor for user-written
+          WYSIWYG markdown and HTML, and the Viewer (and the Editor's initial
+          value) for the markdown stored in the field. DOMPurify sanitizes the
+          HTML in that markdown, including HTML embedded in it. The stored
+          value can come from any writer of the field: another user, an
+          anonymous submitter where the form allows anonymous access, or the
+          API or workflow. The copy that ships is DOMPurify 2.3.3, older than
+          the 2.5.9 Snyk evaluates, so these IDs are a lower bound: advisories
+          fixed between 2.3.4 and 2.5.9 apply too. This is real exposure,
+          accepted for 7.0.0 by Matt (2026-11-17). Replacing the editor is
+          ENG-438, which removes these ignores.
+        expires: 2027-02-15T00:00:00.000Z
+        created: 2026-11-17T19:22:23.000Z
+  SNYK-JS-DOMPURIFY-15874903:
+    - '@toast-ui/react-editor > @toast-ui/editor > dompurify':
+        reason: >-
+          @toast-ui/editor 3.2.2 (its last line; 3.2.3 still requires
+          dompurify ^2.3.3) inlines its own copy of DOMPurify 2.3.3 in
+          dist/esm/index.js, so no resolution or upgrade can reach it, and
+          there is no fixed 2.x release. The portal uses the editor only in
+          the Kinetic form Markdown widget: the Editor for user-written
+          WYSIWYG markdown and HTML, and the Viewer (and the Editor's initial
+          value) for the markdown stored in the field. DOMPurify sanitizes the
+          HTML in that markdown, including HTML embedded in it. The stored
+          value can come from any writer of the field: another user, an
+          anonymous submitter where the form allows anonymous access, or the
+          API or workflow. The copy that ships is DOMPurify 2.3.3, older than
+          the 2.5.9 Snyk evaluates, so these IDs are a lower bound: advisories
+          fixed between 2.3.4 and 2.5.9 apply too. This is real exposure,
+          accepted for 7.0.0 by Matt (2026-11-17). Replacing the editor is
+          ENG-438, which removes these ignores.
+        expires: 2027-02-15T00:00:00.000Z
+        created: 2026-11-17T19:22:23.000Z
+  SNYK-JS-DOMPURIFY-15874905:
+    - '@toast-ui/react-editor > @toast-ui/editor > dompurify':
+        reason: >-
+          @toast-ui/editor 3.2.2 (its last line; 3.2.3 still requires
+          dompurify ^2.3.3) inlines its own copy of DOMPurify 2.3.3 in
+          dist/esm/index.js, so no resolution or upgrade can reach it, and
+          there is no fixed 2.x release. The portal uses the editor only in
+          the Kinetic form Markdown widget: the Editor for user-written
+          WYSIWYG markdown and HTML, and the Viewer (and the Editor's initial
+          value) for the markdown stored in the field. DOMPurify sanitizes the
+          HTML in that markdown, including HTML embedded in it. The stored
+          value can come from any writer of the field: another user, an
+          anonymous submitter where the form allows anonymous access, or the
+          API or workflow. The copy that ships is DOMPurify 2.3.3, older than
+          the 2.5.9 Snyk evaluates, so these IDs are a lower bound: advisories
+          fixed between 2.3.4 and 2.5.9 apply too. This is real exposure,
+          accepted for 7.0.0 by Matt (2026-11-17). Replacing the editor is
+          ENG-438, which removes these ignores.
+        expires: 2027-02-15T00:00:00.000Z
+        created: 2026-11-17T19:22:23.000Z
+  SNYK-JS-DOMPURIFY-16078387:
+    - '@toast-ui/react-editor > @toast-ui/editor > dompurify':
+        reason: >-
+          @toast-ui/editor 3.2.2 (its last line; 3.2.3 still requires
+          dompurify ^2.3.3) inlines its own copy of DOMPurify 2.3.3 in
+          dist/esm/index.js, so no resolution or upgrade can reach it, and
+          there is no fixed 2.x release. The portal uses the editor only in
+          the Kinetic form Markdown widget: the Editor for user-written
+          WYSIWYG markdown and HTML, and the Viewer (and the Editor's initial
+          value) for the markdown stored in the field. DOMPurify sanitizes the
+          HTML in that markdown, including HTML embedded in it. The stored
+          value can come from any writer of the field: another user, an
+          anonymous submitter where the form allows anonymous access, or the
+          API or workflow. The copy that ships is DOMPurify 2.3.3, older than
+          the 2.5.9 Snyk evaluates, so these IDs are a lower bound: advisories
+          fixed between 2.3.4 and 2.5.9 apply too. This is real exposure,
+          accepted for 7.0.0 by Matt (2026-11-17). Replacing the editor is
+          ENG-438, which removes these ignores.
+        expires: 2027-02-15T00:00:00.000Z
+        created: 2026-11-17T19:22:23.000Z
+  SNYK-JS-DOMPURIFY-17342528:
+    - '@toast-ui/react-editor > @toast-ui/editor > dompurify':
+        reason: >-
+          @toast-ui/editor 3.2.2 (its last line; 3.2.3 still requires
+          dompurify ^2.3.3) inlines its own copy of DOMPurify 2.3.3 in
+          dist/esm/index.js, so no resolution or upgrade can reach it, and
+          there is no fixed 2.x release. The portal uses the editor only in
+          the Kinetic form Markdown widget: the Editor for user-written
+          WYSIWYG markdown and HTML, and the Viewer (and the Editor's initial
+          value) for the markdown stored in the field. DOMPurify sanitizes the
+          HTML in that markdown, including HTML embedded in it. The stored
+          value can come from any writer of the field: another user, an
+          anonymous submitter where the form allows anonymous access, or the
+          API or workflow. The copy that ships is DOMPurify 2.3.3, older than
+          the 2.5.9 Snyk evaluates, so these IDs are a lower bound: advisories
+          fixed between 2.3.4 and 2.5.9 apply too. This is real exposure,
+          accepted for 7.0.0 by Matt (2026-11-17). Replacing the editor is
+          ENG-438, which removes these ignores.
+        expires: 2027-02-15T00:00:00.000Z
+        created: 2026-11-17T19:22:23.000Z
+  SNYK-JS-DOMPURIFY-17344504:
+    - '@toast-ui/react-editor > @toast-ui/editor > dompurify':
+        reason: >-
+          @toast-ui/editor 3.2.2 (its last line; 3.2.3 still requires
+          dompurify ^2.3.3) inlines its own copy of DOMPurify 2.3.3 in
+          dist/esm/index.js, so no resolution or upgrade can reach it, and
+          there is no fixed 2.x release. The portal uses the editor only in
+          the Kinetic form Markdown widget: the Editor for user-written
+          WYSIWYG markdown and HTML, and the Viewer (and the Editor's initial
+          value) for the markdown stored in the field. DOMPurify sanitizes the
+          HTML in that markdown, including HTML embedded in it. The stored
+          value can come from any writer of the field: another user, an
+          anonymous submitter where the form allows anonymous access, or the
+          API or workflow. The copy that ships is DOMPurify 2.3.3, older than
+          the 2.5.9 Snyk evaluates, so these IDs are a lower bound: advisories
+          fixed between 2.3.4 and 2.5.9 apply too. This is real exposure,
+          accepted for 7.0.0 by Matt (2026-11-17). Replacing the editor is
+          ENG-438, which removes these ignores.
+        expires: 2027-02-15T00:00:00.000Z
+        created: 2026-11-17T19:22:23.000Z
+  SNYK-JS-DOMPURIFY-17344516:
+    - '@toast-ui/react-editor > @toast-ui/editor > dompurify':
+        reason: >-
+          @toast-ui/editor 3.2.2 (its last line; 3.2.3 still requires
+          dompurify ^2.3.3) inlines its own copy of DOMPurify 2.3.3 in
+          dist/esm/index.js, so no resolution or upgrade can reach it, and
+          there is no fixed 2.x release. The portal uses the editor only in
+          the Kinetic form Markdown widget: the Editor for user-written
+          WYSIWYG markdown and HTML, and the Viewer (and the Editor's initial
+          value) for the markdown stored in the field. DOMPurify sanitizes the
+          HTML in that markdown, including HTML embedded in it. The stored
+          value can come from any writer of the field: another user, an
+          anonymous submitter where the form allows anonymous access, or the
+          API or workflow. The copy that ships is DOMPurify 2.3.3, older than
+          the 2.5.9 Snyk evaluates, so these IDs are a lower bound: advisories
+          fixed between 2.3.4 and 2.5.9 apply too. This is real exposure,
+          accepted for 7.0.0 by Matt (2026-11-17). Replacing the editor is
+          ENG-438, which removes these ignores.
+        expires: 2027-02-15T00:00:00.000Z
+        created: 2026-11-17T19:22:23.000Z
+  SNYK-JS-DOMPURIFY-17344526:
+    - '@toast-ui/react-editor > @toast-ui/editor > dompurify':
+        reason: >-
+          @toast-ui/editor 3.2.2 (its last line; 3.2.3 still requires
+          dompurify ^2.3.3) inlines its own copy of DOMPurify 2.3.3 in
+          dist/esm/index.js, so no resolution or upgrade can reach it, and
+          there is no fixed 2.x release. The portal uses the editor only in
+          the Kinetic form Markdown widget: the Editor for user-written
+          WYSIWYG markdown and HTML, and the Viewer (and the Editor's initial
+          value) for the markdown stored in the field. DOMPurify sanitizes the
+          HTML in that markdown, including HTML embedded in it. The stored
+          value can come from any writer of the field: another user, an
+          anonymous submitter where the form allows anonymous access, or the
+          API or workflow. The copy that ships is DOMPurify 2.3.3, older than
+          the 2.5.9 Snyk evaluates, so these IDs are a lower bound: advisories
+          fixed between 2.3.4 and 2.5.9 apply too. This is real exposure,
+          accepted for 7.0.0 by Matt (2026-11-17). Replacing the editor is
+          ENG-438, which removes these ignores.
+        expires: 2027-02-15T00:00:00.000Z
+        created: 2026-11-17T19:22:23.000Z
+  SNYK-JS-DOMPURIFY-17344538:
+    - '@toast-ui/react-editor > @toast-ui/editor > dompurify':
+        reason: >-
+          @toast-ui/editor 3.2.2 (its last line; 3.2.3 still requires
+          dompurify ^2.3.3) inlines its own copy of DOMPurify 2.3.3 in
+          dist/esm/index.js, so no resolution or upgrade can reach it, and
+          there is no fixed 2.x release. The portal uses the editor only in
+          the Kinetic form Markdown widget: the Editor for user-written
+          WYSIWYG markdown and HTML, and the Viewer (and the Editor's initial
+          value) for the markdown stored in the field. DOMPurify sanitizes the
+          HTML in that markdown, including HTML embedded in it. The stored
+          value can come from any writer of the field: another user, an
+          anonymous submitter where the form allows anonymous access, or the
+          API or workflow. The copy that ships is DOMPurify 2.3.3, older than
+          the 2.5.9 Snyk evaluates, so these IDs are a lower bound: advisories
+          fixed between 2.3.4 and 2.5.9 apply too. This is real exposure,
+          accepted for 7.0.0 by Matt (2026-11-17). Replacing the editor is
+          ENG-438, which removes these ignores.
+        expires: 2027-02-15T00:00:00.000Z
+        created: 2026-11-17T19:22:23.000Z
+  SNYK-JS-DOMPURIFY-17375136:
+    - '@toast-ui/react-editor > @toast-ui/editor > dompurify':
+        reason: >-
+          @toast-ui/editor 3.2.2 (its last line; 3.2.3 still requires
+          dompurify ^2.3.3) inlines its own copy of DOMPurify 2.3.3 in
+          dist/esm/index.js, so no resolution or upgrade can reach it, and
+          there is no fixed 2.x release. The portal uses the editor only in
+          the Kinetic form Markdown widget: the Editor for user-written
+          WYSIWYG markdown and HTML, and the Viewer (and the Editor's initial
+          value) for the markdown stored in the field. DOMPurify sanitizes the
+          HTML in that markdown, including HTML embedded in it. The stored
+          value can come from any writer of the field: another user, an
+          anonymous submitter where the form allows anonymous access, or the
+          API or workflow. The copy that ships is DOMPurify 2.3.3, older than
+          the 2.5.9 Snyk evaluates, so these IDs are a lower bound: advisories
+          fixed between 2.3.4 and 2.5.9 apply too. This is real exposure,
+          accepted for 7.0.0 by Matt (2026-11-17). Replacing the editor is
+          ENG-438, which removes these ignores.
+        expires: 2027-02-15T00:00:00.000Z
+        created: 2026-11-17T19:22:23.000Z
+  SNYK-JS-DOMPURIFY-18307175:
+    - '@toast-ui/react-editor > @toast-ui/editor > dompurify':
+        reason: >-
+          @toast-ui/editor 3.2.2 (its last line; 3.2.3 still requires
+          dompurify ^2.3.3) inlines its own copy of DOMPurify 2.3.3 in
+          dist/esm/index.js, so no resolution or upgrade can reach it, and
+          there is no fixed 2.x release. The portal uses the editor only in
+          the Kinetic form Markdown widget: the Editor for user-written
+          WYSIWYG markdown and HTML, and the Viewer (and the Editor's initial
+          value) for the markdown stored in the field. DOMPurify sanitizes the
+          HTML in that markdown, including HTML embedded in it. The stored
+          value can come from any writer of the field: another user, an
+          anonymous submitter where the form allows anonymous access, or the
+          API or workflow. The copy that ships is DOMPurify 2.3.3, older than
+          the 2.5.9 Snyk evaluates, so these IDs are a lower bound: advisories
+          fixed between 2.3.4 and 2.5.9 apply too. This is real exposure,
+          accepted for 7.0.0 by Matt (2026-11-17). Replacing the editor is
+          ENG-438, which removes these ignores.
+        expires: 2027-02-15T00:00:00.000Z
+        created: 2026-11-17T19:22:23.000Z
+  SNYK-JS-DOMPURIFY-18593782:
+    - '@toast-ui/react-editor > @toast-ui/editor > dompurify':
+        reason: >-
+          @toast-ui/editor 3.2.2 (its last line; 3.2.3 still requires
+          dompurify ^2.3.3) inlines its own copy of DOMPurify 2.3.3 in
+          dist/esm/index.js, so no resolution or upgrade can reach it, and
+          there is no fixed 2.x release. The portal uses the editor only in
+          the Kinetic form Markdown widget: the Editor for user-written
+          WYSIWYG markdown and HTML, and the Viewer (and the Editor's initial
+          value) for the markdown stored in the field. DOMPurify sanitizes the
+          HTML in that markdown, including HTML embedded in it. The stored
+          value can come from any writer of the field: another user, an
+          anonymous submitter where the form allows anonymous access, or the
+          API or workflow. The copy that ships is DOMPurify 2.3.3, older than
+          the 2.5.9 Snyk evaluates, so these IDs are a lower bound: advisories
+          fixed between 2.3.4 and 2.5.9 apply too. This is real exposure,
+          accepted for 7.0.0 by Matt (2026-11-17). Replacing the editor is
+          ENG-438, which removes these ignores.
+        expires: 2027-02-15T00:00:00.000Z
+        created: 2026-11-17T19:22:23.000Z
+  SNYK-JS-DOMPURIFY-20536984:
+    - '@toast-ui/react-editor > @toast-ui/editor > dompurify':
+        reason: >-
+          @toast-ui/editor 3.2.2 (its last line; 3.2.3 still requires
+          dompurify ^2.3.3) inlines its own copy of DOMPurify 2.3.3 in
+          dist/esm/index.js, so no resolution or upgrade can reach it, and
+          there is no fixed 2.x release. The portal uses the editor only in
+          the Kinetic form Markdown widget: the Editor for user-written
+          WYSIWYG markdown and HTML, and the Viewer (and the Editor's initial
+          value) for the markdown stored in the field. DOMPurify sanitizes the
+          HTML in that markdown, including HTML embedded in it. The stored
+          value can come from any writer of the field: another user, an
+          anonymous submitter where the form allows anonymous access, or the
+          API or workflow. The copy that ships is DOMPurify 2.3.3, older than
+          the 2.5.9 Snyk evaluates, so these IDs are a lower bound: advisories
+          fixed between 2.3.4 and 2.5.9 apply too. This is real exposure,
+          accepted for 7.0.0 by Matt (2026-11-17). Replacing the editor is
+          ENG-438, which removes these ignores.
+        expires: 2027-02-15T00:00:00.000Z
+        created: 2026-11-17T19:22:23.000Z
+  SNYK-JS-DOMPURIFY-21755403:
+    - '@toast-ui/react-editor > @toast-ui/editor > dompurify':
+        reason: >-
+          @toast-ui/editor 3.2.2 (its last line; 3.2.3 still requires
+          dompurify ^2.3.3) inlines its own copy of DOMPurify 2.3.3 in
+          dist/esm/index.js, so no resolution or upgrade can reach it, and
+          there is no fixed 2.x release. The portal uses the editor only in
+          the Kinetic form Markdown widget: the Editor for user-written
+          WYSIWYG markdown and HTML, and the Viewer (and the Editor's initial
+          value) for the markdown stored in the field. DOMPurify sanitizes the
+          HTML in that markdown, including HTML embedded in it. The stored
+          value can come from any writer of the field: another user, an
+          anonymous submitter where the form allows anonymous access, or the
+          API or workflow. The copy that ships is DOMPurify 2.3.3, older than
+          the 2.5.9 Snyk evaluates, so these IDs are a lower bound: advisories
+          fixed between 2.3.4 and 2.5.9 apply too. This is real exposure,
+          accepted for 7.0.0 by Matt (2026-11-17). Replacing the editor is
+          ENG-438, which removes these ignores.
+        expires: 2027-02-15T00:00:00.000Z
+        created: 2026-11-17T19:22:23.000Z
+  SNYK-JS-DOMPURIFY-16131135:
+    - '@toast-ui/react-editor > @toast-ui/editor > dompurify':
+        reason: >-
+          @toast-ui/editor 3.2.2 (its last line; 3.2.3 still requires
+          dompurify ^2.3.3) inlines its own copy of DOMPurify 2.3.3 in
+          dist/esm/index.js, so no resolution or upgrade can reach it, and
+          there is no fixed 2.x release. The portal uses the editor only in
+          the Kinetic form Markdown widget: the Editor for user-written
+          WYSIWYG markdown and HTML, and the Viewer (and the Editor's initial
+          value) for the markdown stored in the field. DOMPurify sanitizes the
+          HTML in that markdown, including HTML embedded in it. The stored
+          value can come from any writer of the field: another user, an
+          anonymous submitter where the form allows anonymous access, or the
+          API or workflow. The copy that ships is DOMPurify 2.3.3, older than
+          the 2.5.9 Snyk evaluates, so these IDs are a lower bound: advisories
+          fixed between 2.3.4 and 2.5.9 apply too. This is real exposure,
+          accepted for 7.0.0 by Matt (2026-11-17). Replacing the editor is
+          ENG-438, which removes these ignores.
+        expires: 2027-02-15T00:00:00.000Z
+        created: 2026-11-17T19:22:23.000Z
+  SNYK-JS-DOMPURIFY-17344552:
+    - '@toast-ui/react-editor > @toast-ui/editor > dompurify':
+        reason: >-
+          @toast-ui/editor 3.2.2 (its last line; 3.2.3 still requires
+          dompurify ^2.3.3) inlines its own copy of DOMPurify 2.3.3 in
+          dist/esm/index.js, so no resolution or upgrade can reach it, and
+          there is no fixed 2.x release. The portal uses the editor only in
+          the Kinetic form Markdown widget: the Editor for user-written
+          WYSIWYG markdown and HTML, and the Viewer (and the Editor's initial
+          value) for the markdown stored in the field. DOMPurify sanitizes the
+          HTML in that markdown, including HTML embedded in it. The stored
+          value can come from any writer of the field: another user, an
+          anonymous submitter where the form allows anonymous access, or the
+          API or workflow. The copy that ships is DOMPurify 2.3.3, older than
+          the 2.5.9 Snyk evaluates, so these IDs are a lower bound: advisories
+          fixed between 2.3.4 and 2.5.9 apply too. This is real exposure,
+          accepted for 7.0.0 by Matt (2026-11-17). Replacing the editor is
+          ENG-438, which removes these ignores.
+        expires: 2027-02-15T00:00:00.000Z
+        created: 2026-11-17T19:22:23.000Z
+  SNYK-JS-DOMPURIFY-18170233:
+    - '@toast-ui/react-editor > @toast-ui/editor > dompurify':
+        reason: >-
+          @toast-ui/editor 3.2.2 (its last line; 3.2.3 still requires
+          dompurify ^2.3.3) inlines its own copy of DOMPurify 2.3.3 in
+          dist/esm/index.js, so no resolution or upgrade can reach it, and
+          there is no fixed 2.x release. The portal uses the editor only in
+          the Kinetic form Markdown widget: the Editor for user-written
+          WYSIWYG markdown and HTML, and the Viewer (and the Editor's initial
+          value) for the markdown stored in the field. DOMPurify sanitizes the
+          HTML in that markdown, including HTML embedded in it. The stored
+          value can come from any writer of the field: another user, an
+          anonymous submitter where the form allows anonymous access, or the
+          API or workflow. The copy that ships is DOMPurify 2.3.3, older than
+          the 2.5.9 Snyk evaluates, so these IDs are a lower bound: advisories
+          fixed between 2.3.4 and 2.5.9 apply too. This is real exposure,
+          accepted for 7.0.0 by Matt (2026-11-17). Replacing the editor is
+          ENG-438, which removes these ignores.
+        expires: 2027-02-15T00:00:00.000Z
+        created: 2026-11-17T19:22:23.000Z
+  SNYK-JS-DOMPURIFY-18307177:
+    - '@toast-ui/react-editor > @toast-ui/editor > dompurify':
+        reason: >-
+          @toast-ui/editor 3.2.2 (its last line; 3.2.3 still requires
+          dompurify ^2.3.3) inlines its own copy of DOMPurify 2.3.3 in
+          dist/esm/index.js, so no resolution or upgrade can reach it, and
+          there is no fixed 2.x release. The portal uses the editor only in
+          the Kinetic form Markdown widget: the Editor for user-written
+          WYSIWYG markdown and HTML, and the Viewer (and the Editor's initial
+          value) for the markdown stored in the field. DOMPurify sanitizes the
+          HTML in that markdown, including HTML embedded in it. The stored
+          value can come from any writer of the field: another user, an
+          anonymous submitter where the form allows anonymous access, or the
+          API or workflow. The copy that ships is DOMPurify 2.3.3, older than
+          the 2.5.9 Snyk evaluates, so these IDs are a lower bound: advisories
+          fixed between 2.3.4 and 2.5.9 apply too. This is real exposure,
+          accepted for 7.0.0 by Matt (2026-11-17). Replacing the editor is
+          ENG-438, which removes these ignores.
+        expires: 2027-02-15T00:00:00.000Z
+        created: 2026-11-17T19:22:23.000Z
+  SNYK-JS-DOMPURIFY-21460655:
+    - '@toast-ui/react-editor > @toast-ui/editor > dompurify':
+        reason: >-
+          @toast-ui/editor 3.2.2 (its last line; 3.2.3 still requires
+          dompurify ^2.3.3) inlines its own copy of DOMPurify 2.3.3 in
+          dist/esm/index.js, so no resolution or upgrade can reach it, and
+          there is no fixed 2.x release. The portal uses the editor only in
+          the Kinetic form Markdown widget: the Editor for user-written
+          WYSIWYG markdown and HTML, and the Viewer (and the Editor's initial
+          value) for the markdown stored in the field. DOMPurify sanitizes the
+          HTML in that markdown, including HTML embedded in it. The stored
+          value can come from any writer of the field: another user, an
+          anonymous submitter where the form allows anonymous access, or the
+          API or workflow. The copy that ships is DOMPurify 2.3.3, older than
+          the 2.5.9 Snyk evaluates, so these IDs are a lower bound: advisories
+          fixed between 2.3.4 and 2.5.9 apply too. This is real exposure,
+          accepted for 7.0.0 by Matt (2026-11-17). Replacing the editor is
+          ENG-438, which removes these ignores.
+        expires: 2027-02-15T00:00:00.000Z
+        created: 2026-11-17T19:22:23.000Z
+  SNYK-JS-DOMPURIFY-8722251:
+    - '@toast-ui/react-editor > @toast-ui/editor > dompurify':
+        reason: >-
+          @toast-ui/editor 3.2.2 (its last line; 3.2.3 still requires
+          dompurify ^2.3.3) inlines its own copy of DOMPurify 2.3.3 in
+          dist/esm/index.js, so no resolution or upgrade can reach it, and
+          there is no fixed 2.x release. The portal uses the editor only in
+          the Kinetic form Markdown widget: the Editor for user-written
+          WYSIWYG markdown and HTML, and the Viewer (and the Editor's initial
+          value) for the markdown stored in the field. DOMPurify sanitizes the
+          HTML in that markdown, including HTML embedded in it. The stored
+          value can come from any writer of the field: another user, an
+          anonymous submitter where the form allows anonymous access, or the
+          API or workflow. The copy that ships is DOMPurify 2.3.3, older than
+          the 2.5.9 Snyk evaluates, so these IDs are a lower bound: advisories
+          fixed between 2.3.4 and 2.5.9 apply too. This is real exposure,
+          accepted for 7.0.0 by Matt (2026-11-17). Replacing the editor is
+          ENG-438, which removes these ignores.
+        expires: 2027-02-15T00:00:00.000Z
+        created: 2026-11-17T19:22:23.000Z
+patch: {}
